@@ -1,0 +1,92 @@
+[04-Aug-2018 08:46:38 America/Chicago] PHP Fatal error:  Class 'MWDB' not found in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/arithmetics.php on line 2
+[04-Aug-2018 08:46:58 America/Chicago] PHP Fatal error:  Class 'MWDB' not found in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/geometry.php on line 2
+[04-Aug-2018 08:47:06 America/Chicago] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/critical_lesson_math.php on line 2
+[04-Aug-2018 08:47:43 America/Chicago] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/home.php on line 2
+[04-Aug-2018 08:48:11 America/Chicago] PHP Fatal error:  Call to undefined function is_math_tutoring_class_subscribed() in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/tutoring_plan.php on line 2
+[04-Aug-2018 08:48:18 America/Chicago] PHP Fatal error:  Class 'MWDB' not found in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_i.php on line 2
+[04-Aug-2018 08:48:20 America/Chicago] PHP Fatal error:  Class 'MWDB' not found in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/calculus.php on line 2
+[04-Aug-2018 08:48:30 America/Chicago] PHP Fatal error:  Call to undefined function _e() in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/math_teacher.php on line 5
+[04-Aug-2018 08:48:33 America/Chicago] PHP Fatal error:  Call to undefined function wp_enqueue_script() in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/math_homework.php on line 3
+[04-Aug-2018 08:48:37 America/Chicago] PHP Fatal error:  Class 'MWDB' not found in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_ii.php on line 2
+[17-Aug-2018 13:58:50 America/Chicago] PHP Fatal error:  Call to undefined function is_math_tutoring_class_subscribed() in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/tutoring_plan.php on line 2
+[17-Aug-2018 14:13:28 America/Chicago] PHP Fatal error:  Class 'MWDB' not found in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/arithmetics.php on line 2
+[17-Aug-2018 14:18:35 America/Chicago] PHP Fatal error:  Class 'MWDB' not found in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_i.php on line 2
+[17-Aug-2018 14:20:42 America/Chicago] PHP Fatal error:  Class 'MWDB' not found in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/geometry.php on line 2
+[17-Aug-2018 14:29:20 America/Chicago] PHP Fatal error:  Class 'MWDB' not found in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/calculus.php on line 2
+[17-Aug-2018 14:32:56 America/Chicago] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/critical_lesson_math.php on line 2
+[17-Aug-2018 14:49:28 America/Chicago] PHP Fatal error:  Call to undefined function _e() in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/math_teacher.php on line 5
+[17-Aug-2018 14:52:57 America/Chicago] PHP Fatal error:  Call to undefined function wp_enqueue_script() in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/math_homework.php on line 3
+[17-Aug-2018 14:58:29 America/Chicago] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/home.php on line 2
+[17-Aug-2018 15:00:58 America/Chicago] PHP Fatal error:  Class 'MWDB' not found in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_ii.php on line 2
+[31-Dec-2018 00:43:37 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/calculus.php on line 2
+[31-Dec-2018 00:52:38 UTC] PHP Fatal error:  Call to undefined function _e() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/math_teacher.php on line 5
+[31-Dec-2018 01:19:41 UTC] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/home.php on line 2
+[31-Dec-2018 01:37:43 UTC] PHP Fatal error:  Call to undefined function wp_enqueue_script() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/math_homework.php on line 3
+[31-Dec-2018 02:13:47 UTC] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/critical_lesson_math.php on line 2
+[31-Dec-2018 02:49:51 UTC] PHP Fatal error:  Call to undefined function is_math_tutoring_class_subscribed() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/tutoring_plan.php on line 2
+[31-Dec-2018 02:58:52 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_ii.php on line 2
+[31-Dec-2018 03:07:53 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/geometry.php on line 2
+[31-Dec-2018 03:16:54 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/arithmetics.php on line 2
+[31-Dec-2018 05:32:11 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_i.php on line 2
+[01-Jan-2019 12:09:35 UTC] PHP Fatal error:  Call to undefined function _e() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/math_teacher.php on line 5
+[01-Jan-2019 12:09:41 UTC] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/home.php on line 2
+[01-Jan-2019 12:09:51 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/calculus.php on line 2
+[01-Jan-2019 12:10:31 UTC] PHP Fatal error:  Call to undefined function wp_enqueue_script() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/math_homework.php on line 3
+[01-Jan-2019 12:10:40 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/geometry.php on line 2
+[01-Jan-2019 12:10:44 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/arithmetics.php on line 2
+[01-Jan-2019 12:10:47 UTC] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/critical_lesson_math.php on line 2
+[01-Jan-2019 12:11:04 UTC] PHP Fatal error:  Call to undefined function is_math_tutoring_class_subscribed() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/tutoring_plan.php on line 2
+[01-Jan-2019 12:11:07 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_ii.php on line 2
+[01-Jan-2019 12:12:03 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_i.php on line 2
+[01-Mar-2019 01:29:41 UTC] PHP Fatal error:  Call to undefined function wp_enqueue_script() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/math_homework.php on line 3
+[01-Mar-2019 01:29:57 UTC] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/home.php on line 2
+[01-Mar-2019 01:30:31 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/calculus.php on line 2
+[01-Mar-2019 01:31:04 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/geometry.php on line 2
+[01-Mar-2019 01:31:37 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/arithmetics.php on line 2
+[01-Mar-2019 01:32:10 UTC] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/critical_lesson_math.php on line 2
+[01-Mar-2019 01:32:44 UTC] PHP Fatal error:  Call to undefined function is_math_tutoring_class_subscribed() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/tutoring_plan.php on line 2
+[01-Mar-2019 01:33:18 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_ii.php on line 2
+[01-Mar-2019 01:33:58 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_i.php on line 2
+[01-Mar-2019 19:06:40 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/calculus.php on line 2
+[01-Mar-2019 19:06:48 UTC] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/home.php on line 2
+[01-Mar-2019 19:06:59 UTC] PHP Fatal error:  Call to undefined function wp_enqueue_script() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/math_homework.php on line 3
+[01-Mar-2019 19:07:13 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/geometry.php on line 2
+[01-Mar-2019 19:07:37 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/arithmetics.php on line 2
+[01-Mar-2019 19:07:59 UTC] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/critical_lesson_math.php on line 2
+[01-Mar-2019 19:08:22 UTC] PHP Fatal error:  Call to undefined function is_math_tutoring_class_subscribed() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/tutoring_plan.php on line 2
+[01-Mar-2019 19:08:46 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_ii.php on line 2
+[01-Mar-2019 19:09:13 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_i.php on line 2
+[23-May-2019 05:08:55 UTC] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/home.php on line 2
+[23-May-2019 10:08:04 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/calculus.php on line 2
+[24-May-2019 03:25:07 UTC] PHP Fatal error:  Call to undefined function _e() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/math_teacher.php on line 5
+[24-May-2019 06:44:33 UTC] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/home.php on line 2
+[24-May-2019 11:43:42 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/calculus.php on line 2
+[25-May-2019 02:41:09 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/geometry.php on line 2
+[25-May-2019 04:20:52 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/arithmetics.php on line 2
+[25-May-2019 10:59:46 UTC] PHP Fatal error:  Call to undefined function wp_enqueue_script() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/math_homework.php on line 3
+[26-May-2019 03:36:54 UTC] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/critical_lesson_math.php on line 2
+[26-May-2019 21:53:47 UTC] PHP Fatal error:  Call to undefined function is_math_tutoring_class_subscribed() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/tutoring_plan.php on line 2
+[26-May-2019 23:33:29 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_ii.php on line 2
+[27-May-2019 03:19:50 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_i.php on line 2
+[27-May-2019 11:38:25 UTC] PHP Fatal error:  Call to undefined function is_math_tutoring_class_subscribed() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/tutoring_plan.php on line 2
+[27-May-2019 13:18:08 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_ii.php on line 2
+[10-Aug-2019 02:21:50 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/arithmetics.php on line 2
+[10-Aug-2019 02:22:01 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/calculus.php on line 2
+[10-Aug-2019 02:22:16 UTC] PHP Fatal error:  Call to undefined function _e() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/math_teacher.php on line 5
+[10-Aug-2019 02:22:32 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/geometry.php on line 2
+[10-Aug-2019 02:22:47 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_i.php on line 2
+[10-Aug-2019 02:23:02 UTC] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/home.php on line 2
+[10-Aug-2019 02:23:18 UTC] PHP Fatal error:  Call to undefined function wp_enqueue_script() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/math_homework.php on line 3
+[10-Aug-2019 02:23:34 UTC] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/critical_lesson_math.php on line 2
+[10-Aug-2019 02:23:50 UTC] PHP Fatal error:  Call to undefined function is_math_tutoring_class_subscribed() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/tutoring_plan.php on line 2
+[10-Aug-2019 02:24:08 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_ii.php on line 2
+[15-Apr-2020 10:42:12 UTC] PHP Fatal error:  Call to undefined function wp_enqueue_script() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/math_homework.php on line 3
+[17-Apr-2020 19:51:01 UTC] PHP Fatal error:  Call to undefined function _e() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/math_teacher.php on line 5
+[17-Apr-2020 21:54:12 UTC] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/home.php on line 2
+[18-Apr-2020 04:07:57 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/calculus.php on line 2
+[18-Apr-2020 15:30:57 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/geometry.php on line 2
+[18-Apr-2020 16:48:19 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/arithmetics.php on line 2
+[18-Apr-2020 17:58:31 UTC] PHP Fatal error:  Call to undefined function get_option_name_link() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/critical_lesson_math.php on line 2
+[19-Apr-2020 17:01:59 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_i.php on line 2
+[19-Apr-2020 19:20:34 UTC] PHP Fatal error:  Call to undefined function is_math_tutoring_class_subscribed() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/tutoring_plan.php on line 2
+[19-Apr-2020 20:30:04 UTC] PHP Fatal error:  Class 'MWDB' not found in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/langs/layouts/math/algebra_ii.php on line 2
