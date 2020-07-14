@@ -1,0 +1,9 @@
+[01-Aug-2018 21:59:41 America/Chicago] PHP Fatal error:  Call to undefined function add_action() in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/iii-dictionary.php on line 36
+[16-Aug-2018 04:41:10 America/Chicago] PHP Fatal error:  Call to undefined function add_action() in /home/ikstudy/public_html/wp-content/plugins/iii-dictionary/iii-dictionary.php on line 36
+[25-Dec-2018 08:54:33 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/iii-dictionary.php on line 36
+[27-Dec-2018 01:29:40 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/iii-dictionary.php on line 36
+[24-Feb-2019 15:26:35 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/iii-dictionary.php on line 36
+[12-Apr-2019 22:38:18 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/iii-dictionary.php on line 36
+[17-Jul-2019 13:40:44 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/iii-dictionary.php on line 36
+[26-Jan-2020 02:03:51 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/iii-dictionary.php on line 36
+[25-Mar-2020 10:50:54 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-content/plugins/iii-dictionary/iii-dictionary.php on line 36

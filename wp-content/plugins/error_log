@@ -1,0 +1,4 @@
+[07-Feb-2018 02:38:39 America/Chicago] PHP Fatal error:  Call to undefined function add_action() in /home/ikstudy/public_html/wp-content/plugins/hello.php on line 60
+[31-May-2018 13:19:07 America/Chicago] PHP Fatal error:  Call to undefined function add_action() in /home/ikstudy/public_html/wp-content/plugins/hello.php on line 60
+[11-Jun-2018 02:24:09 America/Chicago] PHP Fatal error:  Call to undefined function add_action() in /home/ikstudy/public_html/wp-content/plugins/hello.php on line 60
+[11-Jun-2018 02:24:18 America/Chicago] PHP Fatal error:  Call to undefined function add_action() in /home/ikstudy/public_html/wp-content/plugins/hello.php on line 60

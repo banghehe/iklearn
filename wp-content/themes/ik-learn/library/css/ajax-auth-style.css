@@ -1,0 +1,245 @@
+form.ajax-auth{
+        z-index: 999;
+    position: fixed;
+    top: 10%;
+    left: 40%;
+    width: 54%;
+    min-width: 330px;
+    margin-left: -200px;
+    background-color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #878787;
+    font-size: 14px;
+}
+form.ajax-auth-signup{
+        z-index: 999;
+    position: fixed;
+    top: 0%;
+    left: 40%;
+    max-height: 653px;
+    width: 54%;
+    min-width: 330px;
+    margin-left: -200px;
+    background-color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #878787;
+    font-size: 14px;
+}
+
+.ajax-auth h1, .ajax-auth h3{
+    font-family: 'Georgia', 'Times New Roman', Times, serif;
+    font-weight: 100;
+    color: #333333;    
+	line-height: 1;    
+}
+
+.ajax-auth h1{
+    font-size: 27px;
+    text-align: center;
+    margin: 0 0 20px 0;
+}
+
+.ajax-auth h3{
+    font-size: 18px;
+    text-align: left;
+    margin: 0;
+}
+
+.ajax-auth h3 a{
+	color: #e25c4c;
+}
+
+.ajax-auth hr {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 0 none;
+    height: 1px;
+    margin: 20px 0;
+}
+
+.ajax-auth input#username,
+.ajax-auth input#password,
+.ajax-auth input#signonname,
+.ajax-auth input#email,
+.ajax-auth input#signonpassword,
+.ajax-auth input#last_name,
+.ajax-auth input#first_name,
+.ajax-auth input#password2{
+    border: 1.5px solid #cacaca;
+    color: #010101;
+    font-size: 15px;
+    width: 100%;
+    padding: 2px 5px 5px 7px;
+    margin: 7px 0 0 0;
+    font-family: 'Georgia', 'Times New Roman', Times, serif;
+}
+
+.ajax-auth input#username:focus,
+.ajax-auth input#password:focus,
+.ajax-auth input#signonname:focus,
+.ajax-auth input#email:focus,
+.ajax-auth input#signonpassword:focus,
+.ajax-auth input#password2:focus{
+    background-color: #FFF;
+}
+
+.ajax-auth label.error{
+	display: none !important;
+}
+
+.ajax-auth input.error{
+	border: 1px solid #FF0000 !important;
+}
+
+.ajax-auth input.submit_button{
+    font-size: 13px;
+    color: #FFF;
+    border: 1px solid #b34336;
+    background-color: #e25c4c;
+    border-radius: 3px;
+    text-shadow: 0 1px 0 #ba3f31;
+    padding: 9px 31px 9px 31px;
+    background: -moz-linear-gradient(top, #ea6656, #df5949);
+    border-top: 1px solid #bb483a;
+    border-bottom: 1px solid #a63b2e;
+    float: right;
+    box-shadow: 0 1px 0 #E87A6E inset;
+}
+
+.ajax-auth a{
+    text-decoration: none;
+}
+
+.ajax-auth a.close{
+    color: #DCDCDC;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.ajax-auth a.text-link{
+    color: #B4B2B2;
+    float: left;
+    margin: 10px 0 0 0;
+}
+
+.ajax-auth p.status{
+    text-align: center;
+    margin: -15px 0 20px 0;
+	font-weight: 600;
+    display: none;
+}
+
+a.login_button{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 5px 7px 5px 7px;
+    background-color: #FFF;
+    border-radius: 3px;
+    border: 1px solid #DCDCDC;
+    color: #333;
+    text-decoration: none;
+    font-size: 11px;
+}
+
+.login_overlay{
+    height: 100%;
+    width: 100%;
+    background-color: #F6F6F6;
+    opacity: 0.9;
+    position: fixed;
+    z-index: 10;
+}
+.btn-submit-login{
+        display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    background: #4c4c4c;
+    font-size: 18px;
+    color: #fecb3f;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    width: 96%;
+}
+.btn-submit-sign{
+        display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    background: #4c4c4c;
+    font-size: 18px;
+    color: #fecb3f;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    width: 100%;
+}
+.btn-cancel-signup{
+    background: #b6b6b6;
+    color: #ffffff !important;
+    width: 90%;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+}
+.forgot-pass{
+        position: absolute;
+    right: 5%;
+}
+.forgot-pass a{
+     color:   #ca4141 !important;
+}
+.content-form{
+    padding: 1% 0 0 5% !important; 
+    margin-bottom: 0px !important;
+    width: 95%
+}
+.content-form-custom{
+    padding: 2% 0 0 5% !important; 
+    margin-bottom: 40px !important;
+    width: 95%
+}
+#pop_signup {
+        text-decoration: none;
+    }
+@media (max-width:780px){
+    #pop_signup {
+        width: 93% !important;
+    }
+    
+}

@@ -1,0 +1,558 @@
+[03-Aug-2018 08:22:54 America/Chicago] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/ikstudy/public_html/wp-includes/rss.php on line 19
+[03-Aug-2018 08:23:11 America/Chicago] PHP Fatal error:  Call to undefined function is_admin() in /home/ikstudy/public_html/wp-includes/vars.php on line 23
+[03-Aug-2018 08:23:14 America/Chicago] PHP Fatal error:  Call to undefined function add_shortcode() in /home/ikstudy/public_html/wp-includes/media.php on line 831
+[03-Aug-2018 08:23:19 America/Chicago] PHP Fatal error:  Call to undefined function is_main_site() in /home/ikstudy/public_html/wp-includes/update.php on line 667
+[03-Aug-2018 08:23:42 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-rdf.php on line 8
+[03-Aug-2018 08:23:47 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-rss.php on line 8
+[03-Aug-2018 08:23:55 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-rss2.php on line 8
+[03-Aug-2018 08:23:59 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-atom.php on line 8
+[03-Aug-2018 08:24:06 America/Chicago] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/ikstudy/public_html/wp-includes/functions.php on line 8
+[03-Aug-2018 08:24:06 America/Chicago] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ikstudy/public_html/wp-includes/functions.php on line 8
+[03-Aug-2018 08:24:13 America/Chicago] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home/ikstudy/public_html/wp-includes/class-feed.php on line 4
+[03-Aug-2018 08:24:13 America/Chicago] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ikstudy/public_html/wp-includes/class-feed.php on line 4
+[03-Aug-2018 08:24:16 America/Chicago] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home/ikstudy/public_html/wp-includes/ms-settings.php on line 14
+[03-Aug-2018 08:24:16 America/Chicago] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ikstudy/public_html/wp-includes/ms-settings.php on line 14
+[03-Aug-2018 08:24:23 America/Chicago] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/ikstudy/public_html/wp-includes/class-snoopy.php on line 6
+[03-Aug-2018 08:24:28 America/Chicago] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/ikstudy/public_html/wp-includes/registration.php on line 7
+[03-Aug-2018 08:24:32 America/Chicago] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/ikstudy/public_html/wp-includes/script-loader.php on line 25
+[03-Aug-2018 08:24:32 America/Chicago] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ikstudy/public_html/wp-includes/script-loader.php on line 25
+[03-Aug-2018 08:24:33 America/Chicago] PHP Fatal error:  Class 'Walker' not found in /home/ikstudy/public_html/wp-includes/post-template.php on line 1325
+[03-Aug-2018 08:24:37 America/Chicago] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/ikstudy/public_html/wp-includes/rss-functions.php on line 8
+[03-Aug-2018 08:24:52 America/Chicago] PHP Fatal error:  Call to undefined function is_robots() in /home/ikstudy/public_html/wp-includes/template-loader.php on line 28
+[03-Aug-2018 08:24:53 America/Chicago] PHP Fatal error:  Class 'WP_Widget' not found in /home/ikstudy/public_html/wp-includes/default-widgets.php on line 14
+[03-Aug-2018 08:24:56 America/Chicago] PHP Fatal error:  Call to undefined function add_filter() in /home/ikstudy/public_html/wp-includes/class-wp-embed.php on line 28
+[03-Aug-2018 08:24:58 America/Chicago] PHP Fatal error:  Call to undefined function add_filter() in /home/ikstudy/public_html/wp-includes/default-filters.php on line 17
+[03-Aug-2018 08:25:07 America/Chicago] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/ikstudy/public_html/wp-includes/class-simplepie.php on line 5
+[03-Aug-2018 08:25:07 America/Chicago] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ikstudy/public_html/wp-includes/class-simplepie.php on line 5
+[03-Aug-2018 08:25:46 America/Chicago] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/ikstudy/public_html/wp-includes/class.wp-styles.php on line 19
+[03-Aug-2018 08:25:54 America/Chicago] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/ikstudy/public_html/wp-includes/class.wp-scripts.php on line 19
+[03-Aug-2018 08:26:04 America/Chicago] PHP Fatal error:  Class 'Walker' not found in /home/ikstudy/public_html/wp-includes/comment-template.php on line 1680
+[03-Aug-2018 08:26:10 America/Chicago] PHP Fatal error:  Class 'Walker' not found in /home/ikstudy/public_html/wp-includes/nav-menu-template.php on line 16
+[03-Aug-2018 08:26:14 America/Chicago] PHP Fatal error:  Class 'Walker' not found in /home/ikstudy/public_html/wp-includes/category-template.php on line 967
+[03-Aug-2018 08:26:15 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-atom-comments.php on line 8
+[03-Aug-2018 08:26:20 America/Chicago] PHP Fatal error:  Call to undefined function add_action() in /home/ikstudy/public_html/wp-includes/ms-default-filters.php on line 16
+[03-Aug-2018 08:26:31 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-rss2-comments.php on line 8
+[03-Aug-2018 08:27:02 America/Chicago] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/ikstudy/public_html/wp-includes/registration-functions.php on line 7
+[03-Aug-2018 08:27:36 America/Chicago] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/ikstudy/public_html/wp-includes/class-wp-image-editor-imagick.php on line 17
+[03-Aug-2018 08:27:45 America/Chicago] PHP Fatal error:  Class 'IXR_Server' not found in /home/ikstudy/public_html/wp-includes/class-wp-xmlrpc-server.php on line 23
+[03-Aug-2018 08:28:06 America/Chicago] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/ikstudy/public_html/wp-includes/class-wp-image-editor-gd.php on line 17
+[03-Aug-2018 08:28:12 America/Chicago] PHP Fatal error:  Class 'IXR_Client' not found in /home/ikstudy/public_html/wp-includes/class-wp-http-ixr-client.php on line 9
+[03-Aug-2018 14:21:32 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-rdf.php on line 8
+[03-Aug-2018 14:39:53 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-rss2.php on line 8
+[03-Aug-2018 15:16:33 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-rss.php on line 8
+[03-Aug-2018 15:49:33 America/Chicago] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/ikstudy/public_html/wp-includes/script-loader.php on line 25
+[03-Aug-2018 15:49:33 America/Chicago] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ikstudy/public_html/wp-includes/script-loader.php on line 25
+[03-Aug-2018 16:07:53 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-atom.php on line 8
+[03-Aug-2018 16:22:34 America/Chicago] PHP Fatal error:  Call to undefined function is_robots() in /home/ikstudy/public_html/wp-includes/template-loader.php on line 28
+[03-Aug-2018 16:29:54 America/Chicago] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/ikstudy/public_html/wp-includes/functions.php on line 8
+[03-Aug-2018 16:29:54 America/Chicago] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ikstudy/public_html/wp-includes/functions.php on line 8
+[03-Aug-2018 16:33:34 America/Chicago] PHP Fatal error:  Class 'WP_Widget' not found in /home/ikstudy/public_html/wp-includes/default-widgets.php on line 14
+[03-Aug-2018 16:40:54 America/Chicago] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/ikstudy/public_html/wp-includes/class-simplepie.php on line 5
+[03-Aug-2018 16:40:54 America/Chicago] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ikstudy/public_html/wp-includes/class-simplepie.php on line 5
+[03-Aug-2018 17:06:34 America/Chicago] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home/ikstudy/public_html/wp-includes/class-feed.php on line 4
+[03-Aug-2018 17:06:34 America/Chicago] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ikstudy/public_html/wp-includes/class-feed.php on line 4
+[03-Aug-2018 17:10:14 America/Chicago] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/ikstudy/public_html/wp-includes/class.wp-scripts.php on line 19
+[03-Aug-2018 17:21:14 America/Chicago] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home/ikstudy/public_html/wp-includes/ms-settings.php on line 14
+[03-Aug-2018 17:21:14 America/Chicago] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ikstudy/public_html/wp-includes/ms-settings.php on line 14
+[03-Aug-2018 17:24:54 America/Chicago] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/ikstudy/public_html/wp-includes/class-snoopy.php on line 6
+[03-Aug-2018 17:35:54 America/Chicago] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/ikstudy/public_html/wp-includes/registration.php on line 7
+[03-Aug-2018 17:39:34 America/Chicago] PHP Fatal error:  Class 'Walker' not found in /home/ikstudy/public_html/wp-includes/post-template.php on line 1325
+[03-Aug-2018 17:43:14 America/Chicago] PHP Fatal error:  Class 'Walker' not found in /home/ikstudy/public_html/wp-includes/category-template.php on line 967
+[03-Aug-2018 17:46:54 America/Chicago] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/ikstudy/public_html/wp-includes/rss-functions.php on line 8
+[03-Aug-2018 18:05:16 America/Chicago] PHP Fatal error:  Call to undefined function add_filter() in /home/ikstudy/public_html/wp-includes/class-wp-embed.php on line 28
+[03-Aug-2018 18:08:55 America/Chicago] PHP Fatal error:  Call to undefined function add_filter() in /home/ikstudy/public_html/wp-includes/default-filters.php on line 17
+[03-Aug-2018 18:12:35 America/Chicago] PHP Fatal error:  Call to undefined function add_action() in /home/ikstudy/public_html/wp-includes/ms-default-filters.php on line 16
+[03-Aug-2018 18:27:15 America/Chicago] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/ikstudy/public_html/wp-includes/class.wp-styles.php on line 19
+[03-Aug-2018 18:38:15 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-rss2-comments.php on line 8
+[03-Aug-2018 18:41:55 America/Chicago] PHP Fatal error:  Class 'Walker' not found in /home/ikstudy/public_html/wp-includes/comment-template.php on line 1680
+[03-Aug-2018 18:52:55 America/Chicago] PHP Fatal error:  Class 'Walker' not found in /home/ikstudy/public_html/wp-includes/nav-menu-template.php on line 16
+[03-Aug-2018 19:18:35 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-atom-comments.php on line 8
+[03-Aug-2018 20:50:16 America/Chicago] PHP Fatal error:  Class 'IXR_Server' not found in /home/ikstudy/public_html/wp-includes/class-wp-xmlrpc-server.php on line 23
+[03-Aug-2018 21:04:56 America/Chicago] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/ikstudy/public_html/wp-includes/class-wp-image-editor-gd.php on line 17
+[03-Aug-2018 21:12:16 America/Chicago] PHP Fatal error:  Class 'IXR_Client' not found in /home/ikstudy/public_html/wp-includes/class-wp-http-ixr-client.php on line 9
+[03-Aug-2018 21:19:36 America/Chicago] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/ikstudy/public_html/wp-includes/registration-functions.php on line 7
+[03-Aug-2018 22:21:56 America/Chicago] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/ikstudy/public_html/wp-includes/class-wp-image-editor-imagick.php on line 17
+[15-Aug-2018 06:12:03 America/Chicago] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/ikstudy/public_html/wp-includes/rss.php on line 19
+[16-Aug-2018 05:16:20 America/Chicago] PHP Fatal error:  Call to undefined function is_admin() in /home/ikstudy/public_html/wp-includes/vars.php on line 23
+[16-Aug-2018 05:23:26 America/Chicago] PHP Fatal error:  Call to undefined function add_shortcode() in /home/ikstudy/public_html/wp-includes/media.php on line 831
+[16-Aug-2018 05:38:40 America/Chicago] PHP Fatal error:  Call to undefined function is_main_site() in /home/ikstudy/public_html/wp-includes/update.php on line 667
+[16-Aug-2018 06:14:18 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-rss.php on line 8
+[16-Aug-2018 06:40:11 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-rdf.php on line 8
+[16-Aug-2018 06:43:19 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-atom.php on line 8
+[16-Aug-2018 06:54:34 America/Chicago] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/ikstudy/public_html/wp-includes/functions.php on line 8
+[16-Aug-2018 06:54:34 America/Chicago] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ikstudy/public_html/wp-includes/functions.php on line 8
+[16-Aug-2018 06:57:49 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-rss2.php on line 8
+[16-Aug-2018 07:14:41 America/Chicago] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home/ikstudy/public_html/wp-includes/class-feed.php on line 4
+[16-Aug-2018 07:14:41 America/Chicago] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ikstudy/public_html/wp-includes/class-feed.php on line 4
+[16-Aug-2018 07:26:10 America/Chicago] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home/ikstudy/public_html/wp-includes/ms-settings.php on line 14
+[16-Aug-2018 07:26:10 America/Chicago] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ikstudy/public_html/wp-includes/ms-settings.php on line 14
+[16-Aug-2018 07:40:32 America/Chicago] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/ikstudy/public_html/wp-includes/class-snoopy.php on line 6
+[16-Aug-2018 07:43:24 America/Chicago] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/ikstudy/public_html/wp-includes/registration.php on line 7
+[16-Aug-2018 07:53:25 America/Chicago] PHP Fatal error:  Class 'Walker' not found in /home/ikstudy/public_html/wp-includes/post-template.php on line 1325
+[16-Aug-2018 07:54:53 America/Chicago] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/ikstudy/public_html/wp-includes/script-loader.php on line 25
+[16-Aug-2018 07:54:53 America/Chicago] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ikstudy/public_html/wp-includes/script-loader.php on line 25
+[16-Aug-2018 07:58:30 America/Chicago] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/ikstudy/public_html/wp-includes/rss-functions.php on line 8
+[16-Aug-2018 08:15:01 America/Chicago] PHP Fatal error:  Call to undefined function add_filter() in /home/ikstudy/public_html/wp-includes/class-wp-embed.php on line 28
+[16-Aug-2018 08:18:28 America/Chicago] PHP Fatal error:  Call to undefined function add_filter() in /home/ikstudy/public_html/wp-includes/default-filters.php on line 17
+[16-Aug-2018 08:28:34 America/Chicago] PHP Fatal error:  Call to undefined function is_robots() in /home/ikstudy/public_html/wp-includes/template-loader.php on line 28
+[16-Aug-2018 08:29:24 America/Chicago] PHP Fatal error:  Class 'WP_Widget' not found in /home/ikstudy/public_html/wp-includes/default-widgets.php on line 14
+[16-Aug-2018 08:38:20 America/Chicago] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/ikstudy/public_html/wp-includes/class-simplepie.php on line 5
+[16-Aug-2018 08:38:20 America/Chicago] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ikstudy/public_html/wp-includes/class-simplepie.php on line 5
+[16-Aug-2018 08:40:54 America/Chicago] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/ikstudy/public_html/wp-includes/class.wp-styles.php on line 19
+[16-Aug-2018 08:43:50 America/Chicago] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/ikstudy/public_html/wp-includes/class.wp-scripts.php on line 19
+[16-Aug-2018 08:49:32 America/Chicago] PHP Fatal error:  Class 'Walker' not found in /home/ikstudy/public_html/wp-includes/comment-template.php on line 1680
+[16-Aug-2018 08:55:17 America/Chicago] PHP Fatal error:  Class 'Walker' not found in /home/ikstudy/public_html/wp-includes/nav-menu-template.php on line 16
+[16-Aug-2018 08:58:36 America/Chicago] PHP Fatal error:  Class 'Walker' not found in /home/ikstudy/public_html/wp-includes/category-template.php on line 967
+[16-Aug-2018 09:03:54 America/Chicago] PHP Fatal error:  Call to undefined function add_action() in /home/ikstudy/public_html/wp-includes/ms-default-filters.php on line 16
+[16-Aug-2018 09:09:39 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-rss2-comments.php on line 8
+[16-Aug-2018 09:13:32 America/Chicago] PHP Fatal error:  Call to undefined function feed_content_type() in /home/ikstudy/public_html/wp-includes/feed-atom-comments.php on line 8
+[16-Aug-2018 09:38:23 America/Chicago] PHP Fatal error:  Class 'IXR_Server' not found in /home/ikstudy/public_html/wp-includes/class-wp-xmlrpc-server.php on line 23
+[16-Aug-2018 09:41:15 America/Chicago] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/ikstudy/public_html/wp-includes/registration-functions.php on line 7
+[16-Aug-2018 09:55:37 America/Chicago] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/ikstudy/public_html/wp-includes/class-wp-image-editor-gd.php on line 17
+[16-Aug-2018 09:58:29 America/Chicago] PHP Fatal error:  Class 'IXR_Client' not found in /home/ikstudy/public_html/wp-includes/class-wp-http-ixr-client.php on line 9
+[16-Aug-2018 10:28:45 America/Chicago] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/ikstudy/public_html/wp-includes/class-wp-image-editor-imagick.php on line 17
+[19-Dec-2018 21:05:10 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss.php on line 19
+[19-Dec-2018 21:23:12 UTC] PHP Fatal error:  Call to undefined function is_admin() in /home/iktutor/public_html/iklearn/wp-includes/vars.php on line 23
+[19-Dec-2018 22:08:17 UTC] PHP Fatal error:  Call to undefined function add_shortcode() in /home/iktutor/public_html/iklearn/wp-includes/media.php on line 831
+[20-Dec-2018 01:53:42 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss.php on line 8
+[20-Dec-2018 02:20:45 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rdf.php on line 8
+[20-Dec-2018 02:38:48 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom.php on line 8
+[20-Dec-2018 02:47:48 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[20-Dec-2018 02:47:48 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[20-Dec-2018 02:47:48 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[20-Dec-2018 03:05:50 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2.php on line 8
+[20-Dec-2018 05:12:07 UTC] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[20-Dec-2018 05:12:07 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[20-Dec-2018 05:21:07 UTC] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[20-Dec-2018 05:21:07 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[20-Dec-2018 05:30:07 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration.php on line 7
+[20-Dec-2018 05:39:08 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/class-snoopy.php on line 6
+[20-Dec-2018 06:24:13 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[20-Dec-2018 06:24:13 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[20-Dec-2018 06:24:13 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[20-Dec-2018 08:30:27 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/post-template.php on line 1325
+[20-Dec-2018 08:39:28 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss-functions.php on line 8
+[21-Dec-2018 04:20:41 UTC] PHP Fatal error:  Call to undefined function is_robots() in /home/iktutor/public_html/iklearn/wp-includes/template-loader.php on line 28
+[21-Dec-2018 04:29:42 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/class-wp-embed.php on line 28
+[21-Dec-2018 04:38:43 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-styles.php on line 19
+[21-Dec-2018 04:47:44 UTC] PHP Fatal error:  Class 'WP_Widget' not found in /home/iktutor/public_html/iklearn/wp-includes/default-widgets.php on line 14
+[21-Dec-2018 05:14:47 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/default-filters.php on line 17
+[21-Dec-2018 05:50:51 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom-comments.php on line 8
+[21-Dec-2018 05:59:52 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[21-Dec-2018 05:59:52 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[21-Dec-2018 05:59:52 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[21-Dec-2018 06:08:53 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2-comments.php on line 8
+[21-Dec-2018 06:17:54 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-includes/ms-default-filters.php on line 16
+[21-Dec-2018 06:26:55 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/comment-template.php on line 1680
+[21-Dec-2018 06:44:57 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-scripts.php on line 19
+[21-Dec-2018 07:12:00 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/nav-menu-template.php on line 16
+[21-Dec-2018 07:30:06 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/category-template.php on line 967
+[21-Dec-2018 07:57:06 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration-functions.php on line 7
+[21-Dec-2018 08:42:11 UTC] PHP Fatal error:  Class 'IXR_Server' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-xmlrpc-server.php on line 23
+[21-Dec-2018 09:09:14 UTC] PHP Fatal error:  Class 'IXR_Client' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-http-ixr-client.php on line 9
+[21-Dec-2018 09:27:16 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-gd.php on line 17
+[21-Dec-2018 09:45:18 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-imagick.php on line 17
+[21-Dec-2018 14:24:49 UTC] PHP Fatal error:  Call to undefined function is_main_site() in /home/iktutor/public_html/iklearn/wp-includes/update.php on line 667
+[08-Jan-2019 10:39:51 UTC] PHP Fatal error:  Call to undefined function is_admin() in /home/iktutor/public_html/iklearn/wp-includes/vars.php on line 23
+[08-Jan-2019 19:30:18 UTC] PHP Fatal error:  Call to undefined function is_admin() in /home/iktutor/public_html/iklearn/wp-includes/vars.php on line 23
+[08-Jan-2019 23:17:39 UTC] PHP Fatal error:  Call to undefined function add_shortcode() in /home/iktutor/public_html/iklearn/wp-includes/media.php on line 831
+[09-Jan-2019 08:02:39 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss.php on line 8
+[09-Jan-2019 19:24:44 UTC] PHP Fatal error:  Call to undefined function is_main_site() in /home/iktutor/public_html/iklearn/wp-includes/update.php on line 667
+[15-Jan-2019 09:16:55 UTC] PHP Fatal error:  Call to undefined function is_main_site() in /home/iktutor/public_html/iklearn/wp-includes/update.php on line 667
+[17-Jan-2019 10:32:07 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss.php on line 8
+[17-Jan-2019 20:29:21 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rdf.php on line 8
+[18-Jan-2019 01:32:32 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom.php on line 8
+[18-Jan-2019 02:48:21 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[18-Jan-2019 02:48:21 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[18-Jan-2019 02:48:21 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[18-Jan-2019 05:19:54 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2.php on line 8
+[18-Jan-2019 23:21:50 UTC] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[18-Jan-2019 23:21:50 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[19-Jan-2019 09:34:11 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration.php on line 7
+[19-Jan-2019 12:05:46 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[19-Jan-2019 12:05:46 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[19-Jan-2019 12:05:46 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[19-Jan-2019 13:21:34 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2.php on line 8
+[19-Jan-2019 14:37:20 UTC] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[19-Jan-2019 14:37:20 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[19-Jan-2019 19:40:31 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/class-snoopy.php on line 6
+[19-Jan-2019 22:12:04 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/class-wp-embed.php on line 28
+[20-Jan-2019 00:43:39 UTC] PHP Fatal error:  Call to undefined function is_robots() in /home/iktutor/public_html/iklearn/wp-includes/template-loader.php on line 28
+[20-Jan-2019 01:59:28 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/default-filters.php on line 17
+[20-Jan-2019 03:15:16 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/comment-template.php on line 1680
+[20-Jan-2019 05:46:50 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-scripts.php on line 19
+[21-Jan-2019 10:38:58 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss-functions.php on line 8
+[21-Jan-2019 19:21:39 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/post-template.php on line 1325
+[21-Jan-2019 20:37:27 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[21-Jan-2019 20:37:27 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[21-Jan-2019 20:37:27 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[22-Jan-2019 06:43:45 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-styles.php on line 19
+[22-Jan-2019 07:59:34 UTC] PHP Fatal error:  Class 'WP_Widget' not found in /home/iktutor/public_html/iklearn/wp-includes/default-widgets.php on line 14
+[22-Jan-2019 10:31:09 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[22-Jan-2019 10:31:09 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[22-Jan-2019 10:31:09 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[22-Jan-2019 14:18:38 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/nav-menu-template.php on line 16
+[22-Jan-2019 18:34:34 UTC] PHP Fatal error:  Class 'IXR_Server' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-xmlrpc-server.php on line 23
+[22-Jan-2019 19:50:21 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration-functions.php on line 7
+[22-Jan-2019 22:21:56 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/category-template.php on line 967
+[22-Jan-2019 23:37:44 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom-comments.php on line 8
+[23-Jan-2019 00:53:31 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2-comments.php on line 8
+[23-Jan-2019 01:58:40 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-includes/ms-default-filters.php on line 16
+[23-Jan-2019 06:54:08 UTC] PHP Fatal error:  Class 'IXR_Client' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-http-ixr-client.php on line 9
+[23-Jan-2019 08:09:55 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-gd.php on line 17
+[23-Jan-2019 20:34:42 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-imagick.php on line 17
+[13-Feb-2019 13:56:56 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-styles.php on line 19
+[13-Feb-2019 13:56:57 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss.php on line 19
+[13-Feb-2019 13:57:00 UTC] PHP Fatal error:  Call to undefined function is_admin() in /home/iktutor/public_html/iklearn/wp-includes/vars.php on line 23
+[13-Feb-2019 13:57:02 UTC] PHP Fatal error:  Call to undefined function add_shortcode() in /home/iktutor/public_html/iklearn/wp-includes/media.php on line 831
+[13-Feb-2019 13:57:05 UTC] PHP Fatal error:  Call to undefined function is_main_site() in /home/iktutor/public_html/iklearn/wp-includes/update.php on line 667
+[13-Feb-2019 13:57:08 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss.php on line 8
+[13-Feb-2019 13:57:12 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rdf.php on line 8
+[13-Feb-2019 13:57:17 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom.php on line 8
+[13-Feb-2019 13:57:21 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[13-Feb-2019 13:57:21 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[13-Feb-2019 13:57:21 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[13-Feb-2019 13:57:26 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2.php on line 8
+[13-Feb-2019 13:57:30 UTC] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[13-Feb-2019 13:57:30 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[13-Feb-2019 13:57:35 UTC] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[13-Feb-2019 13:57:35 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[13-Feb-2019 13:57:39 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/class-snoopy.php on line 6
+[13-Feb-2019 13:57:43 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration.php on line 7
+[13-Feb-2019 13:57:48 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/post-template.php on line 1325
+[13-Feb-2019 13:57:52 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[13-Feb-2019 13:57:52 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[13-Feb-2019 13:57:52 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[13-Feb-2019 13:57:56 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss-functions.php on line 8
+[13-Feb-2019 13:58:01 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/class-wp-embed.php on line 28
+[13-Feb-2019 13:58:05 UTC] PHP Fatal error:  Call to undefined function is_robots() in /home/iktutor/public_html/iklearn/wp-includes/template-loader.php on line 28
+[13-Feb-2019 13:58:09 UTC] PHP Fatal error:  Class 'WP_Widget' not found in /home/iktutor/public_html/iklearn/wp-includes/default-widgets.php on line 14
+[13-Feb-2019 13:58:14 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[13-Feb-2019 13:58:14 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[13-Feb-2019 13:58:14 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[13-Feb-2019 13:58:18 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/default-filters.php on line 17
+[13-Feb-2019 13:58:22 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/comment-template.php on line 1680
+[13-Feb-2019 13:58:27 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-scripts.php on line 19
+[13-Feb-2019 13:58:31 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/nav-menu-template.php on line 16
+[13-Feb-2019 13:58:35 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/category-template.php on line 967
+[13-Feb-2019 13:58:40 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom-comments.php on line 8
+[13-Feb-2019 13:58:44 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2-comments.php on line 8
+[13-Feb-2019 13:58:48 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-includes/ms-default-filters.php on line 16
+[13-Feb-2019 13:58:53 UTC] PHP Fatal error:  Class 'IXR_Server' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-xmlrpc-server.php on line 23
+[13-Feb-2019 13:58:57 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration-functions.php on line 7
+[13-Feb-2019 13:59:01 UTC] PHP Fatal error:  Class 'IXR_Client' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-http-ixr-client.php on line 9
+[13-Feb-2019 13:59:06 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-gd.php on line 17
+[13-Feb-2019 13:59:10 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-imagick.php on line 17
+[17-Feb-2019 06:36:31 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/category-template.php on line 967
+[17-Feb-2019 06:36:34 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss.php on line 19
+[17-Feb-2019 06:36:37 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss.php on line 8
+[17-Feb-2019 06:36:39 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rdf.php on line 8
+[17-Feb-2019 06:36:41 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom.php on line 8
+[17-Feb-2019 06:36:44 UTC] PHP Fatal error:  Call to undefined function is_admin() in /home/iktutor/public_html/iklearn/wp-includes/vars.php on line 23
+[17-Feb-2019 06:36:46 UTC] PHP Fatal error:  Call to undefined function add_shortcode() in /home/iktutor/public_html/iklearn/wp-includes/media.php on line 831
+[17-Feb-2019 06:36:50 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[17-Feb-2019 06:36:50 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[17-Feb-2019 06:36:50 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[17-Feb-2019 06:36:55 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2.php on line 8
+[17-Feb-2019 06:37:01 UTC] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[17-Feb-2019 06:37:01 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[17-Feb-2019 06:37:06 UTC] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[17-Feb-2019 06:37:06 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[17-Feb-2019 06:37:11 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/class-snoopy.php on line 6
+[17-Feb-2019 06:37:16 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration.php on line 7
+[17-Feb-2019 06:37:22 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/post-template.php on line 1325
+[17-Feb-2019 06:37:27 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss-functions.php on line 8
+[17-Feb-2019 06:37:32 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/class-wp-embed.php on line 28
+[17-Feb-2019 06:37:37 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[17-Feb-2019 06:37:37 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[17-Feb-2019 06:37:37 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[17-Feb-2019 06:37:43 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[17-Feb-2019 06:37:43 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[17-Feb-2019 06:37:43 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[17-Feb-2019 06:37:48 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/comment-template.php on line 1680
+[17-Feb-2019 06:37:53 UTC] PHP Fatal error:  Call to undefined function is_robots() in /home/iktutor/public_html/iklearn/wp-includes/template-loader.php on line 28
+[17-Feb-2019 06:37:58 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-styles.php on line 19
+[17-Feb-2019 06:38:04 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-scripts.php on line 19
+[17-Feb-2019 06:38:09 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/nav-menu-template.php on line 16
+[17-Feb-2019 06:38:14 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration-functions.php on line 7
+[17-Feb-2019 06:38:19 UTC] PHP Fatal error:  Class 'WP_Widget' not found in /home/iktutor/public_html/iklearn/wp-includes/default-widgets.php on line 14
+[17-Feb-2019 06:38:25 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-imagick.php on line 17
+[17-Feb-2019 06:38:30 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/default-filters.php on line 17
+[17-Feb-2019 06:38:35 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom-comments.php on line 8
+[17-Feb-2019 06:38:41 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2-comments.php on line 8
+[17-Feb-2019 06:38:46 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-includes/ms-default-filters.php on line 16
+[17-Feb-2019 06:38:51 UTC] PHP Fatal error:  Class 'IXR_Server' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-xmlrpc-server.php on line 23
+[17-Feb-2019 06:38:57 UTC] PHP Fatal error:  Class 'IXR_Client' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-http-ixr-client.php on line 9
+[17-Feb-2019 06:39:02 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-gd.php on line 17
+[17-Feb-2019 06:39:09 UTC] PHP Fatal error:  Call to undefined function is_main_site() in /home/iktutor/public_html/iklearn/wp-includes/update.php on line 667
+[08-Jun-2019 19:54:37 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss.php on line 19
+[08-Jun-2019 19:54:42 UTC] PHP Fatal error:  Call to undefined function is_admin() in /home/iktutor/public_html/iklearn/wp-includes/vars.php on line 23
+[08-Jun-2019 19:54:49 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss.php on line 8
+[08-Jun-2019 19:54:57 UTC] PHP Fatal error:  Call to undefined function add_shortcode() in /home/iktutor/public_html/iklearn/wp-includes/media.php on line 831
+[08-Jun-2019 19:55:06 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rdf.php on line 8
+[08-Jun-2019 19:55:14 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom.php on line 8
+[08-Jun-2019 19:55:22 UTC] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[08-Jun-2019 19:55:22 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[08-Jun-2019 19:55:31 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[08-Jun-2019 19:55:31 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[08-Jun-2019 19:55:31 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[08-Jun-2019 19:55:39 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration.php on line 7
+[08-Jun-2019 19:55:47 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2.php on line 8
+[08-Jun-2019 19:55:56 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[08-Jun-2019 19:55:56 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[08-Jun-2019 19:55:56 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[08-Jun-2019 19:56:04 UTC] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[08-Jun-2019 19:56:04 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[08-Jun-2019 19:56:12 UTC] PHP Fatal error:  Call to undefined function is_robots() in /home/iktutor/public_html/iklearn/wp-includes/template-loader.php on line 28
+[08-Jun-2019 19:56:21 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/class-snoopy.php on line 6
+[08-Jun-2019 19:56:29 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/post-template.php on line 1325
+[08-Jun-2019 19:56:36 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-styles.php on line 19
+[08-Jun-2019 19:56:46 UTC] PHP Fatal error:  Class 'WP_Widget' not found in /home/iktutor/public_html/iklearn/wp-includes/default-widgets.php on line 14
+[08-Jun-2019 19:56:54 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss-functions.php on line 8
+[08-Jun-2019 19:57:02 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/default-filters.php on line 17
+[08-Jun-2019 19:57:11 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/class-wp-embed.php on line 28
+[08-Jun-2019 19:57:19 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[08-Jun-2019 19:57:19 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[08-Jun-2019 19:57:19 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[08-Jun-2019 19:57:27 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/comment-template.php on line 1680
+[08-Jun-2019 19:57:36 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom-comments.php on line 8
+[08-Jun-2019 19:57:44 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2-comments.php on line 8
+[08-Jun-2019 19:57:52 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-includes/ms-default-filters.php on line 16
+[08-Jun-2019 19:58:01 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-scripts.php on line 19
+[08-Jun-2019 19:58:09 UTC] PHP Fatal error:  Class 'IXR_Server' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-xmlrpc-server.php on line 23
+[08-Jun-2019 19:58:18 UTC] PHP Fatal error:  Class 'IXR_Client' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-http-ixr-client.php on line 9
+[08-Jun-2019 19:58:26 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/nav-menu-template.php on line 16
+[08-Jun-2019 19:58:34 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-gd.php on line 17
+[08-Jun-2019 19:58:43 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/category-template.php on line 967
+[08-Jun-2019 19:58:52 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration-functions.php on line 7
+[08-Jun-2019 19:59:00 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-imagick.php on line 17
+[08-Jun-2019 19:59:10 UTC] PHP Fatal error:  Call to undefined function is_main_site() in /home/iktutor/public_html/iklearn/wp-includes/update.php on line 667
+[12-Jun-2019 04:51:03 UTC] PHP Fatal error:  Call to undefined function is_main_site() in /home/iktutor/public_html/iklearn/wp-includes/update.php on line 667
+[12-Jun-2019 23:59:04 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss.php on line 19
+[23-Jun-2019 18:06:13 UTC] PHP Fatal error:  Call to undefined function is_admin() in /home/iktutor/public_html/iklearn/wp-includes/vars.php on line 23
+[23-Jun-2019 22:44:34 UTC] PHP Fatal error:  Call to undefined function add_shortcode() in /home/iktutor/public_html/iklearn/wp-includes/media.php on line 831
+[30-Jun-2019 11:51:42 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss.php on line 8
+[01-Jul-2019 16:20:57 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rdf.php on line 8
+[02-Jul-2019 22:49:51 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom.php on line 8
+[03-Jul-2019 00:12:58 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[03-Jul-2019 00:12:58 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[03-Jul-2019 00:12:58 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[03-Jul-2019 02:36:20 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2.php on line 8
+[04-Jul-2019 12:41:47 UTC] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[04-Jul-2019 12:41:47 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[04-Jul-2019 15:21:52 UTC] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[04-Jul-2019 15:21:52 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[04-Jul-2019 16:36:36 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/class-snoopy.php on line 6
+[04-Jul-2019 18:11:08 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration.php on line 7
+[05-Jul-2019 18:29:03 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/post-template.php on line 1325
+[05-Jul-2019 18:33:32 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[05-Jul-2019 18:33:32 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[05-Jul-2019 18:33:32 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[05-Jul-2019 20:35:37 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss-functions.php on line 8
+[06-Jul-2019 01:36:30 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/class-wp-embed.php on line 28
+[06-Jul-2019 04:11:16 UTC] PHP Fatal error:  Call to undefined function is_robots() in /home/iktutor/public_html/iklearn/wp-includes/template-loader.php on line 28
+[06-Jul-2019 05:25:48 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-styles.php on line 19
+[06-Jul-2019 06:35:57 UTC] PHP Fatal error:  Class 'WP_Widget' not found in /home/iktutor/public_html/iklearn/wp-includes/default-widgets.php on line 14
+[06-Jul-2019 09:21:25 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[06-Jul-2019 09:21:25 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[06-Jul-2019 09:21:25 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[06-Jul-2019 13:12:08 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/default-filters.php on line 17
+[06-Jul-2019 14:21:12 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/comment-template.php on line 1680
+[07-Jul-2019 02:59:39 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-scripts.php on line 19
+[07-Jul-2019 03:04:57 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/nav-menu-template.php on line 16
+[07-Jul-2019 04:21:15 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/category-template.php on line 967
+[07-Jul-2019 05:33:53 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom-comments.php on line 8
+[07-Jul-2019 06:44:01 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2-comments.php on line 8
+[07-Jul-2019 09:15:50 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-includes/ms-default-filters.php on line 16
+[07-Jul-2019 18:14:38 UTC] PHP Fatal error:  Class 'IXR_Server' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-xmlrpc-server.php on line 23
+[07-Jul-2019 18:41:15 UTC] PHP Fatal error:  Class 'IXR_Server' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-xmlrpc-server.php on line 23
+[07-Jul-2019 18:46:41 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration-functions.php on line 7
+[07-Jul-2019 19:05:29 UTC] PHP Fatal error:  Class 'IXR_Client' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-http-ixr-client.php on line 9
+[07-Jul-2019 19:13:52 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-gd.php on line 17
+[08-Jul-2019 12:49:08 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-imagick.php on line 17
+[30-Jul-2019 16:26:52 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss.php on line 19
+[30-Jul-2019 17:54:13 UTC] PHP Fatal error:  Call to undefined function is_admin() in /home/iktutor/public_html/iklearn/wp-includes/vars.php on line 23
+[30-Jul-2019 18:03:41 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss.php on line 8
+[30-Jul-2019 18:32:05 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rdf.php on line 8
+[30-Jul-2019 19:00:29 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom.php on line 8
+[30-Jul-2019 19:09:57 UTC] PHP Fatal error:  Call to undefined function add_shortcode() in /home/iktutor/public_html/iklearn/wp-includes/media.php on line 831
+[30-Jul-2019 20:25:13 UTC] PHP Fatal error:  Call to undefined function is_main_site() in /home/iktutor/public_html/iklearn/wp-includes/update.php on line 667
+[30-Jul-2019 20:27:25 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[30-Jul-2019 20:27:25 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[30-Jul-2019 20:27:25 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[30-Jul-2019 20:28:35 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2.php on line 8
+[30-Jul-2019 21:52:36 UTC] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[30-Jul-2019 21:52:36 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[30-Jul-2019 22:02:04 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/class-snoopy.php on line 6
+[30-Jul-2019 23:17:48 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/post-template.php on line 1325
+[30-Jul-2019 23:46:12 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss-functions.php on line 8
+[31-Jul-2019 00:24:04 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/class-wp-embed.php on line 28
+[31-Jul-2019 00:52:28 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[31-Jul-2019 00:52:28 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[31-Jul-2019 00:52:28 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[31-Jul-2019 01:11:24 UTC] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[31-Jul-2019 01:11:24 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[31-Jul-2019 01:20:52 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/comment-template.php on line 1680
+[31-Jul-2019 01:30:20 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-scripts.php on line 19
+[31-Jul-2019 01:39:48 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration.php on line 7
+[31-Jul-2019 01:58:44 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/nav-menu-template.php on line 16
+[31-Jul-2019 02:27:08 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/category-template.php on line 967
+[31-Jul-2019 02:36:36 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[31-Jul-2019 02:36:36 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[31-Jul-2019 02:36:36 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[31-Jul-2019 03:23:56 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration-functions.php on line 7
+[31-Jul-2019 04:20:44 UTC] PHP Fatal error:  Call to undefined function is_robots() in /home/iktutor/public_html/iklearn/wp-includes/template-loader.php on line 28
+[31-Jul-2019 04:49:08 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-styles.php on line 19
+[31-Jul-2019 07:40:12 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-imagick.php on line 17
+[31-Jul-2019 13:48:50 UTC] PHP Fatal error:  Class 'WP_Widget' not found in /home/iktutor/public_html/iklearn/wp-includes/default-widgets.php on line 14
+[01-Aug-2019 11:52:59 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/default-filters.php on line 17
+[01-Aug-2019 12:23:03 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom-comments.php on line 8
+[01-Aug-2019 12:32:31 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2-comments.php on line 8
+[01-Aug-2019 13:20:12 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-includes/ms-default-filters.php on line 16
+[01-Aug-2019 15:13:29 UTC] PHP Fatal error:  Class 'IXR_Server' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-xmlrpc-server.php on line 23
+[01-Aug-2019 15:41:53 UTC] PHP Fatal error:  Class 'IXR_Client' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-http-ixr-client.php on line 9
+[01-Aug-2019 16:38:41 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-gd.php on line 17
+[09-Oct-2019 06:44:01 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss.php on line 19
+[09-Oct-2019 08:38:57 UTC] PHP Fatal error:  Call to undefined function is_admin() in /home/iktutor/public_html/iklearn/wp-includes/vars.php on line 23
+[09-Oct-2019 09:04:52 UTC] PHP Fatal error:  Call to undefined function add_shortcode() in /home/iktutor/public_html/iklearn/wp-includes/media.php on line 831
+[09-Oct-2019 10:35:13 UTC] PHP Fatal error:  Call to undefined function is_main_site() in /home/iktutor/public_html/iklearn/wp-includes/update.php on line 667
+[09-Oct-2019 11:44:16 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss.php on line 8
+[09-Oct-2019 13:21:31 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rdf.php on line 8
+[09-Oct-2019 14:48:58 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom.php on line 8
+[09-Oct-2019 16:06:03 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[09-Oct-2019 16:06:03 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[09-Oct-2019 16:06:03 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[09-Oct-2019 17:14:15 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2.php on line 8
+[09-Oct-2019 18:19:59 UTC] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[09-Oct-2019 18:19:59 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[09-Oct-2019 19:25:53 UTC] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[09-Oct-2019 19:25:53 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[09-Oct-2019 20:43:55 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/class-snoopy.php on line 6
+[09-Oct-2019 22:29:21 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration.php on line 7
+[09-Oct-2019 23:41:20 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/post-template.php on line 1325
+[10-Oct-2019 00:49:18 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[10-Oct-2019 00:49:18 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[10-Oct-2019 00:49:18 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[10-Oct-2019 09:45:23 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss-functions.php on line 8
+[10-Oct-2019 10:58:22 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/class-wp-embed.php on line 28
+[10-Oct-2019 12:04:29 UTC] PHP Fatal error:  Call to undefined function is_robots() in /home/iktutor/public_html/iklearn/wp-includes/template-loader.php on line 28
+[10-Oct-2019 13:09:57 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-styles.php on line 19
+[10-Oct-2019 14:13:51 UTC] PHP Fatal error:  Class 'WP_Widget' not found in /home/iktutor/public_html/iklearn/wp-includes/default-widgets.php on line 14
+[10-Oct-2019 15:32:59 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[10-Oct-2019 15:32:59 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[10-Oct-2019 15:32:59 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[10-Oct-2019 17:03:02 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/default-filters.php on line 17
+[10-Oct-2019 18:20:47 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/default-filters.php on line 17
+[10-Oct-2019 18:30:53 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/comment-template.php on line 1680
+[10-Oct-2019 18:40:57 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-scripts.php on line 19
+[10-Oct-2019 18:51:15 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/nav-menu-template.php on line 16
+[10-Oct-2019 19:01:13 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/category-template.php on line 967
+[10-Oct-2019 19:11:54 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom-comments.php on line 8
+[10-Oct-2019 20:31:36 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/comment-template.php on line 1680
+[10-Oct-2019 20:39:46 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-scripts.php on line 19
+[10-Oct-2019 20:48:04 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/nav-menu-template.php on line 16
+[10-Oct-2019 20:56:12 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/category-template.php on line 967
+[10-Oct-2019 21:04:22 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom-comments.php on line 8
+[10-Oct-2019 22:57:36 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2-comments.php on line 8
+[10-Oct-2019 23:46:23 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-includes/ms-default-filters.php on line 16
+[11-Oct-2019 00:28:34 UTC] PHP Fatal error:  Class 'IXR_Server' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-xmlrpc-server.php on line 23
+[11-Oct-2019 01:51:22 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration-functions.php on line 7
+[11-Oct-2019 03:22:05 UTC] PHP Fatal error:  Class 'IXR_Client' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-http-ixr-client.php on line 9
+[11-Oct-2019 04:07:35 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-gd.php on line 17
+[11-Oct-2019 05:20:36 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-imagick.php on line 17
+[18-Mar-2020 08:54:54 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss.php on line 19
+[18-Mar-2020 08:55:04 UTC] PHP Fatal error:  Call to undefined function is_admin() in /home/iktutor/public_html/iklearn/wp-includes/vars.php on line 23
+[18-Mar-2020 08:55:08 UTC] PHP Fatal error:  Call to undefined function add_shortcode() in /home/iktutor/public_html/iklearn/wp-includes/media.php on line 831
+[18-Mar-2020 08:56:21 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss.php on line 8
+[18-Mar-2020 08:56:23 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rdf.php on line 8
+[18-Mar-2020 08:56:37 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom.php on line 8
+[18-Mar-2020 08:56:42 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[18-Mar-2020 08:56:42 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[18-Mar-2020 08:56:42 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[18-Mar-2020 08:56:44 UTC] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[18-Mar-2020 08:56:44 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[18-Mar-2020 08:56:49 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2.php on line 8
+[18-Mar-2020 08:56:51 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration.php on line 7
+[18-Mar-2020 08:57:07 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[18-Mar-2020 08:57:07 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[18-Mar-2020 08:57:07 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[18-Mar-2020 08:57:23 UTC] PHP Fatal error:  Call to undefined function is_robots() in /home/iktutor/public_html/iklearn/wp-includes/template-loader.php on line 28
+[18-Mar-2020 08:57:26 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-styles.php on line 19
+[18-Mar-2020 08:57:28 UTC] PHP Fatal error:  Class 'WP_Widget' not found in /home/iktutor/public_html/iklearn/wp-includes/default-widgets.php on line 14
+[18-Mar-2020 08:57:31 UTC] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[18-Mar-2020 08:57:31 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[18-Mar-2020 08:57:33 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/class-snoopy.php on line 6
+[18-Mar-2020 08:57:44 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/post-template.php on line 1325
+[18-Mar-2020 08:57:51 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/default-filters.php on line 17
+[18-Mar-2020 08:57:53 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss-functions.php on line 8
+[18-Mar-2020 08:58:00 UTC] PHP Fatal error:  Call to undefined function is_main_site() in /home/iktutor/public_html/iklearn/wp-includes/update.php on line 667
+[18-Mar-2020 08:58:02 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/class-wp-embed.php on line 28
+[18-Mar-2020 08:58:05 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[18-Mar-2020 08:58:05 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[18-Mar-2020 08:58:05 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[18-Mar-2020 08:58:06 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom-comments.php on line 8
+[18-Mar-2020 08:58:09 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2-comments.php on line 8
+[18-Mar-2020 08:58:11 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-includes/ms-default-filters.php on line 16
+[18-Mar-2020 08:58:16 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/comment-template.php on line 1680
+[18-Mar-2020 08:58:18 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-scripts.php on line 19
+[18-Mar-2020 08:58:22 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/nav-menu-template.php on line 16
+[18-Mar-2020 08:58:25 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/category-template.php on line 967
+[19-Mar-2020 09:54:23 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration-functions.php on line 7
+[19-Mar-2020 09:57:23 UTC] PHP Fatal error:  Class 'IXR_Client' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-http-ixr-client.php on line 9
+[19-Mar-2020 10:00:19 UTC] PHP Fatal error:  Class 'IXR_Server' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-xmlrpc-server.php on line 23
+[19-Mar-2020 10:00:41 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-gd.php on line 17
+[19-Mar-2020 10:02:08 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-imagick.php on line 17
+[05-Apr-2020 16:20:36 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss.php on line 19
+[06-Apr-2020 01:13:58 UTC] PHP Fatal error:  Call to undefined function is_admin() in /home/iktutor/public_html/iklearn/wp-includes/vars.php on line 23
+[06-Apr-2020 08:40:50 UTC] PHP Fatal error:  Call to undefined function add_shortcode() in /home/iktutor/public_html/iklearn/wp-includes/media.php on line 831
+[07-Apr-2020 03:40:35 UTC] PHP Fatal error:  Call to undefined function is_main_site() in /home/iktutor/public_html/iklearn/wp-includes/update.php on line 667
+[12-Apr-2020 16:40:15 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss.php on line 8
+[13-Apr-2020 04:00:33 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rdf.php on line 8
+[13-Apr-2020 07:42:08 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom.php on line 8
+[13-Apr-2020 09:00:16 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[13-Apr-2020 09:00:16 UTC] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[13-Apr-2020 09:00:16 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/functions.php on line 8
+[13-Apr-2020 11:29:40 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2.php on line 8
+[13-Apr-2020 20:23:15 UTC] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[13-Apr-2020 20:23:15 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/ms-settings.php on line 14
+[13-Apr-2020 21:38:12 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/class-snoopy.php on line 6
+[14-Apr-2020 00:19:04 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration.php on line 7
+[14-Apr-2020 01:25:32 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[14-Apr-2020 01:25:32 UTC] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[14-Apr-2020 01:25:32 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/script-loader.php on line 25
+[14-Apr-2020 07:19:27 UTC] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[14-Apr-2020 07:19:27 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[14-Apr-2020 07:23:45 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/rss-functions.php on line 8
+[14-Apr-2020 12:51:33 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/post-template.php on line 1325
+[14-Apr-2020 15:19:34 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/class-wp-embed.php on line 28
+[14-Apr-2020 17:50:30 UTC] PHP Fatal error:  Call to undefined function is_robots() in /home/iktutor/public_html/iklearn/wp-includes/template-loader.php on line 28
+[14-Apr-2020 19:12:01 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-styles.php on line 19
+[14-Apr-2020 22:59:46 UTC] PHP Fatal error:  Class 'WP_Widget' not found in /home/iktutor/public_html/iklearn/wp-includes/default-widgets.php on line 14
+[15-Apr-2020 01:28:23 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[15-Apr-2020 01:28:23 UTC] PHP Warning:  require(ABSPATHWPINC/SimplePie/Misc.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[15-Apr-2020 01:28:23 UTC] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-simplepie.php on line 5
+[15-Apr-2020 05:19:33 UTC] PHP Fatal error:  Call to undefined function add_filter() in /home/iktutor/public_html/iklearn/wp-includes/default-filters.php on line 17
+[15-Apr-2020 06:29:35 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/comment-template.php on line 1680
+[15-Apr-2020 09:01:23 UTC] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/iktutor/public_html/iklearn/wp-includes/class.wp-scripts.php on line 19
+[15-Apr-2020 11:41:18 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/nav-menu-template.php on line 16
+[15-Apr-2020 17:57:43 UTC] PHP Fatal error:  Class 'IXR_Server' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-xmlrpc-server.php on line 23
+[15-Apr-2020 21:39:40 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/category-template.php on line 967
+[15-Apr-2020 22:59:54 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom-comments.php on line 8
+[16-Apr-2020 00:10:08 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss2-comments.php on line 8
+[16-Apr-2020 02:41:01 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/iktutor/public_html/iklearn/wp-includes/ms-default-filters.php on line 16
+[16-Apr-2020 06:29:50 UTC] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/iktutor/public_html/iklearn/wp-includes/registration-functions.php on line 7
+[16-Apr-2020 10:21:50 UTC] PHP Fatal error:  Class 'IXR_Client' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-http-ixr-client.php on line 9
+[16-Apr-2020 11:31:47 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-gd.php on line 17
+[16-Apr-2020 20:31:09 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-imagick.php on line 17
+[24-May-2020 03:03:39 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-gd.php on line 17
+[24-May-2020 03:04:49 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-atom-comments.php on line 8
+[24-May-2020 03:06:41 UTC] PHP Fatal error:  Class 'IXR_Client' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-http-ixr-client.php on line 9
+[24-May-2020 03:06:48 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rdf.php on line 8
+[25-May-2020 01:51:15 UTC] PHP Fatal error:  Call to undefined function is_admin() in /home/iktutor/public_html/iklearn/wp-includes/vars.php on line 23
+[25-May-2020 01:52:56 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rss.php on line 8
+[25-May-2020 01:55:27 UTC] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[25-May-2020 01:55:27 UTC] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/iktutor/public_html/iklearn/wp-includes/class-feed.php on line 4
+[25-May-2020 01:56:38 UTC] PHP Fatal error:  Class 'Walker' not found in /home/iktutor/public_html/iklearn/wp-includes/nav-menu-template.php on line 16
+[25-May-2020 01:58:17 UTC] PHP Fatal error:  Call to undefined function is_main_site() in /home/iktutor/public_html/iklearn/wp-includes/update.php on line 667
+[28-May-2020 03:17:20 UTC] PHP Fatal error:  Call to undefined function feed_content_type() in /home/iktutor/public_html/iklearn/wp-includes/feed-rdf.php on line 8
+[28-May-2020 06:59:10 UTC] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home/iktutor/public_html/iklearn/wp-includes/class-wp-image-editor-gd.php on line 17
