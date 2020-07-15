@@ -4283,7 +4283,6 @@
                         var type_search = [];
 
                         var option = $('#select-available-option :selected').attr("value");
-                        console.log(option);
                         if(option == "all"){
                             type_search.push("rating");
                             type_search.push("favorite");
@@ -4305,6 +4304,9 @@
                             if(subject_type == 0){
                                 $('#popup-message').html('<p class="text-used">Please select subject</p><button id="got-it" type="button" class="btn-orange form-control nopadding-r border-btn">OK</button>');
                                 $('#top-popup-message').css("display", "block");
+                            }else{
+                                $('#table-list-tutor').html('');
+                                get_tutor_user('fromclass', 'table-list-tutor', 'tutor', search, '', '', subject_type, time, date, type_search,stime, time_view, '', subject_name);
                             }
                         }else{
                             var tr = '<tr><td class="no-results"><img src="' + path + 'icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';

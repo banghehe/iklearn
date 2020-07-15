@@ -21744,9 +21744,9 @@ div.tr-info p{
 .slide-resume{
     min-height: 500px;
 }
-.frm-available-now .search-tutorname{
-    width: 38%;
-}
+/* .frm-available-now .search-tutorname{
+    width: 100%;
+} */
 .frm-available-now .cb-type2{
     width: 20%;
     margin-top: 20px;
@@ -22368,7 +22368,7 @@ ul #select-available-subjectSelectBoxItOptions{
         width: 34%;
     }
     .frm-available-now .search-tutorname {
-        width: 28%;
+        width: 100%;
     }
     .frm-available-now .cb-type2 {
         width: 30%;
