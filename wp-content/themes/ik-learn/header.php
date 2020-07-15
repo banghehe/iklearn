@@ -3195,7 +3195,7 @@
                         }
                     });
 
-                    $("#menu_Taggle").click(function () {
+                    $("#menu_Taggle ,#btn-schedule, #btn-tutor").click(function () {
                         $("#my-timezone").css("display","none");
                         $("#open-menu-quicknotifi").css("display","none");
                         var name = $(".display-name").text();
