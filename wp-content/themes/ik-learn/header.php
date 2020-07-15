@@ -1701,17 +1701,17 @@
 
                                                     <div class="frm-available-now">
                                                         <div class="row">
-                                                            <div class="col-sm-4 col-md-4 col-xs-6 search-tutorname">
-                                                                <label class="mt-bottom-8">Tutor Name:</label>
-                                                                <div class="form-group">
-                                                                    <input id="search-find-tutoring" name="search-ready-les" class="form-control search-tit border-ras" placeholder="Type name here...">
-                                                                </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="find-page-title">Tutor and Subject</div>
                                                             </div>
-                                                            <div class="col-sm-5 col-md-5 col-xs-6">
-                                                                <label class="mt-bottom-8">Subject:</label>
+                                                        </div>
+                                                        <div class="row">                                                           
+                                                            <div class="col-sm-6 col-md-6 col-xs-6">
+                                                                <div class="find-general-border">
+                                                                <label class="find-label">Subject for tutoring</label>
                                                                 <div class="form-group border-ras select-style">
-                                                                    <select class="select-box-it form-control" name="available_subject" id="select-available-subject">
-                                                                        <option value="0" data-name="">Subject</option>
+                                                                    <select class="find-select select-box-it  form-control" name="available_subject" id="select-available-subject">
+                                                                        <option class="boo" value="0" data-name="">Subject</option>
                                                                         <option value="all" data-name="Any Subjects">Any Subjects</option>
                                                                         <option value="english_subject|all" data-name="English Only">English Only</option>
                                                                         <option value="math_subject|all" data-name="Math Only">Math Only</option>
@@ -1733,8 +1733,20 @@
                                                                         <option value="science_subject|others" data-name="Science: Others">Science: Others</option>
                                                                     </select>
                                                                 </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-sm-3 col-md-3 col-xs-12 cb-type2">
+                                                            <div class="col-sm-6 col-md-6 search-tutorname">
+                                                            <div class="find-general-border">
+                                                                <label class="find-label">Tutor Name:</label>
+                                                                <div class="form-group">
+                                                                    <input id="search-find-tutoring" name="search-ready-les" class="find-name form-control search-tit " placeholder="Type name here...">
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <!-- <div class="row">
+                                                        <div class="col-sm-3 col-md-3 col-xs-12 cb-type2">
                                                                 <label>
                                                                     <input type="checkbox" class="radio_tutor_search class_cb_search option-input-2 radio" value="favorite" data-lang="en" name="type_search" /> Favorites
                                                                 </label>
@@ -1742,7 +1754,53 @@
                                                                     <input type="checkbox" class="radio_tutor_search class_cb_search option-input-2 radio" value="rating" data-lang="en" name="type_search" /> Rating
                                                                 </label>
                                                             </div>
+                                                        </div> -->
+                                                        <div class ="row">
+                                                            <div class="col-sm-4 col-md-4">
+                                                            <div class="find-general-border">
+                                                                <label class="find-label">Tutoring Type</label>
+                                                                <div class=" max-100 form-group select-style">
+                                                            <select class="find-select select-box-it  form-control" name="available_subject" id="select-available-subject">
+                                                                <option class="boo" value="0" data-name="">Tutoring type</option>
+                                                                <option value="one_tutoring" data-name="1 on 1 Tutoring">1 On 1 Tutoring</option>
+                                                                <option value="group_tutoring" data-name="Group Tutoring">Group Tutoring</option>
+                                                            </select>
+                                                            </div>
+                                                            </div>
                                                         </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="find-general-border">
+                                                            <label class="find-label">Price</label>
+                                                            <div class="max-100 form-group select-style">
+                                                            <select class="find-select select-box-it  form-control" name="available_subject" id="select-available-price">
+                                                                <option class="boo" value="0" data-name="">Price</option>
+                                                                <option value="one_to_ten" data-name="$1 - $10 (30 min)">$1 - $10 (30 min)</option>
+                                                                <option value="eleven_to_twenty" data-name="$11 - $20 (30 min)">$11 - $20 (30 min)</option>
+                                                                <option value="twetyone_to_thirty" data-name="$21 - $30 (30 min)">$21 - $30 (30 min)</option>
+                                                                <option value="thirtyone_to_fourty" data-name="$31 - $40 (30 min)">$31 - $40 (30 min)</option>
+                                                                <option value="fourtyone_to_fifty" data-name="$41 - $50 (30 min)">$41 - $50 (30 min)</option>
+                                                                <option value="morethan_fifty" data-name="> $50 (30 min)">> $50 (30 min)</option>
+
+                                                            </select>
+                                                            </div>  
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    
+                                                    <div class="col-sm-4 col-md-4">
+                                                        <div class="find-general-border">
+                                                            <label class="find-label">Option :</label>
+                                                            <div class="max-100 form-group select-style">
+                                                            <select class="find-select select-box-it  form-control" name="available_subject" id="select-available-option">
+                                                                <option class="boo" value="0" data-name="">Option</option>
+                                                                <option value="all" data-name="Rating & Favorite">Rating & Favorite</option>
+                                                                <option value="rating" data-name="Rating">Rating</option>
+                                                                <option value="favorite" data-name="Favorite">Favorite</option>
+                                                            </select>
+                                                            </div>                                                       
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <label class="mt-top-10 mt-bottom-12">Date:</label>
@@ -4217,10 +4275,18 @@
                         var subject_type = $("#select-available-subjectSelectBoxItText").attr("data-val");
                         var type_search = [];
 
-                        $('input[name="type_search"]:checked').each(function () {
-                            var val = this.value;
-                            type_search.push(val);
-                        });
+                        var option = $('#select-available-option :selected').attr("value");
+                        console.log(option);
+                        if(option == "all"){
+                            type_search.push("rating");
+                            type_search.push("favorite");
+                        }else{
+                            type_search.push(option);
+                        }
+                        // $('#select-available-subject :selected').each(function () {
+                        //     var val = this.value;
+                        //     type_search.push(val);
+                        // });
 
                         if(month != 0 && day != 0 && year != 0)
                             var date = year + '-' + month + '-' + day;
@@ -8999,7 +9065,9 @@
                                         weekday[5] = "Fri";
                                         weekday[6] = "Sat";                                
                                     var n = weekday[day.getDay()];
-                                    $('.current-day').text(month_text + ' ' + day.getDate());
+                                    const monthNames = ["January", "February", "March", "April", "May", "June",
+                                        "July", "August", "September", "October", "November", "December"];                         
+                                    $('.current-day').text(monthNames[full_date.split("/")[0]-1] + ' ' + day.getDate());
                                     $('.stuff-day').text(' (' + n + ')');
 
                                     var prev = new Date(full_date.replace("/", ","));
@@ -10154,7 +10222,10 @@
 							$('#selected-subject').text(subject_name);
 							$('#btn-schedule-now').attr('data-subject',subject_name);
 						}
-                        $.get(home_url + "/?r=ajax/get_users_tutor", {type:type, search:search, time_zone:time_zone, description:description, subject_type:subject_type, time:time, date:date, type_search: type_search, available: available}, function (data) {
+
+                        var post_data = {type:type, search:search, time_zone:time_zone, description:description, subject_type:subject_type, time:time, date:date, type_search: type_search, available: available};
+                        console.log(post_data);
+                        $.get(home_url + "/?r=ajax/get_users_tutor", post_data, function (data) {
                             //console.log(data);
                             data = JSON.parse(data);
                             if (data.users.length > 0) {
