@@ -20320,9 +20320,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     margin-left: 10px;
 }
 .book-mark, #avatar{
-    position: absolute;
-    margin-top: -30px;
-}
+    }
 .book-mark{
      z-index: 1;
      height: 15px important!;
