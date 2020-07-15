@@ -2600,6 +2600,7 @@
                                     <li><a class="header-menu-left padd-adjus" id="class-manager">My Class</a></li>
                                     <li><a class="header-menu-left padd-adjus redirect-create" href="#"> Message</a></li>
                                     <li><a class="header-menu-left padd-adjus redirect-create" href="#">Downloads</a></li>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -3187,6 +3188,7 @@
                     });
 
                     $("#account").click(function () {
+                        $("#my-timezone").css("display","none");
                         var name = $(".display-name").text();
                         var viewport = getViewport();  
                         if(viewport.width < 650){
@@ -3221,6 +3223,7 @@
                     });                    
 
                     $("#itutoring").click(function () {
+                        $("#my-timezone").css("display","none");
                         var name = $(".display-name").text();
                         var viewport = getViewport();  
                         if(viewport.width < 650){
@@ -3254,7 +3257,9 @@
                         }
                     });
 
-                    $("#menu_Taggle").click(function () {
+                    $("#menu_Taggle ,#btn-schedule, #btn-tutor").click(function () {
+                        $("#my-timezone").css("display","none");
+                        $("#open-menu-quicknotifi").css("display","none");
                         var name = $(".display-name").text();
                         var viewport = getViewport();  
                         if(viewport.width < 650){
@@ -3778,6 +3783,7 @@
                     });
 
                     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+                        $("#my-timezone").css("display","none");
                         if ($(this).hasClass('disabled')){
                             e.preventDefault();
                             return false;
@@ -4074,6 +4080,7 @@
 
                     $('#btn-tutor').click(function(){
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                       
                         $('.new-request-list').text('Find a tutor');
                         $(".main-my-schedule").css("display","none");
                         $(".section-tutor-main").css("display","block");
@@ -4298,9 +4305,6 @@
                             if(subject_type == 0){
                                 $('#popup-message').html('<p class="text-used">Please select subject</p><button id="got-it" type="button" class="btn-orange form-control nopadding-r border-btn">OK</button>');
                                 $('#top-popup-message').css("display", "block");
-                            }else{
-                                $('#table-list-tutor').html('');
-                                get_tutor_user('fromclass', 'table-list-tutor', 'tutor', search, '', '', subject_type, time, date, type_search,stime, time_view, '', subject_name);
                             }
                         }else{
                             var tr = '<tr><td class="no-results"><img src="' + path + 'icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';
@@ -4333,12 +4337,14 @@
                                 }
                             });
                         }
+                        $(this).attr("disabled", false);
                     });
 
                     $('.star_buttons').click(function(){
                         var star = $(this).val();
                         var cnt = $(this).attr('data-star');
 						
+						$(this).attr("disabled", false);
 						if(cnt > 1){
 							for(i=0; i<=5; i++){
 								if (i < cnt){
@@ -5860,6 +5866,7 @@
                     $('#btn-my-schedule').click(function(e){
                         $('#open-menu-quicknotifi').css({"display":"none"});
                         $('#open-list-quicknotifi').css({"display":"none"});
+                        $("#my-timezone").css("display","none");
 
                         e.preventDefault();
                         var id = $(this).attr("data-id");
@@ -7929,7 +7936,7 @@
                     $("#menu-quick-notification").click(function(e){
                         e.stopPropagation();
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
-
+                        $("#my-timezone").css("display","none");
                         $("#open-list-quicknotifi").css("display","none");
 
                         if($("#open-list-quicknotifi").hasClass('active')){
@@ -8023,6 +8030,7 @@
                         }
                         $("#open-menu-quicknotifi").css("display","none");
                         $("#open-list-quicknotifi").css("display","none");
+                        $("#my-timezone").css("display","none");
 
                         if($("#open-list-quicknotifi").hasClass('active')){
                             $("#open-list-quicknotifi").removeClass('active');
@@ -8035,6 +8043,7 @@
 
                         $("#open-menu-quicknotifi").css("display","none");
                         $("#open-list-quicknotifi").css("display","none");
+                        $("#my-timezone").css("display","none");
                         $("#open-menu-cancel").css("display","none");
 
                         if($("#open-list-quicknotifi").hasClass('active')){
@@ -8049,6 +8058,7 @@
                         }
                         $("#open-menu-quicknotifi").css("display","none");
                         $("#open-list-quicknotifi").css("display","none");
+                        $("#my-timezone").css("display","none");
                         $("#open-menu-cancel").css("display","none");
 
                         if($("#open-list-quicknotifi").hasClass('active')){
@@ -8423,6 +8433,8 @@
 
                     $("#btn-my-timezone").click(function () {
                         $('#my-timezone').toggle();
+                        $("#open-menu-quicknotifi").css("display","none");
+
                     });
 
                     $('.my-timezone').click(function(){
@@ -10257,7 +10269,11 @@
                                     }
                                     for(var m = 0; m < max_star; m++){
                                         img_star += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
-                                    }    
+                                        
+                                    } 
+                                    if(type == 'fromclass'){
+                                        $('#btn-available-search').attr("disabled", false);
+                                    }   
                                     if( $.inArray(uid, v.user_favorites) >= 0 ) {
                                         var img_bookmark = 'icon_Favorite_BookMark.png';
                                     }else{

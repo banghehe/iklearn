@@ -20331,6 +20331,14 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 .max-100{
     width: 100% !important;
 }
+.book-mark{
+     z-index: 1;
+     height: 15px important!;
+     width: 15px important!;
+}
+#avatar{
+    z-index: 0;
+}
 .book-mark,
 .btn-view,
 .go-back-tutor,
@@ -21736,7 +21744,9 @@ div.tr-info p{
 .slide-resume{
     min-height: 500px;
 }
-
+.frm-available-now .search-tutorname{
+    width: 38%;
+}
 .frm-available-now .cb-type2{
     width: 20%;
     margin-top: 20px;
