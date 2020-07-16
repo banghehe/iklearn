@@ -1,21 +1,21 @@
 <?php
-	$route = get_route();
-	if(isset($route[1])) {
-		switch($route[1]) {
-			case 'elearner': $active_menu = 68;
-				break;
-			case 'collegiate': $active_menu = 67;
-				break;
-			case 'medical': $active_menu = 66;
-				break;
-			case 'intermediate': $active_menu = 65;
-				break;
-			case 'elementary': $active_menu = 64;
-				break;
-		}
-	}
+    $route = get_route();
+    if(isset($route[1])) {
+        switch($route[1]) {
+            case 'elearner': $active_menu = 68;
+                break;
+            case 'collegiate': $active_menu = 67;
+                break;
+            case 'medical': $active_menu = 66;
+                break;
+            case 'intermediate': $active_menu = 65;
+                break;
+            case 'elementary': $active_menu = 64;
+                break;
+        }
+    }
 
-	$current_user = wp_get_current_user();
+    $current_user = wp_get_current_user();
     $is_user_logged_in = is_user_logged_in();
     if($is_user_logged_in){
         $u_time_zone = get_user_meta($current_user->ID, 'user_timezone', true);
@@ -40,11 +40,11 @@
 
     $date = new DateTime('now', new DateTimezone(get_option( 'timezone_string' )));
 
-	$cart_items = get_cart_items();
+    $cart_items = get_cart_items();
 
-	$locale_code = explode('_', get_locale());
+    $locale_code = explode('_', get_locale());
 
-	$lang = pll_current_language() ;
+    $lang = pll_current_language() ;
     $active_day = MWDB::get_tutoring_date();
     $count_notification = MWDB::get_count_quick_notification();
     add_filter( 'the_editor', 'set_my_mce_editor_placeholder' );
@@ -80,7 +80,7 @@
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/library/images/apple-touch-icon.png">
     <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/favicon.png">
     <!--[if IE]>
-	    <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico">
+        <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico">
     <![endif]-->
     <meta name="msapplication-TileColor" content="#f01d4f">
     <meta name="msapplication-TileImage" content="<?php echo get_template_directory_uri(); ?>/library/images/win8-tile-icon.png">
@@ -1701,17 +1701,17 @@
 
                                                     <div class="frm-available-now">
                                                         <div class="row">
-                                                            <div class="col-sm-4 col-md-4 col-xs-6 search-tutorname">
-                                                                <label class="mt-bottom-8">Tutor Name:</label>
-                                                                <div class="form-group">
-                                                                    <input id="search-find-tutoring" name="search-ready-les" class="form-control search-tit border-ras" placeholder="Type name here...">
-                                                                </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <label class="mt-bottom-12">Tutor and Subject</label>
                                                             </div>
-                                                            <div class="col-sm-5 col-md-5 col-xs-6">
-                                                                <label class="mt-bottom-8">Subject:</label>
+                                                        </div>
+                                                        <div class="row">                                                           
+                                                            <div class="col-sm-6 col-md-6 col-xs-6">
+                                                                <div class="find-general-border">
+                                                                <label class="find-label">Subject for tutoring</label>
                                                                 <div class="form-group border-ras select-style">
-                                                                    <select class="select-box-it form-control" name="available_subject" id="select-available-subject">
-                                                                        <option value="0" data-name="">Subject</option>
+                                                                    <select class="find-select select-box-it  form-control" name="available_subject" id="select-available-subject">
+                                                                        <option class="boo" value="0" data-name="">Subject</option>
                                                                         <option value="all" data-name="Any Subjects">Any Subjects</option>
                                                                         <option value="english_subject|all" data-name="English Only">English Only</option>
                                                                         <option value="math_subject|all" data-name="Math Only">Math Only</option>
@@ -1733,8 +1733,20 @@
                                                                         <option value="science_subject|others" data-name="Science: Others">Science: Others</option>
                                                                     </select>
                                                                 </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-sm-3 col-md-3 col-xs-12 cb-type2">
+                                                            <div class="col-sm-6 col-md-6 search-tutorname">
+                                                            <div class="find-general-border">
+                                                                <label class="find-label">Tutor Name:</label>
+                                                                <div class="form-group">
+                                                                    <input id="search-find-tutoring" name="search-ready-les" class="find-name form-control search-tit " placeholder="Type name here...">
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <!-- <div class="row">
+                                                        <div class="col-sm-3 col-md-3 col-xs-12 cb-type2">
                                                                 <label>
                                                                     <input type="checkbox" class="radio_tutor_search class_cb_search option-input-2 radio" value="favorite" data-lang="en" name="type_search" /> Favorites
                                                                 </label>
@@ -1742,15 +1754,62 @@
                                                                     <input type="checkbox" class="radio_tutor_search class_cb_search option-input-2 radio" value="rating" data-lang="en" name="type_search" /> Rating
                                                                 </label>
                                                             </div>
+                                                        </div> -->
+                                                        <div class ="row">
+                                                            <div class="col-sm-4 col-md-4">
+                                                            <div class="find-general-border">
+                                                                <label class="find-label">Tutoring Type</label>
+                                                                <div class=" max-100 form-group select-style">
+                                                            <select class="find-select select-box-it  form-control" name="available_subject" id="select-available-subject">
+                                                                <option class="boo" value="0" data-name="">Tutoring type</option>
+                                                                <option value="one_tutoring" data-name="1 on 1 Tutoring">1 On 1 Tutoring</option>
+                                                                <option value="group_tutoring" data-name="Group Tutoring">Group Tutoring</option>
+                                                            </select>
+                                                            </div>
+                                                            </div>
                                                         </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="find-general-border">
+                                                            <label class="find-label">Price</label>
+                                                            <div class="max-100 form-group select-style">
+                                                            <select class="find-select select-box-it  form-control" name="available_subject" id="select-available-price">
+                                                                <option class="boo" value="0" data-name="">Price</option>
+                                                                <option value="one_to_ten" data-name="$1 - $10 (30 min)">$1 - $10 (30 min)</option>
+                                                                <option value="eleven_to_twenty" data-name="$11 - $20 (30 min)">$11 - $20 (30 min)</option>
+                                                                <option value="twetyone_to_thirty" data-name="$21 - $30 (30 min)">$21 - $30 (30 min)</option>
+                                                                <option value="thirtyone_to_fourty" data-name="$31 - $40 (30 min)">$31 - $40 (30 min)</option>
+                                                                <option value="fourtyone_to_fifty" data-name="$41 - $50 (30 min)">$41 - $50 (30 min)</option>
+                                                                <option value="morethan_fifty" data-name="> $50 (30 min)">> $50 (30 min)</option>
+
+                                                            </select>
+                                                            </div>  
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    
+                                                    <div class="col-sm-4 col-md-4">
+                                                        <div class="find-general-border">
+                                                            <label class="find-label">Option :</label>
+                                                            <div class="max-100 form-group select-style">
+                                                            <select class="find-select select-box-it  form-control" name="available_subject" id="select-available-option">
+                                                                <option class="boo" value="0" data-name="">Option</option>
+                                                                <option value="all" data-name="Rating & Favorite">Rating & Favorite</option>
+                                                                <option value="rating" data-name="Rating">Rating</option>
+                                                                <option value="favorite" data-name="Favorite">Favorite</option>
+                                                            </select>
+                                                            </div>                                                       
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <label class="mt-top-10 mt-bottom-12">Date:</label>
+                                                                <label class="mt-top-10 mt-bottom-12">Date Select</label>
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-4 col-md-4 col-xs-4">
+                                                            <div class="col-sm-3 col-md-3 col-xs-3">
                                                                 <div class="form-group border-ras select-style">
+                                                                    <label class="find-label">Month</label>
                                                                     <select class="select-box-it form-control" name="available_month" id="select-available-month">
                                                                         <option value="0">Select Month</option>
                                                                         <?php 
@@ -1767,8 +1826,9 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-4 col-md-4 col-xs-4">
+                                                            <div class="col-sm-3 col-md-3 col-xs-3">
                                                                 <div class="form-group border-ras select-style">
+                                                                    <label class="find-label">Day</label>
                                                                     <select class="select-box-it form-control" name="available_day" id="select-available-day">
                                                                         <option value="0">Select Day</option>
                                                                         <?php 
@@ -1785,8 +1845,9 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-4 col-md-4 col-xs-4">
+                                                            <div class="col-sm-3 col-md-3 col-xs-3">
                                                                 <div class="form-group border-ras select-style">
+                                                                    <label class="find-label">Time</label>
                                                                     <select class="select-box-it form-control" name="available_time" id="select-available-time">
                                                                         <option value="0" data-time="" data-time-view="">Select Time</option>
                                                                         <?php 
@@ -1813,19 +1874,21 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-4 col-md-4 col-xs-4 available-year-mb">
+                                                            <div class="col-sm-3 col-md-3 col-xs-3 available-year-mb">
                                                                 <div class="form-group">
+                                                                    <label class="find-label">Year</label>
                                                                     <input type="text" class="form-control border-ras" name="available_year" value="<?php echo $dt->format('Y') ?>" id="available_year">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-4 col-md-4 col-xs-4">
+                                                        </div>
+                                                        <div class="row">
+                                                            
+                                                            <div class="col-sm-6 col-md-6 col-xs-6">
                                                                 <button class="btn-dark-blue border-btn btn-available-reset" type="button" name="available_reset">
                                                                     <?php _e('Reset', 'iii-dictionary') ?>
                                                                 </button>
                                                             </div>
-                                                            <div class="col-sm-4 col-md-4 col-xs-4 available-search-mb">
+                                                            <div class="col-sm-6 col-md-6 col-xs-6 available-search-mb">
                                                                 <button class="btn-dark-blue border-btn" id="btn-available-search" type="button" name="available_search">
                                                                     <?php _e('Search Now', 'iii-dictionary') ?>
                                                                 </button>
@@ -1839,18 +1902,18 @@
                                                                 <tr class="tr-detail">
                                                                     <td>
                                                                         <p class="schedule-detail">Your Scheduling detail:</p>
-																		<p class="subject-selected-detail">
-																			<span>Subject:</span>
-																			<span id="selected-subject" class="not-selected active">Not selected yet</span>
-																		</p>
+                                                                        <p class="subject-selected-detail">
+                                                                            <span>Subject:</span>
+                                                                            <span id="selected-subject" class="not-selected active">Not selected yet</span>
+                                                                        </p>
                                                                         <p class="date-detail">
-																			<span>Date:</span>
-																			<span id="selected-date"></span>
-																		</p>
+                                                                            <span>Date:</span>
+                                                                            <span id="selected-date"></span>
+                                                                        </p>
                                                                         <p class="tutor-detail">
-																			<span>Tutor:</span>
-																			<span id="selected-tutor" class="not-selected">Not selected yet</span>
-																		</p>
+                                                                            <span>Tutor:</span>
+                                                                            <span id="selected-tutor" class="not-selected">Not selected yet</span>
+                                                                        </p>
                                                                         <img class="close-detail" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_CONFIRM-CLOSE.png" alt="">
                                                                         <button class="btn-dark-blue border-btn btn-schedule-now" type="button" name="schedule_now" id="btn-schedule-now">Schedule Now</button>
                                                                     </td>
@@ -2117,38 +2180,38 @@
                                                                     
                                                                 </tbody>
                                                             </table>
-															<div class="main-view-status" style="display: none;">
-																<div class="row">
-																	<div class="col-md-11">
-																		<p class="name-status-schedule">
-																			<img id="icon-status-schedule" src="<?php echo get_template_directory_uri(); ?>/library/images/TimeIcon_Completed.png">
-																			<span></span>
-																		</p>
-																	</div>
-																	<div class="col-md-1 text-right">
-																		<img class="close-status-schedule" src="<?php echo get_template_directory_uri(); ?>/library/images/03_Close_Icon.png">
-																	</div>
-																</div>
-																<p class="date-status-schedule">
-																	<span class="label-status-schedule">Date:</span>
-																	<span id="date-schedule"></span>
-																</p>
-																<p class="current-status-schedule">
-																	<span class="label-status-schedule">Status:</span>
-																	<span id="current-status"></span>
-																</p>
-																<p class="name-tutor-schedule">
-																	<span class="label-status-schedule">Tutor:</span>
-																	<span id="name-tutor-detail"></span>
-																</p>
-																<p class="point-status-schedule">
-																	<span class="label-status-schedule">Points:</span>
-																	<span id="point-schedule"></span>
-																</p>
-																<p class="review-status-schedule">
-																	<span class="label-status-schedule">Review:</span>
-																	<span id="review-schedule" class="review-schedule"></span>
-																</p>
+                                                            <div class="main-view-status" style="display: none;">
+                                                                <div class="row">
+                                                                    <div class="col-md-11">
+                                                                        <p class="name-status-schedule">
+                                                                            <img id="icon-status-schedule" src="<?php echo get_template_directory_uri(); ?>/library/images/TimeIcon_Completed.png">
+                                                                            <span></span>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col-md-1 text-right">
+                                                                        <img class="close-status-schedule" src="<?php echo get_template_directory_uri(); ?>/library/images/03_Close_Icon.png">
+                                                                    </div>
+                                                                </div>
+                                                                <p class="date-status-schedule">
+                                                                    <span class="label-status-schedule">Date:</span>
+                                                                    <span id="date-schedule"></span>
+                                                                </p>
+                                                                <p class="current-status-schedule">
+                                                                    <span class="label-status-schedule">Status:</span>
+                                                                    <span id="current-status"></span>
+                                                                </p>
+                                                                <p class="name-tutor-schedule">
+                                                                    <span class="label-status-schedule">Tutor:</span>
+                                                                    <span id="name-tutor-detail"></span>
+                                                                </p>
+                                                                <p class="point-status-schedule">
+                                                                    <span class="label-status-schedule">Points:</span>
+                                                                    <span id="point-schedule"></span>
+                                                                </p>
+                                                                <p class="review-status-schedule">
+                                                                    <span class="label-status-schedule">Review:</span>
+                                                                    <span id="review-schedule" class="review-schedule"></span>
+                                                                </p>
                                                                 <p class="cancel-this-schedule">
                                                                     <span class="label-status-schedule">Cancel:</span>
                                                                     <span class="this-cancel">Cancel This Schedule?<span id="cancel-now">Cancel it now</span></span>
@@ -2167,37 +2230,39 @@
                                                                         </li>
                                                                     </ul>
                                                                 </p>
-																
-																<div id="desc-class2" class="edit-description" style="display: none;">
-																	<span class="editor-top-left"></span>
-																	<span class="editor-top-right"></span>
-																	<span class="editor-bottom-left"></span>
-																	<span class="editor-bottom-right"></span>
-																	<?php
-																	$editor_settings = array(
-																		'wpautop' => false,
-																		'media_buttons' => false,
-																		'quicktags' => false,
-																		'editor_height' => 50,
-																		'textarea_rows' => 3,
-																		'tinymce' => array(
-																			'toolbar1' => 'bold,italic,strikethrough,image,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,spellchecker,fullscreen,wp_adv'
-																		)
-																	);
-																	?>
-																	<?php wp_editor('', 'note_status_schedule', $editor_settings); ?>
-																	<div class="clear-both"></div>
-																</div>
-																<div class="row">
-																	<div class="col-sm-12 col-md-12 col-xs-12">
-																		<div class="form-group">
-																			<button class="btn-dark-blue border-btn btn-status-schedule" type="button" name="send-tutor">
-																				<?php _e('Save Note', 'iii-dictionary') ?>
-																			</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
+                                                                <p class="note-status-schedule">
+                                                                    <span class="label-status-schedule">Note:</span>
+                                                                </p>
+                                                                <div id="desc-class2" class="edit-description">
+                                                                    <span class="editor-top-left"></span>
+                                                                    <span class="editor-top-right"></span>
+                                                                    <span class="editor-bottom-left"></span>
+                                                                    <span class="editor-bottom-right"></span>
+                                                                    <?php
+                                                                    $editor_settings = array(
+                                                                        'wpautop' => false,
+                                                                        'media_buttons' => false,
+                                                                        'quicktags' => false,
+                                                                        'editor_height' => 50,
+                                                                        'textarea_rows' => 3,
+                                                                        'tinymce' => array(
+                                                                            'toolbar1' => 'bold,italic,strikethrough,image,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,spellchecker,fullscreen,wp_adv'
+                                                                        )
+                                                                    );
+                                                                    ?>
+                                                                    <?php wp_editor('', 'note_status_schedule', $editor_settings); ?>
+                                                                    <div class="clear-both"></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-12 col-md-12 col-xs-12">
+                                                                        <div class="form-group">
+                                                                            <button class="btn-dark-blue border-btn btn-status-schedule" type="button" name="send-tutor">
+                                                                                <?php _e('Save Note', 'iii-dictionary') ?>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                             <table class="table table-condensed table-tutoring">
                                                                 <tbody id="table-list-schedule" class="table-list-schedule">
                                                                 </tbody>
@@ -2513,7 +2578,8 @@
                                     </li>
                                     <li><a data-toggle="tab" href="#"><img src="<?php echo get_template_directory_uri(); ?>/library/images/IconMenu_Message.png" class="" alt="setting my account" style="width: 24px;margin:15px 0px"></a>
                                     </li>
-                                    
+                                    <li><a data-toggle="tab" href="#"><img src="<?php echo get_template_directory_uri(); ?>/library/images/IconMenu_Download.png" class="" alt="setting my account" style="width: 24px;margin:15px 0px 0"></a>
+                                    </li>
                                 </ul>
                             </div>
 
@@ -2538,6 +2604,7 @@
                                     </li>
                                     <li><a class="header-menu-left padd-adjus" id="class-manager">My Class</a></li>
                                     <li><a class="header-menu-left padd-adjus redirect-create" href="#"> Message</a></li>
+                                    <li><a class="header-menu-left padd-adjus redirect-create" href="#">Downloads</a></li>
                                     
                                 </ul>
                             </div>
@@ -2589,7 +2656,7 @@
                 <div id="sub-logo">
                     <a href="https://iktutor.com" rel="nofollow" title="Innovative Knowledge">
                         <img src="<?php echo get_template_directory_uri(); ?>/library/images/ikLearn_Dark_LOGO.png" alt="">
-					</a>
+                    </a>
                 </div>
                 <?php 
                 $URL = $_SERVER['REQUEST_URI'];
@@ -2692,7 +2759,7 @@
                                 'link_after' => '',                             // after each link
                                 'depth' => 0,                                   // limit the depth of the nav
                                 'fallback_cb' => ''                             // fallback function (if there is one)
-    						)); 
+                            )); 
                         ?>
                     </nav>
 
@@ -2713,7 +2780,7 @@
                                 'depth' => 0,                                   // limit the depth of the nav
                                 'fallback_cb' => '',                             // fallback function (if there is one)
                                 'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>'
-    						)); 
+                            )); 
                         ?>
                     </nav>
                     <!-- <li><a href="http://ikteach.com/en" target="_blank" >'.__('Teacher','iii-dictionary').'</a></li> -->
@@ -2731,7 +2798,7 @@
                                 'link_after' => '',                             // after each link
                                 'depth' => 0,                                   // limit the depth of the nav
                                 'fallback_cb' => ''                             // fallback function (if there is one)
-    						)); 
+                            )); 
                         ?>
                     </nav>
                 </div>
@@ -3993,8 +4060,8 @@
 
                         $('.radio_tutor_search').attr('checked',false);
                         $('.frm-available-now').css("display","block");
-						$('#table-detail-tutor').css("display","none");
-						$(".slide-resume").css('visibility','hidden');
+                        $('#table-detail-tutor').css("display","none");
+                        $(".slide-resume").css('visibility','hidden');
                         $('#table-list-tutor').html('');
                         var tr = '<tr><td class="no-results"><img src="' + path + 'icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';
                         $('#table-list-tutor').html(tr);
@@ -4034,7 +4101,7 @@
                         $('#list-schedule-status').css("display","none");
                         $('#table-status-schedule').html('');
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
 
                         if($(".main-my-schedule").hasClass('active-tab-schedule')){
                             $(".main-my-schedule").removeClass("active-tab-schedule");
@@ -4216,14 +4283,21 @@
                         var time = $("#select-available-timeSelectBoxItText").attr("data-val");
                         var time_view = $('#select-available-time :selected').attr("data-time-view");
                         var stime = $('#select-available-time :selected').attr("data-time");
-						var subject_name = $('#select-available-subject :selected').attr("data-name");
+                        var subject_name = $('#select-available-subject :selected').attr("data-name");
                         var subject_type = $("#select-available-subjectSelectBoxItText").attr("data-val");
                         var type_search = [];
 
-                        $('input[name="type_search"]:checked').each(function () {
-                            var val = this.value;
-                            type_search.push(val);
-                        });
+                        var option = $('#select-available-option :selected').attr("value");
+                        if(option == "all"){
+                            type_search.push("rating");
+                            type_search.push("favorite");
+                        }else{
+                            type_search.push(option);
+                        }
+                        // $('#select-available-subject :selected').each(function () {
+                        //     var val = this.value;
+                        //     type_search.push(val);
+                        // });
 
                         if(month != 0 && day != 0 && year != 0)
                             var date = year + '-' + month + '-' + day;
@@ -4235,7 +4309,6 @@
                             if(subject_type == 0){
                                 $('#popup-message').html('<p class="text-used">Please select subject</p><button id="got-it" type="button" class="btn-orange form-control nopadding-r border-btn">OK</button>');
                                 $('#top-popup-message').css("display", "block");
-                                $(this).attr("disabled", true);
                             }else{
                                 $('#table-list-tutor').html('');
                                 get_tutor_user('fromclass', 'table-list-tutor', 'tutor', search, '', '', subject_type, time, date, type_search,stime, time_view, '', subject_name);
@@ -4248,7 +4321,7 @@
 
                     $('#btn-submit-review').click(function(){
                         var id = $(this).attr('data-id');
-						var userid = $(this).attr('data-userid');
+                        var userid = $(this).attr('data-userid');
                         var review_id = $(this).attr('data-review-id');
                         var subject = $('#write-review-subject').val();
                         var message = $('#message-review_ifr').contents().find('#tinymce').text();
@@ -4277,26 +4350,27 @@
                     $('.star_buttons').click(function(){
                         var star = $(this).val();
                         var cnt = $(this).attr('data-star');
-						$(this).attr("disabled", false);
-						if(cnt > 1){
-							for(i=0; i<=5; i++){
-								if (i < cnt){
-									$("#star" + i).prop('checked', true);
-								} else {
-									if(i == cnt){
-										//var chk = true;
-										$("#star" + i).prop('checked', true);
-									}else{
-										$("#star" + i).prop('checked', false);
-									}
-								}
-							}
-						}else{
-							$("#star1").prop('checked', true);
-							for(i=2; i<=5; i++){
-								$("#star" + i).prop('checked', false);
-							}
-						}
+                        
+                        $(this).attr("disabled", false);
+                        if(cnt > 1){
+                            for(i=0; i<=5; i++){
+                                if (i < cnt){
+                                    $("#star" + i).prop('checked', true);
+                                } else {
+                                    if(i == cnt){
+                                        //var chk = true;
+                                        $("#star" + i).prop('checked', true);
+                                    }else{
+                                        $("#star" + i).prop('checked', false);
+                                    }
+                                }
+                            }
+                        }else{
+                            $("#star1").prop('checked', true);
+                            for(i=2; i<=5; i++){
+                                $("#star" + i).prop('checked', false);
+                            }
+                        }
                     });
 
                     $('.radio_buttons_tutor').live('click', function () {
@@ -4313,30 +4387,30 @@
                         var id = $(this).attr('data-id');
                         var name = $(this).attr('data-name');
                         var subject = $(this).attr('data-subject');
-						var subject_choose = $(this).attr('data-subject-choose');
+                        var subject_choose = $(this).attr('data-subject-choose');
                         var day = $(this).attr('data-day');
                         var time = $(this).attr('data-time');
                         var time_view = $(this).attr('data-time-view');
                         var price_tutoring = $(this).attr('data-price-tutoring');
                         if($('#selected-tutor').hasClass('active')){
-							$('#selected-tutor').removeClass('active');
+                            $('#selected-tutor').removeClass('active');
                             $('#btn-schedule-now').removeClass('active');
                             $('#selected-tutor').text('Not selected yet');
-							//$('#selected-subject').removeClass('active');
-							//$('#selected-subject').text('Not selected yet');
+                            //$('#selected-subject').removeClass('active');
+                            //$('#selected-subject').text('Not selected yet');
                             $('#btn-schedule-now').attr('data-tutor-id','');
                         }else{
                             $('#selected-tutor').addClass('active');
                             $('#btn-schedule-now').addClass('active');
                             $('#selected-tutor').text(name);
-							//$('#selected-subject').addClass('active');
-							/*if(subject_choose == ''){
-								$('#selected-subject').text(subject);
-								$('#btn-schedule-now').attr('data-subject',subject);
-							}else{
-								$('#selected-subject').text(subject_choose);
-								$('#btn-schedule-now').attr('data-subject',subject_choose);
-							}*/
+                            //$('#selected-subject').addClass('active');
+                            /*if(subject_choose == ''){
+                                $('#selected-subject').text(subject);
+                                $('#btn-schedule-now').attr('data-subject',subject);
+                            }else{
+                                $('#selected-subject').text(subject_choose);
+                                $('#btn-schedule-now').attr('data-subject',subject_choose);
+                            }*/
                             $('#btn-schedule-now').attr('data-name',name);
                             $('#btn-schedule-now').attr('data-tutor-id',id);
                             $('#btn-schedule-now').attr('data-total',price_tutoring);
@@ -4362,7 +4436,7 @@
                     $('#btn-schedule-now').click(function(){
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
                         var choose_tutor = $(this).attr("data-tutor-id");
-						var subject = $(this).attr("data-subject");
+                        var subject = $(this).attr("data-subject");
                         var ptype = $(this).attr("data-ptype");
                         var table = $(this).attr("data-table");
                         var time = $(this).attr("data-time");
@@ -4513,8 +4587,8 @@
                         var day = $(this).attr('data-day');
                         var time = $(this).attr('data-time');
                         var time_view = $(this).attr('data-time-view');
-						var subject_name = $('#select-available-subject :selected').attr("data-name");
-						
+                        var subject_name = $('#select-available-subject :selected').attr("data-name");
+                        
                         $('.writting-review').css("display","none");
                         $('.frm-available-now').css("display","none");
 
@@ -4526,12 +4600,12 @@
                             $('#selected-tutor').text('Not selected yet');
                             $('#btn-schedule-now').attr('data-tutor-id','');
                         }
-						
-						if(subject_name != ''){
-							$('#selected-subject').text(subject_name);
-							$('#btn-schedule-now').attr('data-subject',subject_name);
-						}
-						
+                        
+                        if(subject_name != ''){
+                            $('#selected-subject').text(subject_name);
+                            $('#btn-schedule-now').attr('data-subject',subject_name);
+                        }
+                        
                         if(time != ''){
                             var today = new Date(day.replace("-", ","));                            
                             var weekday = new Array(7);
@@ -4608,7 +4682,7 @@
                         var ptype = $(this).attr('data-ptype');
                         var table = $(this).attr('data-table');
                         $('.writting-review').css("display","none");  
-					    
+                        
                         get_resume(id,'review',ptype,table);
                     });
 
@@ -4625,7 +4699,7 @@
                         $('#write-review-subject').val(subject);
                         tinymce.get('message-review').setContent(message);
                         $('#btn-submit-review').attr('data-id',tutor_id); 
-						$('#btn-submit-review').attr('data-userid',userid); 
+                        $('#btn-submit-review').attr('data-userid',userid); 
                         $('#btn-submit-review').attr('data-review-id',review_id); 
                         $('#btn-submit-review').attr('data-ptype',ptype);
 
@@ -4672,7 +4746,7 @@
                         $('#list-schedule-status').css("display","none");
                         $('#table-status-schedule').html('');
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
 
                         if($('#body-my-scheduled').hasClass('status-schedule')){
                             $('#body-my-scheduled').removeClass('status-schedule')
@@ -4989,10 +5063,10 @@
 
                             if(hftime > 12) hftime = hftime - 12;
                             if(httime > 12) httime = httime - 12;
-							
-							var time_sc1 = hftime+':'+ftime[1]+':'+ftime[2].toLowerCase();
+                            
+                            var time_sc1 = hftime+':'+ftime[1]+':'+ftime[2].toLowerCase();
                             var time_sc2 = httime+':'+totime[1]+':'+totime[2].toLowerCase();
-							
+                            
                             var time = hftime+':'+ftime[1]+ftime[2] +'-'+ httime+':'+totime[1]+totime[2];
 
                             $('#btn-sent-request').attr("data-id","");
@@ -5080,7 +5154,7 @@
                     $('.btn-cancel-time').click(function(){
                         $('#duration-tutoring-request').css("display", "none");
                     });
-					
+                    
                     $(".btn-new-request").live("click",function(){ 
                         var user_points = $(this).attr('data-points');
                         var fromtime = $(this).attr("data-fromtime");
@@ -5200,7 +5274,7 @@
                             $('#table-list-tutor').html(tr);
                         }                     
                     });
-					
+                    
                     $('#btn-find-tutor').click(function(){
                         var search = $('#search-title').val();
                         var time_zone = $("#request-time-zoneSelectBoxItText").attr("data-val");
@@ -5518,7 +5592,7 @@
                         $('#list-schedule-status').css("display","none");
                         $('#table-status-schedule').html('');
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
 
                         if($('#body-my-scheduled').hasClass('status-schedule')){
                             $('#body-my-scheduled').removeClass('status-schedule')
@@ -5661,82 +5735,82 @@
 
                             //$('.btn-cancel-schedule').attr('data-id',id);
                         }*/
-						var cl = $(this).attr("data-class");
-						var subject = $(this).attr("data-subject");
-						var private_subject = $(this).attr("data-private-subject");
-						var student_name = $(this).attr("data-student-name");
-						var tutor_name = $(this).attr("data-tutor-name");
-						var date = $(this).attr("data-date");
-						var stuff = $(this).attr("data-stuff");
-						var message = $(this).attr("data-message");
-						var note = $(this).attr("data-note");
-						var time = $(this).attr("data-time");
-						var time_view = $(this).attr("data-time-view");
-						var fromtime = $(this).attr("data-fromtime");
-						var totime = $(this).attr("data-totime");
-						var total = $(this).attr("data-total");
-						var total_time = $(this).attr("data-total-time");
-						var day = $(this).attr("data-day");
-						var confirmed = $(this).attr("data-confirmed");
-						var canceled = $(this).attr("data-canceled");
-						var id = $(this).attr("data-id");
-						var student_id = $(this).attr("data-student-id");
-						var teacher_id = $(this).attr("data-teacher-id");
-						var status = $(this).attr("data-status");
+                        var cl = $(this).attr("data-class");
+                        var subject = $(this).attr("data-subject");
+                        var private_subject = $(this).attr("data-private-subject");
+                        var student_name = $(this).attr("data-student-name");
+                        var tutor_name = $(this).attr("data-tutor-name");
+                        var date = $(this).attr("data-date");
+                        var stuff = $(this).attr("data-stuff");
+                        var message = $(this).attr("data-message");
+                        var note = $(this).attr("data-note");
+                        var time = $(this).attr("data-time");
+                        var time_view = $(this).attr("data-time-view");
+                        var fromtime = $(this).attr("data-fromtime");
+                        var totime = $(this).attr("data-totime");
+                        var total = $(this).attr("data-total");
+                        var total_time = $(this).attr("data-total-time");
+                        var day = $(this).attr("data-day");
+                        var confirmed = $(this).attr("data-confirmed");
+                        var canceled = $(this).attr("data-canceled");
+                        var id = $(this).attr("data-id");
+                        var student_id = $(this).attr("data-student-id");
+                        var teacher_id = $(this).attr("data-teacher-id");
+                        var status = $(this).attr("data-status");
                         var accepted = $(this).attr("data-accepted");
-						var icon = $(this).attr("data-icon");
-						var create_on = $(this).attr("data-create-on");
-						var created = $(this).attr("data-created");
-						var path = '<?php echo get_template_directory_uri() ?>/library/images/';
-						
-						var review_schedule = 'Session Not Completed Yet';
-						var point_schedule = ' <span class="spent"></span>';
-						
-						if($.trim(note) == 'null') note = '';
-						
-						if($.trim(cl) == 'accepted'){
-							var current_status = 'Completed';
-							var type_status = 'confirmed';
-							point_schedule = ' <span class="spent">(spent)</span>';
-							review_schedule = '<a href="https://notepad.iktutor.com/en/?sid='+id+'&user_id='+student_id+'&teacher_id='+teacher_id+'" target="_blank">Review Session Again</a>';
-							
-							if(!$('#completed-status-btn').hasClass('active')){
-								$('.list-schedule-status').removeClass('active');
-								$('#completed-status-btn').addClass('active');
-								$('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed.png');
-								$('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
-								$('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
-								$('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
-							}
-							
-							if(!$('.btn-status-schedule').hasClass('active')){
-								$('.btn-status-schedule').addClass('active');
-							}
+                        var icon = $(this).attr("data-icon");
+                        var create_on = $(this).attr("data-create-on");
+                        var created = $(this).attr("data-created");
+                        var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                        
+                        var review_schedule = 'Session Not Completed Yet';
+                        var point_schedule = ' <span class="spent"></span>';
+                        
+                        if($.trim(note) == 'null') note = '';
+                        
+                        if($.trim(cl) == 'accepted'){
+                            var current_status = 'Completed';
+                            var type_status = 'confirmed';
+                            point_schedule = ' <span class="spent">(spent)</span>';
+                            review_schedule = '<a href="https://notepad.iktutor.com/en/?sid='+id+'&user_id='+student_id+'&teacher_id='+teacher_id+'" target="_blank">Review Session Again</a>';
+                            
+                            if(!$('#completed-status-btn').hasClass('active')){
+                                $('.list-schedule-status').removeClass('active');
+                                $('#completed-status-btn').addClass('active');
+                                $('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed.png');
+                                $('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
+                                $('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
+                                $('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
+                            }
+                            
+                            if(!$('.btn-status-schedule').hasClass('active')){
+                                $('.btn-status-schedule').addClass('active');
+                            }
 
                             $('.cancel-this-schedule').css("display","none");
-						}else if($.trim(cl) == 'canceled'){
-							if(accepted == 2)
+                        }else if($.trim(cl) == 'canceled'){
+                            if(accepted == 2)
                                 var current_status = 'Canceled by Tutor';
                             else
                                 var current_status = 'Canceled';
 
-							var type_status = 'canceled';
-							
-							if(!$('#expired-status-btn').hasClass('active')){
-								$('.list-schedule-status').removeClass('active');
-								$('#expired-status-btn').addClass('active');
-								$('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired.png');
-								$('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
-								$('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
-								$('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
-							}
-							
-							if(!$('.btn-status-schedule').hasClass('active')){
-								$('.btn-status-schedule').addClass('active');
-							}
+                            var type_status = 'canceled';
+                            
+                            if(!$('#expired-status-btn').hasClass('active')){
+                                $('.list-schedule-status').removeClass('active');
+                                $('#expired-status-btn').addClass('active');
+                                $('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired.png');
+                                $('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
+                                $('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
+                                $('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
+                            }
+                            
+                            if(!$('.btn-status-schedule').hasClass('active')){
+                                $('.btn-status-schedule').addClass('active');
+                            }
 
                             $('.cancel-this-schedule').css("display","none");
-						}else{
+                        }else{
                             if(accepted == 1)
                                 var current_status = 'Confirmed';
                             else if(accepted == 2)
@@ -5744,56 +5818,56 @@
                             else
                                 var current_status = 'Waiting for Confirmation';
 
-							var type_status = 'waiting';
-							
-							if(!$('#scheduled-status-btn').hasClass('active')){
-								$('.list-schedule-status').removeClass('active');
-								$('#scheduled-status-btn').addClass('active');
-								$('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled.png');
-								$('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
-								$('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
-								$('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
-							}
-							
-							if(!$('.btn-status-schedule').hasClass('active')){
-								$('.btn-status-schedule').addClass('active');
-							}
+                            var type_status = 'waiting';
+                            
+                            if(!$('#scheduled-status-btn').hasClass('active')){
+                                $('.list-schedule-status').removeClass('active');
+                                $('#scheduled-status-btn').addClass('active');
+                                $('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled.png');
+                                $('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
+                                $('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
+                                $('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
+                            }
+                            
+                            if(!$('.btn-status-schedule').hasClass('active')){
+                                $('.btn-status-schedule').addClass('active');
+                            }
 
                             $('.cancel-this-schedule').css("display","block");     
-						}
-						
-						if(note == ''){
-							$('.btn-status-schedule').text('Save Note');
-						}else{
-							$('.btn-status-schedule').text('Edit Note');
-							tinymce.get('note_status_schedule').setContent(note);
-						}
-						
-						$('.name-status-schedule').find('img').attr('src',path + icon);
-						if($.trim(subject) == 'null')
-							$('.name-status-schedule').find('span').text(private_subject);
-						else
-							$('.name-status-schedule').find('span').text(subject);
-						$('#date-schedule').text(date + stuff + ' ' + time_view);
-						$('#current-status').text(current_status);
-						$('#name-tutor-detail').text(tutor_name);
-						$('#point-schedule').html(total + 'Points($)' + point_schedule);
-						$('#review-schedule').addClass($.trim(cl));
-						$('#review-schedule').html(review_schedule);
-						$('.close-status-schedule').attr('data-status',type_status);
-						$('.btn-status-schedule').attr('data-id',id);
+                        }
+                        
+                        if(note == ''){
+                            $('.btn-status-schedule').text('Save Note');
+                        }else{
+                            $('.btn-status-schedule').text('Edit Note');
+                            tinymce.get('note_status_schedule').setContent(note);
+                        }
+                        
+                        $('.name-status-schedule').find('img').attr('src',path + icon);
+                        if($.trim(subject) == 'null')
+                            $('.name-status-schedule').find('span').text(private_subject);
+                        else
+                            $('.name-status-schedule').find('span').text(subject);
+                        $('#date-schedule').text(date + stuff + ' ' + time_view);
+                        $('#current-status').text(current_status);
+                        $('#name-tutor-detail').text(tutor_name);
+                        $('#point-schedule').html(total + 'Points($)' + point_schedule);
+                        $('#review-schedule').addClass($.trim(cl));
+                        $('#review-schedule').html(review_schedule);
+                        $('.close-status-schedule').attr('data-status',type_status);
+                        $('.btn-status-schedule').attr('data-id',id);
                         $('#yes-cancel-it').attr('data-id',id);
                         $('#no-cancel-it').attr('data-id',id);
-						
-						$('#list-schedule-status').css("display","block");
-						$('#table-status-schedule').html('');
-						$('#table-list-schedule').html('');
-						$('#tutoring-scheduled').html('');
-						$("#open-menu-schedule").css("display","none");
+                        
+                        $('#list-schedule-status').css("display","block");
+                        $('#table-status-schedule').html('');
+                        $('#table-list-schedule').html('');
+                        $('#tutoring-scheduled').html('');
+                        $("#open-menu-schedule").css("display","none");
                         $("#open-menu-cancel").css("display","none");
-						$(".header-schedule").addClass('active');
-						$(".body-my-scheduled").addClass('status-schedule');
-						$(".main-view-status").css("display","block");
+                        $(".header-schedule").addClass('active');
+                        $(".body-my-scheduled").addClass('status-schedule');
+                        $(".main-view-status").css("display","block");
                     });
 
                     $('#btn-my-schedule').click(function(e){
@@ -6132,13 +6206,13 @@
                                 var index = $("#select-timezoneSelectBoxItText").attr("data-val");
                                 
                                 $.post(home_url + "/?r=ajax/get_tutoring_date_active", {                                   
-									timezone: timezone,
-									name: name,
-									index: index
-								}, function (data) {
-									$('#active-day-tutor').val(data);
-									initCalendar('update', data);
-								});
+                                    timezone: timezone,
+                                    name: name,
+                                    index: index
+                                }, function (data) {
+                                    $('#active-day-tutor').val(data);
+                                    initCalendar('update', data);
+                                });
 
                                 if(table == 'table-list-tutor'){
                                     var retype = 'tutor';
@@ -6192,8 +6266,8 @@
                     $('#got-canceled').live("click",function(){
                         $('#top-popup-message').css("display", "none");
                     });
-					
-					$('.view-status-scheduled').live("click",function(){
+                    
+                    $('.view-status-scheduled').live("click",function(){
                         var cl = $(this).attr("data-class");
                         var subject = $(this).attr("data-subject");
                         var private_subject = $(this).attr("data-private-subject");
@@ -6202,7 +6276,7 @@
                         var date = $(this).attr("data-date");
                         var stuff = $(this).attr("data-stuff");
                         var message = $(this).attr("data-message");
-						var note = $(this).attr("data-note");
+                        var note = $(this).attr("data-note");
                         var time = $(this).attr("data-time");
                         var time_view = $(this).attr("data-time-view");
                         var fromtime = $(this).attr("data-fromtime");
@@ -6214,59 +6288,59 @@
                         var confirmed = $(this).attr("data-confirmed");
                         var canceled = $(this).attr("data-canceled");
                         var id = $(this).attr("data-id");
-						var student_id = $(this).attr("data-student-id");
-						var teacher_id = $(this).attr("data-teacher-id");
+                        var student_id = $(this).attr("data-student-id");
+                        var teacher_id = $(this).attr("data-teacher-id");
                         var status = $(this).attr("data-status");
                         var accepted = $(this).attr("data-accepted");
                         var icon = $(this).attr("data-icon");
                         var create_on = $(this).attr("data-create-on");
                         var created = $(this).attr("data-created");
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
-						
-						var review_schedule = 'Session Not Completed Yet';
-						var point_schedule = ' <span class="spent"></span>';
-						
-						if($.trim(note) == 'null') note = '';
-						
-						if($.trim(cl) == 'accepted'){
-							var current_status = 'Completed';
-							var type_status = 'confirmed';
-							point_schedule = ' <span class="spent">(spent)</span>';
-							review_schedule = '<a href="https://notepad.iktutor.com/en/?sid='+id+'&user_id='+student_id+'&teacher_id='+teacher_id+'" target="_blank">Review Session Again</a>';
-							
-							if(!$('#completed-status-btn').hasClass('active')){
-								$('.list-schedule-status').removeClass('active');
-								$('#completed-status-btn').addClass('active');
-								$('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed.png');
-								$('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
-								$('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
-								$('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
-							}
-							
-							if(!$('.btn-status-schedule').hasClass('active')){
-								$('.btn-status-schedule').addClass('active');
-							}
+                        
+                        var review_schedule = 'Session Not Completed Yet';
+                        var point_schedule = ' <span class="spent"></span>';
+                        
+                        if($.trim(note) == 'null') note = '';
+                        
+                        if($.trim(cl) == 'accepted'){
+                            var current_status = 'Completed';
+                            var type_status = 'confirmed';
+                            point_schedule = ' <span class="spent">(spent)</span>';
+                            review_schedule = '<a href="https://notepad.iktutor.com/en/?sid='+id+'&user_id='+student_id+'&teacher_id='+teacher_id+'" target="_blank">Review Session Again</a>';
+                            
+                            if(!$('#completed-status-btn').hasClass('active')){
+                                $('.list-schedule-status').removeClass('active');
+                                $('#completed-status-btn').addClass('active');
+                                $('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed.png');
+                                $('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
+                                $('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
+                                $('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
+                            }
+                            
+                            if(!$('.btn-status-schedule').hasClass('active')){
+                                $('.btn-status-schedule').addClass('active');
+                            }
 
                             $('.cancel-this-schedule').css("display","none");
-						}else if($.trim(cl) == 'canceled'){
+                        }else if($.trim(cl) == 'canceled'){
                             if(accepted == 2)
-							    var current_status = 'Canceled by Tutor';
+                                var current_status = 'Canceled by Tutor';
                             else
                                 var current_status = 'Canceled';
 
-							var type_status = 'canceled';
-							
-							if(!$('#expired-status-btn').hasClass('active')){
-								$('.list-schedule-status').removeClass('active');
-								$('#expired-status-btn').addClass('active');
-								$('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired.png');
-								$('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
-								$('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
-								$('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
-							}
+                            var type_status = 'canceled';
+                            
+                            if(!$('#expired-status-btn').hasClass('active')){
+                                $('.list-schedule-status').removeClass('active');
+                                $('#expired-status-btn').addClass('active');
+                                $('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired.png');
+                                $('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
+                                $('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
+                                $('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
+                            }
 
                             $('.cancel-this-schedule').css("display","none");
-						}else{
+                        }else{
                             if(accepted == 1)
                                 var current_status = 'Confirmed';
                             else if(accepted == 2)
@@ -6274,84 +6348,84 @@
                             else
                                 var current_status = 'Waiting for Confirmation';
 
-							var type_status = 'waiting';
-							
-							if(!$('#scheduled-status-btn').hasClass('active')){
-								$('.list-schedule-status').removeClass('active');
-								$('#scheduled-status-btn').addClass('active');
-								$('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled.png');
-								$('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
-								$('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
-								$('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
-							}
+                            var type_status = 'waiting';
+                            
+                            if(!$('#scheduled-status-btn').hasClass('active')){
+                                $('.list-schedule-status').removeClass('active');
+                                $('#scheduled-status-btn').addClass('active');
+                                $('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled.png');
+                                $('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
+                                $('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
+                                $('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
+                            }
 
                             $('.cancel-this-schedule').css("display","block");
-						}
-						
-						if(note == ''){
-							$('.btn-status-schedule').text('Save Note');
-							tinymce.get('note_status_schedule').setContent('');
-						}else{
-							$('.btn-status-schedule').text('Edit Note');
-							tinymce.get('note_status_schedule').setContent(note);
-						}
-						
-						$('.name-status-schedule').find('img').attr('src',path + icon);
-						if($.trim(subject) == 'null')
-							$('.name-status-schedule').find('span').text(private_subject);
-						else
-							$('.name-status-schedule').find('span').text(subject);
-						$('#date-schedule').text(date + stuff + ' ' + time_view);
-						$('#current-status').text(current_status);
-						$('#name-tutor-detail').text(tutor_name);
-						$('#point-schedule').html(total + 'Points($)' + point_schedule);
-						$('#review-schedule').addClass($.trim(cl));
-						$('#review-schedule').html(review_schedule);
-						$('.close-status-schedule').attr('data-status',type_status);
-						$('.btn-status-schedule').attr('data-id',id);
+                        }
+                        
+                        if(note == ''){
+                            $('.btn-status-schedule').text('Save Note');
+                            tinymce.get('note_status_schedule').setContent('');
+                        }else{
+                            $('.btn-status-schedule').text('Edit Note');
+                            tinymce.get('note_status_schedule').setContent(note);
+                        }
+                        
+                        $('.name-status-schedule').find('img').attr('src',path + icon);
+                        if($.trim(subject) == 'null')
+                            $('.name-status-schedule').find('span').text(private_subject);
+                        else
+                            $('.name-status-schedule').find('span').text(subject);
+                        $('#date-schedule').text(date + stuff + ' ' + time_view);
+                        $('#current-status').text(current_status);
+                        $('#name-tutor-detail').text(tutor_name);
+                        $('#point-schedule').html(total + 'Points($)' + point_schedule);
+                        $('#review-schedule').addClass($.trim(cl));
+                        $('#review-schedule').html(review_schedule);
+                        $('.close-status-schedule').attr('data-status',type_status);
+                        $('.btn-status-schedule').attr('data-id',id);
                         $('#yes-cancel-it').attr('data-id',id);
                         $('#no-cancel-it').attr('data-id',id);
-						
-						$('#list-schedule-status').css("display","block");
-						$('#table-status-schedule').html('');
-						$("#open-menu-schedule").css("display","none");
+                        
+                        $('#list-schedule-status').css("display","block");
+                        $('#table-status-schedule').html('');
+                        $("#open-menu-schedule").css("display","none");
                         $("#open-menu-cancel").css("display","none");
-						$(".main-view-status").css("display","block");
-					});
-					
-					$('.close-status-schedule').click(function(){
-						$("#open-menu-schedule li").removeClass('active');
-						$("#scheduled-btn").parent().addClass('active');
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","block");
+                    });
+                    
+                    $('.close-status-schedule').click(function(){
+                        $("#open-menu-schedule li").removeClass('active');
+                        $("#scheduled-btn").parent().addClass('active');
+                        $(".main-view-status").css("display","none");
 
-						if(!$('#body-my-scheduled').hasClass('status-schedule')){
-							$('#body-my-scheduled').addClass('status-schedule')
-						}
-						
-						if($('.btn-status-schedule').hasClass('active')){
-							$('.btn-status-schedule').removeClass('active');
-						}
-						var status = $(this).attr("data-status");
-						get_status_schedule(status);
-					});
-					
-					$('.btn-status-schedule').click(function(){
-						var id = $(this).attr("data-id");
-						if($(this).hasClass('active')){
-							var description = $('#note_status_schedule_ifr').contents().find('#tinymce').text();
-							if($.trim(description) != ''){
-								$.post(home_url + "/?r=ajax/save_tutoring_desc", {                                   
-									id: id,
-									description: description,
-									type: "note"
-								}, function (data) {
-									if ($.trim(data) == '1') {
-										$('.btn-status-schedule').text('Edit Note');
-									}                                         
-								});
-							}
-						}
-					});
+                        if(!$('#body-my-scheduled').hasClass('status-schedule')){
+                            $('#body-my-scheduled').addClass('status-schedule')
+                        }
+                        
+                        if($('.btn-status-schedule').hasClass('active')){
+                            $('.btn-status-schedule').removeClass('active');
+                        }
+                        var status = $(this).attr("data-status");
+                        get_status_schedule(status);
+                    });
+                    
+                    $('.btn-status-schedule').click(function(){
+                        var id = $(this).attr("data-id");
+                        if($(this).hasClass('active')){
+                            var description = $('#note_status_schedule_ifr').contents().find('#tinymce').text();
+                            if($.trim(description) != ''){
+                                $.post(home_url + "/?r=ajax/save_tutoring_desc", {                                   
+                                    id: id,
+                                    description: description,
+                                    type: "note"
+                                }, function (data) {
+                                    if ($.trim(data) == '1') {
+                                        $('.btn-status-schedule').text('Edit Note');
+                                    }                                         
+                                });
+                            }
+                        }
+                    });
 
                     $('.view-detail-status').live("click",function(){
                         var cl = $(this).attr("data-class");
@@ -6400,10 +6474,10 @@
                         $('.goto-main-schedule').attr("data-type",'status');
                         $('.goto-main-schedule').attr("data-tab",'main-status-request');  
                         $('#custom-timezone').attr("data-type","view");
-						$('#custom-timezone').attr("data-id",id);
+                        $('#custom-timezone').attr("data-id",id);
                         $('#custom-timezone').attr("data-day",day);
                         $('#custom-timezone').attr("data-created",created); 
-						$('#custom-timezone').attr("data-id",id);
+                        $('#custom-timezone').attr("data-id",id);
                         if($.trim(cl) == "accepted"){
                             $('.name-request-vew').find('img').attr('src',path+'icon_Status_Confirmed.png');
                             $('.name-request-vew').find('span').text('CONFIRMED');
@@ -6548,10 +6622,10 @@
 
                             if(hftime > 12) hftime = hftime - 12;
                             if(httime > 12) httime = httime - 12;
-							
-							var time_sc1 = hftime+':'+ftime[1]+':'+ftime[2].toLowerCase();
+                            
+                            var time_sc1 = hftime+':'+ftime[1]+':'+ftime[2].toLowerCase();
                             var time_sc2 = httime+':'+totime[1]+':'+totime[2].toLowerCase();
-							
+                            
                             var time = hftime+':'+ftime[1]+ftime[2] +' - '+ httime+':'+totime[1]+totime[2];
 
                             $('#btn-sent-request').attr("data-id",id);
@@ -6599,7 +6673,7 @@
                             $('#search-title').val('');
                             tinymce.get('description_request').setContent('');
                             $('.radio_buttons_search').attr('checked',false);
-							
+                            
                             $('#table-search-tutor').html("");
                             var tr = '<tr><td colspan="3" class="no-list"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_No_Schedule.png" alt="">Currently, there are no list</td></tr>';
                             $('#table-search-tutor').append(tr);
@@ -6680,7 +6754,7 @@
                         $('#list-schedule-status').css("display","none");
                         $('#table-status-schedule').html('');
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
 
                         if($(".main-my-schedule").hasClass('active-tab-schedule')){
                             $(".main-my-schedule").removeClass("active-tab-schedule");
@@ -6722,7 +6796,7 @@
                         $('#list-schedule-status').css("display","none");
                         $('#table-status-schedule').html('');
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
 
                         $('#custom-timezone').attr("data-type","status");
                         $('#custom-timezone').attr("data-status","all");
@@ -6926,39 +7000,39 @@
                         var GivenDate = new Date(date);
                         if(GivenDate > CurrentDate){
                             var type = 'am'; 
-                        	var html = '<option value="0">Select Time</option>';
-                        	for (var i = 0; i < 24; i++) {                            
-                        	    var id = i;
-                        	    if (i > 11){
-                        	        var j = i - 12;                                    
-                        	        type = 'pm'; 
-                        	    }else{
-                        	        var j = i;
-                        	    }
+                            var html = '<option value="0">Select Time</option>';
+                            for (var i = 0; i < 24; i++) {                            
+                                var id = i;
+                                if (i > 11){
+                                    var j = i - 12;                                    
+                                    type = 'pm'; 
+                                }else{
+                                    var j = i;
+                                }
                         
-                        	    if(j == 0) id = j = 12;
+                                if(j == 0) id = j = 12;
                         
-                        	    var kl = (parseInt(id) + 1);
-                        	    if(kl > 12){
-                        	        var ks  = kl - 12;
-                        	    }else{
-                        	        var ks = kl;
-                        	    }
+                                var kl = (parseInt(id) + 1);
+                                if(kl > 12){
+                                    var ks  = kl - 12;
+                                }else{
+                                    var ks = kl;
+                                }
                         
-                        	    if(ks < 10) 
-                        	        var kll = '0'+ks;
-                        	    else
-                        	        var kll = ks;
+                                if(ks < 10) 
+                                    var kll = '0'+ks;
+                                else
+                                    var kll = ks;
                         
-                        	    if(j < 10) 
-                        	        var jk = '0'+j;
-                        	    else
-                        	        var jk = j;
-                        	    
-                        	    html += '<option data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
-                        	    html += '<option data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
-                        	}
-                        	$('#select-available-time').html(html).data("selectBox-selectBoxIt").refresh();
+                                if(j < 10) 
+                                    var jk = '0'+j;
+                                else
+                                    var jk = j;
+                                
+                                html += '<option data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
+                                html += '<option data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
+                            }
+                            $('#select-available-time').html(html).data("selectBox-selectBoxIt").refresh();
                         }else{
                             if(current_day == date){
                                 var current_hour = $("#mytime-clock").attr("data-hour");
@@ -6967,58 +7041,58 @@
                                 
                                 var type = 'am'; 
                                 var html = '<option value="0">Select Time</option>';
-                            	for (var i = current_hour; i < 24; i++) {                            
-                            	    var id = i;
-                            	    if (i > 11){
-                            	        var j = i - 12;                                    
-                            	        type = 'pm'; 
-                            	    }else{
-                            	        var j = i;
-                            	    }
+                                for (var i = current_hour; i < 24; i++) {                            
+                                    var id = i;
+                                    if (i > 11){
+                                        var j = i - 12;                                    
+                                        type = 'pm'; 
+                                    }else{
+                                        var j = i;
+                                    }
                             
-                            	    if(j == 0) id = j = 12;
+                                    if(j == 0) id = j = 12;
                             
-                            	    var kl = (parseInt(id) + 1);
-                            	    if(kl > 12){
-                            	        var ks  = kl - 12;
-                            	    }else{
-                            	        var ks = kl;
-                            	    }
+                                    var kl = (parseInt(id) + 1);
+                                    if(kl > 12){
+                                        var ks  = kl - 12;
+                                    }else{
+                                        var ks = kl;
+                                    }
                             
-                            	    if(ks < 10) 
-                            	        var kll = '0'+ks;
-                            	    else
-                            	        var kll = ks;
+                                    if(ks < 10) 
+                                        var kll = '0'+ks;
+                                    else
+                                        var kll = ks;
                             
-                            	    if(j < 10) 
-                            	        var jk = '0'+j;
-                            	    else
-                            	        var jk = j;
-                            	    
-                            	    if(current_minute > 29 && i == current_hour){
-                            	        var sel_time = j+':30'+type;
-                            	        if(sel_time == available_time)
-                            	            var sel = 'selected="selected"';
-                            	        else
-                            	            var sel = '';
-                            	        html += '<option '+sel+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
-                            	    }else{
-                            	        var sel_time1 = j+':00'+type;
-                            	        if(sel_time1 == available_time)
-                            	            var sel1 = 'selected="selected"';
-                            	        else
-                            	            var sel1 = '';
-                            	            
-                            	        var sel_time2 = j+':30'+type;
-                            	        if(sel_time2 == available_time)
-                            	            var sel2 = 'selected="selected"';
-                            	        else
-                            	            var sel2 = '';
-                            	        html += '<option '+sel1+' data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
-                            	        html += '<option '+sel2+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
-                            	    }
-                            	}
-                            	$('#select-available-time').html(html).data("selectBox-selectBoxIt").refresh();
+                                    if(j < 10) 
+                                        var jk = '0'+j;
+                                    else
+                                        var jk = j;
+                                    
+                                    if(current_minute > 29 && i == current_hour){
+                                        var sel_time = j+':30'+type;
+                                        if(sel_time == available_time)
+                                            var sel = 'selected="selected"';
+                                        else
+                                            var sel = '';
+                                        html += '<option '+sel+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
+                                    }else{
+                                        var sel_time1 = j+':00'+type;
+                                        if(sel_time1 == available_time)
+                                            var sel1 = 'selected="selected"';
+                                        else
+                                            var sel1 = '';
+                                            
+                                        var sel_time2 = j+':30'+type;
+                                        if(sel_time2 == available_time)
+                                            var sel2 = 'selected="selected"';
+                                        else
+                                            var sel2 = '';
+                                        html += '<option '+sel1+' data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
+                                        html += '<option '+sel2+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
+                                    }
+                                }
+                                $('#select-available-time').html(html).data("selectBox-selectBoxIt").refresh();
                             }
                         }
                     });
@@ -7043,34 +7117,34 @@
                         initTimeClock(name);
                         initMyTimeClock(name);
                         $('#mycity-name').text(city);
-						
+                        
                         if(ptype == 'status'){
                             var status = $('#custom-timezone').attr("data-status");
                             if(status != 'finished'){
                                 get_status_request(status);
                             }
                         }else if(ptype == 'view'){
-							var id = $('#custom-timezone').attr("data-id");
-							$.post(home_url + "/?r=ajax/get_view_by_timezone", {  
-								id: id,
-								timezone: timezone,
-								name: name,
-								index: index
-							}, function (data) {
-								var result = $.parseJSON(data);
-								if(result.date){
-									$('.current-view-day').text(result.date);
-									$('.stuff-view-day').text(result.stuff);
-									$('.time-current-view').text(result.time_view);
-									$('.create-time').text(result.create_on);
-									$('.btn-reschedule-request').attr("data-day",result.day);
-									$('.btn-view-request').attr("data-day",result.day);
-									$('.goto-main-schedule').attr("data-day",result.day);
-									$('#custom-timezone').attr("data-day",result.day);  
-									$('#custom-timezone').attr("data-created",result.created);
-								}
-							});
-						}
+                            var id = $('#custom-timezone').attr("data-id");
+                            $.post(home_url + "/?r=ajax/get_view_by_timezone", {  
+                                id: id,
+                                timezone: timezone,
+                                name: name,
+                                index: index
+                            }, function (data) {
+                                var result = $.parseJSON(data);
+                                if(result.date){
+                                    $('.current-view-day').text(result.date);
+                                    $('.stuff-view-day').text(result.stuff);
+                                    $('.time-current-view').text(result.time_view);
+                                    $('.create-time').text(result.create_on);
+                                    $('.btn-reschedule-request').attr("data-day",result.day);
+                                    $('.btn-view-request').attr("data-day",result.day);
+                                    $('.goto-main-schedule').attr("data-day",result.day);
+                                    $('#custom-timezone').attr("data-day",result.day);  
+                                    $('#custom-timezone').attr("data-created",result.created);
+                                }
+                            });
+                        }
                     });
 
                     /*$('#sandbox-container-tutor').datepicker({
@@ -7673,7 +7747,7 @@
                         $('.header-schedule').addClass('active');
                         $('#list-schedule-status').css("display","block");
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
 
                         if(!$('#body-my-scheduled').hasClass('status-schedule')){
                             $('#body-my-scheduled').addClass('status-schedule')
@@ -7698,7 +7772,7 @@
                         $(this).parent().addClass('active');
                         $('#list-schedule-status').css("display","block");
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
 
                         if(!$('#body-my-scheduled').hasClass('status-schedule')){
                             $('#body-my-scheduled').addClass('status-schedule')
@@ -7724,7 +7798,7 @@
                         $('.header-schedule').addClass('active');
                         $('#list-schedule-status').css("display","block");
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
 
                         if(!$('#body-my-scheduled').hasClass('status-schedule')){
                             $('#body-my-scheduled').addClass('status-schedule')
@@ -7773,7 +7847,7 @@
                     $("#all-status-btn").click(function(){
                         $("#open-menu-schedule li").removeClass('active');
                         $("#all-schedule-btn").parent().addClass('active');
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
                         $("#open-menu-schedule").css("display","none");
 
                         if(!$('#body-my-scheduled').hasClass('status-schedule')){
@@ -7797,7 +7871,7 @@
                     $("#scheduled-status-btn").click(function(){
                         $("#open-menu-schedule li").removeClass('active');
                         $("#scheduled-btn").parent().addClass('active');
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
                         $("#open-menu-schedule").css("display","none");
 
                         if(!$('#body-my-scheduled').hasClass('status-schedule')){
@@ -7821,7 +7895,7 @@
                     $("#completed-status-btn").click(function(){
                         $("#open-menu-schedule li").removeClass('active');
                         $("#completed-btn").parent().addClass('active');
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
                         $("#open-menu-schedule").css("display","none");
 
                         if(!$('#body-my-scheduled').hasClass('status-schedule')){
@@ -7845,7 +7919,7 @@
                     $("#expired-status-btn").click(function(){
                         $("#open-menu-schedule li").removeClass('active');
                         $("#expired-btn").parent().addClass('active');
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
                         $("#open-menu-schedule").css("display","none");
 
                         if(!$('#body-my-scheduled').hasClass('status-schedule')){
@@ -8211,17 +8285,17 @@
                     });
 
                     $(".schedule-left-btn").click(function(){
-						$('.header-schedule').removeClass('active');
-						$('#list-schedule-status').css("display","none");
-						$('#table-status-schedule').html('');
-						$("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $('.header-schedule').removeClass('active');
+                        $('#list-schedule-status').css("display","none");
+                        $('#table-status-schedule').html('');
+                        $("#open-menu-schedule").css("display","none");
+                        $(".main-view-status").css("display","none");
 
-						if($("#body-my-scheduled").hasClass('status-schedule')){
-							$("#body-my-scheduled").removeClass("status-schedule");
-						}
+                        if($("#body-my-scheduled").hasClass('status-schedule')){
+                            $("#body-my-scheduled").removeClass("status-schedule");
+                        }
                         $("#body-my-scheduled").animate({scrollTop: 0});
-				
+                
                         var day = $(this).attr("data-day");
                         var type = $(this).attr("data-type");
 
@@ -8288,15 +8362,15 @@
                     });
 
                     $(".schedule-right-btn").click(function(){
-						$('.header-schedule').removeClass('active');
-						$('#list-schedule-status').css("display","none");
-						$('#table-status-schedule').html('');
-						$("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $('.header-schedule').removeClass('active');
+                        $('#list-schedule-status').css("display","none");
+                        $('#table-status-schedule').html('');
+                        $("#open-menu-schedule").css("display","none");
+                        $(".main-view-status").css("display","none");
 
-						if($("#body-my-scheduled").hasClass('status-schedule')){
-							$("#body-my-scheduled").removeClass("status-schedule");
-						}
+                        if($("#body-my-scheduled").hasClass('status-schedule')){
+                            $("#body-my-scheduled").removeClass("status-schedule");
+                        }
                         $("#body-my-scheduled").animate({scrollTop: 0});
 
                         var day = $(this).attr("data-day");
@@ -8359,7 +8433,7 @@
                                 $(this).attr('data-action','disabled');
                             }
                         });
-						
+                        
                         get_list_schedule('schedule');
                         get_scheduled_day(day,type);
                     });
@@ -8567,11 +8641,11 @@
                                 var jk = j;
                             
                             if(current_minute1 > 29 && i == current_hour1){
-                    	        html1 += '<option data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
-                    	    }else{
-                    	        html1 += '<option data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
-                    	        html1 += '<option data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
-                    	    }
+                                html1 += '<option data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
+                            }else{
+                                html1 += '<option data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
+                                html1 += '<option data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
+                            }
                         }
                         $('#select-available-time').html(html1).data("selectBox-selectBoxIt").refresh();
                         
@@ -8763,27 +8837,27 @@
                                             var jk = j;
                                         
                                         if(current_minute > 29 && i == current_hour){
-                                	        var sel_time = j+':30'+type;
-                                	        if(sel_time == available_time_sel)
-                                	            var sel = 'selected="selected"';
-                                	        else
-                                	            var sel = '';
-                                	        html += '<option '+sel+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
-                                	    }else{
-                                	        var sel_time1 = j+':00'+type;
-                                	        if(sel_time1 == available_time_sel)
-                                	            var sel1 = 'selected="selected"';
-                                	        else
-                                	            var sel1 = '';
-                                	            
-                                	        var sel_time2 = j+':30'+type;
-                                	        if(sel_time2 == available_time_sel)
-                                	            var sel2 = 'selected="selected"';
-                                	        else
-                                	            var sel2 = '';
-                                	        html += '<option '+sel1+' data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
-                                	        html += '<option '+sel2+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
-                                	    }
+                                            var sel_time = j+':30'+type;
+                                            if(sel_time == available_time_sel)
+                                                var sel = 'selected="selected"';
+                                            else
+                                                var sel = '';
+                                            html += '<option '+sel+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
+                                        }else{
+                                            var sel_time1 = j+':00'+type;
+                                            if(sel_time1 == available_time_sel)
+                                                var sel1 = 'selected="selected"';
+                                            else
+                                                var sel1 = '';
+                                                
+                                            var sel_time2 = j+':30'+type;
+                                            if(sel_time2 == available_time_sel)
+                                                var sel2 = 'selected="selected"';
+                                            else
+                                                var sel2 = '';
+                                            html += '<option '+sel1+' data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
+                                            html += '<option '+sel2+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
+                                        }
                                     }
                                     $('#select-available-time').html(html).data("selectBox-selectBoxIt").refresh();
                                 }
@@ -9046,21 +9120,21 @@
                                     $("#menu-schedule-btn").attr('data-day',formattedDate);
                                     $(".schedule-left-btn").attr('data-day',yyyy+'-'+mm+'-'+dd);
                                     $(".schedule-right-btn").attr('data-day',yyyy_n+'-'+mm_n+'-'+dd_n);
-    								
-    								$('.header-schedule').removeClass('active');
-    								$('#list-schedule-status').css("display","none");
-    								$('#table-status-schedule').html('');
-    								$("#open-menu-schedule").css("display","none");
-    								$(".main-view-status").css("display","none");
+                                    
+                                    $('.header-schedule').removeClass('active');
+                                    $('#list-schedule-status').css("display","none");
+                                    $('#table-status-schedule').html('');
+                                    $("#open-menu-schedule").css("display","none");
+                                    $(".main-view-status").css("display","none");
 
-    								if($(".main-my-schedule").hasClass('active-tab-schedule')){
-    									$(".main-my-schedule").removeClass("active-tab-schedule");
-    								}
+                                    if($(".main-my-schedule").hasClass('active-tab-schedule')){
+                                        $(".main-my-schedule").removeClass("active-tab-schedule");
+                                    }
 
-    								if($("#body-my-scheduled").hasClass('status-schedule')){
-    									$("#body-my-scheduled").removeClass("status-schedule");
-    								}
-    								
+                                    if($("#body-my-scheduled").hasClass('status-schedule')){
+                                        $("#body-my-scheduled").removeClass("status-schedule");
+                                    }
+                                    
                                     if($(this).hasClass('today')){
                                         var th = $('#time-clock').attr('data-hour');
                                         get_list_schedule('schedule', th);
@@ -9186,15 +9260,15 @@
                                     if(v.confirmed == 1 && v.canceled == 0){
                                         var cl = ' accepted';   
                                         var confirmed = 'edf9eb';  
-										var icon = 'TimeIcon_Completed.png';										
+                                        var icon = 'TimeIcon_Completed.png';                                        
                                     }else if(v.canceled == 1 && v.confirmed == 0){
                                         var cl = ' canceled';  
                                         var confirmed = 'f4f7f7';  
-										var icon = 'TimeIcon_Expired.png';	
+                                        var icon = 'TimeIcon_Expired.png';  
                                     }else{
                                         var cl = ' wait';
                                         var confirmed = 'e7feff';
-										var icon = 'TimeIcon_Scheduled.png';
+                                        var icon = 'TimeIcon_Scheduled.png';
                                     }
 
                                     if(type == 'schedule'){                                        
@@ -9405,7 +9479,7 @@
                         }
 
                         $("#table-list-schedule").html('');
-						$("#tutoring-scheduled").html('');
+                        $("#tutoring-scheduled").html('');
                         var tbody_request = $("#table-status-schedule");
                         tbody_request.html('');
                         $.get(home_url + "/?r=ajax/get_request_status", {type: type}, function (data) {
@@ -9416,16 +9490,16 @@
                                     //var icon = getIconTutoring(v.subject);   
                                     if(v.confirmed == 1){
                                         var cl = ' accepted'; 
-										var icon = 'TimeIcon_Completed.png';										
+                                        var icon = 'TimeIcon_Completed.png';                                        
                                     }else if(v.canceled == 1){
                                         var cl = ' canceled';  
-										var icon = 'TimeIcon_Expired.png';	
+                                        var icon = 'TimeIcon_Expired.png';  
                                     }else{
                                         var cl = ' wait';
-										var icon = 'TimeIcon_Scheduled.png';
+                                        var icon = 'TimeIcon_Scheduled.png';
                                     }  
-									
-									if(v.accepted == 1){
+                                    
+                                    if(v.accepted == 1){
                                         var private_subject = 'Confirmed';
                                     }else{
                                         if(v.subject == "")
@@ -9433,7 +9507,7 @@
                                         else
                                             var private_subject = v.subject;
                                     }
-									
+                                    
                                     var tr = '<tr class="tr-status">';
                                         tr += '<td class="view-status-scheduled' + cl + '" data-id="' + v.id + '" data-teacher-id="' + v.tutor_id + '" data-student-id="' + v.id_user + '" data-subject="' + v.subject + '" data-private-subject="' + v.private_subject + '" data-message="' + v.short_message + '" data-note="' + v.note + '" data-student-name="' + v.student_name + '" data-time="' + v.time + '" data-location="' + v.location + '" data-status="' + v.status + '" data-accepted="' + v.accepted + '" data-confirmed="' + v.confirmed + '" data-date="' + v.date_view + '" data-icon="' + icon + '" data-class="' + cl + '" data-total="' + v.total + '" data-time-view="' + v.time_view2 + '" data-create-on="' + v.create_on + '" data-tutor-name="' + v.tutor_name + '" data-stuff="' + v.stuff + '" data-fromtime="' + v.fromtime + '" data-totime="' + v.totime + '" data-day="' + v.day + '" data-total-time="' + v.total_time + '" data-canceled="' + v.canceled + '" data-created="' + v.created + '"><span>' + private_subject + '</span></td>'; 
                                         tr += '<td class="time-request-status">' + v.date + v.stuff +' '+ v.time_view + '</td>';
@@ -9460,12 +9534,12 @@
                                     }else{
                                         var cl = ' wait';
                                     }      
-										
-									if(v.subject == "")
-										var private_subject = v.private_subject;
-									else
-										var private_subject = v.subject;
-									
+                                        
+                                    if(v.subject == "")
+                                        var private_subject = v.private_subject;
+                                    else
+                                        var private_subject = v.subject;
+                                    
                                     var tr = '<tr class="tr-status">';
                                         tr += '<td class="view-detail-status' + cl + '" data-id="' + v.id + '" data-subject="' + v.subject + '" data-private-subject="' + v.private_subject + '" data-message="' + v.short_message + '" data-note="' + v.note + '" data-student-name="' + v.student_name + '" data-time="' + v.time + '" data-location="' + v.location + '" data-status="' + v.status + '" data-accepted="' + v.accepted + '" data-confirmed="' + v.confirmed + '" data-date="' + v.date + '" data-icon="' + icon + '" data-class="' + cl + '" data-total="' + v.total + '" data-time-view="' + v.time_view + '" data-create-on="' + v.create_on + '" data-tutor-name="' + v.tutor_name + '" data-stuff="' + v.stuff + '" data-fromtime="' + v.fromtime + '" data-totime="' + v.totime + '" data-day="' + v.day + '" data-total-time="' + v.total_time + '" data-canceled="' + v.canceled + '" data-created="' + v.created + '"><span>' + private_subject + '</span></td>'; 
                                         tr += '<td class="by-tutor">by <span class="view-tutor-detail" data-id="' + v.tutor_id + '">' + v.tutor_name + '</span></td>';
@@ -9657,7 +9731,7 @@
                         $(".slide-resume").css('visibility','visible');
 
                         if(type == 'review'){
-							updateReview(id);
+                            updateReview(id);
                             $('#tr-tutor' + id).css('display','block');
                             $('#tr-info' + id).css('display','none');
                             $('#tr-review' + id).css('display','block');
@@ -9940,7 +10014,7 @@
                             weekday[4] = "Thur";
                             weekday[5] = "Fri";
                             weekday[6] = "Sat";
-						/*
+                        /*
                         if(ptype == 'view'){
                             var created = $('#custom-timezone').attr("data-created");
                            
@@ -10003,16 +10077,16 @@
                             $('#btn-sent-request').attr('data-day',yyyy_s+'-'+mm_s+'-'+dd_s);
                             $(".schedule-left-btn").attr('data-day',yyyy+'-'+mm+'-'+dd);
                             $(".schedule-right-btn").attr('data-day',yyyy_n+'-'+mm_n+'-'+dd_n);
-							
-							$('.header-schedule').removeClass('active');
-							$('#list-schedule-status').css("display","none");
-							$('#table-status-schedule').html('');
-							$("#open-menu-schedule").css("display","none");
-							$(".main-view-status").css("display","none");
+                            
+                            $('.header-schedule').removeClass('active');
+                            $('#list-schedule-status').css("display","none");
+                            $('#table-status-schedule').html('');
+                            $("#open-menu-schedule").css("display","none");
+                            $(".main-view-status").css("display","none");
 
-							if($("#body-my-scheduled").hasClass('status-schedule')){
-								$("#body-my-scheduled").removeClass("status-schedule");
-							}
+                            if($("#body-my-scheduled").hasClass('status-schedule')){
+                                $("#body-my-scheduled").removeClass("status-schedule");
+                            }
 
                             get_list_schedule('schedule');
                             get_scheduled_day(yyyy_s+'-'+mm_s+'-'+dd_s,'schedule', true);
@@ -10088,16 +10162,16 @@
                             $('#btn-sent-request').attr('data-day',yyyy_s+'-'+mm_s+'-'+dd_s);
                             $(".schedule-left-btn").attr('data-day',yyyy+'-'+mm+'-'+dd);
                             $(".schedule-right-btn").attr('data-day',yyyy_n+'-'+mm_n+'-'+dd_n);
-							
-							$('.header-schedule').removeClass('active');
-							$('#list-schedule-status').css("display","none");
-							$('#table-status-schedule').html('');
-							$("#open-menu-schedule").css("display","none");
-							$(".main-view-status").css("display","none");
+                            
+                            $('.header-schedule').removeClass('active');
+                            $('#list-schedule-status').css("display","none");
+                            $('#table-status-schedule').html('');
+                            $("#open-menu-schedule").css("display","none");
+                            $(".main-view-status").css("display","none");
 
-							if($("#body-my-scheduled").hasClass('status-schedule')){
-								$("#body-my-scheduled").removeClass("status-schedule");
-							}
+                            if($("#body-my-scheduled").hasClass('status-schedule')){
+                                $("#body-my-scheduled").removeClass("status-schedule");
+                            }
 
                             get_list_schedule('schedule');
                             get_scheduled_day(yyyy_s+'-'+mm_s+'-'+dd_s,'schedule', true);
@@ -10163,11 +10237,14 @@
                         $(".slide-resume").removeClass('slick-initialized');
                         $(".slide-resume").removeClass('slick-slider');
                         $(".slide-resume").css('visibility','hidden');
-						if(subject_name != ''){
-							$('#selected-subject').text(subject_name);
-							$('#btn-schedule-now').attr('data-subject',subject_name);
-						}
-                        $.get(home_url + "/?r=ajax/get_users_tutor", {type:type, search:search, time_zone:time_zone, description:description, subject_type:subject_type, time:time, date:date, type_search: type_search, available: available}, function (data) {
+                        if(subject_name != ''){
+                            $('#selected-subject').text(subject_name);
+                            $('#btn-schedule-now').attr('data-subject',subject_name);
+                        }
+
+                        var post_data = {type:type, search:search, time_zone:time_zone, description:description, subject_type:subject_type, time:time, date:date, type_search: type_search, available: available};
+                        console.log(post_data);
+                        $.get(home_url + "/?r=ajax/get_users_tutor", post_data, function (data) {
                             //console.log(data);
                             data = JSON.parse(data);
                             if (data.users.length > 0) {
@@ -10199,6 +10276,7 @@
                                     }
                                     for(var m = 0; m < max_star; m++){
                                         img_star += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
+                                        
                                     } 
                                     if(type == 'fromclass'){
                                         $('#btn-available-search').attr("disabled", false);
@@ -10359,50 +10437,50 @@
                             return true;
                         });
                     }   
-					
-					function updateReview(tutor_id = 0){
-						var userid = '<?php if ($is_user_logged_in) echo $current_user->ID; else echo 0; ?>';
-						$.get(home_url + "/?r=ajax/get_users_reviews", {tutor_id: tutor_id}, function (data) {
-							data = JSON.parse(data);
-							if (data.reviews.length > 0) {
-								var div = '<p class="head-title-resum">REVIEW</p>';
-								$.each(data.reviews, function (ir, vr) {
-									var img_star1 = '';
-									var max_star1 = 5;
+                    
+                    function updateReview(tutor_id = 0){
+                        var userid = '<?php if ($is_user_logged_in) echo $current_user->ID; else echo 0; ?>';
+                        $.get(home_url + "/?r=ajax/get_users_reviews", {tutor_id: tutor_id}, function (data) {
+                            data = JSON.parse(data);
+                            if (data.reviews.length > 0) {
+                                var div = '<p class="head-title-resum">REVIEW</p>';
+                                $.each(data.reviews, function (ir, vr) {
+                                    var img_star1 = '';
+                                    var max_star1 = 5;
 
-									if(vr.star > 0){
-										for(var k = 0; k < vr.star; k++){
-											img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_ON.png" alt="">';
-										}
-										max_star1 = max_star1 - vr.star;
-									}
+                                    if(vr.star > 0){
+                                        for(var k = 0; k < vr.star; k++){
+                                            img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_ON.png" alt="">';
+                                        }
+                                        max_star1 = max_star1 - vr.star;
+                                    }
 
-									for(var j = 0; j < max_star1; j++){
-										img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
-									}
-									
-									if(userid == vr.userid){
-										$('#view-write-review' + tutor_id).attr('data-id',vr.id);
-										$('#view-write-review' + tutor_id).attr('data-review-id',vr.review_id);
-										$('#view-write-review' + tutor_id).attr('data-userid',vr.userid);
-										$('#view-write-review' + tutor_id).attr('data-star',vr.star);
-										$('#view-write-review' + tutor_id).attr('data-subject',vr.subject);
-										$('#view-write-review' + tutor_id).attr('data-message',vr.message);
-									}
+                                    for(var j = 0; j < max_star1; j++){
+                                        img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
+                                    }
+                                    
+                                    if(userid == vr.userid){
+                                        $('#view-write-review' + tutor_id).attr('data-id',vr.id);
+                                        $('#view-write-review' + tutor_id).attr('data-review-id',vr.review_id);
+                                        $('#view-write-review' + tutor_id).attr('data-userid',vr.userid);
+                                        $('#view-write-review' + tutor_id).attr('data-star',vr.star);
+                                        $('#view-write-review' + tutor_id).attr('data-subject',vr.subject);
+                                        $('#view-write-review' + tutor_id).attr('data-message',vr.message);
+                                    }
 
-									if(ir == 0)
-										var cl = 'first';
-									else
-										var cl = '';
+                                    if(ir == 0)
+                                        var cl = 'first';
+                                    else
+                                        var cl = '';
 
-									div += '<div class="tr-info ' + cl + ' clearfix">';
-										div += '<p class="subject-review">' + vr.subject + '</p><p class="icon-star">' + img_star1 + '<span class="name-review">' + vr.review_name + '<span></p><p class="view-tutor-message">' + vr.message + '</p>';
-									div += '</div>';
-								});
-								$('#tr-review' + tutor_id).html(div);
-							}
-						});
-					}
+                                    div += '<div class="tr-info ' + cl + ' clearfix">';
+                                        div += '<p class="subject-review">' + vr.subject + '</p><p class="icon-star">' + img_star1 + '<span class="name-review">' + vr.review_name + '<span></p><p class="view-tutor-message">' + vr.message + '</p>';
+                                    div += '</div>';
+                                });
+                                $('#tr-review' + tutor_id).html(div);
+                            }
+                        });
+                    }
 
                     function getDistancePlace(text = '', type = ''){
                         var distance = '';
