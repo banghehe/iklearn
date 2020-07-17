@@ -3,7 +3,16 @@ body {
     color: #000000;
     font-family: "Myriad Pro", "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 300;
+    width: 100%;
+    height: 100%;
+    
+    background-color: #b0b0b0;
 }
+
+#home {
+    background-color: #fff;
+}
+
 @font-face {
     font-family:Daum_Semi_regular;
     src:url(../fonts/Daum_Regular.ttf) format('truetype'), url(../fonts/Daum_Regular.eot#iefix) format('embedded-opentype');
@@ -98,6 +107,8 @@ body {
     font-weight: normal;
     font-style: normal;
 }
+
+
 
 
 .banner_sat p, .popup_sat p a, .prep_bot h4 span, .banner_english p, .tsp p{
@@ -2414,6 +2425,7 @@ header .user-nav .sub-menu > li > a:hover {
     border-color: #565539;
     display: inline-block;
 }
+
 
 .footer .copyright {
     float: right;
@@ -20294,7 +20306,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 .avatar-tutor img{
     width: 62px;
     height: 62px;
-    border-radius: 10%; 
+    border-radius: 50%; 
     margin-right: 0;
 }
 .name-tutor{
@@ -20318,18 +20330,6 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 .name-tutor img{
     width: 16px;
     margin-left: 10px;
-}
-.book-mark, #avatar{
-    position: absolute;
-    margin-top: -30px;
-}
-.book-mark{
-     z-index: 1;
-     height: 15px important!;
-     width: 15px important!;
-}
-#avatar{
-    z-index: 0;
 }
 .book-mark,
 .btn-view,
@@ -21541,11 +21541,10 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     right: 5px;
     width: 295px;
     background: #94cfe1;
-    top: 49px;
+    top: 63px;
     z-index: 4000;
     display: none;
     transition: all 0.5s; 
-    height: 550px;
 }
 #my-timezone li{
     height: 27px;
@@ -22235,6 +22234,55 @@ div.tr-info p{
 ::-ms-input-placeholder {
   color: #a4a4a4;
 }
+
+/* start of Find Tutor CSS */
+.findtutor .select-style {
+    padding: 8px;
+    background-color: #ffffff;
+    border: solid 1px #B8B8B8;
+    border-radius: 4px !important;
+}
+
+.findtutor .border-ras .selectboxit-container .selectboxit {
+    border-radius: 0px !important;
+}
+
+.findtutor .selectboxit-text {
+    font-size: 1.3em;
+    color:#000 !important;
+}
+
+.findtutor .form-control {
+    border: none !important;
+    padding-left: 0px !important;
+    margin-left: 0px !important;
+    font-size: 1.3em;
+    color:#000 !important;
+}
+
+.findtutor .select-style span{
+    font-size: 0.9em;
+    color: #d9d9d9;
+    padding-left: 0px !important;
+    margin-left: 0px !important;
+    background-color: transparent !important;
+}
+
+.result_quick {
+    color: #B8B8B8;
+    font-size: 13px;
+    font-family: Myriad_regular;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.button-notfound {
+    width: 18px;
+    padding-right: 2px;
+}
+/* end of Find Tutor CSS */
+
+
 @media(min-width: 992px){
     #tutorForm .chk-subject-type .col-md-2,
     #myUpdate .chk-subject-type .col-md-2{
