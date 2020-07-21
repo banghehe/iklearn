@@ -4572,7 +4572,57 @@
                         var id = $(this).attr('data-id');
                     });
 
-                    $('.btn-resume').live('click', function (e) {
+                    $('.find-card-more').live('click', function (e) {
+                        e.preventDefault();
+
+                        var id = $(this).attr('data-id');
+                        var ptype = $(this).attr('data-type');
+                        var table = $(this).attr('data-table');
+                        var slide_index = $(this).attr('data-slide-index');
+                        var day = $(this).attr('data-day');
+                        var time = $(this).attr('data-time');
+                        var time_view = $(this).attr('data-time-view');
+						var subject_name = $('#select-available-subject :selected').attr("data-name");
+						
+                        $('.writting-review').css("display","none");
+                        $('.frm-available-now').css("display","none");
+
+                        $('.slide-resume').slick('slickGoTo', parseInt(slide_index));
+
+                        if($('#selected-tutor').hasClass('active')){
+                            $('#selected-tutor').removeClass('active');
+                            $('#btn-schedule-now').removeClass('active');
+                            $('#selected-tutor').text('Not selected yet');
+                            $('#btn-schedule-now').attr('data-tutor-id','');
+                        }
+						
+						if(subject_name != ''){
+							$('#selected-subject').text(subject_name);
+							$('#btn-schedule-now').attr('data-subject',subject_name);
+						}
+						
+                        if(time != ''){
+                            var today = new Date(day.replace("-", ","));                            
+                            var weekday = new Array(7);
+                                weekday[0] =  "Sun";
+                                weekday[1] = "Mon";
+                                weekday[2] = "Tue";
+                                weekday[3] = "Wed";
+                                weekday[4] = "Thur";
+                                weekday[5] = "Fri";
+                                weekday[6] = "Sat";                                
+                            var n = weekday[today.getDay()];
+                            var month_text = getMonthtoText(today.getMonth()+1);
+                            $('#selected-date').text(month_text + ' ' + today.getDate() +'('+n+')'+time_view);
+                            $('#btn-schedule-now').attr('data-day',day);
+                            $('#btn-schedule-now').attr('data-time',time);
+                            $('#btn-schedule-now').attr('data-time-view',time_view);
+                        }
+
+                        get_resume(id,'resume',ptype,table,"",time_view);
+                    });
+
+                    $('.find-card-select-btn').live('click', function (e) {
                         e.preventDefault();
 
                         var id = $(this).attr('data-id');
@@ -10240,7 +10290,7 @@
                         var post_data = {type:type, search:search, time_zone:time_zone, description:description, subject_type:subject_type, time:time, date:date, type_search: type_search, available: available};
                         console.log(post_data);
                         $.get(home_url + "/?r=ajax/get_users_tutor", post_data, function (data) {
-                            //console.log(data);
+                            console.log(data);
                             data = JSON.parse(data);
                             if (data.users.length > 0) {
                                 if(type == 'fromclass' && stime != ''){
@@ -10286,9 +10336,31 @@
                                     if(retype == 'findtutor'){
                                         tr+='<td><input type="radio" class="radio_buttons_tutor class_cb_search option-input-2 radio" value="' + v.ID + '" data-id="' + v.ID + '" data-name="' + v.display_name + '" name="choose_tutor"></td>';
                                     }                          
-                                    tr+='<td class="avatar-tutor"><img src="' + v.user_avatar + '" alt="' + v.display_name + '"/></td>'; 
-                                    tr+='<td><p class="name-tutor">' + v.display_name + '<img id="book-mark' + v.ID + '" class="book-mark" data-id="' + v.ID + '" src="<?php echo get_template_directory_uri(); ?>/library/images/' + img_bookmark + '" alt=""></p><p class="icon-star">' + img_star + '<span>(' + v.cnt + ')<span></p><p class="subject-tutor">' + v.user_subject + '</p></td>';
-                                    tr+='<td></td>';
+                                    tr+=`<td class="avatar-tutor"><div class="find-card-img-container">
+                                    <img class="find-card-img-profile"src="${v.user_avatar}" alt="${v.display_name}"/>
+                                    <img id="book-mark ${v.ID}" class="find-card-img-bookmark find-card-bookmarked" data-id="' + v.ID + '" src="https://www.dropbox.com/s/lpnymvcrl6zzvpi/star-solid.svg?raw=1" alt=""/>
+                                    </div></td>`; 
+
+
+                                    var subject = "";
+                                    v.subject_type.forEach(function(item, index){
+                                        if(index == v.subject_type.length - 1){
+                                            subject += item;
+                                        }else{
+                                            subject += item + ", ";
+                                        }
+                                    })
+                                    //DUMMY DATA
+                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><small class="find-tutoring-type-tag">GROUP</small></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
+                                        <div><b>${v.display_name}</b></div><div><p class="find-card-marketing-tag">
+                                        Lorem ipsum dolor sit amet</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
+                                        <span class="find-card-more" data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume"><u>+Read more</u></span></p></div>
+                                    </td>`;
+                                    tr+=`<td><div>
+                                    <p style="text-align:center;"><span class="find-card-price">$${v.price_tutoring}</span><span class="find-card-time">&nbsp;/&nbsp;30 min</span></p></div>
+                                    <div><button class="find-card-select-btn btn orange"  data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume">Select This Tutor</button></div>
+                                    <div class="find-card-send-message"><img class="find-card-envelope" src="https://www.dropbox.com/s/lqa74sc4w9gtv3o/envelope-solid.svg?raw=1"> Send a message</p></div>
+                                    </td>`;
                                     tr+='</tr>';
                                     tbody_request.append(tr);  
 
