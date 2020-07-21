@@ -23314,3 +23314,96 @@ ul #select-available-subjectSelectBoxItOptions{
         width: 100%;
     }
 }
+
+.find-tutoring-type-tag{
+    font-style:Semibold;
+    color: #ffffff;
+    background-color: #757575;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.find-card-sibject{
+    font-family:Myriad_regular;
+    font-size: 17px;
+    color: #6f6f6f;
+}
+.find-card-marketing-tag{
+    font-family:Myriad_regular;
+    font-style: italic;
+    font-size: 13px;
+    color: #9b9b9b;
+}
+.find-card-star-count{
+    font-family:Myriad_regular;
+    font-size: 12px;
+    color: #9c9c9c;
+}
+.find-card-more{
+    font-family:Myriad_regular;
+    font-size: 12px;
+    /* Important to override .icon-star span color*/
+    color: #58aec7 !important;
+}
+.find-card-price{
+    font-family:Myriad_regular;
+    font-size: 17px;
+    color: #439fba;
+}
+.find-card-time{
+    font-family:Myriad_regular;
+    font-size: 17px;
+    color: #8f8f8f;
+}
+.find-card-select-btn{
+    max-width: 161px;
+    /* Override .btn.orange font color and font */
+    color: #fff !important;
+    font-style:Semibold !important;
+    font-size: 12px;
+    border-radius: 10px;
+}
+.find-card-envelope{
+    /* Just override anything */
+    max-width: 13px !important;
+}
+.find-card-send-message{
+    font-family:Myriad_regular;
+    font-size: 12px;
+    color: #aaa;
+    text-align: center;
+    margin-top:10px;
+}
+
+.find-card-img-container{
+    position: relative;
+    top:0px;
+    left:0px;
+}
+.find-card-img-profile{
+    position:relative;
+    top:0px;
+    left:0px;
+    max-width: 83px;
+    max-height: 83px;
+
+}
+.find-card-img-bookmark{
+    position: absolute;
+    top:0px;
+    left:0px;
+    max-width: 16px;
+    max-height:16px;
+    background-color: #aaa;
+    /* Override idk */
+    border-radius:2px !important;
+    border:2px  solid #fff;
+    padding:2px;
+}
+
+.find-card-bookmarked{
+    /* Override original background */
+    background-color: #006fbd !important;
+}
