@@ -20301,9 +20301,9 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     margin-right: 3px;
 }
 .avatar-tutor img{
-    width: 62px;
-    height: 62px;
-    border-radius: 50%; 
+    width: 70px;
+    height: 70px;
+    border-radius: 5%; 
     margin-right: 0;
 }
 .name-tutor{
@@ -20428,7 +20428,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     padding-right: 10px;
 }
 .tr-tutor td:nth-child(3){
-    text-align: right;
+    text-align: center;
 }
 .tr-tutor.resume td:first-child,
 .tr-tutor.resume td:nth-child(4){
@@ -23329,6 +23329,10 @@ ul #select-available-subjectSelectBoxItOptions{
     font-family:Myriad_regular;
     font-size: 17px;
     color: #6f6f6f;
+    width: 500px;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
 }
 .find-card-marketing-tag{
     font-family:Myriad_regular;
@@ -23365,10 +23369,7 @@ ul #select-available-subjectSelectBoxItOptions{
     font-size: 12px;
     border-radius: 10px;
 }
-.find-card-envelope{
-    /* Just override anything */
-    max-width: 13px !important;
-}
+
 .find-card-send-message{
     font-family:Myriad_regular;
     font-size: 12px;
@@ -23392,18 +23393,18 @@ ul #select-available-subjectSelectBoxItOptions{
 }
 .find-card-img-bookmark{
     position: absolute;
-    top:0px;
+  
     left:0px;
     max-width: 16px;
     max-height:16px;
     background-color: #aaa;
     /* Override idk */
     border-radius:2px !important;
-    border:2px  solid #fff;
-    padding:2px;
+    border:1px  solid #fff;
+    padding:1px;
 }
 
 .find-card-bookmarked{
     /* Override original background */
-    background-color: #006fbd !important;
+    background-color: white !important;
 }

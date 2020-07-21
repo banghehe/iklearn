@@ -10336,11 +10336,8 @@
                                     if(retype == 'findtutor'){
                                         tr+='<td><input type="radio" class="radio_buttons_tutor class_cb_search option-input-2 radio" value="' + v.ID + '" data-id="' + v.ID + '" data-name="' + v.display_name + '" name="choose_tutor"></td>';
                                     }                          
-                                    tr+=`<td class="avatar-tutor"><div class="find-card-img-container">
-                                    <img class="find-card-img-profile"src="${v.user_avatar}" alt="${v.display_name}"/>
-                                    <img id="book-mark ${v.ID}" class="find-card-img-bookmark find-card-bookmarked" data-id="' + v.ID + '" src="https://www.dropbox.com/s/lpnymvcrl6zzvpi/star-solid.svg?raw=1" alt=""/>
-                                    </div></td>`; 
-
+                                    
+                                     tr+='<td class="avatar-tutor"><img src="' + v.user_avatar + '" alt="' + v.display_name + '"/><img id="book-mark' + v.ID + '" class="find-card-img-bookmark find-card-bookmarked" data-id="' + v.ID + '" src="<?php echo get_template_directory_uri(); ?>/library/images/' + img_bookmark + '" alt=""></td>'; 
 
                                     var subject = "";
                                     v.subject_type.forEach(function(item, index){
@@ -10351,7 +10348,7 @@
                                         }
                                     })
                                     //DUMMY DATA
-                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><small class="find-tutoring-type-tag">GROUP</small></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
+                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Group.png" alt="" style="height:12px"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
                                         <div><b>${v.display_name}</b></div><div><p class="find-card-marketing-tag">
                                         Lorem ipsum dolor sit amet</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
                                         <span class="find-card-more" data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume"><u>+Read more</u></span></p></div>
@@ -10359,7 +10356,7 @@
                                     tr+=`<td><div>
                                     <p style="text-align:center;"><span class="find-card-price">$${v.price_tutoring}</span><span class="find-card-time">&nbsp;/&nbsp;30 min</span></p></div>
                                     <div><button class="find-card-select-btn btn orange"  data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume">Select This Tutor</button></div>
-                                    <div class="find-card-send-message"><img class="find-card-envelope" src="https://www.dropbox.com/s/lqa74sc4w9gtv3o/envelope-solid.svg?raw=1"> Send a message</p></div>
+                                    <div class="find-card-send-message"><img class="find-card-envelope" src="https://www.dropbox.com/s/lqa74sc4w9gtv3o/envelope-solid.svg?raw=1" style="width:13px"> Send a message</p></div>
                                     </td>`;
                                     tr+='</tr>';
                                     tbody_request.append(tr);  
