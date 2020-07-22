@@ -19589,11 +19589,12 @@ table.table-critical-lesson > tbody > tr > td {
 .style-form input[type="text"], #myUpdate input[type="password"], .style-form textarea,
 .main-new-request input[type="text"],
 .frm-available-now input[type="text"] {
-    font-size: 13px;
+    font-size: 16px;
     color: #4b4b4b;
     border-radius: 25px;
     font-family: Myriad_regular;
     background: #ffffff;
+    margin-left: -13px
 }
 .main-new-request .cb-type3{
     float: left;
@@ -19695,9 +19696,9 @@ table.table-critical-lesson > tbody > tr > td {
 }
 .select-style .select-box-it {
     border: none !important;
-    background: #F4f7f7 !important;
+   
     height: 28px !important;
-    padding-left: 20px !important;
+    
     padding-top: 0;
 }
 
@@ -19717,6 +19718,7 @@ table.table-critical-lesson > tbody > tr > td {
 span.select-box-it.form-control, span.select-box-it.form-control > span {
     line-height: 28px;
     height: 28px;
+    margin-left: -3px;
 }
 .border-ras .selectboxit-container .selectboxit {
     border-radius: 25px !important;
@@ -19731,6 +19733,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     background-repeat: no-repeat;
     background-size: 10px;
     background-position-y: 14px;
+    margin-right: -20px;
 }
 .form__boolean {
     margin-top: 5px;
@@ -20407,9 +20410,9 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 }
 .find-page-title{
     color:black;
-    font-size: 19px;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-bottom:17px;
+    font-size: 15px;
+   /* font-family: Semi-Bold;*/
+    margin-bottom:9px;
 }
 .tr-tutor{
     border-bottom: 1px solid #EBEBEB;
@@ -20477,7 +20480,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     font-size: 13px;
     font-family: Myriad_regular;
     width: 100%;
-    padding: 20px 0;
+    padding: 10px 0;
 }
 #table-list-tutor tr td.no-results img{
     height: 15px;
@@ -21412,7 +21415,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     color: #A5A5A5;
 }
 .frm-available-now{
-    padding: 16px 0 8px;
+    padding: 13px 0 8px;
     border-bottom: 1px solid #EBEBEB;
     display: none;
 }
@@ -21644,11 +21647,11 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     border-left-color: #D6D6D6;
     border-right-color: #D6D6D6;
 }*/
-.frm-available-now label{
+/*.frm-available-now label{
     font-size: 13px !important;
     color: #4b4b4b;
     font-family: Myriad_regular;
-}
+}*/
 .tr-detail{
     background: #f5f6f8;
     border-bottom: 1px solid #E0E0E0;
@@ -23407,4 +23410,19 @@ ul #select-available-subjectSelectBoxItOptions{
 .find-card-bookmarked{
     /* Override original background */
     background-color: white !important;
+}
+#selectboxit-arrow-container{
+    margin-right: -10px;
+}
+.icon-about{
+    max-width: 13px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+.result_quick{
+    color: #B8B8B8;
+    font-size: 13px;
+    font-family: Myriad_regular;
+    width: 100%;
+   padding: 10px 0;
 }

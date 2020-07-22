@@ -1702,7 +1702,8 @@
                                                     <div class="frm-available-now">
                                                         <div class="row">
                                                             <div class="col-sm-12 col-md-12">
-                                                                <div class="find-page-title">Tutor and Subject</div>
+                                                                <label class="find-page-title">Tutor and Subject</label>
+                                                                <img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png"  alt="">
                                                             </div>
                                                         </div>
                                                         <div class="row">                                                           
@@ -1803,14 +1804,17 @@
                                                 </div>
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <label class="mt-top-10 mt-bottom-12">Date:</label>
+                                                                <label class="find-page-title">Set a Time</label>
+                                                                <img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png"  alt="">
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-4 col-md-4 col-xs-4">
+                                                            <div class="col-sm-3 col-md-3 col-xs-3">
+                                                                <div class="find-general-border">
+                                                                <label class="find-label">Month</label>
                                                                 <div class="form-group border-ras select-style">
                                                                     <select class="select-box-it form-control" name="available_month" id="select-available-month">
-                                                                        <option value="0">Select Month</option>
+                                                                        <option value="0">Select Month:</option>
                                                                         <?php 
                                                                         for ($j = 1; $j < 13; $j++) {
                                                                             if($j < 10)
@@ -1825,7 +1829,10 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-4 col-md-4 col-xs-4">
+                                                            </div>
+                                                            <div class="col-sm-3 col-md-3 col-xs-3">
+                                                                <div class="find-general-border">
+                                                                <label class="find-label">Day:</label>
                                                                 <div class="form-group border-ras select-style">
                                                                     <select class="select-box-it form-control" name="available_day" id="select-available-day">
                                                                         <option value="0">Select Day</option>
@@ -1843,7 +1850,10 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-4 col-md-4 col-xs-4">
+                                                            </div>
+                                                            <div class="col-sm-3 col-md-3 col-xs-3">
+                                                                <div class="find-general-border">
+                                                                <label class="find-label">Time:</label>
                                                                 <div class="form-group border-ras select-style">
                                                                     <select class="select-box-it form-control" name="available_time" id="select-available-time">
                                                                         <option value="0" data-time="" data-time-view="">Select Time</option>
@@ -1871,19 +1881,24 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-4 col-md-4 col-xs-4 available-year-mb">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control border-ras" name="available_year" value="<?php echo $dt->format('Y') ?>" id="available_year">
+                                                            </div>
+                                                            <div class="col-sm-3 col-md-3 col-xs-3">
+                                                                <div class="find-general-border">
+                                                                <label class="find-label">Year:</label>
+                                                                <div class="form-group border-ras select-style">
+                                                                    <input type="text" class="select-box-it form-control" name="available_year" value="<?php echo $dt->format('Y') ?>" id="available_year" >
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-4 col-md-4 col-xs-4">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                           
+                                                            <div class="col-sm-6 col-md-6 col-xs-6">
                                                                 <button class="btn-dark-blue border-btn btn-available-reset" type="button" name="available_reset">
                                                                     <?php _e('Reset', 'iii-dictionary') ?>
                                                                 </button>
                                                             </div>
-                                                            <div class="col-sm-4 col-md-4 col-xs-4 available-search-mb">
+                                                            <div class="col-sm-6 col-md-6 col-xs-6 available-search-mb">
                                                                 <button class="btn-dark-blue border-btn" id="btn-available-search" type="button" name="available_search">
                                                                     <?php _e('Search Now', 'iii-dictionary') ?>
                                                                 </button>
@@ -1892,6 +1907,7 @@
                                                     </div>
 
                                                     <div class="tutoring-table">
+                                                        <label class="result_quick" style="display: none"></label>
                                                         <table id="table-detail-tutor">
                                                             <tbody>
                                                                 <tr class="tr-detail">
@@ -1917,7 +1933,7 @@
                                                         </table>
                                                         <table>
                                                             <tbody id="table-list-tutor">
-                                                                
+                                                               
                                                             </tbody>
                                                         </table>
                                                         <div class="slide-resume">
@@ -3938,6 +3954,7 @@
                     });
 
                     $('#sub-findingtutor').click(function(){
+
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
                         $('.new-request-list').text('Find a tutor');
                         $('#btn-available-now').addClass('active');
@@ -10276,6 +10293,15 @@
                     function get_tutor_user(type = 'list', table = 'table-list-tutor', retype = 'tutor', search = '', time_zone = '', description = '', subject_type = '', time = '', date = '', type_search = '', stime = '', time_view = '', available = '', subject_name = ''){
                         var tbody_request = $("#"+table);
                         var uid = '<?php if ($is_user_logged_in) echo $current_user->ID; else echo 0; ?>';
+
+                        var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                        var year = $('#available_year').val();
+                        var day = $("#select-available-daySelectBoxItText").attr("data-val");
+                        var month = $("#select-available-monthSelectBoxItText").attr("data-val");
+                        var time = $("#select-available-timeSelectBoxItText").attr("data-val");
+                        var time_view = $('#select-available-time :selected').attr("data-time-view");
+                        var stime = $('#select-available-time :selected').attr("data-time");    
+
                         tbody_request.html("");
                         $('#table-detail-tutor').css('display','none');
                         $(".slide-resume").html('');
@@ -10331,7 +10357,7 @@
                                     }else{
                                         var img_bookmark = 'Icon_Favorite_Unselected.png';
                                     }                       
-                                      
+                                    // var quickresult = `Result for : <b>${getMonthtoText(month)} ${day}, ${year}, ${time_view}</b>`;
                                     var tr = '<tr class="tr-tutor btn-resume" data-type="' + type + '" data-table="' + table + '" data-id="' + v.ID + '" data-time="'+stime+'" data-time-view="'+time_view+'" data-day="'+date+'" data-slide-index="' + i + '" data-subject="'+ subject_name +'" data-price-tutoring="' + v.price_tutoring + '" name="resume">'; 
                                     if(retype == 'findtutor'){
                                         tr+='<td><input type="radio" class="radio_buttons_tutor class_cb_search option-input-2 radio" value="' + v.ID + '" data-id="' + v.ID + '" data-name="' + v.display_name + '" name="choose_tutor"></td>';
@@ -10348,17 +10374,18 @@
                                         }
                                     })
                                     //DUMMY DATA
-                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Group.png" alt="" style="height:12px"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
+                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Group.png" alt="" style="height:12px;margin-top: 5px;"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
                                         <div><b>${v.display_name}</b></div><div><p class="find-card-marketing-tag">
                                         Lorem ipsum dolor sit amet</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
                                         <span class="find-card-more" data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume"><u>+Read more</u></span></p></div>
                                     </td>`;
                                     tr+=`<td><div>
                                     <p style="text-align:center;"><span class="find-card-price">$${v.price_tutoring}</span><span class="find-card-time">&nbsp;/&nbsp;30 min</span></p></div>
-                                    <div><button class="find-card-select-btn btn orange"  data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume">Select This Tutor</button></div>
-                                    <div class="find-card-send-message"><img class="find-card-envelope" src="https://www.dropbox.com/s/lqa74sc4w9gtv3o/envelope-solid.svg?raw=1" style="width:13px"> Send a message</p></div>
+                                    <div style="margin-top:5px"><button class="find-card-select-btn btn orange"  data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume">Select This Tutor</button></div>
+                                    <div class="find-card-send-message"><img class="find-card-envelope" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Message.png" style="width:13px; margin-top:-2px;">&nbsp; Contact Tutor</p></div>
                                     </td>`;
                                     tr+='</tr>';
+
                                     tbody_request.append(tr);  
 
                                     //Slide resume tutor
@@ -10489,16 +10516,18 @@
                                 });   
 
                                 $(".slide-resume").not('.slick-initialized').slick(getSliderSettings());
+                                
+                                let quickresult = `Result for : <b>${getMonthtoText(month)} ${day}, ${year}, ${time_view}</b>`;
+                                    $('.result_quick').html(quickresult);
+                                    $('.result_quick').css("display","block");
                             }else{
-                                //var tr = '<tr><td colspan="3" class="no-list"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_No_Schedule.png" alt="">Currently, there are no list</td></tr>';
-
                                 var tr = '<tr><td class="no-results"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';
                                 if(type == 'fromclass'){
-                                    tbody_request.append(tr);  
+                                    tbody_request.append(tr); 
+                                     $('.result_quick').css("display","none");
                                 }
                             } 
-                            
-                            return true;
+                           
                         });
                     }   
 					
