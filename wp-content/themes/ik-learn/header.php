@@ -2976,6 +2976,8 @@
                     $(".view-my-account").click(function () {
                         $("#main-nav").css("display","none !importtant");
                         $("#my-account-modal").modal('show');
+                        $('#main-nav').removeClass('show');
+                         $('#main-nav').css("display", "none");
                         var name = $(".display-name").text();
                         if (name !== '') {
                             $("#sub-createacc").removeClass("active");
@@ -3275,7 +3277,7 @@
                         }
                     });
 
-                    $("#menu_Taggle ,#btn-schedule, #btn-tutor").click(function () {
+                    $("#menu_Taggle").click(function () {
                         $("#my-timezone").css("display","none");
                         $("#open-menu-quicknotifi").css("display","none");
                         $("#open-menu-schedule").css("display","none");
@@ -4101,7 +4103,7 @@
 
                     $('#btn-tutor').click(function(){
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
-                       
+                        closeNav();
                         $('.new-request-list').text('Find a tutor');
                         $(".main-my-schedule").css("display","none");
                         $(".section-tutor-main").css("display","block");
@@ -4119,9 +4121,15 @@
                         $("#open-menu-schedule").css("display","none");
 						$(".main-view-status").css("display","none");
 
+
                         if($(".main-my-schedule").hasClass('active-tab-schedule')){
-                            $(".main-my-schedule").removeClass("active-tab-schedule");
+                        $(".main-my-schedule").removeClass("active-tab-schedule");
                         }
+                        
+                            $("#sub-schedule-li").removeClass('active');
+                            $("#sub-findingtutor").addClass('active');
+                            $("#sub-status").removeClass('active');
+                       
 
                         var viewport = getViewport();
                         if(viewport.width < 925){
@@ -4801,6 +4809,7 @@
 
                     $("#btn-schedule").click(function(){   
                         var day = $('#today-tutor').val();
+                        closeNav();
                         $('.new-request-list').text('SCHEDULE');      
                         //$('#custom-timezone').css("display","block");
                         //$("#menu-schedule-btn").text('Summary');
@@ -4813,6 +4822,9 @@
                         $('#table-status-schedule').html('');
                         $("#open-menu-schedule").css("display","none");
 						$(".main-view-status").css("display","none");
+                        $("#sub-schedule-li").addClass('active');
+                        $("#sub-findingtutor").removeClass('active');
+                        $("#sub-status").removeClass('active');
 
                         if($('#body-my-scheduled').hasClass('status-schedule')){
                             $('#body-my-scheduled').removeClass('status-schedule')
@@ -8035,8 +8047,7 @@
                         getQuickNotification(true);
                     });
 
-                    $('#close-modal').click( function (e)
-                    {
+                    $('#close-modal').click( function (e){
                         e.stopPropagation();
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
                         $('#my-account-modal').modal("hide");//location.reload();         
@@ -8070,6 +8081,7 @@
                         $(".sub-menu-left li").removeClass("active");
 
                         closeNav();
+
                     });
 
                     $(".close-quicknotifi").live("click",function(e){
@@ -8101,6 +8113,7 @@
                         if (e.target !== this){
                             return;
                         }
+                        closeNav();
                         $("#open-menu-quicknotifi").css("display","none");
                         $("#open-list-quicknotifi").css("display","none");
                         $("#my-timezone").css("display","none");
@@ -8131,6 +8144,7 @@
                        
                     });
                     $(".student-center").click( function (e){
+                        closeNav();
                          $("#open-menu-schedule").css("display","none");
                     });
                     $(".body-my-scheduled").click( function (){
@@ -8143,6 +8157,7 @@
                         if (e.target !== this){
                             return;
                         }
+                        closeNav();
                         $("#open-menu-quicknotifi").css("display","none");
                         $("#open-list-quicknotifi").css("display","none");
                         $("#my-timezone").css("display","none");
