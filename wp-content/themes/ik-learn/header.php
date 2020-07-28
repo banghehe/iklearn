@@ -2974,8 +2974,10 @@
                     });
 
                     $(".view-my-account").click(function () {
-                        $("#main-nav").css("display","none !importtant");
+                        $(".sub-menu").css("display","none");
                         $("#my-account-modal").modal('show');
+                        $("#sub-user-nav").find("> ul > li").removeClass("ic-close-arrow");
+                        $("#lang-switcher-nav").find("> ul > li").removeClass("ic-close-arrow");
                         $('#main-nav').removeClass('show');
                          $('#main-nav').css("display", "none");
                         var name = $(".display-name").text();
@@ -3005,7 +3007,7 @@
                             $("#login-user").addClass("active");
                             $("#login-user").addClass("in");
                             $("#lost-password").removeClass("active");
-                            $("#lost-password").removeClass("in");
+                            $("#lost-password").removeClass("in");  
                             $("#lost-password").addClass("hidden");
                             $("#create-account").removeClass("active");
                             $("#create-account").removeClass("in");
@@ -3016,6 +3018,8 @@
                             $("#updateinfo").removeClass("active");
                             $("#updateinfo").removeClass("in");
                         }
+                        
+                
                         
                     });
 
