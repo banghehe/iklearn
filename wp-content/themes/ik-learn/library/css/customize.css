@@ -20441,7 +20441,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 .find-page-title{
     color:black;
     font-size: 15px;
-   /* font-family: Semi-Bold;*/
+    font-family: SemiBold;
     margin-bottom:9px;
 }
 .tr-tutor{
@@ -21594,7 +21594,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     right: 5px;
     width: 295px;
     background: #94cfe1;
-    top: 50px;
+    top: 48.5px;
     z-index: 4000;
     display: none;
     transition: all 0.5s; 
@@ -23458,4 +23458,7 @@ ul #select-available-subjectSelectBoxItOptions{
 }
 #open-menu-schedule{
     z-index: 12 !important;
+}
+#available_year{
+    padding-top: 10px;
 }
