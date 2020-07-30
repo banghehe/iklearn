@@ -2974,7 +2974,12 @@
                     });
 
                     $(".view-my-account").click(function () {
-                        $(".sub-menu").css("display","none");
+                        var isMobile = window.matchMedia("only screen and (max-width: 955px)").matches;
+                        if (isMobile) {
+                            //Conditional script here
+    
+                           $(".sub-menu").css("display","none");
+                        }
                         $("#my-account-modal").modal('show');
                         $("#sub-user-nav").find("> ul > li").removeClass("ic-close-arrow");
                         $("#lang-switcher-nav").find("> ul > li").removeClass("ic-close-arrow");
