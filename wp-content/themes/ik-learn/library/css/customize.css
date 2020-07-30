@@ -23409,7 +23409,7 @@ ul #select-available-subjectSelectBoxItOptions{
 
 .find-card-bookmarked{
     /* Override original background */
-    background-color: white !important;
+    background-color: red !important;
 }
 #selectboxit-arrow-container{
     margin-right: -10px;

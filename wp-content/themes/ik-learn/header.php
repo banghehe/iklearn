@@ -4323,7 +4323,13 @@
                                 $('#top-popup-message').css("display", "block");
                             }else{
                                 $('#table-list-tutor').html('');
-                                get_tutor_user('fromclass', 'table-list-tutor', 'tutor', search, '', '', subject_type, time, date, type_search,stime, time_view, '', subject_name);
+                                search_tutor_user('fromclass', 'table-list-tutor', 'tutor', search, '', '', subject_type, time, date, type_search,stime, time_view, '', subject_name);
+                                // var data = {
+                                //     "data":"data"
+                                // }
+                                // $.get(home_url + "/?r=ajax/search_tutor",data,function(resp){
+                                //     console.log(resp);
+                                // });
                             }
                         }else{
                             var tr = '<tr><td class="no-results"><img src="' + path + 'icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';
@@ -10376,7 +10382,255 @@
                                     //DUMMY DATA
                                     tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Group.png" alt="" style="height:12px;margin-top: 5px;"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
                                         <div><b>${v.display_name}</b></div><div><p class="find-card-marketing-tag">
-                                        Lorem ipsum dolor sit amet</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
+                                        ${v.desc_tell_me}</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
+                                        <span class="find-card-more" data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume"><u>+Read more</u></span></p></div>
+                                    </td>`;
+                                    tr+=`<td><div>
+                                    <p style="text-align:center;"><span class="find-card-price">$${v.price_tutoring}</span><span class="find-card-time">&nbsp;/&nbsp;30 min</span></p></div>
+                                    <div style="margin-top:5px"><button class="find-card-select-btn btn orange"  data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume">Select This Tutor</button></div>
+                                    <div class="find-card-send-message"><img class="find-card-envelope" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Message.png" style="width:13px; margin-top:-2px;">&nbsp; Contact Tutor</p></div>
+                                    </td>`;
+                                    tr+='</tr>';
+
+                                    tbody_request.append(tr);  
+
+                                    //Slide resume tutor
+                                    var attr_data = 'data-id="" data-userid="" data-star="" data-subject="" data-message="" data-ptype="' + type + '"';
+                                    if (v.reviews.length > 0) {
+                                        $.each(v.reviews, function (index, value) {
+                                            if(value.userid == uid){
+                                                attr_data = 'data-id="' + value.id + '" data-userid="' + value.userid + '" data-star="' + value.star + '" data-subject="' + value.subject + '" data-message="' + value.message + '" data-ptype="' + type + '"';
+                                            }
+                                        });
+                                    }
+
+                                    var view = '<img src="<?php echo get_template_directory_uri(); ?>/library/images/iconM_Resume_ON-O.png" alt="" id="view-resume' + v.ID + '" class="btn-view view-resume" data-id="' + v.ID + '" data-ptype="' + type + '" data-table="' + table + '"><img id="view-review' + v.ID + '" class="btn-view view-review" data-id="' + v.ID + '" data-ptype="' + type + '" data-table="' + table + '" src="<?php echo get_template_directory_uri(); ?>/library/images/iconM_Review_OFF.png" alt="">';
+                                    if(uid != v.ID){
+                                        view += '<img id="view-write-review' + v.ID + '" class="btn-view view-write-review" data-review-id="' + v.ID + '" '+ attr_data +' data-table="' + table + '" src="<?php echo get_template_directory_uri(); ?>/library/images/iconM_Write_Review_OFF.png" alt="">';
+                                    }
+                                    var title_resum = 'RESUME';
+
+                                    view += '<button type="button" data-id="' + v.ID + '" data-subject="' + v.user_subject + '"  data-subject-choose="'+ subject_name +'" data-name="' + v.display_name + '" data-ptype="' + type + '" data-time="'+stime+'" data-time-view="'+time_view+'" data-day="'+date+'" data-price-tutoring="' + v.price_tutoring + '" class="btn-orange2 nopadding-r border-btn" id="btn-select-tutor"><span>Select</span></button>';
+                                    var div = '<div class="item">';
+                                            div += '<div class="tr-tutor resume clearfix" id="tr-tutor' + v.ID + '">';
+                                                div +='<div class="avatar-tutor"><img src="' + v.user_avatar + '" alt="' + v.display_name + '"/></div>'; 
+                                                div +='<div class="item-name"><p class="name-tutor">' + v.display_name + '</p><p class="icon-star">' + img_star + '<span>('+v.cnt+')<span></p><p class="view-tutor">' + view + '</p></div>';
+                                            div +='</div>';
+
+                                            div +='<div class="tr-info clearfix" id="tr-info' + v.ID + '">';
+                                                div += '<p class="head-title-resum">' + title_resum + '</p>';
+                                                div += '<h4>Why I like teaching and tutoring:</h4>';
+                                                div += '<p>' + v.desc_tell_me + '<p>';
+                                                div += '<h4>Subjects I can teach:</h4>';
+                                                div += '<ul>';
+                                                if(v.subject_type.length > 0){
+                                                    for(var i = 0; i < v.subject_type.length; i++){
+                                                        div += '<li>'+ v.subject_type[i] +'</li>';
+                                                    }
+                                                }
+                                                div += '</ul>';
+                                                
+                                                if(v.school_name != '' || v.teaching_link != '' || v.user_years != '' || v.teaching_subject != ''){
+                                                    $class_teaching = '';
+                                                }else{
+                                                    $class_teaching = ' class="hidden"';
+                                                }    
+                                                div += '<h4' + $class_teaching + '>Teaching Experlence at School:</h4>';
+                                                div += '<ul' + $class_teaching + '>';
+                                                if(v.school_name != '' || v.teaching_link != ''){
+                                                    div += '<li>School Name: ' + v.school_name + ' (' + v.teaching_link + ')</li>';
+                                                }
+                                                if(v.teaching_subject != ''){
+                                                    div += '<li>Subject: ' + v.teaching_subject + '</li>';
+                                                }
+                                                if(v.user_years != ''){
+                                                    div += '<li>Years: ' + v.user_years + '</li>';
+                                                }
+                                                div += '</ul>';
+
+                                                if(v.school_attend != '' || v.user_grade != '' || v.user_gpa != '' || v.user_major != '' || v.student_link != ''){
+                                                    $class_student = '';
+                                                }else{
+                                                    $class_student = ' class="hidden"';
+                                                }
+                                                div += '<h4' + $class_student + '>Teaching Experlence as a Student:</h4>';
+                                                div += '<ul' + $class_student + '>';
+                                                if(v.school_attend != ''){
+                                                    div += '<li>Attending: ' + v.school_attend + ' (' + v.student_link + ')</li>';
+                                                }
+                                                if(v.user_grade == '1'){
+                                                    div += '<li>Grade: Freshman</li>';
+                                                }else if(v.user_grade == '2'){
+                                                    div += '<li>Grade: Sophomore</li>';
+                                                }else if(v.user_grade == '3'){
+                                                    div += '<li>Grade: Junior</li>';
+                                                }else if(v.user_grade == '4'){
+                                                    div += '<li>Grade: Senior</li>';
+                                                }
+                                                if(v.user_gpa != ''){
+                                                    div += '<li>GPA: ' + v.user_gpa + '</li>';
+                                                }
+                                                if(v.user_major != ''){
+                                                    div += '<li>Major: ' + v.user_major + '</li>';
+                                                }
+                                                div += '</ul>';
+                                                div += '<h4>Educational Background:</h4>';
+                                                div += '<ul>';
+                                                if(v.school_name1 != ''){
+                                                    div += '<li>School Name: ' + v.school_name1 + ' (' + data.school_link1 + ')</li>';
+                                                }
+                                                if(v.school_name2 != ''){
+                                                    div += '<li>School Name: ' + v.school_name2 + ' (' + data.school_link2 + ')</li>';
+                                                }
+                                                if(v.any_other != ''){
+                                                    div += '<li>Others: ' + v.any_other + '</li>';
+                                                }
+                                                div += '</ul>';
+                                            div += '</div>';
+
+                                    if (v.reviews.length > 0) {
+                                        div += '<div id="tr-review' + v.ID + '" style="display: none">';
+                                        div += '<p class="head-title-resum">REVIEW</p>';
+                                        $.each(v.reviews, function (ir, vr) {
+                                            var img_star1 = '';
+                                            var max_star1 = 5;
+
+                                            if(vr.star > 0){
+                                                for(var k = 0; k < vr.star; k++){
+                                                    img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_ON.png" alt="">';
+                                                }
+                                                max_star1 = max_star1 - vr.star;
+                                            }
+
+                                            for(var j = 0; j < max_star1; j++){
+                                                img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
+                                            }
+
+                                            if(ir == 0)
+                                                var cl = 'first';
+                                            else
+                                                var cl = '';
+
+                                            div += '<div class="tr-info ' + cl + ' clearfix">';
+                                                div += '<p class="subject-review">' + vr.subject + '</p><p class="icon-star">' + img_star1 + '<span class="name-review">' + vr.review_name + '<span></p><p class="view-tutor-message">' + vr.message + '</p>';
+                                            div += '</div>';
+                                        });
+                                        div += '</div>';
+                                    }
+                                    div +='</div>';
+                                    $('.slide-resume').append(div);
+                                });   
+
+                                $(".slide-resume").not('.slick-initialized').slick(getSliderSettings());
+                                
+                                let quickresult = `Result for : <b>${getMonthtoText(month)} ${day}, ${year}, ${time_view}</b>`;
+                                    $('.result_quick').html(quickresult);
+                                    $('.result_quick').css("display","block");
+                            }else{
+                                var tr = '<tr><td class="no-results"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';
+                                if(type == 'fromclass'){
+                                    tbody_request.append(tr); 
+                                     $('.result_quick').css("display","none");
+                                }
+                            } 
+                           
+                        });
+                    }   
+
+                    function search_tutor_user(type = 'list', table = 'table-list-tutor', retype = 'tutor', search = '', time_zone = '', description = '', subject_type = '', time = '', date = '', type_search = '', stime = '', time_view = '', available = '', subject_name = ''){
+                        var tbody_request = $("#"+table);
+                        var uid = '<?php if ($is_user_logged_in) echo $current_user->ID; else echo 0; ?>';
+
+                        var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                        var year = $('#available_year').val();
+                        var day = $("#select-available-daySelectBoxItText").attr("data-val");
+                        var month = $("#select-available-monthSelectBoxItText").attr("data-val");
+                        var time = $("#select-available-timeSelectBoxItText").attr("data-val");
+                        var time_view = $('#select-available-time :selected').attr("data-time-view");
+                        var stime = $('#select-available-time :selected').attr("data-time");    
+
+                        tbody_request.html("");
+                        $('#table-detail-tutor').css('display','none');
+                        $(".slide-resume").html('');
+                        $(".slide-resume").removeClass('slick-initialized');
+                        $(".slide-resume").removeClass('slick-slider');
+                        $(".slide-resume").css('visibility','hidden');
+						if(subject_name != ''){
+							$('#selected-subject').text(subject_name);
+							$('#btn-schedule-now').attr('data-subject',subject_name);
+						}
+
+                        var post_data = {type:type, search:search, time_zone:time_zone, description:description, subject_type:subject_type, time:time, date:date, type_search: type_search, available: available};
+                        console.log(post_data);
+                        $.get(home_url + "/?r=ajax/search_tutor", post_data, function (data) {
+                            console.log(data);
+                            data = JSON.parse(data);
+                            if (data.users.length > 0) {
+                                if(type == 'fromclass' && stime != ''){
+                                    var time_zone = $('#user-time-zone :selected').attr("data-value");
+                                    var today = new Date(date.replace("-", ","));                            
+                                    var weekday = new Array(7);
+                                        weekday[0] =  "Sun";
+                                        weekday[1] = "Mon";
+                                        weekday[2] = "Tue";
+                                        weekday[3] = "Wed";
+                                        weekday[4] = "Thur";
+                                        weekday[5] = "Fri";
+                                        weekday[6] = "Sat";                                
+                                    var n = weekday[today.getDay()];
+                                    var month_text = getMonthtoText(today.getMonth()+1);
+                                    $('#selected-date').text(month_text + ' ' + today.getDate() +'('+n+')'+time_view);
+                                }
+                                $.each(data.users, function (i, v) {  
+                                    var img_star = '';
+                                    var max_star = 5;
+                                    arr_tutor.push(v.ID);
+
+                                    if(v.star > 0){
+                                        for(var l = 0; l < v.star; l++){
+                                            img_star += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_ON.png" alt="">';
+                                        }
+                                        max_star = max_star - v.star;
+                                    }
+                                    for(var m = 0; m < max_star; m++){
+                                        img_star += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
+                                        
+                                    } 
+                                    if(type == 'fromclass'){
+                                        $('#btn-available-search').attr("disabled", false);
+                                    }   
+                                    if( $.inArray(uid, v.user_favorites) >= 0 ) {
+                                        var img_bookmark = 'icon_Favorite_BookMark.png';
+                                    }else{
+                                        var img_bookmark = 'Icon_Favorite_Unselected.png';
+                                    }                       
+                                    // var quickresult = `Result for : <b>${getMonthtoText(month)} ${day}, ${year}, ${time_view}</b>`;
+                                    var tr = '<tr class="tr-tutor btn-resume" data-type="' + type + '" data-table="' + table + '" data-id="' + v.ID + '" data-time="'+stime+'" data-time-view="'+time_view+'" data-day="'+date+'" data-slide-index="' + i + '" data-subject="'+ subject_name +'" data-price-tutoring="' + v.price_tutoring + '" name="resume">'; 
+                                    if(retype == 'findtutor'){
+                                        tr+='<td><input type="radio" class="radio_buttons_tutor class_cb_search option-input-2 radio" value="' + v.ID + '" data-id="' + v.ID + '" data-name="' + v.display_name + '" name="choose_tutor"></td>';
+                                    }                          
+                                    
+                                     tr+='<td class="avatar-tutor"><img src="' + v.user_avatar + '" alt="' + v.display_name + '"/><img id="book-mark' + v.ID + '" class="find-card-img-bookmark find-card-bookmarked" data-id="' + v.ID + '" src="<?php echo get_template_directory_uri(); ?>/library/images/' + img_bookmark + '" alt=""></td>'; 
+
+                                    var subject = v.tutoring_subject;
+                                    if(v.tutoring_subject_type == "all"){
+                                        v.subject_type.forEach(function(item, index){
+                                        if(index == v.subject_type.length - 1){
+                                            subject += item;
+                                        }else{
+                                            subject += item + ", ";
+                                        }
+                                    })
+                                    }
+                                    var type = "/library/images/icon_1on1.png";
+                                    console.log( "value is " + v.enable_group_tutoring);
+                                    if(v.enable_group_tutoring == "timelot_group_tutoring"){
+                                        type = "/library/images/icon_Group.png";
+                                    }
+                                    //DUMMY DATA
+                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>${type}" alt="" style="height:12px;margin-top: 5px;"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
+                                        <div><b>${v.display_name}</b></div><div><p class="find-card-marketing-tag">
+                                        ${v.desc_tell_me}</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
                                         <span class="find-card-more" data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume"><u>+Read more</u></span></p></div>
                                     </td>`;
                                     tr+=`<td><div>
