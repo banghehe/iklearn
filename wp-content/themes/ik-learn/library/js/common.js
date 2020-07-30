@@ -62,7 +62,6 @@ var ASSIGNMENT_REPORT = 6;
                   }
                 }
             });
-
             $("#lang-switcher-nav").find("> ul > li > a").click(function (e) {
                 var viewport = getViewport();
                 if (viewport.width < 955) {
@@ -83,7 +82,6 @@ var ASSIGNMENT_REPORT = 6;
                   }
                 }
             });
-            
         }
         $(window).on("resize", function () {
 //            $("#sub-user-nav").find("> ul > li > .sub-menu").css("display", "");
