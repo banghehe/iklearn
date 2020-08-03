@@ -5507,7 +5507,7 @@ if($task == "search_tutor"){
             $school_link1 = get_user_meta($value->ID, 'school_link1', true);
             $school_link2 = get_user_meta($value->ID, 'school_link2', true);
             $any_other = get_user_meta($value->ID, 'any_other', true);
-        
+            $previous_school = get_user_meta($value->ID, 'previous_school', true);
 
             if (!empty($profile_value))
                 $user_avatar = $profile_value;
@@ -5708,6 +5708,7 @@ if($task == "search_tutor"){
             $item['school_name2'] =  $school_name2;
             $item['school_link1'] =  $school_link1;
             $item['school_link2'] =  $school_link2;
+            $item['previous_school'] =  $previous_school;
             $item['any_other'] =  $any_other;
             $item['subject_description'] =  $subject_description;
             $item['price_tutoring'] = $price_tutoring;
@@ -5916,6 +5917,7 @@ if ($task == "get_users_tutor") {
             $school_link1 = get_user_meta($value->ID, 'school_link1', true);
             $school_link2 = get_user_meta($value->ID, 'school_link2', true);
             $any_other = get_user_meta($value->ID, 'any_other', true);
+            $previous_school = get_user_meta($value->ID, 'previous_school', true);
 
             if (!empty($profile_value))
                 $user_avatar = $profile_value;
@@ -6119,6 +6121,7 @@ if ($task == "get_users_tutor") {
             $item['any_other'] =  $any_other;
             $item['subject_description'] =  $subject_description;
             $item['price_tutoring'] = $price_tutoring;
+            $item['previous_school'] = $previous_school;
 
             if($type == 'favorite' && $favorite > 0){
                 $arr_user1[] = $item;

@@ -10428,7 +10428,7 @@
                                     //DUMMY DATA
                                     tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Group.png" alt="" style="height:12px;margin-top: 5px;"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
                                         <div><b>${v.display_name}</b></div><div><p class="find-card-marketing-tag">
-                                        ${v.desc_tell_me}</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
+                                        ${v.previous_school}</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
                                         <span class="find-card-more" data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume"><u>+Read more</u></span></p></div>
                                     </td>`;
                                     tr+=`<td><div>
@@ -10676,7 +10676,7 @@
                                     //DUMMY DATA
                                     tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>${type}" alt="" style="height:12px;margin-top: 5px;"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
                                         <div><b>${v.display_name}</b></div><div><p class="find-card-marketing-tag">
-                                        ${v.desc_tell_me}</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
+                                        ${v.previous_school}</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
                                         <span class="find-card-more" data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume"><u>+Read more</u></span></p></div>
                                     </td>`;
                                     tr+=`<td><div>
