@@ -28,6 +28,12 @@
         $u_time_zone = $u_time_zone_index = 0;
         $timezone_name = convert_timezone_to_name($u_time_zone_index);
     }
+    if($is_user_logged_in){
+    add_user_meta($current_user->ID,'status_login','1');
+    update_user_meta($current_user->ID, 'status_login', '1');
+
+    };
+
     $my_timezone_index = $u_time_zone_index;
     $my_city = convert_timezone_to_location($u_time_zone_index);
     $dt = new DateTime('now', new DateTimezone($timezone_name));
@@ -158,13 +164,12 @@
                                     Schedule Starter
                                 </button>
                             </li>
-                            <li class="last">
-                                <button type="button" id="close-modal">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/library/images/09_Menu_Closed.png">
-                                    Close
-                                </button>
-                            </li>
+                            
                         </ul>
+                        <button  type="button" id="close-modal" style="background: none;">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/library/images/09_Menu_Closed.png" style="height: 14px; margin-top: -5px;">
+                                    
+                                </button>
 
                         <ul id="my-timezone" style="display: none;">
                             <li data-value="" data-city="London" <?php if($timezone_index == '0' ) echo 'class="active"'; ?>>Select Time Zone</li>
@@ -606,9 +611,11 @@
                                                         $display_name = get_user_meta($current_user->ID, 'display_name', true);
                                                         if (!empty($display_name) && $display_name != '')
                                                             echo $display_name;
-                                                        else
-                                                            _e('N/A', 'iii-dictionary');
-                                                    } else
+                                                        else{
+                                                            $ru_first_name = get_user_meta($current_user->ID, 'first_name', true);
+                                                            $ru_last_name = get_user_meta($current_user->ID, 'last_name', true);
+                                                            echo $ru_first_name.' '.$ru_last_name;
+                                                    };} else
                                                         _e('N/A', 'iii-dictionary');
                                                     ?>
                                                 </span>
@@ -795,6 +802,60 @@
                                             <hr>
                                         </div>
                                     </div>
+                                    <div class="row line-profile">
+                                            <div class="col-sm-6 col-md-6">
+                                                <label><?php _e('Time Zone', 'iii-dictionary') ?></label>
+                                                 <span class="color-black" id="profile-skype-id">
+                                                        <?php
+                                                        if ($is_user_logged_in) {
+                                                            
+                                                            if (!empty($my_timezone_index) && $my_timezone_index != ''){
+                                                                if($my_timezone_index == '1' ) echo 'New York';
+                                                                if($my_timezone_index == '2' ) echo 'Minneapolis';
+                                                                if($my_timezone_index == '3' ) echo 'Colorado';
+                                                                if($my_timezone_index == '4' ) echo 'San Francisco';
+                                                                if($my_timezone_index == '5' ) echo 'Hawaii';
+                                                                if($my_timezone_index == '6' ) echo 'Guam';
+                                                                if($my_timezone_index == '7') echo 'Tokyo';                     
+                                                                if($my_timezone_index == '8' ) echo 'Seoul';
+                                                                if($my_timezone_index == '9' ) echo 'Beijing';
+                                                                if($my_timezone_index == '10' ) echo 'Xianyang';
+                                                                if($my_timezone_index == '11' ) echo 'Hanoi';
+                                                                if($my_timezone_index == '12' ) echo 'Bangkok';
+                                                                if($my_timezone_index == '13' ) echo 'Myanmar';
+                                                                if($my_timezone_index == '14' ) echo 'Bangladesh';
+                                                                if($my_timezone_index == '15' ) echo 'Sri Lanka';
+                                                                if($my_timezone_index == '16' ) echo 'New Delhi';
+                                                                if($my_timezone_index == '17' ) echo 'Mumbai';
+                                                                if($my_timezone_index == '18' ) echo 'London';
+                                                                if($my_timezone_index == '19' ) echo 'Sydney';
+
+                                                            }
+                                                            else
+                                                                _e('N/A', 'iii-dictionary');
+                                                        }else {
+                                                            _e('N/A', 'iii-dictionary');
+                                                        }
+                                                        ?>
+                                                    </span>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6">
+                                                <label><?php _e('Gender', 'iii-dictionary') ?></label>
+                                                <span class="color-black" id="gender-show">
+                                                        <?php
+                                                        if ($is_user_logged_in) {
+                                                            $gender_show = get_user_meta($current_user->ID, 'gender', true);
+                                                            if (!empty($gender_show) && $gender_show != '')
+                                                                echo $gender_show;
+                                                            else
+                                                                _e('N/A', 'iii-dictionary');
+                                                        }else {
+                                                            _e('N/A', 'iii-dictionary');
+                                                        }
+                                                        ?>
+                                                    </span>
+                                            </div>
+                                        </div>
                                 </form>
                             </div>
                             <!-- Profile --> 
@@ -2963,6 +3024,11 @@
 
                     $('.logout-link').click(function (e) {
                         localStorage.clear();
+                        var status_login = '0';
+                            $.post(home_url + "/?r=ajax/status_login", {
+                                status_login: status_login,
+                                type: "update"
+                            });
                     });
 
                     $('.close-modal-account').click(function () {
@@ -3426,7 +3492,7 @@
                                 else
                                     document.location.href = redirect;
                             } else {
-                                $('#popup-message').html('<p class="text-used">' + data + '</p><button id="got-it" type="button" class="btn-orange form-control nopadding-r border-btn">OK</button>');
+                                $('#popup-message').html('<p class="text-used">' + data + '</p><button id="got-it" type="button" class="btn-orange form-control nopadding-r border-btn" style="height: 40px !important ">OK</button><span class="sign-up popup-sign">Register now?</span><br><span class="forgot-pass popup-sign" >Forgot password?</span>');
                                 $('#top-popup-message').css("display", "block");
                             }
                         });
@@ -11119,4 +11185,30 @@
                     }
                 });
             })(jQuery);
+            $('body').on('click', '.sign-up', function () {
+                $("#login-user").removeClass("active");
+                        $("#login-user").removeClass("in");
+                        $("#lost-password").removeClass("active");
+                        $("#lost-password").removeClass("in");
+                        $("#create-account").addClass("active");
+                        $("#create-account").addClass("in");
+
+                        var img = '<?php echo get_template_directory_uri() ?>/library/images/icon_Tutor_ID.png';
+                        $("#user-upload-avatar").attr('src',img);
+
+                        
+                        $("#top-popup-message").css("display","none");
+            });
+            $('body').on('click','.forgot-pass', function () {
+                        $("#login-user").addClass("hidden");
+                        $("#create-account").removeClass("active");
+                        $("#create-account").removeClass("in");
+                        $("#login-user").removeClass("active");
+                        $("#login-user").removeClass("in");
+                        $("#lost-password").removeClass("hidden");
+                        $("#lost-password").addClass("active");
+                        $("#lost-password").addClass("in");
+                    
+                        $("#top-popup-message").css("display","none");
+                    });
         </script>

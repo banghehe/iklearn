@@ -35,6 +35,13 @@ if (isset($route[2])) {
 /*
  * ajax search for dictionary
  */
+if($task == "status_login"){
+    $status_login = get_user_meta($user->ID, 'status_login', true);
+    $status_login = $_REQUEST['status_login'];
+    $current_user = wp_get_current_user();
+    update_user_meta($current_user->ID, 'status_login', '0');
+
+}
 if ($task == 'dictionary') {
     $d = $_GET['d'];
     $dict_table = get_dictionary_table($d);

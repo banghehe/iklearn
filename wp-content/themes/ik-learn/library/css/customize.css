@@ -19691,7 +19691,7 @@ table.table-critical-lesson > tbody > tr > td {
     font-family: Myriad_regular;
 }
 .border-btn {
-    border-radius: 25px !important;
+    border-radius: 7px !important;
 }
 .lblForgot {
     font-size: 16px;
@@ -20440,7 +20440,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 }
 .find-page-title{
     color:black;
-    font-size: 15px;
+    font-size: 15pt;
     font-family: SemiBold;
     margin-bottom:9px;
 }
@@ -21974,8 +21974,12 @@ div.tr-info p{
     width: 17px;
     margin-right: 5px;
 }
-#open-menu-quicknotifi #close-modal img{
-    width: 14px;
+ #close-modal{
+    background: none;
+    border: 0;
+    outline: 0;
+    margin: 0;
+
 }
 .header-schedule.active{
     margin-bottom: 0;
@@ -22241,7 +22245,17 @@ div.tr-info p{
     border: 0;
     outline: 0;
     margin: 0;
-    padding: 0 0 0 5px;
+    /*padding: 0;
+*/}
+#menu-quick-notification::after {
+    content: '';
+    position: absolute;
+    background-color: #D6D6D6;
+    width: 2px;
+    height: 50%;
+    bottom: 17px;
+    right: 25px;
+
 }
 .find-general-border{
     padding-right: 13px;
@@ -22253,8 +22267,8 @@ div.tr-info p{
     margin-bottom: 14px;
 }
 .frm-available-now .find-label{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 11px !important;
+    font-family: Myriad_regular;
+    font-size: 11pt !important;
     color:#9c9c9c !important;
     margin-bottom:0px !important;
 }
@@ -23461,4 +23475,14 @@ ul #select-available-subjectSelectBoxItOptions{
 }
 #available_year{
     padding-top: 10px;
+}
+.popup-sign{
+    color: #ffc168;
+    font-size: 14px;
+    font-family: Myriad_light;
+    cursor: pointer;
+text-decoration: underline;
+margin-left: 280px;
+margin-top: -55px;
+position: absolute;
 }
