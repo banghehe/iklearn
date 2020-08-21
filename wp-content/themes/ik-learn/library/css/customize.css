@@ -1052,7 +1052,9 @@ a.btn.grey:focus {
     height: 26px;
     display: inline-block;
     vertical-align: middle;
+    margin: 3px 0 -5px 0;
     margin-right: 10px;
+
 }
 
 .icon-submit {
@@ -19266,7 +19268,7 @@ table.table-critical-lesson > tbody > tr > td {
     font-weight: bold;
     font-family: Myriad_regular;
 }
-#myForm input, #createAccount input, #myUpdate input, 
+#myForm input, 
 #tutorForm input, #earningFrom input, #top-my-schedules input {
     border: 1px solid #e0e0e0;
 }
@@ -19354,10 +19356,13 @@ table.table-critical-lesson > tbody > tr > td {
     border-top: none !important;
     font-weight: normal !important;
 }
-.selectboxit,.selectboxit-options{
-    background: #ffffff !important;
+.selectboxit-options{
+    background: white !important;
     color: #4b4b4b !important;
-
+}
+.selectboxit{
+    background: none !important;
+    color: #4b4b4b !important;
 }
 .selectboxit-text{
     font-weight: normal !important;
@@ -19369,7 +19374,7 @@ table.table-critical-lesson > tbody > tr > td {
     border-top-color:#4b4b4b !important;
 }
 
-#month .selectboxit-btn.selectboxit-enabled:active,
+/*#month .selectboxit-btn.selectboxit-enabled:active,
 #month .selectboxit-container .selectboxit-options :hover,
 #month .selectboxit-container .selectboxit-options :focus,
 #date .selectboxit-btn.selectboxit-enabled:active,
@@ -19377,7 +19382,7 @@ table.table-critical-lesson > tbody > tr > td {
 #date .selectboxit-container .selectboxit-options :focus
 {
     background-color: #e1f4fd  !important;
-}
+}*/
 #month .selectboxit-container .selectboxit-options :hover,
 #month .selectboxit-container .selectboxit-options :focus,
 #date .selectboxit-container .selectboxit-options :hover,
@@ -19609,7 +19614,7 @@ table.table-critical-lesson > tbody > tr > td {
 }
 .modal-signup .form-control {
     height: 28px !important;
-    border: 1px solid #c2c2c2 !important;
+    border: 1px solid #c2c2c2 ;
 }
 .border-ras {
     border-radius: 25px !important;
@@ -19619,11 +19624,11 @@ table.table-critical-lesson > tbody > tr > td {
 .style-form input[type="text"], #myUpdate input[type="password"], .style-form textarea,
 .main-new-request input[type="text"],
 .frm-available-now input[type="text"] {
-    font-size: 16px;
-    color: #4b4b4b;
+    font-size: 14pt;
+    color: #515151;
     border-radius: 25px;
     font-family: Myriad_regular;
-    background: #ffffff;
+    background: none;
     margin-left: -13px
 }
 .main-new-request .cb-type3{
@@ -19743,7 +19748,7 @@ table.table-critical-lesson > tbody > tr > td {
 .select-style .selectboxit-container * {
     font-family: Myriad_regular;
     color: #9c9c9c !important;
-    font-size: 13px !important;
+    font-size: 14px !important;
 }
 span.select-box-it.form-control, span.select-box-it.form-control > span {
     line-height: 28px;
@@ -19780,7 +19785,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 .profile-pic img {
     width: 28px;
     height: 28px;
-    vertical-align: top;
+    /*vertical-align: top;*/
 }
 #myProfile .profile-pic img {
     width: 40px;
@@ -19796,7 +19801,9 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     margin: 10px 0;
 }
 #user-upload-img, #user-upload-avatar {
-    border-radius: 50%;
+    border-radius: 10px;
+    height: 50px;
+    width: 50px;
 }
 #input-image, #input-avatar {
     display: none;
@@ -20044,6 +20051,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     top: 5px;
     padding-left: 20px;
     font-size: 13px;
+    margin-top: 20px;
 }
 .yes-availability{
     background: url('../images/Icon_ID-Available.png') 0 2px no-repeat;
@@ -20093,30 +20101,18 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 #createAccount .form-group{
     position: relative;
 } 
-#myUpdate h4{
+/*#myUpdate h4{
     color: #000;
     font-family: Semibold;
     font-size: 15px;
     margin-bottom: 13px;
-}
+}*/
 #tutor-regis-update h4{
     margin-top: 18px;
 }
-#update_birth_g_pc,
-#update_birth_g_mb{
-    background: #F4F7F7;
-    color: #9c9c9c!important;
-    border: 0!important;
-}
-#update_username{
-    background: #F4F7F7!important;
-    border: 0!important;
-}
-#update_birth_g_pc,
-#update_birth_g_mb{
-    background: #F4F7F7!important;
-    border: 0!important;
-}
+
+
+
 .subscription {
     margin-top: 22px;
 }
@@ -20334,8 +20330,8 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     margin-right: 3px;
 }
 .avatar-tutor img{
-    width: 70px;
-    height: 70px;
+    width: 83px;
+    height: 83px;
     border-radius: 5%; 
     margin-right: 0;
 }
@@ -20589,7 +20585,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     margin-top: 15px;
 }
 .select-style .selectboxit-options a {
-    padding-left: 24px;
+    padding-left: 2px;
 }
 .select-style .selectboxit-list > .selectboxit-focus > .selectboxit-option-anchor {
     background: #F4f7f7;
@@ -22266,7 +22262,7 @@ div.tr-info p{
     border-radius: 10px;
     margin-bottom: 14px;
 }
-.frm-available-now .find-label{
+ .find-label{
     font-family: Myriad_regular;
     font-size: 11pt !important;
     color:#9c9c9c !important;
@@ -23380,6 +23376,7 @@ ul #select-available-subjectSelectBoxItOptions{
     overflow: hidden;
     white-space: nowrap; 
     text-overflow: ellipsis;
+    margin-top: -7px;
 }
 .find-card-marketing-tag{
     font-family:Myriad_regular;
@@ -23409,7 +23406,7 @@ ul #select-available-subjectSelectBoxItOptions{
     color: #8f8f8f;
 }
 .find-card-select-btn{
-    max-width: 161px;
+    width: 161px;
     /* Override .btn.orange font color and font */
     color: #fff !important;
     font-style:Semibold !important;
@@ -23459,7 +23456,8 @@ ul #select-available-subjectSelectBoxItOptions{
     margin-right: -10px;
 }
 .icon-about{
-    max-width: 13px;
+    max-width: 13px !important;
+    max-height: 13px !important;
     margin-bottom: 5px;
     margin-left: 5px;
 }
@@ -23485,4 +23483,152 @@ text-decoration: underline;
 margin-left: 280px;
 margin-top: -55px;
 position: absolute;
+}
+.language_drop{
+    
+    background: white;
+    border: 1px solid #d9d9d9;
+    position: absolute;
+    z-index: 100;
+     display: none;
+     padding: 10px;
+    width: 90%;
+    margin: 12px;
+    border-top: 0;
+}
+.language_drop ul li{
+   
+    padding: 2px 8px;
+}
+.option-input-3{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    position: relative;
+    top: 5.333px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 19px;
+    width: 35px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 0.5rem;
+    outline: none;
+    position: relative;
+    z-index: 1;
+    text-decoration: none;
+     background: url(../images/icon_Toggle_Switch_OFF.png) no-repeat;
+    background-size: contain;
+    margin-right: 7px;
+    border: none;
+}
+.option-input-3:checked {
+    content: "";
+    background: url(../images/icon_Toggle_Switch_ON.png) no-repeat center;
+    display: inline-block;
+    background-position-x: 0px !important;
+    /* display: block; */
+    background-size: contain;
+}
+.option-input-3:checked, .option-input-3:focus, .option-input-4:checked, .option-input-4:focus {
+    border: 0;
+    outline: none !important;
+}
+.show-language {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 30px;
+    /*margin-top: -3px;*/
+    cursor: pointer;
+    font-size: 14pt;
+    font-family: Myriad_regular;
+}
+.Available-lg{
+    padding-left: 8px;
+    font-family: semibold;
+    font-size: 13pt;
+    color: #515151;
+}
+.show-language-drop{
+background-image: url(../images/icon_dropdown_arrow.png) !important;
+    background-repeat: no-repeat;
+    background-size: 10px;
+    background-position-y: 14px;
+    float: right;
+}
+.find-general-border div input{
+    background: none;
+    border: 0 !important ;
+}
+#user-time-zoneSelectBoxItContainer{
+    margin-top: -10px;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  
+  
+  -webkit-box-shadow: 0 0 0px 0px #fffff inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+.required-star {
+    color: red;
+    padding-top: 4px;
+    position: absolute;
+    font-weight: bold;
+    padding-left: 2px;
+}
+.clear-input{
+    background: url(../images/Icon_Close.png) ;
+    background-repeat: no-repeat;
+background-size: 8px;
+background-position-y: 14px;
+float: right;
+margin-top: -35px;
+height: 30px;
+width: 10px;
+cursor: pointer;
+}
+.my-account{
+    font-family: Myriad_regular;
+    font-size: 13px;
+    color: #a1a1a1;
+    margin: 4px 0 -4px;
+}
+.tutor-acc{
+    color: #199eca;
+    font-size: 18px;
+    font-family: Semibold;
+    line-height: normal;
+    /*text-transform: none;*/
+    padding-left: 0;
+}
+#edit-profile{
+    width: 100px;
+    position: fixed;
+    
+    margin-left: 33%;
+    margin-top: -48px;
+    border-radius: 5px !important;
+    background: #FFA523;
+    cursor: pointer;
+    height: 35px;
+        font-size: 15px;
+}
+@media (max-width: 651px){
+    #edit-profile{
+        margin-left: 37%;
+        
+    }
 }

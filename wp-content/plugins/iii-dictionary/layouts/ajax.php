@@ -4643,18 +4643,14 @@ if ($task == "create_account") {
 
         // send confirmation email
         if (is_email($user_email)) {
-            $title = __('Congratulations! You have successfully signed up for iklearn.com', 'iii-dictionary');
-            $message = __('You have successfully signed up for iklearn.com.', 'iii-dictionary') . "\r\n\r\n" .
-                    __('If you have questions or need support, please contact us at support@iklearn.com.', 'iii-dictionary') . "\r\n\r\n" .
-                    __('If you forgot your password, please click on the "forgot password" button after entering your username (email address).', 'iii-dictionary') . "\r\n\r\n" .
-                    __('Please enjoy the Merriam Webster dictionary and English learning tools.', 'iii-dictionary') . "\r\n\r\n" .
-                    __('For teachers - You may assign homework practice sheets available on this site. You can also create your own homework sheets. Please click here for details. The homework that is turned in by students is automatically graded and saved in your teacher\'s box. Currently, the available homework worksheets are (1) spelling practice and (2) vocabulary and grammar.', 'iii-dictionary') . "\r\n\r\n\r\n" .
-                    __('Happy learning!', 'iii-dictionary') . "\r\n\r\n\r\n" .
-                    __('Support', 'iii-dictionary');
+            $title = __('Your account has been created successfully!', 'iii-dictionary');
+            $message = __('<p style="font-size: 14px; font-family: Lucida Console;">You have successfully signed up for iktutor.com.</p>', 'iii-dictionary') . "\r\n\r\n" .
+                    __('<p style="font-size: 14px; font-family: Lucida Console;">If you have questions or need support, please contact us at support@iktutor.com.</p>', 'iii-dictionary') . "\r\n\r\n" .
+                    __('<p style="font-size: 14px; font-family: Lucida Console;">If you are a student, you can take an online course or get help from a live online tutor.</p>', 'iii-dictionary') . "\r\n\r\n\r\n" .
+                    __('<p style="font-size: 14px; font-family: Lucida Console;">If you are registered as a tutor, you can provide help to students with homework or other subjects. You can earn some income by tutoring or offering an online course.</p>', 'iii-dictionary') . "\r\n\r\n\r\n" .
+                    __('<p style="font-size: 14px; font-family: Lucida Console;">Welcome to the IKtutor community!<p>');
 
-            if ($message && !wp_mail($user_email, wp_specialchars_decode($title), $message)) {
-                
-            }
+            wp_mail($user_email, wp_specialchars_decode($title), $message);
         }
 
         $_SESSION['newuser'] = 1;

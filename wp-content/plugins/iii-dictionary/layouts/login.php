@@ -97,17 +97,17 @@ switch ($action) {
                 $hashed = time() . ':' . $wp_hasher->HashPassword($key);
                 $wpdb->update($wpdb->users, array('user_activation_key' => $hashed), array('user_login' => $user_login));
 
-                $message = '<p>';
-                $message .= __('Someone requested that the password be reset for the following account:', 'iii-dictionary') . " ";
-                $message .= network_home_url() . " ";
-                $message .= sprintf(__('Username: %s', 'iii-dictionary'), $user_login) . " </p><p></p><p>";
-                $message .= __('If this was a mistake, just ignore this email and nothing will happen.', 'iii-dictionary') . " </p><p></p><p>";
-                $message .= __('To reset your password, visit the following address:', 'iii-dictionary') . " </p><p></p><p>";
-                $message .= '' . network_site_url('?r=login&action=resetpass&key=' . $key . '&login=' . rawurlencode($user_login)) . " </p>";
+                $message .= __('<p style="font-size: 14px; font-family: Lucida Console;">We’ve received a request to reset the password for your account: https://iktutor.com</p>', 'iii-dictionary') . " ";
+        
+                $message .= sprintf(__('<p style="font-size: 14px; font-family: Lucida Console;">Username: %s</p>', 'iii-dictionary'), $user_login) ;
+        
+                $message .= __('<p style="font-size: 14px; font-family: Lucida Console;">To reset your password, visit the following address:</p>', 'iii-dictionary');
+                $message .= '<p style="font-size: 14px; font-family: Lucida Console;">' . network_site_url('?r=login&action=resetpass&key=' . $key . '&login=' . rawurlencode($user_login)).'</p>' ;
+                $message .= __('<p style="font-size: 14px; font-family: Lucida Console;">If this was a mistake, just ignore this email and nothing will happen.</p>', 'iii-dictionary');
 
                 $blogname = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
 
-                $title = sprintf(__('[%s] Password Reset', 'iii-dictionary'), $blogname);
+                $title = sprintf(__('You have requested the password change', 'iii-dictionary'), $blogname);
 
                 $title = apply_filters('retrieve_password_title', $title);
 
@@ -167,9 +167,15 @@ switch ($action) {
             }
 
             if (!$has_err && isset($_POST['pass1']) && !empty($_POST['pass1'])) {
+                $user_email_re = $rp_login;
                 reset_password($user, $_POST['pass1']);
                 ik_enqueue_messages(__('Your password has been reset.', 'iii-dictionary'), 'success');
+                $title = __('Your Password change has been accepted.', 'iii-dictionary');
+                            $message = __('<p style="font-size: 14px; font-family: Lucida Console;">Hi '. $user_email.', your password has been successfully reset.</p>', 'iii-dictionary') . "\r\n\r\n" .
+                    
+                            __('<p style="font-size: 14px; font-family: Lucida Console;">Sincerely, IK Tutor Support!<p>');
 
+                            wp_mail($user_email_re, wp_specialchars_decode($title), $message);
                 wp_redirect(locale_home_url() . '/?r=login');
                 exit;
             }

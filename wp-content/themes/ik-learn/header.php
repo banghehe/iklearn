@@ -23,16 +23,47 @@
         $u_time_zone_index = get_user_meta($current_user->ID, 'time_zone_index', true);
         $u_time_zone_index = empty($u_time_zone_index)? 0 : $u_time_zone_index;
         $u_time_zone_name = get_user_meta($current_user->ID, 'time_zone_name', true);
-        $timezone_name = empty($u_time_zone_name)? convert_timezone_to_name($u_time_zone_index) : $u_time_zone_name;
+        // $timezone_name = empty($u_time_zone_name)? convert_timezone_to_name($u_time_zone_index) : $u_time_zone_name;
     }else{
         $u_time_zone = $u_time_zone_index = 0;
-        $timezone_name = convert_timezone_to_name($u_time_zone_index);
+        // $timezone_name = convert_timezone_to_name($u_time_zone_index);
     }
+    if($is_user_logged_in){
+    $status_login_2 = get_user_meta($current_user->ID, 'status_login_2', true);
+    if($status_login_2 == '0'){
+        update_user_meta($current_user->ID, 'status_login_2', '1');
+        wp_logout();
+    };
+    }
+    function file_get_contents_curl( $url ) {
+ 
+    $ch = curl_init();
+ 
+    curl_setopt( $ch, CURLOPT_AUTOREFERER, TRUE );
+    curl_setopt( $ch, CURLOPT_HEADER, 0 );
+    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+    curl_setopt( $ch, CURLOPT_URL, $url );
+    curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, TRUE );
+ 
+    $data = curl_exec( $ch );
+    curl_close( $ch );
+ 
+    return $data;
+ 
+    }
+    // $ip_user = $_SERVER['REMOTE_ADDR'];
+    $time_zone_user = json_decode(file_get_contents("https://ipinfo.io/"));
+    $time_zone_user1 = $time_zone_user->city;
+    $timezone_name = $time_zone_user->timezone;
     if($is_user_logged_in){
     add_user_meta($current_user->ID,'status_login','1');
     update_user_meta($current_user->ID, 'status_login', '1');
 
     };
+    if($is_user_logged_in)
+    {$link_ss = '?r=ajax/logged/'.$current_user->ID.'/'.session_id();}
+    else
+    {$link_ss = '';};
 
     $my_timezone_index = $u_time_zone_index;
     $my_city = convert_timezone_to_location($u_time_zone_index);
@@ -137,7 +168,7 @@
                     <div class="icon-close-classes-created">
                         <?php if ($is_user_logged_in) { ?>
                         <button type="button" id="btn-my-timezone" class="btn-my-schedule">
-                            <span id="mycity-name"><?php echo $my_city ?></span>
+                            <span id="mycity-name"><?php echo $time_zone_user1 ?></span>
                             <span id="mytime-clock" data-hour="24" data-minute="0">2:35 PM</span>
                             <img class="ic-my-schedule" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_TimeZone_Selector.png">
                         </button>
@@ -173,82 +204,82 @@
 
                         <ul id="my-timezone" style="display: none;">
                             <li data-value="" data-city="London" <?php if($timezone_index == '0' ) echo 'class="active"'; ?>>Select Time Zone</li>
-                            <li class="my-timezone<?php if($my_timezone_index == '1' ) echo ' active'; ?>" data-index="1" data-value="-5" data-name="America/New_York" data-city="New York">
-                                <span class="name-city" id="name-city1">New York</span>
-                                <span class="name-clock" id="name-clock1"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '2' ) echo ' active'; ?>" data-index="2" data-value="-6" data-name="America/Chicago" data-city="Minneapolis">
-                                <span class="name-city" id="name-city2">Minneapolis</span>
-                                <span class="name-clock" id="name-clock2"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '3' ) echo ' active'; ?>" data-index="3" data-value="-5" data-name="America/Denver" data-city="Colorado">
-                                <span class="name-city" id="name-city3">Colorado</span>
-                                <span class="name-clock" id="name-clock3"></span>
-                            </li>
-                            <li class="my-timezone <?php if($my_timezone_index == '4' ) echo ' active'; ?>" data-index="4" data-value="-7" data-name="America/Los_Angeles" data-city="San Francisco">
-                                <span class="name-city" id="name-city4">San Francisco</span>
-                                <span class="name-clock" id="name-clock4"></span>
-                            </li>
-                            <li class="my-timezone <?php if($my_timezone_index == '5' ) echo ' active'; ?>" data-index="5" data-value="-10" data-name="Pacific/Honolulu" data-city="Hawaii">
-                                <span class="name-city" id="name-city5">Hawaii</span>
-                                <span class="name-clock" id="name-clock5"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '6' ) echo ' active'; ?>" data-index="6" data-value="+10" data-name="Pacific/Guam" data-city="Guam">
-                                <span class="name-city" id="name-city6">Guam</span>
-                                <span class="name-clock" id="name-clock6"></span>
-                            </li>
-                            <li class="my-timezone" data-index="7" data-value="+9" data-name="Asia/Tokyo" data-city="Tokyo">
-                                <span class="name-city" id="name-city7">Tokyo</span>
-                                <span class="name-clock" id="name-clock7"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '7' ) echo ' active'; ?>" data-index="8" data-value="+9" data-name="Asia/Seoul" data-city="Seoul" <?php if($my_timezone_index == '8' ) echo 'class="active"'; ?>>
-                                <span class="name-city" id="name-city8">Seoul</span>
-                                <span class="name-clock" id="name-clock8"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '9' ) echo ' active'; ?>" data-index="9" data-value="+8" data-name="Asia/Shanghai" data-city="Beijing">
-                                <span class="name-city" id="name-city9">Beijing</span>
-                                <span class="name-clock" id="name-clock9"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '10' ) echo ' active'; ?>" data-index="10" data-value="+8" data-name="Asia/Shanghai" data-city="Xianyang">
-                                <span class="name-city" id="name-city10">Xianyang</span>
-                                <span class="name-clock" id="name-clock10"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '11' ) echo ' active'; ?>" data-index="11" data-value="+7" data-name="Asia/Ho_Chi_Minh" data-city="Hanoi">
-                                <span class="name-city" id="name-city11">Hanoi</span>
-                                <span class="name-clock" id="name-clock11"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '12' ) echo ' active'; ?>" data-index="12" data-value="+7" data-name="Asia/Bangkok" data-city="Bangkok">
-                                <span class="name-city" id="name-city12">Bangkok</span>
-                                <span class="name-clock" id="name-clock12"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '13' ) echo ' active'; ?>" data-index="13" data-value="+7" data-name="Asia/Rangoon" data-city="Myanmar">
-                                <span class="name-city" id="name-city13">Myanmar</span>
-                                <span class="name-clock" id="name-clock13"></span>
-                            </li>
-                            <li class="my-timezone <?php if($my_timezone_index == '14' ) echo ' active'; ?>" data-index="14" data-value="+6" data-name="Asia/Dhaka" data-city="Bangladesh">
-                                <span class="name-city" id="name-city14">Bangladesh</span>
-                                <span class="name-clock" id="name-clock14"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '15' ) echo ' active'; ?>" data-index="15" data-value="+5" data-name="Asia/Colombo" data-city="Sri Lanka">
-                                <span class="name-city" id="name-city15">Sri Lanka</span>
-                                <span class="name-clock" id="name-clock15"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '16' ) echo ' active'; ?>" data-index="16" data-value="+5" data-name="Asia/Kolkata" data-city="New Delhi">
-                                <span class="name-city" id="name-city16">New Delhi</span>
-                                <span class="name-clock" id="name-clock16"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '17' ) echo ' active'; ?>" data-index="17" data-value="+5" data-name="Asia/Kolkata" data-city="Mumbai">
-                                <span class="name-city" id="name-city17">Mumbai</span>
-                                <span class="name-clock" id="name-clock17"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '18' ) echo ' active'; ?>" data-index="18" data-value="0" data-name="Europe/London" data-city="London">
-                                <span class="name-city" id="name-city18">London</span>
-                                <span class="name-clock" id="name-clock18"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '19' ) echo ' active'; ?>" data-index="19" data-value="+5" data-name="Australia/Sydney" data-city="Sydney">
-                                <span class="name-city" id="name-city19">Sydney</span>
-                                <span class="name-clock" id="name-clock19"></span>
-                            </li>
+                                <li class="my-timezone<?php if($timezone_name == 'America/New_York' ) echo ' active'; ?>" data-index="1" data-value="-5" data-name="America/New_York" data-city="New York">
+                                    <span class="name-city" id="name-city1">New York</span>
+                                    <span class="name-clock" id="name-clock1"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'America/Chicago' ) echo ' active'; ?>" data-index="2" data-value="-6" data-name="America/Chicago" data-city="Minneapolis">
+                                    <span class="name-city" id="name-city2">Minneapolis</span>
+                                    <span class="name-clock" id="name-clock2"></span>
+                                </li>
+                                <li class="my-timezone<?php if( $timezone_name == 'America/Denver' ) echo ' active'; ?>" data-index="3" data-value="-5" data-name="America/Denver" data-city="Colorado">
+                                    <span class="name-city" id="name-city3">Colorado</span>
+                                    <span class="name-clock" id="name-clock3"></span>
+                                </li>
+                                <li class="my-timezone <?php if($timezone_name == 'America/Los_Angeles' ) echo ' active'; ?>" data-index="4" data-value="-7" data-name="America/Los_Angeles" data-city="SF/LA">
+                                    <span class="name-city" id="name-city4">SF/LA</span>
+                                    <span class="name-clock" id="name-clock4"></span>
+                                </li>
+                                <li class="my-timezone <?php if($timezone_name == 'Pacific/Honolulu' ) echo ' active'; ?>" data-index="5" data-value="-10" data-name="Pacific/Honolulu" data-city="Hawaii">
+                                    <span class="name-city" id="name-city5">Hawaii</span>
+                                    <span class="name-clock" id="name-clock5"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Pacific/Guam' ) echo ' active'; ?>" data-index="6" data-value="+10" data-name="Pacific/Guam" data-city="Guam">
+                                    <span class="name-city" id="name-city6">Guam</span>
+                                    <span class="name-clock" id="name-clock6"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Tokyo' ) echo ' active'; ?>" data-index="7" data-value="+9" data-name="Asia/Tokyo" data-city="Tokyo">
+                                    <span class="name-city" id="name-city7">Tokyo</span>
+                                    <span class="name-clock" id="name-clock7"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Seoul' ) echo ' active'; ?>" data-index="8" data-value="+9" data-name="Asia/Seoul" data-city="Seoul">
+                                    <span class="name-city" id="name-city8">Seoul</span>
+                                    <span class="name-clock" id="name-clock8"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Shanghai' ) echo ' active'; ?>" data-index="9" data-value="+8" data-name="Asia/Shanghai" data-city="Beijing">
+                                    <span class="name-city" id="name-city9">Beijing</span>
+                                    <span class="name-clock" id="name-clock9"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Shanghai' ) echo ' active'; ?>" data-index="10" data-value="+8" data-name="Asia/Shanghai" data-city="Xianyang">
+                                    <span class="name-city" id="name-city10">Xianyang</span>
+                                    <span class="name-clock" id="name-clock10"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Ho_Chi_Minh' ) echo ' active'; ?>" data-index="11" data-value="+7" data-name="Asia/Ho_Chi_Minh" data-city="Hanoi">
+                                    <span class="name-city" id="name-city11">Hanoi</span>
+                                    <span class="name-clock" id="name-clock11"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Bangkok' ) echo ' active'; ?>" data-index="12" data-value="+7" data-name="Asia/Bangkok" data-city="Bangkok">
+                                    <span class="name-city" id="name-city12">Bangkok</span>
+                                    <span class="name-clock" id="name-clock12"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Rangoon' ) echo ' active'; ?>" data-index="13" data-value="+7" data-name="Asia/Rangoon" data-city="Myanmar">
+                                    <span class="name-city" id="name-city13">Myanmar</span>
+                                    <span class="name-clock" id="name-clock13"></span>
+                                </li>
+                                <li class="my-timezone <?php if($timezone_name == 'Asia/Dhaka' ) echo ' active'; ?>" data-index="14" data-value="+6" data-name="Asia/Dhaka" data-city="Bangladesh">
+                                    <span class="name-city" id="name-city14">Bangladesh</span>
+                                    <span class="name-clock" id="name-clock14"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Colombo' ) echo ' active'; ?>" data-index="15" data-value="+5" data-name="Asia/Colombo" data-city="Sri Lanka">
+                                    <span class="name-city" id="name-city15">Sri Lanka</span>
+                                    <span class="name-clock" id="name-clock15"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == '16' ) echo ' active'; ?>" data-index="16" data-value="+5" data-name="Asia/Kolkata" data-city="New Delhi">
+                                    <span class="name-city" id="name-city16">New Delhi</span>
+                                    <span class="name-clock" id="name-clock16"></span>
+                                </li>
+                                <li class="my-timezone<?php if( $timezone_name== '17' ) echo ' active'; ?>" data-index="17" data-value="+5" data-name="Asia/Kolkata" data-city="Mumbai">
+                                    <span class="name-city" id="name-city17">Mumbai</span>
+                                    <span class="name-clock" id="name-clock17"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Europe/London' ) echo ' active'; ?>" data-index="18" data-value="0" data-name="Europe/London" data-city="London">
+                                    <span class="name-city" id="name-city18">London</span>
+                                    <span class="name-clock" id="name-clock18"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Australia/Sydney' ) echo ' active'; ?>" data-index="19" data-value="+5" data-name="Australia/Sydney" data-city="Sydney">
+                                    <span class="name-city" id="name-city19">Sydney</span>
+                                    <span class="name-clock" id="name-clock19"></span>
+                                </li>
                         </ul>
                     </div>
                     <img id="menu_Taggle" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Menu_Trigger.png">
@@ -362,39 +393,32 @@
                             <!-- Lost Password -->
                             <!-- Create Basic Account -->
                             <div id="create-account" class="tab-pane fade">
-                                <h3>Create Basic Account <span id="create-overview">overview</span></h3>
+                                <div class="student-center">
+                                    <p class="my-account">MY ACCOUNT</p>
+                                    <p class="tutor-acc">Create a Student Account</p>
+                                </div>
+                                <h3 class="mt-top-14" style="color: #36a93f;">Create Basic Account <img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"><span id="create-overview">overview</span></h3>
+                                <p style="color: red; font-size: 14px; "> (<span style="padding-top: 2px; position: absolute;  font-weight: bold;   padding-left: 2px; font-size: 14pt">*</span>&nbsp &nbsp) Required</p>
                                 <form method="post" id="createAccount" action="" name="registerform" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-sm-10 col-md-10 refreshclass">
+                                        <div class="col-sm-9 col-md-9 refreshclass">
+                                            <div class="find-general-border">
                                             <div class="form-group">
+                                                <span class="find-label"><?php _e('Email Address', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                                 <input id="user_login_signup" class="form-control" name="user_login" type="text" value="" required>
-                                                <span class="placeholder"><?php _e('Email Address', 'iii-dictionary') ?>:</span>
-                                                <span id="checked-availability" class="not-check-available"><span></span></span>
+                                                
+                                                <span id="checked-availability" class="not-check-available" style="    margin-right: 20px; "><span></span></span>
+                                                <button class="btn-dark-blue border-btn check-availability" id="check-availability" style="background: #FFA523; width: 50px; margin-top: -30px; float: right; border-radius: 8px !important;" type="button" name="wp-submit">Check</button>
                                             </div>
                                         </div>
-                                        <div class="col-sm-2 col-md-2">
-                                            <button class="btn-dark-blue border-btn check-availability" id="check-availability" style="background: #FFA523;" type="button" name="wp-submit">Availability</button>
                                         </div>
-                                        <div class="clearfix"></div>
-                                        <div class="col-sm-5 col-md-5 mt-top-14 refreshclass">
-                                            <div class="form-group">
-                                                <input id="user_password_signup" class="form-control border-ras" name="user_password" type="text" value="" required>
-                                                <span class="placeholder"><?php _e('Password', 'iii-dictionary') ?>:</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-5 col-md-5 mt-top-14 refreshclass">
-                                            <div class="form-group">
-                                                <input id="confirm_password" class="form-control border-ras" name="confirm_password" type="text" value="" required>
-                                                <span class="placeholder"><?php _e('Confirm Password', 'iii-dictionary') ?>:</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2 col-md-2 mt-top-14 gender-pc">
-                                            <div id="gender-pc">
+                                        <div class="col-sm-3 col-md-3">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Gender', 'iii-dictionary') ?><span class="required-star"> *</span></span>   
                                                 <div class="form-group">
                                                     <div class="border-ras select-style" id="gender">
                                                         <select id="birth_g_pc" class="select-box-it form-control" name="birth_g_pc">
-                                                            <option value="">Gender</option>
+                                                            
                                                             <option value="Male">Male</option>
                                                             <option value="Female">Female</option>
                                                         </select>
@@ -404,27 +428,57 @@
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="col-sm-6 col-md-6 mt-top-14 refreshclass">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Password', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                             <div class="form-group">
-                                                <input id="first_name_signup" class="form-control" name="first_name" type="text" value="" required>
-                                                <span class="placeholder"><?php _e('First Name', 'iii-dictionary') ?>:</span>
+                                                <input id="user_password_signup" class="form-control border-ras" name="user_password" type="text" value="" required>
+                                                <div class="clear-input" onclick="document.getElementById('user_password_signup').value=null;"></div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 col-md-6 mt-top-14 refreshclass">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Confirm Password', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                            <div class="form-group">
+                                                <input id="confirm_password" class="form-control border-ras" name="confirm_password" type="text" value="" required>
+                                                <div class="clear-input" onclick="document.getElementById('confirm_password').value=null;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
+                                        <div class="clearfix"></div>
+                                        <div class="col-sm-6 col-md-6 mt-top-14 refreshclass">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('First Name', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                            <div class="form-group">
+                                                <input id="first_name_signup" class="form-control" name="first_name" type="text" value="" required>
+                                                <div class="clear-input" onclick="document.getElementById('first_name_signup').value=null;"></div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 mt-top-14 refreshclass">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Last Name', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                             <div class="form-group">
                                                 <input id="last_name_signup" class="form-control" name="last_name" type="text" value="" required>
-                                                <span class="placeholder"><?php _e('Last Name', 'iii-dictionary') ?>:</span>
+                                                <div class="clear-input" onclick="document.getElementById('last_name_signup').value=null;"></div>
                                             </div>
+                                        </div>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="col-sm-12 col-md-12 mt-top-9">
                                             <div class="form-group">
-                                                <label class="create-label mt-bottom-11">
-                                                    <?php _e('Date of Birth', 'iii-dictionary') ?>
-                                                </label>
+                                                <h4 class="create-label mt-bottom-11">
+                                                    <?php _e('Date of Birth', 'iii-dictionary') ?><img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info">
+                                                </h4>
                                                 <div class="row tiny-gutter">
                                                     <div class="col-xs-12 col-sm-4 col-md-4 border-ras select-style" id="month">
+                                                    <div class="find-general-border">
+                                                        <span class="find-label"><?php _e('Month', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                                        <div class="form-group">
                                                         <select id="birth_m" class="select-box-it form-control" name="birth-m">
-                                                            <option value="">(Month)</option>
+                                                            
                                                             <?php for ($i = 1; $i <= 12; $i++) : ?>
                                                                 <?php $pad_str = str_pad($i, 2, '0', STR_PAD_LEFT) ?>
                                                                     <option value="<?php echo $pad_str ?>">
@@ -433,9 +487,14 @@
                                                                     <?php endfor ?>
                                                         </select>
                                                     </div>
+                                                    </div>
+                                                    </div>
                                                     <div class="col-xs-12 col-sm-4 col-md-4 border-ras select-style" id="date">
+                                                        <div class="find-general-border">
+                                                        <span class="find-label"><?php _e('Day', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                                        <div class="form-group">
                                                         <select id="birth_d" class="select-box-it form-control" name="birth-d">
-                                                            <option value="">(Day)</option>
+                                                            
                                                             <?php for ($i = 1; $i <= 31; $i++) : ?>
                                                                 <?php $pad_str = str_pad($i, 2, '0', STR_PAD_LEFT) ?>
                                                                     <option value="<?php echo $pad_str ?>">
@@ -444,12 +503,19 @@
                                                                     <?php endfor ?>
                                                         </select>
                                                     </div>
+                                                    </div>
+                                                    </div>
                                                     <div class="col-xs-12 col-sm-4 col-md-4 refreshclass year-mb">
-                                                        <input id="birth_y" class="form-control" name="birth-y" type="text" value="" required>
-                                                        <span class="placeholder"><?php _e('Year', 'iii-dictionary') ?>:</span>
+                                                        <div class="find-general-border">
+                                                            <span class="find-label"><?php _e('Year', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                                            <div class="form-group">
+                                                                <input id="birth_y" class="form-control" name="birth-y" type="text" value="" required>
+                                                                <div class="clear-input" onclick="document.getElementById('birth_y').value=null;"></div>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
-                                                    <div class="col-xs-12 col-sm-4 col-md-4 gender-mb">
+                                                   <!--  <div class="col-xs-12 col-sm-4 col-md-4 gender-mb">
                                                         <div id="gender-mb">
                                                             <div class="form-group">
                                                                 <div class="border-ras select-style" id="gender">
@@ -461,79 +527,72 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <div class="col-sm-12 col-md-12 refreshclass">
-                                            <label class="create-label mt-top-10">
-                                                <?php _e('Language', 'iii-dictionary') ?>
-                                            </label>
-                                            <div class="form__boolean mt-bottom-10 clearfix" id="checkBoxSearch" style="margin-top: 0">
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons class_cb_search option-input-2 radio" value="en" data-lang="en" name="cb-lang" /> English
-                                                    </label>
+                                        <div id="language-timezone" class="col-sm-6 col-md-6 col-xs-6">
+                                                
+                                                <div  class="find-general-border language-input">
+                                                <span class="find-label"><?php _e('Language', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                                <div id="show-language" class="show-language">
+                                                  
+                                                <span class="show-language-drop" style="margin-top: -2.5px;"><i style="opacity:0;">0</i></span>
                                                 </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons class_cb_search option-input-2 radio" value="ja" data-lang="ja" name="cb-lang" /> Japanese
-                                                    </label>
                                                 </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons class_cb_search option-input-2 radio" value="ko" data-lang="ko" name="cb-lang" /> Korean
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons class_cb_search option-input-2 radio" value="zh" data-lang="zh" name="cb-lang" /> Chinese
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons class_cb_search option-input-2 radio" value="zh-tw" data-lang="zh-tw" name="cb-lang" /> Traditional Chinese
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons class_cb_search option-input-2 radio" value="vi" data-lang="vi" name="cb-lang" /> Vietnamese
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons class_cb_search option-input-2 radio" value="ot" data-lang="ot" name="cb-lang" /> Others
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-12 col-md-12 profile-pic refreshclass mt-top-14" style="clear: both;">
-                                            <label class="create-label img-profile">Profile Picture (optional)</label>
-                                            <div class="row">
-                                                <div class="col-sm-4 col-md-4 mt-top-9">
-                                                    <div class="form-group">
-                                                        <img id="user-upload-avatar" src="<?php echo get_template_directory_uri(); ?>/library/images/Icon_Image_Person.png" alt="Profile Picture" style="display: inline-block; margin-right: 14px;">
-                                                        <input class="form-control input-file" type="file" id="input-avatar" value="">
-                                                        <button class="btn-dark-blue border-btn" style="background: #cecece; display: inline-block; width: 82%" type="button" name="upload" onclick="document.getElementById('input-avatar').click();">
-                                                            <?php _e('Browse', 'iii-dictionary') ?>
-                                                        </button>
+                                            
+                                                <div class="form__boolean mt-bottom-10 clearfix language_drop" id="checkBoxSearch" style="margin-top: -14px">
+                                                    <span class="Available-lg">Available language</span>
+                                                    <ul id="list-language" style="font-size: 11pt; color: #9c9c9c;">
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons class_cb_search option-input-3 radio" value="en" data-lang="en" name="cb-lang"/>
+                                                            <span>English</span>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons class_cb_search option-input-3 radio" value="ja" data-lang="ja" name="cb-lang"/>
+                                                            <span>Japanese</span>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons class_cb_search option-input-3 radio" value="ko" data-lang="ko" name="cb-lang"/>
+                                                            <span>Korean</span>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons class_cb_search option-input-3 radio" value="zh" data-lang="zh" name="cb-lang"/>
+                                                            <span>Chinese</span>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons class_cb_search option-input-3 radio" value="zh-tw" data-lang="zh-tw" name="cb-lang"/>
+                                                            <span>Traditional Chinese</span>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons class_cb_search option-input-3 radio" value="vi" data-lang="vi" name="cb-lang"/>
+                                                            <span>Vietnamese</span>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons class_cb_search option-input-3 radio" value="ot" data-lang="ot" name="cb-lang"/>
+                                                            <span>Others</span>
+                                                        </li>
+                                                        
+                                                    </ul>
+                                                    <div style="padding:12px 0;">
+                                                    <div class="ol-sm-6 col-md-6">
+                                                        <button id="save-lg" class="btn-dark-blue border-btn" style="background: #009dcb;" type="button" name="save_timelot">
+                                                                                SAVE   
+                                                                            </button>
                                                     </div>
+                                                    <div class="ol-sm-6 col-md-6">
+                                                        <button id="cancel-lg" class="btn-dark-blue border-btn" style="background: #CECECE;" type="button" name="cancel_timelot" >
+                                                                                CANCEL
+                                                                            </button>
                                                 </div>
-
-                                                <div class="col-sm-8 col-md-8 mt-top-9">
-                                                    <div class="form-group">
-                                                        <input class="form-control input-path" id="profile-avatar" type="text">
-                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
+                                                </div>
+                                                </div>
                                         <div class="col-sm-6 col-md-6 col-xs-6 mt-top-mb-12">
-                                            <label class="create-label mt-top-10">
-                                                <?php _e('My Time Zone', 'iii-dictionary') ?>
-                                            </label>
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('My Time Zone', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                            
                                             <div class="form-group border-ras select-style user-timezone mt-top-8">
                                                 <select class="select-box-it form-control" name="time_zone" id="user-time-zone">
                                                     <option value="0" data-value="0" data-name="Europe/London" data-city="London">Select Time Zone</option>
@@ -559,10 +618,43 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        </div>
+                                        <div class="clearfix"></div>    
+                                        <div class="col-sm-12 col-md-12 profile-pic refreshclass mt-top-14" style="clear: both;">                                                
+                                                    
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-12"><h4>Profile Picture (optional)<img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"></h4></div>
+                                                    <div class="col-sm-3 col-md-3 mt-top-9">
+                                                        <div class="row">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-4 col-md-4">
+                                                            <img id="user-upload-avatar" src="<?php echo get_template_directory_uri(); ?>/library/images/Icon_Image_Person.png" alt="Profile Picture" style="display: inline-block; margin-right: 14px;">
+                                                            </div>
+                                                            <div class="col-sm-8 col-md-8">
+                                                            <input class="form-control input-file" type="file" id="input-avatar" value="" >
+                                                            <button class="btn-dark-blue border-btn" style="background: #cecece; display: inline-block; width: 100%; height: 50px; border-radius: 10px !important;" type="button" name="upload"  onclick="document.getElementById('input-avatar').click();"><?php _e('Browse', 'iii-dictionary') ?></button>
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-9 col-md-9 mt-top-9" >
+                                                        <div class="find-general-border">
+                                                            <span class="find-label">Image Location</span>
+                                                            <div class="form-group">                                    
+                                                            <input class="form-control input-path" id="profile-avatar" type="text">
+                                                            <div class="clear-input" onclick="document.getElementById('profile_avatar').value=null;"></div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                        
                                         <div class="clearfix"></div>
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-bottom-24">
                                             <div class="form-group">
-                                                <button class="btn-dark-blue border-btn" id="create-acc" style="background: #65C762; margin-top: 20px;" type="button" name="wp-submit">
+                                                <button class="btn-dark-blue border-btn" id="create-acc" style="background: #199eca; margin-top: 20px;" type="button" name="wp-submit">
                                                     <?php _e('Create Account', 'iii-dictionary') ?>
                                                 </button>
                                             </div>
@@ -620,6 +712,7 @@
                                                     ?>
                                                 </span>
                                             </div>
+                                            <div class="btn-dark-blue border-btn check-availability" id="edit-profile">Update Profile</div>
                                         </div>
                                         <hr>
                                     </div>
@@ -942,70 +1035,91 @@
                                         $update_description = get_user_meta($current_user->ID, 'subject_description', true);
                                     }
                                 ?>
-                                <h3>Update My Account</h3>
+                                <div class="student-center">
+                                    <p class="my-account">MY ACCOUNT</p>
+                                    <p class="tutor-acc">Update My Account</p>
+                                </div>
                                 <form method="post" id="myUpdate" action="" name="updateAccount" enctype="multipart/form-data">
-                                    <h4>Basic Account Info:</h4>
+                                    
+                                    <h3 style="color: #36a93f">Basic Account <img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"></h3>
+                                    <span style="color: red; font-size: 14px; float: right; margin-top: -30px;"> (<span style="padding-top: 2px; position: absolute;  font-weight: bold;   padding-left: 2px; font-size: 14pt">*</span>&nbsp &nbsp) Required</span>
                                     <div class="row">
-                                        <div class="col-sm-12 col-md-12">
+                                        <div class="col-sm-9 col-md-9">
+                                        <div class="find-general-border">
+                                            <span class="find-label"><?php _e('Email Address', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                             <div class="form-group">
                                                 <input id="update_username" class="form-control" name="update_username" type="text" value="<?php echo $update_username ?>" readonly="">
-                                                <span class="placeholder"><?php _e('Email Address', 'iii-dictionary') ?>:</span>
+                                                
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-3">
+                                            <div id="update-gender-pc">
+                                                <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Gender', 'iii-dictionary') ?><span class="required-star"> *</span></span>                                            
+                                                <div class="form-group">
+                                                    <div class="border-ras select-style" id="gender_up">
+                                                        
+                                                        <select id="update_birth_g_pc" class="select-box-it form-control" name="update_birth_g_pc">
+                                                            <option value="" <?php if($update_birth_g == '') echo 'selected="selected"' ?>>Gender</option>
+                                                            <option value="Male" <?php if($update_birth_g == "Male")echo 'selected="selected"'?>>Male</option>
+                                                            <option value="Female" <?php if($update_birth_g == "Female")echo 'selected="selected"'?>>Female</option>
+                                                        </select>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <div class="col-sm-5 col-md-5 mt-top-14">
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Password', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                             <div class="form-group">
-                                                <input id="update_password" class="form-control border-ras" name="update_password" type="text" value="<?php echo $update_user_password ?>" required>
-                                                <span class="placeholder"><?php _e('Password', 'iii-dictionary') ?>:</span>
+                                                <input id="update_password" class="form-control border-ras" name="update_password" type="password" value="<?php echo $update_user_password ?>" required>
+                                                
                                             </div>
                                         </div>
-                                        <div class="col-sm-5 col-md-5 mt-top-14 mt-top-mb-24">
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Confirm Password', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                             <div class="form-group">
-                                                <input id="update_confirmpass" class="form-control border-ras" name="update_confirmpass" type="text" value="<?php echo $update_user_password ?>" required>
-                                                <span class="placeholder"><?php _e('Confirm Password', 'iii-dictionary') ?>:</span>
+                                                <input id="update_confirmpass" class="form-control border-ras" name="update_confirmpass" type="password" value="<?php echo $update_user_password ?>" required>
+                                                
                                             </div>
+                                        </div>
                                         </div>
 
-                                        <div class="col-sm-2 col-md-2 mt-top-14 gender-pc">
-                                            <div id="update-gender-pc">                                                
-                                                <div class="form-group">
-                                                    <div class="border-ras select-style" id="gender_up">
-                                                        <?php if($update_birth_g != ''){ ?>
-                                                        <input type="text" class="form-control" name="update_birth_g_pc" value="<?php echo $update_birth_g; ?>" id="update_birth_g_pc" readonly="">
-                                                        <?php }else{ ?>
-                                                        <select id="update_birth_g_pc" class="select-box-it form-control" name="update_birth_g_pc">
-                                                            <option value="">Gender</option>
-                                                            <option value="Male">Male</option>
-                                                            <option value="Female">Female</option>
-                                                        </select>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                    </div>
+                                        
+                                        <div class="clearfix"></div>
+                                        
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('First Name', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                            <div class="form-group">
+                                                <input id="update_first_name" class="form-control" name="update_first_name" type="text" value="<?php echo $update_first_name ?>" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Last Name', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                            <div class="form-group">
+                                                <input id="update_last_name" class="form-control" name="update_last_name" type="text" value="<?php echo $update_last_name ?>" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <div class="col-sm-6 col-md-6 mt-top-14">
-                                            <div class="form-group">
-                                                <input id="update_first_name" class="form-control" name="update_first_name" type="text" value="<?php echo $update_first_name ?>" required>
-                                                <span class="placeholder"><?php _e('First Name', 'iii-dictionary') ?>:</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 mt-top-14 mt-top-mb-24">
-                                            <div class="form-group">
-                                                <input id="update_last_name" class="form-control" name="update_last_name" type="text" value="<?php echo $update_last_name ?>" required>
-                                                <span class="placeholder"><?php _e('Last Name', 'iii-dictionary') ?>:</span>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
+                                        <h4 class="create-label col-sm-12 col-md-12">Date of Birth<img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"></h4>
                                         <div class="col-sm-12 col-md-12 mt-top-9">
+
                                             <div class="form-group">
-                                                <label class="create-label mt-bottom-11">
-                                                    <?php _e('Date of Birth', 'iii-dictionary') ?>
-                                                </label>
+                                                
                                                 <div class="row tiny-gutter">
                                                     <div class="col-xs-12 col-sm-4 col-md-4 border-ras select-style" id="update_month">
+                                                        <div class="find-general-border">
+                                                            <span class="find-label"><?php _e('Month', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                                         <select id="update_birth_m" class="select-box-it form-control" name="update-birth-m">
                                                             <option value="">(Month)</option>
                                                             <?php 
@@ -1022,7 +1136,10 @@
                                                             <?php endfor ?>
                                                         </select>
                                                     </div>
+                                                    </div>
                                                     <div class="col-xs-12 col-sm-4 col-md-4 border-ras select-style" id="update_date">
+                                                        <div class="find-general-border">
+                                                            <span class="find-label"><?php _e('Day', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                                         <select id="update_birth_d" class="select-box-it form-control" name="update-birth-d">
                                                             <option value="">(Day)</option>
                                                             <?php 
@@ -1039,100 +1156,105 @@
                                                             <?php endfor ?>
                                                         </select>
                                                     </div>
-                                                    <div class="col-xs-12 col-sm-4 col-md-4 year-mb">
-                                                        <input id="update_birth_y" class="form-control" name="update-birth-y" type="text" value="<?php echo $update_birth_y ?>" required>
-                                                        <span class="placeholder"><?php _e('Year', 'iii-dictionary') ?>:</span>
                                                     </div>
-
-                                                    <div class="col-xs-12 col-sm-4 col-md-4 gender-mb">
-                                                        <div id="update-gender-mb">
+                                                    <div class="col-xs-12 col-sm-4 col-md-4 year-mb">
+                                                        <div class="find-general-border">
+                                                            
+                                                            <span class="find-label"><?php _e('Year', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                                             <div class="form-group">
-                                                                <div class="border-ras select-style" id="update_gender">
-                                                                    <?php if($update_birth_g != ''){ ?>
-                                                                    <input readonly="" type="text" name="update_birth_g_mb" class="form-control" value="<?php echo $update_birth_g; ?>" id="update_birth_g_mb">
-                                                                    <?php }else{ ?>
-                                                                    <select id="update_birth_g_mb" class="select-box-it form-control" name="update_birth_g_mb">
-                                                                        <option value="">Gender</option>
-                                                                        <option value="Male">Male</option>
-                                                                        <option value="Female">Female</option>
-                                                                    </select>
-                                                                    <?php } ?>
-                                                                </div>
-                                                            </div>
+                                                        <input id="update_birth_y" class="form-control" name="update-birth-y" type="text" value="<?php echo $update_birth_y ?>" required>
                                                         </div>
                                                     </div>
+                                                    </div>
+
+                                                    
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <div class="col-sm-12 col-md-12">
-                                            <label class="create-label mt-top-10">
-                                                <?php _e('Language', 'iii-dictionary') ?>
-                                            </label>
-                                            <div class="form__boolean mt-bottom-10 clearfix" id="checkBoxSearch" style="margin-top: 0">
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons option-input-2 radio" value="en" <?php if(count($update_language)> 0 && in_array("en", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/> English
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons option-input-2 radio" value="ja" <?php if(count($update_language)> 0 && in_array("ja", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/> Japanese
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons option-input-2 radio" value="ko" <?php if(count($update_language)> 0 && in_array("ko", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/> Korean
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons option-input-2 radio" value="zh" <?php if(count($update_language)> 0 && in_array("zh", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/> Chinese
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons option-input-2 radio" value="zh-tw" <?php if(count($update_language)> 0 && in_array("zh-tw", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/> Traditional Chinese
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons option-input-2 radio" value="vi" <?php if(count($update_language)> 0 && in_array("vi", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/> Vietnamese
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons option-input-2 radio" value="ot" <?php if(count($update_language)> 0 && in_array("ot", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/> Others
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <h4 class="create-label col-sm-12 col-md-12 mt-bottom-11">Language & My Time Zone<img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"></h4>
+                                        <div id="language-timezone-update" class="col-sm-6 col-md-6 col-xs-6 mt-top-mb-12">
+                                                
+                                                <div  class="find-general-border language-input">
+                                                <span class="find-label"><?php _e('Language', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                                <div id="show-language-up" class="show-language">
 
-                                        <div class="col-sm-12 col-md-12 profile-pic mt-top-14" style="clear: both;">
-                                            <label class="create-label img-profile">Profile Picture (optional)</label>
-                                            <div class="row">
-                                                <div class="col-sm-4 col-md-4 mt-top-9">
-                                                    <div class="form-group">
-                                                        <img id="user-upload-img" src="<?php echo get_template_directory_uri(); ?>/library/images/Icon_Image_Person.png" alt="Profile Picture" style="display: inline-block; margin-right: 14px;">
-                                                        <input class="form-control input-file" type="file" id="input-image" value="">
-                                                        <button class="btn-dark-blue border-btn" style="background: #cecece; display: inline-block; width: 82%" type="button" name="upload" onclick="document.getElementById('input-image').click();">
-                                                            <?php _e('Browse', 'iii-dictionary') ?>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                                    <?php 
+                                                         $languagelist = "";
+                                                        if(count($update_language) > 0){
+                                                       
+                                                        if(in_array("en", $update_language)){$languagelist = $languagelist."English, ";}
+                                                        if(in_array("ja", $update_language)){$languagelist = $languagelist."Japanese, ";}
+                                                        if(in_array("ko", $update_language)){$languagelist = $languagelist."Korean, ";}
+                                                        if(in_array("zh", $update_language)){$languagelist = $languagelist."Chinese, ";}
+                                                        if(in_array("zh-tw", $update_language)){$languagelist = $languagelist."Traditional Chinese, ";}
+                                                        if(in_array("vi", $update_language)){$languagelist = $languagelist."Vietnamese, ";}
+                                                        if(in_array("ot", $update_language)){$languagelist = $languagelist."Others, ";}
 
-                                                <div class="col-sm-8 col-md-8 mt-top-9">
-                                                    <div class="form-group">
-                                                        <input class="form-control input-path" id="profile-value" type="text" value="<?php echo $profile_value ?>">
-                                                    </div>
+                                                        };
+                                                        echo rtrim($languagelist,", ");
+                                                        
+                                                        ?>
+                                                        <span class="selectboxit-arrow-container" style="margin-top: -2.5px; margin-right: 0"><i style="opacity:0;">0</i></span>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
+                                                </div>
+                                                <div class="form__boolean mt-bottom-10 clearfix language_drop" id="checkBoxSearch" style="margin-top: -14px">
+                                                    <span class="Available-lg">Available language</span>
+                                                    <ul id="list-language" style="font-size: 11pt; color: #9c9c9c;">
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons option-input-3 radio" value="en" <?php if(count($update_language) > 0 && in_array("en", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/>
+                                                            <span>English</span>
+                                                        </li>
+                                                        
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons option-input-3 radio" value="ja" <?php if(count($update_language) > 0 && in_array("ja", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/>
+                                                            <span>Japanese</span>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <input type="checkbox"  class="radio_buttons option-input-3 radio" value="ko" <?php if(count($update_language) > 0 && in_array("ko", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/>
+                                                            <span>Korean</span>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons option-input-3 radio" value="zh" <?php if(count($update_language) > 0 && in_array("zh", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/>
+                                                            <span>Chinese</span>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons option-input-3 radio" value="zh-tw" <?php if(count($update_language) > 0 && in_array("zh-tw", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/>
+                                                            <span>Traditional Chinese</span>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons option-input-3 radio" value="vi" <?php if(count($update_language) > 0 && in_array("vi", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/>
+                                                            <span>Vietnamese</span>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons option-input-3 radio" value="ot" <?php if(count($update_language) > 0 && in_array("ot", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/>
+                                                            <span>Others</span>
+                                                        </li>
+                                                    </ul>
+                                                    <div style="padding:12px 0;">
+                                                <div class="ol-sm-6 col-md-6">
+                                                   <button id="save-lg-up" class="btn-dark-blue border-btn" style="background: #009dcb;" type="button" name="save_timelot">
+                                                                                SAVE   
+                                                                            </button>
+                                                </div>
+                                                <div class="ol-sm-6 col-md-6">
+                                                     <button id="cancel-lg-up" class="btn-dark-blue border-btn" style="background: #CECECE;" type="reset" name="cancel_timelot" >
+                                                                                CANCEL
+                                                                            </button>
+                                                </div>
+                                                </div>
+                                                </div>
+                                                </div>
                                         <div class="col-sm-6 col-md-6 col-xs-6 mt-top-mb-12">
-                                            <label class="create-label mt-top-10">
-                                                <?php _e('My Time Zone', 'iii-dictionary') ?>
-                                            </label>
+                                            <div class="find-general-border">
+                                            <span class="find-label">
+                                                <?php _e('My Time Zone', 'iii-dictionary') ?><span class="required-star"> *</span>
+                                            </span>
                                             <div class="form-group border-ras select-style user-timezone mt-top-8">
                                                 <select class="select-box-it form-control" name="time_zone" id="update-time-zone">
                                                     <option value="0" data-value="0" data-name="Europe/London" data-city="London" <?php if($time_zone_index == '0' ) echo 'selected="selected"'; ?>>Select Time Zone</option>
@@ -1158,7 +1280,40 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        </div>
                                         <div class="clearfix"></div>
+
+                                        <div class="col-sm-12 col-md-12 profile-pic mt-top-14" style="clear: both;">
+                                            <label class="create-label img-profile">Profile Picture (optional)</label>
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-3 mt-top-9">
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-md-4">
+                                                    
+
+                                                        <img id="user-upload-img" src="<?php echo get_template_directory_uri(); ?>/library/images/Icon_Image_Person.png" alt="Profile Picture" style="display: inline-block; margin-right: 14px;">
+                                                        </div>
+                                                        <div class="col-sm-8 col-md-8">
+                                                        <input class="form-control input-file" type="file" id="input-image" value="">
+                                                        <button class="btn-dark-blue border-btn" style="background: #cecece; display: inline-block; height: 50px;" type="button" name="upload" onclick="document.getElementById('input-image').click();">
+                                                            <?php _e('Browse', 'iii-dictionary') ?>
+                                                        </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-9 col-md-9 mt-top-9">
+                                                    <div class="find-general-border">
+                                                        <span class="find-label"><?php _e('Image Location', 'iii-dictionary') ?></span>
+                                                    <div class="form-group">
+                                                        <input class="form-control input-path" id="profile-value" type="text" value="<?php echo $profile_value ?>">
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        
                                         <?php 
                                             if ($is_user_logged_in && (is_mw_qualified_teacher($current_user->ID) || is_mw_registered_teacher($current_user->ID)))
                                                 $style = 'style="display: none;"';
@@ -1774,7 +1929,7 @@
                                                                 <div class="form-group border-ras select-style">
                                                                     <select class="find-select select-box-it  form-control" name="available_subject" id="select-available-subject">
                                                                         <option class="boo" value="0" data-name="">Subject</option>
-                                                                        <option value="all" data-name="Any Subjects">Any Subjects</option>
+                                                                        <!-- <option value="all" data-name="Any Subjects">Any Subjects</option> -->
                                                                         <option value="english_subject|all" data-name="English Only">English Only</option>
                                                                         <option value="math_subject|all" data-name="Math Only">Math Only</option>
                                                                         <option value="science_subject|all" data-name="Science Only">Science Only </option>
@@ -1826,6 +1981,7 @@
                                                                 <option class="boo" value="0" data-name="">Tutoring type</option>
                                                                 <option value="one_tutoring" data-name="1 on 1 Tutoring">1 On 1 Tutoring</option>
                                                                 <option value="group_tutoring" data-name="Group Tutoring">Group Tutoring</option>
+                                                                <option value="" data="">Both</option>
                                                             </select>
                                                             </div>
                                                             </div>
@@ -1835,7 +1991,7 @@
                                                             <label class="find-label">Price</label>
                                                             <div class="max-100 form-group select-style">
                                                             <select class="find-select select-box-it  form-control" name="available_subject" id="select-available-price">
-                                                                <option class="boo" value="0" data-name="">Price</option>
+                                                                <option class="boo" value="0" data-name="">Any Price</option>
                                                                 <option value="one_to_ten" data-name="$1 - $10 (30 min)">$1 - $10 (30 min)</option>
                                                                 <option value="eleven_to_twenty" data-name="$11 - $20 (30 min)">$11 - $20 (30 min)</option>
                                                                 <option value="twetyone_to_thirty" data-name="$21 - $30 (30 min)">$21 - $30 (30 min)</option>
@@ -2724,7 +2880,7 @@
             <div class="main-nav-block"></div>
             <div class="container" style="position: relative">
                 <div id="sub-logo">
-                    <a href="https://iktutor.com" rel="nofollow" title="Innovative Knowledge">
+                    <a href="https://iktutor.com<?php echo $link_ss ?>" rel="nofollow" title="Innovative Knowledge">
                         <img src="<?php echo get_template_directory_uri(); ?>/library/images/ikLearn_Dark_LOGO.png" alt="">
                     </a>
                 </div>
@@ -3211,6 +3367,7 @@
                             $(".slide-resume").css('visibility','hidden');
                             var tr = '<tr><td class="no-results"><img src="' + path + 'icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';
                             $('#table-list-tutor').html(tr);
+                            $('.result_quick').css("display","none");
                         }else{
                             $("#login-user").removeClass("hidden");
                             $("#login-user").addClass("active");
@@ -3497,7 +3654,68 @@
                             }
                         });
                     });
-
+                    $("#save-lg").click(function () {
+                            $('.language_drop').css('display','none');
+                            var cb = document.getElementsByName('cb-lang');
+                            var lg = "";
+                            if (cb[0].checked === true){
+                                lg += 'English, ';
+                            }
+                            if (cb[1].checked === true){
+                                lg += 'Japanese, ';
+                            }
+                            if (cb[2].checked === true){
+                                lg += 'Korean, ';
+                            }
+                            if (cb[3].checked === true){
+                                lg += 'Chinese, ';
+                            }
+                            if (cb[4].checked === true){
+                                lg += 'Traditional Chinese, ';
+                            }
+                            if (cb[5].checked === true){
+                                lg += 'Vietnamese, ';
+                            }
+                            if (cb[6].checked === true){
+                                lg += 'Other, ';
+                            }
+                            var sl = lg.substring(0, lg.length - 2);
+                            document.getElementById("show-language").innerHTML = sl+'<span class="show-language-drop" style="margin-top: -2.5px;"><i style="opacity:0;">0</i></span>';
+                    });
+                    $("#save-lg-up").click(function () {
+                            $('.language_drop').css('display','none');
+                            var cb = document.getElementsByName('update-cb-lang');
+                            var lg = "";
+                            if (cb[0].checked === true){
+                                lg += 'English, ';
+                            }
+                            if (cb[1].checked === true){
+                                lg += 'Japanese, ';
+                            }
+                            if (cb[2].checked === true){
+                                lg += 'Korean, ';
+                            }
+                            if (cb[3].checked === true){
+                                lg += 'Chinese, ';
+                            }
+                            if (cb[4].checked === true){
+                                lg += 'Traditional Chinese, ';
+                            }
+                            if (cb[5].checked === true){
+                                lg += 'Vietnamese, ';
+                            }
+                            if (cb[6].checked === true){
+                                lg += 'Other, ';
+                            }
+                            var sl = lg.substring(0, lg.length - 2);
+                            document.getElementById("show-language-up").innerHTML = sl+'<span class="show-language-drop" style="margin-top: -2.5px;"><i style="opacity:0;">0</i></span>';
+                    });
+                    $("#cancel-lg").click(function () {
+                            $('.language_drop').css('display','none');
+                        });
+                    $("#cancel-lg-up").click(function () {
+                            $('.language_drop').css('display','none');
+                        });
                     $('#create-acc').click(function () {
                         $('#create-acc').attr("disabled", true);
                         var user_name = $('#user_login_signup').val();
@@ -3517,12 +3735,9 @@
                             if(val == '') var val = $(this).attr('data-lang');
                             cb_lang.push(val);
                         });
-                        var viewport = getViewport();
-                        if(viewport.width < 650){
-                            var gender = $("#birth-g_mbSelectBoxItText").attr("data-val");
-                        }else{
-                            var gender = $("#birth_g_pcSelectBoxItText").attr("data-val");
-                        }
+                        
+                        var gender = $("#birth_g_pcSelectBoxItText").attr("data-val");
+                        
                         $.post(home_url + "/?r=ajax/create_account", {
                             user_name: user_name,
                             user_password: user_password,
@@ -3549,6 +3764,7 @@
                         });
                     });
 
+
                     $('.cancel-update-teacher').click(function () {
                         var id = $(this).attr('data-id');
                         var tab = $(this).attr('data-tab');
@@ -3561,9 +3777,7 @@
                     $('#update-teacher').click(function () {
                         $("#update-teacher").attr("disabled", true);
                         var check_student = $('#chk-tutor-teacher').val();
-                        var check_gender = $('#chk-user-gender').val();
-
-                        //var user_email = $('#update_username').val();
+                       //var user_email = $('#update_username').val();
                         var new_password = $('#update_password').val();
                         var retype_new_password = $('#update_confirmpass').val();
                         var first_name = $('#update_first_name').val();
@@ -3602,17 +3816,11 @@
 
                         var birth_m = $("#update_birth_mSelectBoxItText").attr("data-val");
                         var birth_d = $("#update_birth_dSelectBoxItText").attr("data-val");
-                        var gender = '';
-                        if(check_gender == '' || $.trim(check_gender) == ''){
-                            var viewport = getViewport();
-                            if(viewport.width < 650){
-                                var gender = $("#update_birth_g_mbSelectBoxItText").attr("data-val");
-                            }else{
-                                var gender = $("#update_birth_g_pcSelectBoxItText").attr("data-val");
-                            }
-                        }else{
-                            gender = check_gender;
-                        }
+                                   
+                             
+                        var gender = $("#update_birth_g_pcSelectBoxItText").attr("data-val");
+                    
+                        
 
                         var cb_lang = [];
                         var subject_type = [];
@@ -4158,6 +4366,7 @@
                         $('#table-list-tutor').html('');
                         var tr = '<tr><td class="no-results"><img src="' + path + 'icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';
                         $('#table-list-tutor').html(tr);
+                        $('.result_quick').css("display","none");
                         
                         /*
                         var date = $('#today-tutor').val();
@@ -4221,6 +4430,7 @@
                         if(!$('#btn-available-now').hasClass('active')){
                             $('.btn-sub-tab').removeClass('active');
                             $('#btn-available-now').addClass('active');
+                            $('.result_quick').css("display","none");
                             $('#btn-available-now').find('img').attr('src',path + '04_Available_Now_Selected.png');
                             $('#btn-list-review').find('img').attr('src',path + 'icon_L_Review.png');
                             $('#btn-list-favorite').find('img').attr('src',path + 'icon_L_Favorite.png');
@@ -4362,6 +4572,7 @@
                         }
                         var tr = '<tr><td class="no-results"><img src="' + path + 'icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';
                         $('#table-list-tutor').html(tr);
+                        $('.result_quick').css("display","none");
                         //get_tutor_user('fromclass','table-list-tutor','tutor');
                     });
                     
@@ -8638,16 +8849,16 @@
                             $(this).addClass('active');
                             $('#mycity-name').text(city);
 
-                            $("#select-timezone").selectBoxIt('selectOption',index.toString()).data("selectBox-selectBoxIt");
-                            $("#select-timezone").data("selectBox-selectBoxIt").refresh();
+                            // $("#select-timezone").selectBoxIt('selectOption',index.toString()).data("selectBox-selectBoxIt");
+                            // $("#select-timezone").data("selectBox-selectBoxIt").refresh();
 
                             $('#my-timezone').toggle();
 
-                            $.post(home_url + "/?r=ajax/update_timezone", {                                   
-                                timezone: timezone,
-                                name: name,
-                                index: index
-                            }, function (data) {});
+                            // $.post(home_url + "/?r=ajax/update_timezone", {                                   
+                            //     timezone: timezone,
+                            //     name: name,
+                            //     index: index
+                            // }, function (data) {});
 
                             initDateTimePicker(name, index, timezone, city);
                             clearInterval(interval);
@@ -10015,7 +10226,7 @@
 
                             $('#tutor-regis-update').css("display","none");
                             $('#chk-tutor-teacher').val($chk_teacher);
-                            $('#chk-user-gender').val(data.gender);
+                            // $('##update_birth_g_pc').val(data.gender);
                             $('#update_username').val(data.user_email);
                             $('#update_password').val(data.user_password);
                             $('#update_confirmpass').val(data.user_password);
@@ -10054,6 +10265,10 @@
                             $("#update-time-zone").data("selectBox-selectBoxIt").refresh();
 
                             if(data.birth_m != ''){
+                                $("#update_birth_g_pc").selectBoxIt('selectOption',data.gender.toString()).data("selectBox-selectBoxIt");
+                                $("#update_birth_g_pc").data("selectBox-selectBoxIt").refresh();
+                            }
+                            if(data.birth_m != ''){
                                 $("#update_birth_m").selectBoxIt('selectOption',data.birth_m.toString()).data("selectBox-selectBoxIt");
                                 $("#update_birth_m").data("selectBox-selectBoxIt").refresh();
                             }
@@ -10067,17 +10282,7 @@
                             }
 
                             var viewport = getViewport();
-                            if(viewport.width < 650){
-                                if(data.gender != ''){
-                                    $('#update_gender').html('');
-                                    $('#update_gender').html('<input readonly="" type="text" name="update_birth_g_mb" class="form-control" value="' + data.gender + '" id="update_birth_g_mb">');
-                                }
-                            }else{
-                                if(data.gender != ''){
-                                    $('#gender_up').html('');
-                                    $('#gender_up').html('<input type="text" class="form-control" name="update_birth_g_pc" value="' + data.gender + '" id="update_birth_g_pc" readonly="">');
-                                }
-                            }
+                            
                             $('input[name="update-cb-lang"]').each(function () {
                                 if( $.inArray(this.value, data.cb_lang) >= 0 ) {
                                     $(this).attr("checked",true);
@@ -10117,6 +10322,7 @@
                     }
 
                     function initDateTimePicker(timezone_name = 'Europe/London', timezone_index = 18, time_zone = 0, location_time = 'London', type = 'schedule'){
+                        var timezone_name = '<?php echo $timezone_name ?>';
                         var ptype = $('#custom-timezone').attr("data-type");
                         var pday = $('#custom-timezone').attr("data-day");
                         if($('.datepicker-days').find('.day').hasClass('active')){
@@ -10492,8 +10698,8 @@
                                         }
                                     })
                                     //DUMMY DATA
-                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Group.png" alt="" style="height:12px;margin-top: 5px;"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
-                                        <div><b>${v.display_name}</b></div><div><p class="find-card-marketing-tag">
+                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Group.png" alt="" style="width:43px;margin-top: -15px;"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
+                                        <div><b style="font-size:14px">${v.display_name}</b></div><div><p class="find-card-marketing-tag">
                                         ${v.previous_school}</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
                                         <span class="find-card-more" data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume"><u>+Read more</u></span></p></div>
                                     </td>`;
@@ -10740,8 +10946,8 @@
                                         type = "/library/images/icon_Group.png";
                                     }
                                     //DUMMY DATA
-                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>${type}" alt="" style="height:12px;margin-top: 5px;"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
-                                        <div><b>${v.display_name}</b></div><div><p class="find-card-marketing-tag">
+                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>${type}" alt="" style="width:43px;margin-top: -15px;"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
+                                        <div><b style="font-size:14px">${v.display_name}</b></div><div><p class="find-card-marketing-tag">
                                         ${v.previous_school}</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
                                         <span class="find-card-more" data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume"><u>+Read more</u></span></p></div>
                                     </td>`;
@@ -11184,6 +11390,13 @@
                         return distance;
                     }
                 });
+            $('#edit-profile').click(function(){
+               
+                $('#updateinfo').addClass('active in');
+                $('#profile').removeClass('active in');
+                $('#sub-update-info').addClass('active');
+                $('#sub-profile').removeClass('active');
+            });
             })(jQuery);
             $('body').on('click', '.sign-up', function () {
                 $("#login-user").removeClass("active");
@@ -11211,4 +11424,27 @@
                     
                         $("#top-popup-message").css("display","none");
                     });
+            $('.language-input').click(function () {
+                $('.language_drop').slideToggle(0);
+            });
+            $(document).click(function (e){
+            // Đối tượng container chứa popup
+            var containerlang = $("#language-timezone");
+            var containerlang_up = $("#language-timezone-update");
+            // Nếu click bên ngoài đối tượng container thì ẩn nó đi
+            if (!containerlang.is(e.target) && containerlang.has(e.target).length === 0){
+                var isopened = containerlang.find('.language_drop').css("display");
+                    if (isopened == 'block') {
+                        containerlang.find('.language_drop').slideToggle(0);
+                    }
+            }
+            if (!containerlang_up.is(e.target) && containerlang_up.has(e.target).length === 0){
+                var isopened = containerlang_up.find('.language_drop').css("display");
+                    if (isopened == 'block') {
+                        containerlang_up.find('.language_drop').slideToggle(0);
+                    }
+            }
+            });
+
+
         </script>
