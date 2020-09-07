@@ -1035,6 +1035,20 @@
                     teacher_homework_tool_price();
                     }
             }); 
+            $( document ).ready(function() {
+                var getprofile = window.location.href;
+                
+                if(getprofile == 'https://iktutor.com/iklearn/en/?r=my-account#purchase-points'){
+               $('#purchase-points-dialog').css('display','block');
+               $('#purchase-points-dialog').addClass('in');
+               }
+
+            });
+            $('#close-pur').click(function(){
+                $('#purchase-points-dialog').css('display','none');
+               $('#purchase-points-dialog').removeClass('in');
+
+            });
             $('#teacher-home-tool-modal-english #sel-dictionary, #teacher-home-tool-modal-english #sel-teacher-tool, #teacher-home-tool-modal-english #student-num-add-continute-english').change(function(){
                 teacher_homework_tool_price();
             });

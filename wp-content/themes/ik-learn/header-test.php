@@ -1,22 +1,21 @@
 <?php
-	
-	$route = get_route();
-	if(isset($route[1])) {
-		switch($route[1]) {
-			case 'elearner': $active_menu = 68;
-				break;
-			case 'collegiate': $active_menu = 67;
-				break;
-			case 'medical': $active_menu = 66;
-				break;
-			case 'intermediate': $active_menu = 65;
-				break;
-			case 'elementary': $active_menu = 64;
-				break;
-		}
-	}
+    $route = get_route();
+    if(isset($route[1])) {
+        switch($route[1]) {
+            case 'elearner': $active_menu = 68;
+                break;
+            case 'collegiate': $active_menu = 67;
+                break;
+            case 'medical': $active_menu = 66;
+                break;
+            case 'intermediate': $active_menu = 65;
+                break;
+            case 'elementary': $active_menu = 64;
+                break;
+        }
+    }
 
-	$current_user = wp_get_current_user();
+    $current_user = wp_get_current_user();
     $is_user_logged_in = is_user_logged_in();
     if($is_user_logged_in){
         $u_time_zone = get_user_meta($current_user->ID, 'user_timezone', true);
@@ -24,11 +23,48 @@
         $u_time_zone_index = get_user_meta($current_user->ID, 'time_zone_index', true);
         $u_time_zone_index = empty($u_time_zone_index)? 0 : $u_time_zone_index;
         $u_time_zone_name = get_user_meta($current_user->ID, 'time_zone_name', true);
-        $timezone_name = empty($u_time_zone_name)? convert_timezone_to_name($u_time_zone_index) : $u_time_zone_name;
+        // $timezone_name = empty($u_time_zone_name)? convert_timezone_to_name($u_time_zone_index) : $u_time_zone_name;
     }else{
         $u_time_zone = $u_time_zone_index = 0;
-        $timezone_name = convert_timezone_to_name($u_time_zone_index);
+        // $timezone_name = convert_timezone_to_name($u_time_zone_index);
     }
+    if($is_user_logged_in){
+    $status_login_2 = get_user_meta($current_user->ID, 'status_login_2', true);
+    if($status_login_2 == '0'){
+        update_user_meta($current_user->ID, 'status_login_2', '1');
+        wp_logout();
+    };
+    }
+    function file_get_contents_curl( $url ) {
+ 
+    $ch = curl_init();
+ 
+    curl_setopt( $ch, CURLOPT_AUTOREFERER, TRUE );
+    curl_setopt( $ch, CURLOPT_HEADER, 0 );
+    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+    curl_setopt( $ch, CURLOPT_URL, $url );
+    curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, TRUE );
+ 
+    $data = curl_exec( $ch );
+    curl_close( $ch );
+ 
+    return $data;
+ 
+    }
+    $ip_user = $_SERVER['REMOTE_ADDR'];
+    $time_zone_user = json_decode(file_get_contents_curl("https://ipinfo.io/{$ip_user}"));
+    $time_zone_user1 = $time_zone_user->city;
+    $timezone_name = $time_zone_user->timezone;
+    if($is_user_logged_in){
+    add_user_meta($current_user->ID,'status_login','1');
+    update_user_meta($current_user->ID, 'status_login', '1');
+
+    };
+    if($is_user_logged_in)
+    {$link_ss = '?r=ajax/logged/'.$current_user->ID.'/'.session_id();}
+    else
+    {$link_ss = '';};
+
     $my_timezone_index = $u_time_zone_index;
     $my_city = convert_timezone_to_location($u_time_zone_index);
     $dt = new DateTime('now', new DateTimezone($timezone_name));
@@ -41,12 +77,13 @@
 
     $date = new DateTime('now', new DateTimezone(get_option( 'timezone_string' )));
 
-	$cart_items = get_cart_items();
+    $cart_items = get_cart_items();
 
-	$locale_code = explode('_', get_locale());
+    $locale_code = explode('_', get_locale());
 
-	$lang = pll_current_language() ;
+    $lang = pll_current_language() ;
     $active_day = MWDB::get_tutoring_date();
+    $count_notification = MWDB::get_count_quick_notification();
     add_filter( 'the_editor', 'set_my_mce_editor_placeholder' );
 
     function set_my_mce_editor_placeholder( $textarea_html ){
@@ -73,14 +110,14 @@
     
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>
-       
+        <?php wp_title(''); ?>
     </title>
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1" />           
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/library/images/apple-touch-icon.png">
     <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/favicon.png">
     <!--[if IE]>
-	    <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico">
+        <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico">
     <![endif]-->
     <meta name="msapplication-TileColor" content="#f01d4f">
     <meta name="msapplication-TileImage" content="<?php echo get_template_directory_uri(); ?>/library/images/win8-tile-icon.png">
@@ -123,140 +160,147 @@
     </script>
 </head>
 
-<body <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
-    <div class="modal fade modal-signup" id="my-account-modal" role="dialog" >
+<body class="modal-open" <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
+    <div class="modal fade modal-signup in" id="my-account-modal" role="dialog" style="display: block;">
         <div class="modal-dialog modal-lg modal-signup">
             <div class="modal-content modal-content-signup">
                 <div class="title-div">
                     <div class="icon-close-classes-created">
                         <?php if ($is_user_logged_in) { ?>
                         <button type="button" id="btn-my-timezone" class="btn-my-schedule">
-                            <span id="mycity-name"><?php echo $my_city ?></span>
+                            <span id="mycity-name"><?php echo $time_zone_user1 ?></span>
                             <span id="mytime-clock" data-hour="24" data-minute="0">2:35 PM</span>
                             <img class="ic-my-schedule" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_TimeZone_Selector.png">
-                        </button>
-                        <button type="button" id="btn-my-schedule" class="btn-my-schedule">
-                            <img class="ic-my-schedule" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MySchedule_Top.png">
                         </button>
                         <?php } ?>
 
                         <button type="button" id="menu-quick-notification">
+                            <?php if($count_notification == 0){ ?>
                             <img class="ic-close7" src="<?php echo get_template_directory_uri(); ?>/library/images/07_Top_Trigger.png">
+                            <?php }else{ ?>
+                            <img class="ic-close7 active" src="<?php echo get_template_directory_uri(); ?>/library/images/08_Top_Trigger_NOTIFICATION.png">    
+                            <?php } ?>
                         </button>
 
                         <ul id="open-menu-quicknotifi" style="display: none;">
-                            <li>
-                                <button type="button" id="close-modal">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/library/images/09_Menu_Closed.png">
-                                    Close
-                                </button>
-                            </li>
                             <li>
                                 <button type="button" id="quick-notification-btn">
                                     <img src="<?php echo get_template_directory_uri(); ?>/library/images/10_Menu_Notification.png">
                                     Quick Notification
                                 </button>
                             </li>
-                        </ul>
-
-                        <ul id="open-list-quicknotifi" style="display: none;">
+                            <li>
+                                <button type="button" id="btn-my-schedule">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/library/images/01_icon_Schedule_Starter.png">
+                                    Schedule Starter
+                                </button>
+                            </li>
                             
                         </ul>
+                        <button  type="button" id="close-modal" style="background: none;">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/library/images/09_Menu_Closed.png" style="height: 14px; margin-top: -5px;">
+                                    
+                                </button>
 
                         <ul id="my-timezone" style="display: none;">
                             <li data-value="" data-city="London" <?php if($timezone_index == '0' ) echo 'class="active"'; ?>>Select Time Zone</li>
-                            <li class="my-timezone<?php if($my_timezone_index == '1' ) echo ' active'; ?>" data-index="1" data-value="-5" data-name="America/New_York" data-city="New York">
-                                <span class="name-city" id="name-city1">New York</span>
-                                <span class="name-clock" id="name-clock1"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '2' ) echo ' active'; ?>" data-index="2" data-value="-6" data-name="America/Chicago" data-city="Minneapolis">
-                                <span class="name-city" id="name-city2">Minneapolis</span>
-                                <span class="name-clock" id="name-clock2"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '3' ) echo ' active'; ?>" data-index="3" data-value="-5" data-name="America/Denver" data-city="Colorado">
-                                <span class="name-city" id="name-city3">Colorado</span>
-                                <span class="name-clock" id="name-clock3"></span>
-                            </li>
-                            <li class="my-timezone <?php if($my_timezone_index == '4' ) echo ' active'; ?>" data-index="4" data-value="-7" data-name="America/Los_Angeles" data-city="San Francisco">
-                                <span class="name-city" id="name-city4">San Francisco</span>
-                                <span class="name-clock" id="name-clock4"></span>
-                            </li>
-                            <li class="my-timezone <?php if($my_timezone_index == '5' ) echo ' active'; ?>" data-index="5" data-value="-10" data-name="Pacific/Honolulu" data-city="Hawaii">
-                                <span class="name-city" id="name-city5">Hawaii</span>
-                                <span class="name-clock" id="name-clock5"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '6' ) echo ' active'; ?>" data-index="6" data-value="+10" data-name="Pacific/Guam" data-city="Guam">
-                                <span class="name-city" id="name-city6">Guam</span>
-                                <span class="name-clock" id="name-clock6"></span>
-                            </li>
-                            <li class="my-timezone" data-index="7" data-value="+9" data-name="Asia/Tokyo" data-city="Tokyo">
-                                <span class="name-city" id="name-city7">Tokyo</span>
-                                <span class="name-clock" id="name-clock7"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '7' ) echo ' active'; ?>" data-index="8" data-value="+9" data-name="Asia/Seoul" data-city="Seoul" <?php if($my_timezone_index == '8' ) echo 'class="active"'; ?>>
-                                <span class="name-city" id="name-city8">Seoul</span>
-                                <span class="name-clock" id="name-clock8"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '9' ) echo ' active'; ?>" data-index="9" data-value="+8" data-name="Asia/Shanghai" data-city="Beijing">
-                                <span class="name-city" id="name-city9">Beijing</span>
-                                <span class="name-clock" id="name-clock9"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '10' ) echo ' active'; ?>" data-index="10" data-value="+8" data-name="Asia/Shanghai" data-city="Xianyang">
-                                <span class="name-city" id="name-city10">Xianyang</span>
-                                <span class="name-clock" id="name-clock10"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '11' ) echo ' active'; ?>" data-index="11" data-value="+7" data-name="Asia/Ho_Chi_Minh" data-city="Hanoi">
-                                <span class="name-city" id="name-city11">Hanoi</span>
-                                <span class="name-clock" id="name-clock11"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '12' ) echo ' active'; ?>" data-index="12" data-value="+7" data-name="Asia/Bangkok" data-city="Bangkok">
-                                <span class="name-city" id="name-city12">Bangkok</span>
-                                <span class="name-clock" id="name-clock12"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '13' ) echo ' active'; ?>" data-index="13" data-value="+7" data-name="Asia/Rangoon" data-city="Myanmar">
-                                <span class="name-city" id="name-city13">Myanmar</span>
-                                <span class="name-clock" id="name-clock13"></span>
-                            </li>
-                            <li class="my-timezone <?php if($my_timezone_index == '14' ) echo ' active'; ?>" data-index="14" data-value="+6" data-name="Asia/Dhaka" data-city="Bangladesh">
-                                <span class="name-city" id="name-city14">Bangladesh</span>
-                                <span class="name-clock" id="name-clock14"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '15' ) echo ' active'; ?>" data-index="15" data-value="+5" data-name="Asia/Colombo" data-city="Sri Lanka">
-                                <span class="name-city" id="name-city15">Sri Lanka</span>
-                                <span class="name-clock" id="name-clock15"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '16' ) echo ' active'; ?>" data-index="16" data-value="+5" data-name="Asia/Kolkata" data-city="New Delhi">
-                                <span class="name-city" id="name-city16">New Delhi</span>
-                                <span class="name-clock" id="name-clock16"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '17' ) echo ' active'; ?>" data-index="17" data-value="+5" data-name="Asia/Kolkata" data-city="Mumbai">
-                                <span class="name-city" id="name-city17">Mumbai</span>
-                                <span class="name-clock" id="name-clock17"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '18' ) echo ' active'; ?>" data-index="18" data-value="0" data-name="Europe/London" data-city="London">
-                                <span class="name-city" id="name-city18">London</span>
-                                <span class="name-clock" id="name-clock18"></span>
-                            </li>
-                            <li class="my-timezone<?php if($my_timezone_index == '19' ) echo ' active'; ?>" data-index="19" data-value="+5" data-name="Australia/Sydney" data-city="Sydney">
-                                <span class="name-city" id="name-city19">Sydney</span>
-                                <span class="name-clock" id="name-clock19"></span>
-                            </li>
+                                <li class="my-timezone<?php if($timezone_name == 'America/New_York' ) echo ' active'; ?>" data-index="1" data-value="-5" data-name="America/New_York" data-city="New York">
+                                    <span class="name-city" id="name-city1">New York</span>
+                                    <span class="name-clock" id="name-clock1"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'America/Chicago' ) echo ' active'; ?>" data-index="2" data-value="-6" data-name="America/Chicago" data-city="Minneapolis">
+                                    <span class="name-city" id="name-city2">Minneapolis</span>
+                                    <span class="name-clock" id="name-clock2"></span>
+                                </li>
+                                <li class="my-timezone<?php if( $timezone_name == 'America/Denver' ) echo ' active'; ?>" data-index="3" data-value="-5" data-name="America/Denver" data-city="Colorado">
+                                    <span class="name-city" id="name-city3">Colorado</span>
+                                    <span class="name-clock" id="name-clock3"></span>
+                                </li>
+                                <li class="my-timezone <?php if($timezone_name == 'America/Los_Angeles' ) echo ' active'; ?>" data-index="4" data-value="-7" data-name="America/Los_Angeles" data-city="SF/LA">
+                                    <span class="name-city" id="name-city4">SF/LA</span>
+                                    <span class="name-clock" id="name-clock4"></span>
+                                </li>
+                                <li class="my-timezone <?php if($timezone_name == 'Pacific/Honolulu' ) echo ' active'; ?>" data-index="5" data-value="-10" data-name="Pacific/Honolulu" data-city="Hawaii">
+                                    <span class="name-city" id="name-city5">Hawaii</span>
+                                    <span class="name-clock" id="name-clock5"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Pacific/Guam' ) echo ' active'; ?>" data-index="6" data-value="+10" data-name="Pacific/Guam" data-city="Guam">
+                                    <span class="name-city" id="name-city6">Guam</span>
+                                    <span class="name-clock" id="name-clock6"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Tokyo' ) echo ' active'; ?>" data-index="7" data-value="+9" data-name="Asia/Tokyo" data-city="Tokyo">
+                                    <span class="name-city" id="name-city7">Tokyo</span>
+                                    <span class="name-clock" id="name-clock7"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Seoul' ) echo ' active'; ?>" data-index="8" data-value="+9" data-name="Asia/Seoul" data-city="Seoul">
+                                    <span class="name-city" id="name-city8">Seoul</span>
+                                    <span class="name-clock" id="name-clock8"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Shanghai' ) echo ' active'; ?>" data-index="9" data-value="+8" data-name="Asia/Shanghai" data-city="Beijing">
+                                    <span class="name-city" id="name-city9">Beijing</span>
+                                    <span class="name-clock" id="name-clock9"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Shanghai' ) echo ' active'; ?>" data-index="10" data-value="+8" data-name="Asia/Shanghai" data-city="Xianyang">
+                                    <span class="name-city" id="name-city10">Xianyang</span>
+                                    <span class="name-clock" id="name-clock10"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Ho_Chi_Minh' ) echo ' active'; ?>" data-index="11" data-value="+7" data-name="Asia/Ho_Chi_Minh" data-city="Hanoi">
+                                    <span class="name-city" id="name-city11">Hanoi</span>
+                                    <span class="name-clock" id="name-clock11"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Bangkok' ) echo ' active'; ?>" data-index="12" data-value="+7" data-name="Asia/Bangkok" data-city="Bangkok">
+                                    <span class="name-city" id="name-city12">Bangkok</span>
+                                    <span class="name-clock" id="name-clock12"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Rangoon' ) echo ' active'; ?>" data-index="13" data-value="+7" data-name="Asia/Rangoon" data-city="Myanmar">
+                                    <span class="name-city" id="name-city13">Myanmar</span>
+                                    <span class="name-clock" id="name-clock13"></span>
+                                </li>
+                                <li class="my-timezone <?php if($timezone_name == 'Asia/Dhaka' ) echo ' active'; ?>" data-index="14" data-value="+6" data-name="Asia/Dhaka" data-city="Bangladesh">
+                                    <span class="name-city" id="name-city14">Bangladesh</span>
+                                    <span class="name-clock" id="name-clock14"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Asia/Colombo' ) echo ' active'; ?>" data-index="15" data-value="+5" data-name="Asia/Colombo" data-city="Sri Lanka">
+                                    <span class="name-city" id="name-city15">Sri Lanka</span>
+                                    <span class="name-clock" id="name-clock15"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == '16' ) echo ' active'; ?>" data-index="16" data-value="+5" data-name="Asia/Kolkata" data-city="New Delhi">
+                                    <span class="name-city" id="name-city16">New Delhi</span>
+                                    <span class="name-clock" id="name-clock16"></span>
+                                </li>
+                                <li class="my-timezone<?php if( $timezone_name== '17' ) echo ' active'; ?>" data-index="17" data-value="+5" data-name="Asia/Kolkata" data-city="Mumbai">
+                                    <span class="name-city" id="name-city17">Mumbai</span>
+                                    <span class="name-clock" id="name-clock17"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Europe/London' ) echo ' active'; ?>" data-index="18" data-value="0" data-name="Europe/London" data-city="London">
+                                    <span class="name-city" id="name-city18">London</span>
+                                    <span class="name-clock" id="name-clock18"></span>
+                                </li>
+                                <li class="my-timezone<?php if($timezone_name == 'Australia/Sydney' ) echo ' active'; ?>" data-index="19" data-value="+5" data-name="Australia/Sydney" data-city="Sydney">
+                                    <span class="name-city" id="name-city19">Sydney</span>
+                                    <span class="name-clock" id="name-clock19"></span>
+                                </li>
                         </ul>
                     </div>
                     <img id="menu_Taggle" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Menu_Trigger.png">
                     <span class="modal-title text-uppercase">
-                        <a href="#">
+                        <a id="iklearn-home"  href="#">
                             <img data-dismiss="modal" src="<?php echo get_template_directory_uri(); ?>/library/images/ikTeach_Logo.png">
                         </a>
                     </span>
                 </div>
                 <hr class="line-modal">
                 <div class="bg-overload"></div>
+                <div id="open-list-quicknotifi" style="display: none;">
+                    <div class="add-list-quicknotifi">
+                                
+                    </div>
+                </div>
                 <div class="modal-body-signup">
                     <div class="section-right">
                         <div class="tab-content">
                             <!-- Login -->
-                            <div id="login-user" class="style-form tab-pane fade in active">
+                            <div id="login-user" class="style-form tab-pane fade">
                                 <h3>Login</h3>
                                 <div class="col-md-12">
                                     <form action="<?php echo locale_home_url() ?>/?r=login" name="loginform" method="post">
@@ -267,7 +311,7 @@
                                                         <label for="username">
                                                             <?php _e('Username (e-mail address)', 'iii-dictionary') ?>
                                                         </label>
-                                                        <input type="text" class="form-control border-ras" id="username-login" name="log" value="" style="border-radius:0px;">
+                                                        <input type="text" class="form-control border-ras" id="username-login" name="log" value="" style="border-radius:0px; margin-left: 0; padding-bottom: 6px">
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-6 col-md-6">
@@ -349,39 +393,32 @@
                             <!-- Lost Password -->
                             <!-- Create Basic Account -->
                             <div id="create-account" class="tab-pane fade">
-                                <h3>Create Basic Account <span id="create-overview">overview</span></h3>
-                                <form method="post" id="createAccount" action="" name="registerform" enctype="multipart/form-data">
+                                <div class="student-center">
+                                    <p class="my-account">MY ACCOUNT</p>
+                                    <p class="tutor-acc">CREATE A STUDENT ACCOUNT</p>
+                                </div>
+                                <p class="mt-top-14 heading-acc" style="color: #36a93f; font-size: 22px; font-family: Myriad_regular;">Create Basic Account <img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"><span id="create-overview">overview</span></p>
+                                <p style="color: red; font-size: 14px; "> (<span style=" position: absolute;  font-weight: bold;   padding-left: 1px; font-size: 14pt">*</span>&nbsp &nbsp) Required</p>
+                                <form method="post" id="createAccount" action="" name="registerform" enctype="multipart/form-data" autocomplete="off">
                                     <div class="row">
-                                        <div class="col-sm-10 col-md-10 refreshclass">
+                                        <div class="col-sm-9 col-md-9 refreshclass">
+                                            <div class="find-general-border">
                                             <div class="form-group">
-                                                <input id="user_login_signup" class="form-control" name="user_login" type="text" value="" required>
-                                                <span class="placeholder"><?php _e('Email Address', 'iii-dictionary') ?>:</span>
-                                                <span id="checked-availability" class="not-check-available"><span></span></span>
+                                                <span class="find-label"><?php _e('Email Address', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                                <input id="user_login_signup" class="form-control" name="user_login" type="text" value=" "  required>
+                                                
+                                                <span id="checked-availability" class="not-check-available" style="    margin-right: 20px; "><span></span></span>
+                                                <button class="btn-dark-blue border-btn check-availability" id="check-availability" style="background: #FFA523; width: 50px; margin-top: -43px; float: right; border-radius: 8px !important;" type="button" name="wp-submit">Check</button>
                                             </div>
                                         </div>
-                                        <div class="col-sm-2 col-md-2">
-                                            <button class="btn-dark-blue border-btn check-availability" id="check-availability" style="background: #FFA523;" type="button" name="wp-submit">Availability</button>
                                         </div>
-                                        <div class="clearfix"></div>
-                                        <div class="col-sm-5 col-md-5 mt-top-14 refreshclass">
-                                            <div class="form-group">
-                                                <input id="user_password_signup" class="form-control border-ras" name="user_password" type="text" value="" required>
-                                                <span class="placeholder"><?php _e('Password', 'iii-dictionary') ?>:</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-5 col-md-5 mt-top-14 refreshclass">
-                                            <div class="form-group">
-                                                <input id="confirm_password" class="form-control border-ras" name="confirm_password" type="text" value="" required>
-                                                <span class="placeholder"><?php _e('Confirm Password', 'iii-dictionary') ?>:</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2 col-md-2 mt-top-14 gender-pc">
-                                            <div id="gender-pc">
+                                        <div class="col-sm-3 col-md-3">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Gender', 'iii-dictionary') ?><span class="required-star"> *</span></span>   
                                                 <div class="form-group">
                                                     <div class="border-ras select-style" id="gender">
                                                         <select id="birth_g_pc" class="select-box-it form-control" name="birth_g_pc">
-                                                            <option value="">Gender</option>
+                                                            
                                                             <option value="Male">Male</option>
                                                             <option value="Female">Female</option>
                                                         </select>
@@ -390,28 +427,60 @@
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <div class="col-sm-6 col-md-6 mt-top-14 refreshclass">
+                                        <div class="col-sm-6 col-md-6 mt-top-3 refreshclass">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Password', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                            <div class="form-group">
+                                                
+                                                <input id="user_password_signup" class="form-control border-ras" name="user_password" type="text" value=""required>
+                                                
+                                                <div class="clear-input" onclick="document.getElementById('user_password_signup').value=null;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 mt-top-3 refreshclass">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Confirm Password', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                            <div class="form-group">
+                                                <input id="confirm_password" class="form-control border-ras" name="confirm_password" type="text" value="" required>
+                                                <div class="clear-input" onclick="document.getElementById('confirm_password').value=null;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
+                                        <div class="clearfix"></div>
+                                        <div class="col-sm-6 col-md-6 mt-top-3 refreshclass">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('First Name', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                             <div class="form-group">
                                                 <input id="first_name_signup" class="form-control" name="first_name" type="text" value="" required>
-                                                <span class="placeholder"><?php _e('First Name', 'iii-dictionary') ?>:</span>
+                                                <div class="clear-input" onclick="document.getElementById('first_name_signup').value=null;"></div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 col-md-6 mt-top-14 refreshclass">
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 mt-top-3 refreshclass">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Last Name', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                             <div class="form-group">
                                                 <input id="last_name_signup" class="form-control" name="last_name" type="text" value="" required>
-                                                <span class="placeholder"><?php _e('Last Name', 'iii-dictionary') ?>:</span>
+                                                <div class="clear-input" onclick="document.getElementById('last_name_signup').value=null;"></div>
                                             </div>
                                         </div>
+                                        </div>
                                         <div class="clearfix"></div>
-                                        <div class="col-sm-12 col-md-12 mt-top-9">
-                                            <div class="form-group">
-                                                <label class="create-label mt-bottom-11">
-                                                    <?php _e('Date of Birth', 'iii-dictionary') ?>
-                                                </label>
+                                        <div class="col-sm-12 col-md-12 mt-top-4">
+                                            
+                                                <p class="create-label mt-bottom-11 heading-acc">
+                                                    <?php _e('Date of Birth', 'iii-dictionary') ?><img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info">
+                                                </p>
                                                 <div class="row tiny-gutter">
                                                     <div class="col-xs-12 col-sm-4 col-md-4 border-ras select-style" id="month">
+                                                    <div class="find-general-border">
+                                                        <span class="find-label"><?php _e('Month', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                                        <div class="form-group">
                                                         <select id="birth_m" class="select-box-it form-control" name="birth-m">
-                                                            <option value="">(Month)</option>
+                                                            
                                                             <?php for ($i = 1; $i <= 12; $i++) : ?>
                                                                 <?php $pad_str = str_pad($i, 2, '0', STR_PAD_LEFT) ?>
                                                                     <option value="<?php echo $pad_str ?>">
@@ -420,9 +489,14 @@
                                                                     <?php endfor ?>
                                                         </select>
                                                     </div>
+                                                    </div>
+                                                    </div>
                                                     <div class="col-xs-12 col-sm-4 col-md-4 border-ras select-style" id="date">
+                                                        <div class="find-general-border">
+                                                        <span class="find-label"><?php _e('Day', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                                        <div class="form-group">
                                                         <select id="birth_d" class="select-box-it form-control" name="birth-d">
-                                                            <option value="">(Day)</option>
+                                                            
                                                             <?php for ($i = 1; $i <= 31; $i++) : ?>
                                                                 <?php $pad_str = str_pad($i, 2, '0', STR_PAD_LEFT) ?>
                                                                     <option value="<?php echo $pad_str ?>">
@@ -431,12 +505,19 @@
                                                                     <?php endfor ?>
                                                         </select>
                                                     </div>
+                                                    </div>
+                                                    </div>
                                                     <div class="col-xs-12 col-sm-4 col-md-4 refreshclass year-mb">
-                                                        <input id="birth_y" class="form-control" name="birth-y" type="text" value="" required>
-                                                        <span class="placeholder"><?php _e('Year', 'iii-dictionary') ?>:</span>
+                                                        <div class="find-general-border">
+                                                            <span class="find-label"><?php _e('Year', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                                            <div class="form-group">
+                                                                <input id="birth_y" class="form-control" name="birth-y" type="text" value="" required>
+                                                                <div class="clear-input" onclick="document.getElementById('birth_y').value=null;"></div>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
-                                                    <div class="col-xs-12 col-sm-4 col-md-4 gender-mb">
+                                                   <!--  <div class="col-xs-12 col-sm-4 col-md-4 gender-mb">
                                                         <div id="gender-mb">
                                                             <div class="form-group">
                                                                 <div class="border-ras select-style" id="gender">
@@ -448,86 +529,80 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="col-sm-12 col-md-12 refreshclass">
-                                            <label class="create-label mt-top-10">
-                                                <?php _e('Language', 'iii-dictionary') ?>
-                                            </label>
-                                            <div class="form__boolean mt-bottom-10 clearfix" id="checkBoxSearch" style="margin-top: 0">
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons class_cb_search option-input-2 radio" value="en" data-lang="en" name="cb-lang" /> English
-                                                    </label>
+                                        
+                                        
+                                        <p class="col-sm-12 col-md-12 col-xs-12 mt-top-4 heading-acc"><?php _e('Language', 'iii-dictionary') ?> & <?php _e('Time Zone', 'iii-dictionary') ?>  <img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"> </p>
+                                        <div id="language-timezone" class="col-sm-6 col-md-6 col-xs-6">
+                                                
+                                                <div  class="find-general-border language-input">
+                                                <span class="find-label"><?php _e('Language', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                                <div id="show-language" class="show-language">
+                                                  
+                                                <span class="show-language-drop" style="margin-top: -2.5px;"><i style="opacity:0;">0</i></span>
                                                 </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons class_cb_search option-input-2 radio" value="ja" data-lang="ja" name="cb-lang" /> Japanese
-                                                    </label>
                                                 </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons class_cb_search option-input-2 radio" value="ko" data-lang="ko" name="cb-lang" /> Korean
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons class_cb_search option-input-2 radio" value="zh" data-lang="zh" name="cb-lang" /> Chinese
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons class_cb_search option-input-2 radio" value="zh-tw" data-lang="zh-tw" name="cb-lang" /> Traditional Chinese
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons class_cb_search option-input-2 radio" value="vi" data-lang="vi" name="cb-lang" /> Vietnamese
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons class_cb_search option-input-2 radio" value="ot" data-lang="ot" name="cb-lang" /> Others
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-12 col-md-12 profile-pic refreshclass mt-top-14" style="clear: both;">
-                                            <label class="create-label img-profile">Profile Picture (optional)</label>
-                                            <div class="row">
-                                                <div class="col-sm-4 col-md-4 mt-top-9">
-                                                    <div class="form-group">
-                                                        <img id="user-upload-avatar" src="<?php echo get_template_directory_uri(); ?>/library/images/Icon_Image_Person.png" alt="Profile Picture" style="display: inline-block; margin-right: 14px;">
-                                                        <input class="form-control input-file" type="file" id="input-avatar" value="">
-                                                        <button class="btn-dark-blue border-btn" style="background: #cecece; display: inline-block; width: 82%" type="button" name="upload" onclick="document.getElementById('input-avatar').click();">
-                                                            <?php _e('Browse', 'iii-dictionary') ?>
-                                                        </button>
+                                            
+                                                <div class="form__boolean mt-bottom-10 clearfix language_drop" id="checkBoxSearch" style="margin-top: -14px">
+                                                    <span class="Available-lg">Available language</span>
+                                                    <ul id="list-language" style="font-size: 11pt; color: #9c9c9c;">
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons class_cb_search option-input-3 radio" value="en" data-lang="en" name="cb-lang"/>
+                                                            <span>&ensp; English</span>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons class_cb_search option-input-3 radio" value="ja" data-lang="ja" name="cb-lang"/>
+                                                            <span>&ensp; Japanese</span>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons class_cb_search option-input-3 radio" value="ko" data-lang="ko" name="cb-lang"/>
+                                                            <span>&ensp; Korean</span>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons class_cb_search option-input-3 radio" value="zh" data-lang="zh" name="cb-lang"/>
+                                                            <span>&ensp; Chinese</span>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons class_cb_search option-input-3 radio" value="zh-tw" data-lang="zh-tw" name="cb-lang"/>
+                                                            <span>&ensp; Traditional Chinese</span>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons class_cb_search option-input-3 radio" value="vi" data-lang="vi" name="cb-lang"/>
+                                                            <span>&ensp; Vietnamese</span>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons class_cb_search option-input-3 radio" value="ot" data-lang="ot" name="cb-lang"/>
+                                                            <span>&ensp; Others</span>
+                                                        </li>
+                                                        
+                                                    </ul>
+                                                    <div style="padding:12px 0;">
+                                                    <div class="ol-sm-6 col-md-6">
+                                                        <button id="save-lg" class="btn-dark-blue border-btn" style="background: #009dcb;" type="button" name="save_timelot">
+                                                                                SAVE   
+                                                                            </button>
                                                     </div>
+                                                    <div class="ol-sm-6 col-md-6">
+                                                        <button id="cancel-lg" class="btn-dark-blue border-btn" style="background: #CECECE;" type="button" name="cancel_timelot" >
+                                                                                CANCEL
+                                                                            </button>
                                                 </div>
-
-                                                <div class="col-sm-8 col-md-8 mt-top-9">
-                                                    <div class="form-group">
-                                                        <input class="form-control input-path" id="profile-avatar" type="text">
-                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
+                                                </div>
+                                                </div>
                                         <div class="col-sm-6 col-md-6 col-xs-6 mt-top-mb-12">
-                                            <label class="create-label mt-top-10">
-                                                <?php _e('My Time Zone', 'iii-dictionary') ?>
-                                            </label>
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('My Time Zone', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                            
                                             <div class="form-group border-ras select-style user-timezone mt-top-8">
                                                 <select class="select-box-it form-control" name="time_zone" id="user-time-zone">
                                                     <option value="0" data-value="0" data-name="Europe/London" data-city="London">Select Time Zone</option>
                                                     <option value="1" data-value="-5" data-city="New York" data-name="America/New_York">New York</option>
                                                     <option value="2" data-value="-6" data-city="Minneapolis" data-name="America/Chicago">Minneapolis</option>
                                                     <option value="3" data-value="-5" data-city="Colorado" data-name="America/Denver">Colorado</option>
-                                                    <option value="4" data-value="-7" data-city="San Francisco" data-name="America/Los_Angeles">San Francisco</option>
+                                                    <option value="4" data-value="-7" data-city="SF/LA" data-name="America/Los_Angeles">SF/LA</option>
                                                     <option value="5" data-value="-10" data-city="Hawaii" data-name="Pacific/Honolulu">Hawaii</option>
                                                     <option value="6" data-value="+10" data-city="Guam" data-name="Pacific/Guam">Guam</option>
                                                     <option value="7" data-value="+9" data-city="Tokyo" data-name="Asia/Tokyo">Tokyo</option>
@@ -546,10 +621,43 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        </div>
+                                        <div class="clearfix"></div>    
+                                        <div class="col-sm-12 col-md-12 profile-pic refreshclass mt-top-4" style="clear: both;">                                                
+                                                    
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-12"><p class="heading-acc">Profile Picture (optional)<img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"></p></div>
+                                                    <div class="col-sm-3 col-md-3 mt-top-9">
+                                                        <div class="row">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-4 col-md-4">
+                                                            <img id="user-upload-avatar" src="<?php echo get_template_directory_uri(); ?>/library/images/Icon_Image_Person.png" alt="Profile Picture" style="display: inline-block; margin-right: 14px;">
+                                                            </div>
+                                                            <div class="col-sm-8 col-md-8">
+                                                            <input class="form-control input-file" type="file" id="input-avatar" value="" >
+                                                            <button class="btn-dark-blue border-btn" style="background: #cecece; display: inline-block; width: 100%; height: 50px; border-radius: 10px !important;" type="button" name="upload"  onclick="document.getElementById('input-avatar').click();"><?php _e('Browse', 'iii-dictionary') ?></button>
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-9 col-md-9 mt-top-9" >
+                                                        <div class="find-general-border">
+                                                            <span class="find-label">Image Location</span>
+                                                            <div class="form-group">                                    
+                                                            <input class="form-control input-path" id="profile-avatar" type="text">
+                                                            <div class="clear-input" onclick="document.getElementById('profile_avatar').value=null;"></div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                        
                                         <div class="clearfix"></div>
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-bottom-24">
                                             <div class="form-group">
-                                                <button class="btn-dark-blue border-btn" id="create-acc" style="background: #65C762; margin-top: 20px;" type="button" name="wp-submit">
+                                                <button class="btn-dark-blue border-btn" id="create-acc" style="background: #199eca; margin-top: 20px;" type="button" name="wp-submit">
                                                     <?php _e('Create Account', 'iii-dictionary') ?>
                                                 </button>
                                             </div>
@@ -591,20 +699,23 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-10 col-md-10">
-                                            <div class="form-group">
+                                            <div class="form-group" id="info-name">
                                                 <label>My Name</label>
                                                 <span class="color-black" id="profile-my-name"><?php
                                                     if ($is_user_logged_in) {
                                                         $display_name = get_user_meta($current_user->ID, 'display_name', true);
                                                         if (!empty($display_name) && $display_name != '')
                                                             echo $display_name;
-                                                        else
-                                                            _e('N/A', 'iii-dictionary');
-                                                    } else
+                                                        else{
+                                                            $ru_first_name = get_user_meta($current_user->ID, 'first_name', true);
+                                                            $ru_last_name = get_user_meta($current_user->ID, 'last_name', true);
+                                                            echo $ru_first_name.' '.$ru_last_name;
+                                                    };} else
                                                         _e('N/A', 'iii-dictionary');
                                                     ?>
                                                 </span>
                                             </div>
+                                            <div class="btn-dark-blue border-btn check-availability" id="edit-profile">Update Profile</div>
                                         </div>
                                         <hr>
                                     </div>
@@ -723,6 +834,25 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6">
                                             <div class="form-group">
+                                                <label><?php _e('Gender', 'iii-dictionary') ?></label>
+                                                <span class="color-black" id="gender-show">
+                                                        <?php
+                                                        if ($is_user_logged_in) {
+                                                            $gender_show = get_user_meta($current_user->ID, 'gender', true);
+                                                            if (!empty($gender_show) && $gender_show != '')
+                                                                echo $gender_show;
+                                                            else
+                                                                _e('N/A', 'iii-dictionary');
+                                                        }else {
+                                                            _e('N/A', 'iii-dictionary');
+                                                        }
+                                                        ?>
+                                                    </span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        <!-- <div class="col-sm-6 col-md-6">
+                                            <div class="form-group">
                                                 <label>
                                                     <?php _e('Mobile Phone Number', 'iii-dictionary') ?>
                                                 </label>
@@ -741,9 +871,9 @@
                                                 </span>
                                             </div>
                                             <hr>
-                                        </div>
+                                        </div> -->
                                     </div>
-                                    <div class="row line-profile">
+                                    <!-- <div class="row line-profile">
                                         <div class="col-sm-6 col-md-6">
                                             <div class="form-group">
                                                 <label>
@@ -786,7 +916,46 @@
                                             </div>
                                             <hr>
                                         </div>
-                                    </div>
+                                    </div> -->
+                                    <div class="row line-profile">
+                                            <div class="col-sm-6 col-md-6">
+                                                <label><?php _e('Time Zone', 'iii-dictionary') ?></label>
+                                                 <span class="color-black" id="profile-skype-id">
+                                                        <?php
+                                                        if ($is_user_logged_in) {
+                                                            
+                                                            if (!empty($my_timezone_index) && $my_timezone_index != ''){
+                                                                if($my_timezone_index == '1' ) echo 'New York';
+                                                                if($my_timezone_index == '2' ) echo 'Minneapolis';
+                                                                if($my_timezone_index == '3' ) echo 'Colorado';
+                                                                if($my_timezone_index == '4' ) echo 'SF/LA';
+                                                                if($my_timezone_index == '5' ) echo 'Hawaii';
+                                                                if($my_timezone_index == '6' ) echo 'Guam';
+                                                                if($my_timezone_index == '7') echo 'Tokyo';                     
+                                                                if($my_timezone_index == '8' ) echo 'Seoul';
+                                                                if($my_timezone_index == '9' ) echo 'Beijing';
+                                                                if($my_timezone_index == '10' ) echo 'Xianyang';
+                                                                if($my_timezone_index == '11' ) echo 'Hanoi';
+                                                                if($my_timezone_index == '12' ) echo 'Bangkok';
+                                                                if($my_timezone_index == '13' ) echo 'Myanmar';
+                                                                if($my_timezone_index == '14' ) echo 'Bangladesh';
+                                                                if($my_timezone_index == '15' ) echo 'Sri Lanka';
+                                                                if($my_timezone_index == '16' ) echo 'New Delhi';
+                                                                if($my_timezone_index == '17' ) echo 'Mumbai';
+                                                                if($my_timezone_index == '18' ) echo 'London';
+                                                                if($my_timezone_index == '19' ) echo 'Sydney';
+
+                                                            }
+                                                            else
+                                                                _e('N/A', 'iii-dictionary');
+                                                        }else {
+                                                            _e('N/A', 'iii-dictionary');
+                                                        }
+                                                        ?>
+                                                    </span>
+                                            </div>
+                                            
+                                        </div>
                                 </form>
                             </div>
                             <!-- Profile --> 
@@ -873,70 +1042,93 @@
                                         $update_description = get_user_meta($current_user->ID, 'subject_description', true);
                                     }
                                 ?>
-                                <h3>Update My Account</h3>
-                                <form method="post" id="myUpdate" action="" name="updateAccount" enctype="multipart/form-data">
-                                    <h4>Basic Account Info:</h4>
+                                <div class="student-center">
+                                    <p class="my-account">MY ACCOUNT</p>
+                                    <p class="tutor-acc">UPDATE MY ACCOUNT</p>
+                                </div>
+                                <form method="post" id="myUpdate" action="" name="updateAccount" enctype="multipart/form-data" autocomplete="off">
+                                    
+                                    <p class="heading-acc" style="color: #36a93f; margin-top: 16px; font-size: 22px; font-family: Myriad_regular;">Basic Account <img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"></p>
+                                    <span style="color: red; font-size: 14px; float: right; margin-top: -30px;"> (<span style=" position: absolute;  font-weight: bold;   padding-left: 1px; font-size: 14pt">*</span>&nbsp &nbsp) Required</span>
                                     <div class="row">
-                                        <div class="col-sm-12 col-md-12">
+                                        <div class="col-sm-9 col-md-9">
+                                        <div class="find-general-border">
+                                            <span class="find-label"><?php _e('Email Address', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                             <div class="form-group">
                                                 <input id="update_username" class="form-control" name="update_username" type="text" value="<?php echo $update_username ?>" readonly="">
-                                                <span class="placeholder"><?php _e('Email Address', 'iii-dictionary') ?>:</span>
+                                                
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-3">
+                                            <div id="update-gender-pc">
+                                                <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Gender', 'iii-dictionary') ?><span class="required-star"> *</span></span>                                            
+                                                <div class="form-group">
+                                                    <div class="border-ras select-style" id="gender_up">
+                                                        
+                                                        <select id="update_birth_g_pc" class="select-box-it form-control" name="update_birth_g_pc">
+                                                            <option value="" <?php if($update_birth_g == '') echo 'selected="selected"' ?>>Gender</option>
+                                                            <option value="Male" <?php if($update_birth_g == "Male")echo 'selected="selected"'?>>Male</option>
+                                                            <option value="Female" <?php if($update_birth_g == "Female")echo 'selected="selected"'?>>Female</option>
+                                                        </select>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <div class="col-sm-5 col-md-5 mt-top-14">
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Password', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                             <div class="form-group">
-                                                <input id="update_password" class="form-control border-ras" name="update_password" type="text" value="<?php echo $update_user_password ?>" required>
-                                                <span class="placeholder"><?php _e('Password', 'iii-dictionary') ?>:</span>
+                                                <input id="update_password" class="form-control border-ras" name="update_password" type="text" value="" required>
+                                                <div class="clear-input" onclick="document.getElementById('update_password').value=null;"></div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-5 col-md-5 mt-top-14 mt-top-mb-24">
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Confirm Password', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                             <div class="form-group">
-                                                <input id="update_confirmpass" class="form-control border-ras" name="update_confirmpass" type="text" value="<?php echo $update_user_password ?>" required>
-                                                <span class="placeholder"><?php _e('Confirm Password', 'iii-dictionary') ?>:</span>
+                                                <input id="update_confirmpass" class="form-control border-ras" name="update_confirmpass" type="text" value="" required>
+                                                <div class="clear-input" onclick="document.getElementById('update_confirmpass').value=null;"></div>
                                             </div>
+                                        </div>
                                         </div>
 
-                                        <div class="col-sm-2 col-md-2 mt-top-14 gender-pc">
-                                            <div id="update-gender-pc">                                                
-                                                <div class="form-group">
-                                                    <div class="border-ras select-style" id="gender_up">
-                                                        <?php if($update_birth_g != ''){ ?>
-                                                        <input type="text" class="form-control" name="update_birth_g_pc" value="<?php echo $update_birth_g; ?>" id="update_birth_g_pc" readonly="">
-                                                        <?php }else{ ?>
-                                                        <select id="update_birth_g_pc" class="select-box-it form-control" name="update_birth_g_pc">
-                                                            <option value="">Gender</option>
-                                                            <option value="Male">Male</option>
-                                                            <option value="Female">Female</option>
-                                                        </select>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                    </div>
+                                        
+                                        <div class="clearfix"></div>
+                                        
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('First Name', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                            <div class="form-group">
+                                                <input id="update_first_name" class="form-control" name="update_first_name" type="text" value="<?php echo $update_first_name ?>" required>
+                                                <div class="clear-input" onclick="document.getElementById('update_first_name').value=null;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="find-general-border">
+                                                <span class="find-label"><?php _e('Last Name', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                            <div class="form-group">
+                                                <input id="update_last_name" class="form-control" name="update_last_name" type="text" value="<?php echo $update_last_name ?>" required>
+                                                <div class="clear-input" onclick="document.getElementById('update_last_name').value=null;"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <div class="col-sm-6 col-md-6 mt-top-14">
-                                            <div class="form-group">
-                                                <input id="update_first_name" class="form-control" name="update_first_name" type="text" value="<?php echo $update_first_name ?>" required>
-                                                <span class="placeholder"><?php _e('First Name', 'iii-dictionary') ?>:</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 mt-top-14 mt-top-mb-24">
-                                            <div class="form-group">
-                                                <input id="update_last_name" class="form-control" name="update_last_name" type="text" value="<?php echo $update_last_name ?>" required>
-                                                <span class="placeholder"><?php _e('Last Name', 'iii-dictionary') ?>:</span>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="col-sm-12 col-md-12 mt-top-9">
-                                            <div class="form-group">
-                                                <label class="create-label mt-bottom-11">
-                                                    <?php _e('Date of Birth', 'iii-dictionary') ?>
-                                                </label>
+                                        <p class=" heading-acc create-label col-sm-12 col-md-12 mt-top-4">Date of Birth<img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"></p>
+                                        <div class="col-sm-12 col-md-12">
+
+                                           
+                                                
                                                 <div class="row tiny-gutter">
                                                     <div class="col-xs-12 col-sm-4 col-md-4 border-ras select-style" id="update_month">
+                                                        <div class="find-general-border">
+                                                            <span class="find-label"><?php _e('Month', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                                         <select id="update_birth_m" class="select-box-it form-control" name="update-birth-m">
                                                             <option value="">(Month)</option>
                                                             <?php 
@@ -953,7 +1145,10 @@
                                                             <?php endfor ?>
                                                         </select>
                                                     </div>
+                                                    </div>
                                                     <div class="col-xs-12 col-sm-4 col-md-4 border-ras select-style" id="update_date">
+                                                        <div class="find-general-border">
+                                                            <span class="find-label"><?php _e('Day', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                                         <select id="update_birth_d" class="select-box-it form-control" name="update-birth-d">
                                                             <option value="">(Day)</option>
                                                             <?php 
@@ -970,107 +1165,113 @@
                                                             <?php endfor ?>
                                                         </select>
                                                     </div>
-                                                    <div class="col-xs-12 col-sm-4 col-md-4 year-mb">
-                                                        <input id="update_birth_y" class="form-control" name="update-birth-y" type="text" value="<?php echo $update_birth_y ?>" required>
-                                                        <span class="placeholder"><?php _e('Year', 'iii-dictionary') ?>:</span>
                                                     </div>
-
-                                                    <div class="col-xs-12 col-sm-4 col-md-4 gender-mb">
-                                                        <div id="update-gender-mb">
+                                                    <div class="col-xs-12 col-sm-4 col-md-4 year-mb">
+                                                        <div class="find-general-border">
+                                                            
+                                                            <span class="find-label"><?php _e('Year', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                                             <div class="form-group">
-                                                                <div class="border-ras select-style" id="update_gender">
-                                                                    <?php if($update_birth_g != ''){ ?>
-                                                                    <input readonly="" type="text" name="update_birth_g_mb" class="form-control" value="<?php echo $update_birth_g; ?>" id="update_birth_g_mb">
-                                                                    <?php }else{ ?>
-                                                                    <select id="update_birth_g_mb" class="select-box-it form-control" name="update_birth_g_mb">
-                                                                        <option value="">Gender</option>
-                                                                        <option value="Male">Male</option>
-                                                                        <option value="Female">Female</option>
-                                                                    </select>
-                                                                    <?php } ?>
-                                                                </div>
-                                                            </div>
+                                                        <input id="update_birth_y" class="form-control" name="update-birth-y" type="text" value="<?php echo $update_birth_y ?>" required>
+                                                        <div class="clear-input" onclick="document.getElementById('update_birth_y').value=null;"></div>
                                                         </div>
                                                     </div>
+                                                    </div>
+
+                                                    
                                                 </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="clearfix"></div>
-                                        <div class="col-sm-12 col-md-12">
-                                            <label class="create-label mt-top-10">
-                                                <?php _e('Language', 'iii-dictionary') ?>
-                                            </label>
-                                            <div class="form__boolean mt-bottom-10 clearfix" id="checkBoxSearch" style="margin-top: 0">
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons option-input-2 radio" value="en" <?php if(count($update_language)> 0 && in_array("en", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/> English
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons option-input-2 radio" value="ja" <?php if(count($update_language)> 0 && in_array("ja", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/> Japanese
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons option-input-2 radio" value="ko" <?php if(count($update_language)> 0 && in_array("ko", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/> Korean
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons option-input-2 radio" value="zh" <?php if(count($update_language)> 0 && in_array("zh", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/> Chinese
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons option-input-2 radio" value="zh-tw" <?php if(count($update_language)> 0 && in_array("zh-tw", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/> Traditional Chinese
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons option-input-2 radio" value="vi" <?php if(count($update_language)> 0 && in_array("vi", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/> Vietnamese
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-2 col-xs-4 cb-type2">
-                                                    <label>
-                                                        <input type="checkbox" class="radio_buttons option-input-2 radio" value="ot" <?php if(count($update_language)> 0 && in_array("ot", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/> Others
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <p class=" heading-acc create-label col-sm-12 col-md-12 mt-bottom-11">Language & Time Zone<img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"></p>
+                                        <div id="language-timezone-update" class="col-sm-6 col-md-6 col-xs-6 mt-top-mb-12">
+                                                
+                                                <div  class="find-general-border language-input">
+                                                <span class="find-label"><?php _e('Language', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                                <div id="show-language-up" class="show-language">
 
-                                        <div class="col-sm-12 col-md-12 profile-pic mt-top-14" style="clear: both;">
-                                            <label class="create-label img-profile">Profile Picture (optional)</label>
-                                            <div class="row">
-                                                <div class="col-sm-4 col-md-4 mt-top-9">
-                                                    <div class="form-group">
-                                                        <img id="user-upload-img" src="<?php echo get_template_directory_uri(); ?>/library/images/Icon_Image_Person.png" alt="Profile Picture" style="display: inline-block; margin-right: 14px;">
-                                                        <input class="form-control input-file" type="file" id="input-image" value="">
-                                                        <button class="btn-dark-blue border-btn" style="background: #cecece; display: inline-block; width: 82%" type="button" name="upload" onclick="document.getElementById('input-image').click();">
-                                                            <?php _e('Browse', 'iii-dictionary') ?>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                                    <?php 
+                                                         $languagelist = "";
+                                                        if(count($update_language) > 0){
+                                                       
+                                                        if(in_array("en", $update_language)){$languagelist = $languagelist."English, ";}
+                                                        if(in_array("ja", $update_language)){$languagelist = $languagelist."Japanese, ";}
+                                                        if(in_array("ko", $update_language)){$languagelist = $languagelist."Korean, ";}
+                                                        if(in_array("zh", $update_language)){$languagelist = $languagelist."Chinese, ";}
+                                                        if(in_array("zh-tw", $update_language)){$languagelist = $languagelist."Traditional Chinese, ";}
+                                                        if(in_array("vi", $update_language)){$languagelist = $languagelist."Vietnamese, ";}
+                                                        if(in_array("ot", $update_language)){$languagelist = $languagelist."Others, ";}
 
-                                                <div class="col-sm-8 col-md-8 mt-top-9">
-                                                    <div class="form-group">
-                                                        <input class="form-control input-path" id="profile-value" type="text" value="<?php echo $profile_value ?>">
-                                                    </div>
+                                                        };
+                                                        echo rtrim($languagelist,", ");
+                                                        
+                                                        ?>
+                                                        <span class="selectboxit-arrow-container" style="margin-top: -2.5px; margin-right: 0"><i style="opacity:0;">0</i></span>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
+                                                </div>
+                                                <div class="form__boolean mt-bottom-10 clearfix language_drop" id="checkBoxSearch" style="margin-top: -14px">
+                                                    <span class="Available-lg">Available language</span>
+                                                    <ul id="list-language" style="font-size: 11pt; color: #9c9c9c;">
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons option-input-3 radio" value="en" <?php if(count($update_language) > 0 && in_array("en", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/>
+                                                            <span>&ensp; English</span>
+                                                        </li>
+                                                        
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons option-input-3 radio" value="ja" <?php if(count($update_language) > 0 && in_array("ja", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/>
+                                                            <span>&ensp; Japanese</span>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <input type="checkbox"  class="radio_buttons option-input-3 radio" value="ko" <?php if(count($update_language) > 0 && in_array("ko", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/>
+                                                            <span>&ensp; Korean</span>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons option-input-3 radio" value="zh" <?php if(count($update_language) > 0 && in_array("zh", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/>
+                                                            <span>&ensp; Chinese</span>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons option-input-3 radio" value="zh-tw" <?php if(count($update_language) > 0 && in_array("zh-tw", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/>
+                                                            <span>&ensp; Traditional Chinese</span>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons option-input-3 radio" value="vi" <?php if(count($update_language) > 0 && in_array("vi", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/>
+                                                            <span>&ensp; Vietnamese</span>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <input type="checkbox" class="radio_buttons option-input-3 radio" value="ot" <?php if(count($update_language) > 0 && in_array("ot", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/>
+                                                            <span>&ensp; Others</span>
+                                                        </li>
+                                                    </ul>
+                                                    <div style="padding:12px 0;">
+                                                <div class="ol-sm-6 col-md-6">
+                                                   <button id="save-lg-up" class="btn-dark-blue border-btn" style="background: #009dcb;" type="button" name="save_timelot">
+                                                                                SAVE   
+                                                                            </button>
+                                                </div>
+                                                <div class="ol-sm-6 col-md-6">
+                                                     <button id="cancel-lg-up" class="btn-dark-blue border-btn" style="background: #CECECE;" type="reset" name="cancel_timelot" >
+                                                                                CANCEL
+                                                                            </button>
+                                                </div>
+                                                </div>
+                                                </div>
+                                                </div>
                                         <div class="col-sm-6 col-md-6 col-xs-6 mt-top-mb-12">
-                                            <label class="create-label mt-top-10">
-                                                <?php _e('My Time Zone', 'iii-dictionary') ?>
-                                            </label>
+                                            <div class="find-general-border">
+                                            <span class="find-label">
+                                                <?php _e('My Time Zone', 'iii-dictionary') ?><span class="required-star"> *</span>
+                                            </span>
                                             <div class="form-group border-ras select-style user-timezone mt-top-8">
                                                 <select class="select-box-it form-control" name="time_zone" id="update-time-zone">
                                                     <option value="0" data-value="0" data-name="Europe/London" data-city="London" <?php if($time_zone_index == '0' ) echo 'selected="selected"'; ?>>Select Time Zone</option>
                                                     <option value="1" data-value="-5" data-city="New York" data-name="America/New_York" <?php if($time_zone_index == '1' ) echo 'selected="selected"'; ?>>New York</option>
                                                     <option value="2" data-value="-6" data-city="Minneapolis" data-name="America/Chicago" <?php if($time_zone_index == '2' ) echo 'selected="selected"'; ?>>Minneapolis</option>
                                                     <option value="3" data-value="-5" data-city="Colorado" data-name="America/Denver" <?php if($time_zone_index == '3' ) echo 'selected="selected"'; ?>>Colorado</option>
-                                                    <option value="4" data-value="-7" data-city="San Francisco" data-name="America/Los_Angeles" <?php if($time_zone_index == '4' ) echo 'selected="selected"'; ?>>San Francisco</option>
+                                                    <option value="4" data-value="-7" data-city="SF/LA" data-name="America/Los_Angeles" <?php if($time_zone_index == '4' ) echo 'selected="selected"'; ?>>SF/LA</option>
                                                     <option value="5" data-value="-10" data-city="Hawaii" data-name="Pacific/Honolulu" <?php if($time_zone_index == '5' ) echo 'selected="selected"'; ?>>Hawaii</option>
                                                     <option value="6" data-value="+10" data-city="Guam" data-name="Pacific/Guam" <?php if($time_zone_index == '6' ) echo 'selected="selected"'; ?>>Guam</option>
                                                     <option value="7" data-value="+9" data-city="Tokyo" data-name="Asia/Tokyo" <?php if($time_zone_index == '7' ) echo 'selected="selected"'; ?>>Tokyo</option>
@@ -1089,7 +1290,41 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        </div>
                                         <div class="clearfix"></div>
+
+                                        
+                                            <p class="heading-acc create-label col-sm-12 col-md-12 mt-bottom-4 mt-top-4">Profile Picture (optional)<img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"></p>
+                                            
+                                            
+                                                <div class="col-sm-3 col-md-3 mt-top-9">
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-md-4">
+                                                    
+
+                                                        <img id="user-upload-img" src="<?php echo get_template_directory_uri(); ?>/library/images/Icon_Image_Person.png" alt="Profile Picture" style="display: inline-block; margin-right: 14px;">
+                                                        </div>
+                                                        <div class="col-sm-8 col-md-8">
+                                                        <input class="form-control input-file" type="file" id="input-image" value="">
+                                                        <button class="btn-dark-blue border-btn" style="background: #cecece; display: inline-block; height: 50px;" type="button" name="upload" onclick="document.getElementById('input-image').click();">
+                                                            <?php _e('Browse', 'iii-dictionary') ?>
+                                                        </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-9 col-md-9 mt-top-9">
+                                                    <div class="find-general-border">
+                                                        <span class="find-label"><?php _e('Image Location', 'iii-dictionary') ?></span>
+                                                    <div class="form-group">
+                                                        <input class="form-control input-path" id="profile-value" type="text" value="<?php echo $profile_value ?>">
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            
+                                        
+                                        <div class="clearfix"></div>
+                                        
                                         <?php 
                                             if ($is_user_logged_in && (is_mw_qualified_teacher($current_user->ID) || is_mw_registered_teacher($current_user->ID)))
                                                 $style = 'style="display: none;"';
@@ -1135,33 +1370,14 @@
                                             </div>
 
                                             <label class="mt-top-10 mt-bottom-12">Tell me why you like Tutoring and Teaching</label>
-                                            <div id="desc-class2" class="mt-bottom-10">
-                                                <span class="editor-top-left"></span>
-                                                <span class="editor-top-right"></span>
-                                                <span class="editor-bottom-left"></span>
-                                                <span class="editor-bottom-right"></span>
-                                                <?php
-                                                $editor_settings = array(
-                                                    'wpautop' => false,
-                                                    'media_buttons' => false,
-                                                    'quicktags' => false,
-                                                    'editor_height' => 50,
-                                                    'textarea_rows' => 3,
-                                                    'tinymce' => array(
-                                                        'toolbar1' => 'bold,italic,strikethrough,image,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,spellchecker,fullscreen,wp_adv'
-                                                    )
-                                                );
-                                                ?>
-                                                <?php wp_editor($desc_tell_update, 'desc_tell_update', $editor_settings); ?>
-                                                <div class="clear-both"></div>
-                                            </div>
+                                            
 
                                             <label class="mt-top-12">Subjects you Interested in Tutor (check to all applied)</label>
                                             <div class="row">
                                                 <div class="form__boolean chk-subject-type mt-bottom-10 clearfix" id="checkBoxSearch" style="margin-top: 0">
                                                     <div class="col-sm-4 col-md-3 col-xs-4 cb-type3">
                                                         <label>
-                                                            <input type="checkbox" class="radio_buttons option-input-2 radio" value="english_writting" <?php if(count($subject_type_update)> 0 && in_array("english_writting", $update_language)) echo 'checked="checked"'; ?> name="subject_type_update"/> English Writting
+                                                            <input type="checkbox" class="radio_buttons option-input-2 radio" value="english_writting" <?php if(count($subject_type_update)> 0 && in_array("english_writting", $update_language)) echo 'checked="checked"'; ?> name="subject_type_update"/> English Writing
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-4 col-md-3 col-xs-4 cb-type3">
@@ -1628,64 +1844,33 @@
                             <!-- Subscription & Points -->
 
                             <div id="tutoring-main" class="tab-pane fade">
-                                <h3 class="mt-bottom-12">Student Information Center <span id="tutor-overview">overview</span></h3>
-                                <div class="tutoring-main mt-top-14">
+                                <div class="student-center">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-6 col-xs-6">
+                                            <p class="mt-bottom-12 student-center-title">Student Information Center</p>
+                                            <div class="new-request-list">SCHEDULE</div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-xs-6 text-right">
+                                            <button type="button" id="btn-getting">
+                                                Getting Tutoring
+                                            </button>
+
+                                            <button type="button" id="btn-tutor">
+                                                Find Tutor
+                                            </button>
+                                            <button type="button" id="btn-schedule">
+                                                Schedule
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tutoring-main">
                                     <div id="tab-sub-tutoring" class="tab-style2">
-                                        <ul class="nav nav-tabs">
-                                            <li class="active tab-sub" id="tab-tutoring">
-                                                <a data-toggle="tab" href="#tab-tutor-content">
-                                                    <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_M_ClassPosts_Selected.png" alt="">
-                                                    Tutoring
-                                                </a>
-                                            </li>
-                                            <li class="tab-sub" id="tab-my-class">
-                                                <a data-toggle="tab" href="#tab-myclass">
-                                                    <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_M_MyClass.png" alt="">
-                                                    My Class
-                                                </a>
-                                            </li>
-                                            <li class="tab-sub" id="tab-my-message">
-                                                <a data-toggle="tab" href="#tab-mymessage">
-                                                    <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_M_MyMessage.png" alt="">
-                                                    My Message
-                                                </a>
-                                            </li>
-                                            <div class="clearfix"></div>
-                                        </ul>
                                         <div class="tab-content">
                                             <div id="tab-tutor-content" class="tab-pane fade in active">
                                                 <input value="" type="hidden" id="active-day-tutor">
                                                 <input value="" type="hidden" id="today-tutor">
-                                                <div class="border-selectall">
-                                                    <div class="col-sm-6 col-md-6 col-xs-6 no-padding cb-type-lesson">
-                                                        <div class="new-request-list">Find a tutor</div>
-                                                    </div>
-                                                    <div class="col-sm-2 col-md-2 col-xs-2 nopadding-r">
-                                                        <div class="form-group">
-                                                            <button type="button" class="btn-orange2 nopadding-r border-btn" id="btn-tutor">
-                                                                <img src="<?php echo get_template_directory_uri(); ?>/library/images/tutoring_01_Tutor.png" alt=""><span>Tutor</span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-2 col-md-2 col-xs-2 nopadding-r">
-                                                        <div class="form-group">
-                                                            <button type="button" class="btn-orange2 nopadding-r border-btn" id="btn-schedule">
-                                                                <img src="<?php echo get_template_directory_uri(); ?>/library/images/tutoring_02_Schedule.png" alt=""><span>Schedule</span>
-                                                            </button>
-                                                        </div>
-                                                    </div> 
-                                                    <div class="col-sm-2 col-md-2 col-xs-2 nopadding-r">
-                                                        <div class="form-group">
-                                                            <button type="button" class="btn-orange2 nopadding-r border-btn" id="btn-status">
-                                                                <img src="<?php echo get_template_directory_uri(); ?>/library/images/tutoring_03_Status.png" alt=""><span>Status</span>
-                                                            </button>                           
-                                                        </div>
-                                                    </div>  
-                                                    <button type="button" class="btn-open-calendar" id="btn-open-calendar">
-                                                        <img src="<?php echo get_template_directory_uri(); ?>/library/images/tutoring_04_Open_Calendar.png" alt="">
-                                                    </button>
-                                                    <div class="clearfix"></div>
-                                                </div>
                                                 <div class="form-group border-ras select-style" id="custom-timezone" data-type="" data-day="">
                                                     <?php
                                                     $timezone_index = '';
@@ -1702,7 +1887,7 @@
                                                         <option value="1" data-value="-5" data-name="America/New_York" data-city="New York" <?php if($timezone_index == '1' ) echo 'selected="selected"'; ?>>New York</option>
                                                         <option value="2" data-value="-6" data-name="America/Chicago" data-city="Minneapolis" <?php if($timezone_index == '2' ) echo 'selected="selected"'; ?>>Minneapolis</option>
                                                         <option value="3" data-value="-5" data-name="America/Denver" data-city="Colorado" <?php if($timezone_index == '3' ) echo 'selected="selected"'; ?>>Colorado</option>
-                                                        <option value="4" data-value="-7" data-name="America/Los_Angeles" data-city="San Francisco" <?php if($timezone_index == '4' ) echo 'selected="selected"'; ?>>San Francisco</option>
+                                                        <option value="4" data-value="-7" data-name="America/Los_Angeles" data-city="SF/LA" <?php if($timezone_index == '4' ) echo 'selected="selected"'; ?>>SF/LA</option>
                                                         <option value="5" data-value="-10" data-name="Pacific/Honolulu" data-city="Hawaii" <?php if($timezone_index == '5' ) echo 'selected="selected"'; ?>>Hawaii</option>
                                                         <option value="6" data-value="+10" data-name="Pacific/Guam" data-city="Guam" <?php if($timezone_index == '6' ) echo 'selected="selected"'; ?>>Guam</option>
                                                         <option value="7" data-value="+9" data-name="Asia/Tokyo" data-city="Tokyo" <?php if($timezone_index == '7' ) echo 'selected="selected"'; ?>>Tokyo</option>
@@ -1719,6 +1904,82 @@
                                                         <option value="18" data-value="0" data-name="Europe/London" data-city="London" <?php if($timezone_index == '18' ) echo 'selected="selected"'; ?>>London</option>
                                                         <option value="19" data-value="+5" data-name="Australia/Sydney" data-city="Sydney" <?php if($timezone_index == '19' ) echo 'selected="selected"'; ?>>Sydney</option>
                                                     </select>
+                                                </div>
+                                                <div class="getting-tutor-main" style="display: none; margin-left: -34px;">
+                                                    <div class="step-box">
+                                                        
+                                                        <img style="width: 371px" src="<?php echo get_template_directory_uri(); ?>/library/images/05_Title_Image.jpg">
+                                                        <div style=" float: right; width: 400px;">
+                                                            <br>
+                                                            <span style="font-family: Myriad_light; color: #343434;  font-size: 40px; line-height: 1.3;">Welcome to iktutor.com! Let’s get you started with the tutoring.</span>
+                                                            <br><br>
+                                                            <span style="font-family: Myriad_light; color: #8a8a8a;font-size: 17px; ">These 4 Steps of Quick Start Guide will help you through how to get into Online Tutoring with the basics that you need to know.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="step-box" >
+                                                        <div class="step-btn" style=" background: #49a1bc;">STEP 1</div>
+                                                        <br>
+                                                        <img class="getting-img" style="width: 305px" src="<?php echo get_template_directory_uri(); ?>/library/images/06_Step1.jpg">
+                                                        <div>
+                                                            <p class="tit-getting">Do you have enough points for <br>tutoring? If not, here’s what <br>you can do!</p>
+                                                            <ul class="list-getting">
+                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp;  You will spend points to schedule a Tutoring.</li>
+                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp;  1 point = $1 dollar. Simple as that!</li>
+                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp;  Anytime you are short on points, simply “Recharge” them.</li>
+                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp;  That’s all, now you are ready to begin!</li>
+                                                            </ul>
+                                                        </div>
+                                                        <a id="go-to-point" href="<?php echo locale_home_url() ?>/?r=my-account#purchase-points"><div class="link-getting" style="color: #49a1bc;">Go to Purchase Points &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Step1.png"></div></a>
+                                                    </div>
+                                                    <div class="step-box">
+                                                         <div class="step-btn"  style=" background: #dc8c23;">STEP 2</div>
+                                                        <br>
+                                                        <img class="getting-img" style="width: 260px" src="<?php echo get_template_directory_uri(); ?>/library/images/07_Step2.jpg">
+                                                        <div>
+                                                            <p class="tit-getting">What and when do you want your schedule to be?</p>
+                                                            <ul class="list-getting">
+                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; There are two ways to make a schedule. Through “<u>Find Tutor Page</u>” or “<u>Schedule Page</u>”</li>
+                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; Find Tutor Page: To set a schedule, a student defines “<u>Subject</u>”, “<u>Date</u>”, and “<u>Other Parameters</u>” from the search area. </li>
+                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; Schedule Page: From the calendar, select the “<u>Date</u>”, then it will take you to the “Fnd Tutor Page”. From there, finish the remaining parameters</li>
+                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; Now you are almost ready to meet your tutor! </li>
+                                                            </ul>
+
+                                                            <div class="go-to-find link-getting" style="color: #dc8c23;">Go to Find Tutor Page &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/02_Icon_Step2.png"></div>
+                                                            <div id="go-to-schedule" class="link-getting" style="color: #dc8c23;">Go to Schedule Page &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/02_Icon_Step2.png"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="step-box">
+                                                        <div class="step-btn"  style=" background: #ff6d6d;">STEP 3</div>
+                                                        <br>
+                                                        <img class="getting-img" style="width: 250px" src="<?php echo get_template_directory_uri(); ?>/library/images/08_Step3.jpg">
+                                                        <p class="tit-getting">It’s time to select the right tutor!</p>
+                                                        <ul class="list-getting">
+                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; Once Preference is set, click on “<u>Search</u>”. Now you will be presented with “<u>Lists of Tutors</u>”.</li>
+                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; Alternatively, go to “<u>Available Tutor List</u>”, if you don’t have any preference.</li>
+                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; Before finalizing a tutor, you can check their details like, “<u>Marketing Words</u>”, “<u>Background</u>”, “<u>Reviews</u>”, and “<u>Scheduling Status</u>”. These will help you to decide the right tutor for your schedule.</li>
+                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; When everything looks good, make a schedule by clicking on the “<u>Schedule Button</u>”.</li>
+
+                                                        </ul>
+                                                        <div class="link-getting go-to-find-tutor" style="color: #ff6d6d;">Go to Available Tutor List &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Step3.png"></div>
+                                                        <div class="go-to-find link-getting" style="color: #ff6d6d;">Go to Find Tutor Page &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Step3.png"></div>
+                                                    </div>
+                                                    <div class="step-box">
+                                                        <div class="step-btn"  style=" background: #4ba618;">STEP 4</div>
+                                                        <br>
+                                                        <img class="getting-img" style="width: 309px" src="<?php echo get_template_directory_uri(); ?>/library/images/09_Step4.jpg">
+                                                        <p class="tit-getting">What to expect after everything is set.</p>
+                                                        <ul class="list-getting">
+                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; At this point, students need to wait for the tutor to ”<u>Confirm</u>” the schedule.</li>
+                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; When confirmed, both tutor and student meet up at the “<u>Online Tutoring Notepad</u>” from the appointed time. </li>
+                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; For whatever reason, if the tutor hasn’t confirmed yet, students have the option to “<u>Cancel</u>” the schedule. </li>
+                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; All the schedule status can be checked from the student's “<u>Schedule Detailed Page</u>”. </li>
+                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; That’s it! Enjoy your online tutoring! </li>
+
+                                                        </ul>
+                                                        <div id=go-to-all class="link-getting" style="color: #4ba618;">Go to Schedule Detail Page &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/04_Icon_Step4.png"></div>
+                                                        <a href="https://notepad.iktutor.com/" target="_bank"><div class="link-getting" style="color: #4ba618;">Go to Online Tutoring Notepad &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/04_Icon_Step4.png"></div></a>
+                                                    </div>
+
                                                 </div>
                                                 <div class="section-tutor-main">
                                                     <div class="border-selectall color-border">
@@ -1747,25 +2008,26 @@
 
                                                     <div class="frm-available-now">
                                                         <div class="row">
-                                                            <div class="col-sm-4 col-md-4 col-xs-6 search-tutorname">
-                                                                <label class="mt-bottom-8">Tutor Name:</label>
-                                                                <div class="form-group">
-                                                                    <input id="search-find-tutoring" name="search-ready-les" class="form-control search-tit border-ras" placeholder="Type name here...">
-                                                                </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <label class="find-page-title">Tutor and Subject</label>
+                                                                <img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png"  alt="">
                                                             </div>
-                                                            <div class="col-sm-5 col-md-5 col-xs-6">
-                                                                <label class="mt-bottom-8">Subject:</label>
+                                                        </div>
+                                                        <div class="row">                                                           
+                                                            <div class="col-sm-6 col-md-6 col-xs-6">
+                                                                <div class="find-general-border">
+                                                                <label class="find-label">Subject for tutoring</label>
                                                                 <div class="form-group border-ras select-style">
-                                                                    <select class="select-box-it form-control" name="available_subject" id="select-available-subject">
-                                                                        <option value="0" data-name="">Subject</option>
-                                                                        <option value="all" data-name="Any Subjects">Any Subjects</option>
+                                                                    <select class="find-select select-box-it  form-control" name="available_subject" id="select-available-subject">
+                                                                        <option class="boo" value="0" data-name="">Subject</option>
+                                                                        <!-- <option value="all" data-name="Any Subjects">Any Subjects</option> -->
                                                                         <option value="english_subject|all" data-name="English Only">English Only</option>
                                                                         <option value="math_subject|all" data-name="Math Only">Math Only</option>
                                                                         <option value="science_subject|all" data-name="Science Only">Science Only </option>
                                                                         <option value="other_preference|others" data-name="Other Subjects Only">Other Subjects Only</option>
                                                                         <option value="english_subject|english_conversation" data-name="English: Conversation for Foreign Students">English: Conversation for Foreign Students</option>
                                                                         <option value="english_subject|english_grammar" data-name="Enlgish: Grammar">Enlgish: Grammar</option>
-                                                                        <option value="english_subject|english_writting" data-name="English Writting">English Writting</option>
+                                                                        <option value="english_subject|english_writting" data-name="English Writting">English Writing</option>
                                                                         <option value="english_subject|english_reading_comprehension" data-name="English: Reading Comprehension">English: Reading Comprehension</option>
                                                                         <option value="english_subject|others" data-name="English: Others">English: Others</option>
                                                                         <option value="math_subject|elemenatary_school_math" data-name="Math: Elementary">Math: Elementary</option>
@@ -1779,8 +2041,20 @@
                                                                         <option value="science_subject|others" data-name="Science: Others">Science: Others</option>
                                                                     </select>
                                                                 </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-sm-3 col-md-3 col-xs-12 cb-type2">
+                                                            <div class="col-sm-6 col-md-6 search-tutorname">
+                                                            <div class="find-general-border">
+                                                                <label class="find-label">Tutor Name:</label>
+                                                                <div class="form-group">
+                                                                    <input id="search-find-tutoring" name="search-ready-les" class="find-name form-control search-tit " placeholder="Type name here...">
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <!-- <div class="row">
+                                                        <div class="col-sm-3 col-md-3 col-xs-12 cb-type2">
                                                                 <label>
                                                                     <input type="checkbox" class="radio_tutor_search class_cb_search option-input-2 radio" value="favorite" data-lang="en" name="type_search" /> Favorites
                                                                 </label>
@@ -1788,17 +2062,67 @@
                                                                     <input type="checkbox" class="radio_tutor_search class_cb_search option-input-2 radio" value="rating" data-lang="en" name="type_search" /> Rating
                                                                 </label>
                                                             </div>
+                                                        </div> -->
+                                                        <div class ="row">
+                                                            <div class="col-sm-4 col-md-4">
+                                                            <div class="find-general-border">
+                                                                <label class="find-label">Tutoring Type</label>
+                                                                <div class=" max-100 form-group select-style">
+                                                            <select class="find-select select-box-it  form-control" name="available_subject" id="select-available-subject">
+                                                                <option class="boo" value="0" data-name="">Tutoring type</option>
+                                                                <option value="one_tutoring" data-name="1 on 1 Tutoring">1 On 1 Tutoring</option>
+                                                                <option value="group_tutoring" data-name="Group Tutoring">Group Tutoring</option>
+                                                                <option value="" data="">Both</option>
+                                                            </select>
+                                                            </div>
+                                                            </div>
                                                         </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="find-general-border">
+                                                            <label class="find-label">Price</label>
+                                                            <div class="max-100 form-group select-style">
+                                                            <select class="find-select select-box-it  form-control" name="available_subject" id="select-available-price">
+                                                                <option class="boo" value="0" data-name="">Any Price</option>
+                                                                <option value="one_to_ten" data-name="$1 - $10 (30 min)">$1 - $10 (30 min)</option>
+                                                                <option value="eleven_to_twenty" data-name="$11 - $20 (30 min)">$11 - $20 (30 min)</option>
+                                                                <option value="twetyone_to_thirty" data-name="$21 - $30 (30 min)">$21 - $30 (30 min)</option>
+                                                                <option value="thirtyone_to_fourty" data-name="$31 - $40 (30 min)">$31 - $40 (30 min)</option>
+                                                                <option value="fourtyone_to_fifty" data-name="$41 - $50 (30 min)">$41 - $50 (30 min)</option>
+                                                                <option value="morethan_fifty" data-name="> $50 (30 min)">> $50 (30 min)</option>
+
+                                                            </select>
+                                                            </div>  
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    
+                                                    <div class="col-sm-4 col-md-4">
+                                                        <div class="find-general-border">
+                                                            <label class="find-label">Option :</label>
+                                                            <div class="max-100 form-group select-style">
+                                                            <select class="find-select select-box-it  form-control" name="available_subject" id="select-available-option">
+                                                                <option class="boo" value="0" data-name="">None</option>
+                                                                <option value="all" data-name="Rating & Favorite">Rating & Favorite</option>
+                                                                <option value="rating" data-name="Rating">Rating</option>
+                                                                <option value="favorite" data-name="Favorite">Favorite</option>
+                                                            </select>
+                                                            </div>                                                       
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <label class="mt-top-10 mt-bottom-12">Date:</label>
+                                                                <label class="find-page-title">Set a Time</label>
+                                                                <img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png"  alt="">
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-4 col-md-4 col-xs-4">
+                                                            <div class="col-sm-3 col-md-3 col-xs-3">
+                                                                <div class="find-general-border">
+                                                                <label class="find-label">Month</label>
                                                                 <div class="form-group border-ras select-style">
                                                                     <select class="select-box-it form-control" name="available_month" id="select-available-month">
-                                                                        <option value="0">Select Month</option>
+                                                                        
                                                                         <?php 
                                                                         for ($j = 1; $j < 13; $j++) {
                                                                             if($j < 10)
@@ -1813,10 +2137,13 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-4 col-md-4 col-xs-4">
+                                                            </div>
+                                                            <div class="col-sm-3 col-md-3 col-xs-3">
+                                                                <div class="find-general-border">
+                                                                <label class="find-label">Day:</label>
                                                                 <div class="form-group border-ras select-style">
                                                                     <select class="select-box-it form-control" name="available_day" id="select-available-day">
-                                                                        <option value="0">Select Day</option>
+                                                                       
                                                                         <?php 
                                                                         for ($i = 1; $i < 32; $i++) {
                                                                             if($i < 10)
@@ -1831,10 +2158,13 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-4 col-md-4 col-xs-4">
+                                                            </div>
+                                                            <div class="col-sm-3 col-md-3 col-xs-3">
+                                                                <div class="find-general-border">
+                                                                <label class="find-label">Time:</label>
                                                                 <div class="form-group border-ras select-style">
                                                                     <select class="select-box-it form-control" name="available_time" id="select-available-time">
-                                                                        <option value="0" data-time="" data-time-view="">Select Time</option>
+                                                                        
                                                                         <?php 
                                                                         $dt_hour = (int)$dt->format('H');
                                                                         $type = 'am';
@@ -1859,19 +2189,24 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-4 col-md-4 col-xs-4 available-year-mb">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control border-ras" name="available_year" value="<?php echo $dt->format('Y') ?>" id="available_year">
+                                                            </div>
+                                                            <div class="col-sm-3 col-md-3 col-xs-3">
+                                                                <div class="find-general-border">
+                                                                <label class="find-label">Year:</label>
+                                                                <div class="form-group border-ras select-style">
+                                                                    <input type="text" class="select-box-it form-control" name="available_year" value="<?php echo $dt->format('Y') ?>" id="available_year" >
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-4 col-md-4 col-xs-4">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                           
+                                                            <div class="col-sm-6 col-md-6 col-xs-6">
                                                                 <button class="btn-dark-blue border-btn btn-available-reset" type="button" name="available_reset">
                                                                     <?php _e('Reset', 'iii-dictionary') ?>
                                                                 </button>
                                                             </div>
-                                                            <div class="col-sm-4 col-md-4 col-xs-4 available-search-mb">
+                                                            <div class="col-sm-6 col-md-6 col-xs-6 available-search-mb">
                                                                 <button class="btn-dark-blue border-btn" id="btn-available-search" type="button" name="available_search">
                                                                     <?php _e('Search Now', 'iii-dictionary') ?>
                                                                 </button>
@@ -1880,23 +2215,24 @@
                                                     </div>
 
                                                     <div class="tutoring-table">
+                                                        <label class="result_quick" style="display: none"></label>
                                                         <table id="table-detail-tutor">
                                                             <tbody>
                                                                 <tr class="tr-detail">
                                                                     <td>
                                                                         <p class="schedule-detail">Your Scheduling detail:</p>
-																		<p class="subject-selected-detail">
-																			<span>Subject:</span>
-																			<span id="selected-subject" class="not-selected active">Not selected yet</span>
-																		</p>
+                                                                        <p class="subject-selected-detail">
+                                                                            <span>Subject:</span>
+                                                                            <span id="selected-subject" class="not-selected active">Not selected yet</span>
+                                                                        </p>
                                                                         <p class="date-detail">
-																			<span>Date:</span>
-																			<span id="selected-date"></span>
-																		</p>
+                                                                            <span>Date:</span>
+                                                                            <span id="selected-date"></span>
+                                                                        </p>
                                                                         <p class="tutor-detail">
-																			<span>Tutor:</span>
-																			<span id="selected-tutor" class="not-selected">Not selected yet</span>
-																		</p>
+                                                                            <span>Tutor:</span>
+                                                                            <span id="selected-tutor" class="not-selected">Not selected yet</span>
+                                                                        </p>
                                                                         <img class="close-detail" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_CONFIRM-CLOSE.png" alt="">
                                                                         <button class="btn-dark-blue border-btn btn-schedule-now" type="button" name="schedule_now" id="btn-schedule-now">Schedule Now</button>
                                                                     </td>
@@ -1905,7 +2241,7 @@
                                                         </table>
                                                         <table>
                                                             <tbody id="table-list-tutor">
-                                                                
+                                                               
                                                             </tbody>
                                                         </table>
                                                         <div class="slide-resume">
@@ -1982,26 +2318,7 @@
                                                         <span class="create-time">Jan 26, 2018 (5:30)</span>
                                                     </p>
                                                     <p class="description-request">Test</p>
-                                                    <div id="desc-class2" class="edit-description" style="display: none;">
-                                                        <span class="editor-top-left"></span>
-                                                        <span class="editor-top-right"></span>
-                                                        <span class="editor-bottom-left"></span>
-                                                        <span class="editor-bottom-right"></span>
-                                                        <?php
-                                                        $editor_settings = array(
-                                                            'wpautop' => false,
-                                                            'media_buttons' => false,
-                                                            'quicktags' => false,
-                                                            'editor_height' => 50,
-                                                            'textarea_rows' => 3,
-                                                            'tinymce' => array(
-                                                                'toolbar1' => 'bold,italic,strikethrough,image,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,spellchecker,fullscreen,wp_adv'
-                                                            )
-                                                        );
-                                                        ?>
-                                                        <?php wp_editor('', 'edit_description_request', $editor_settings); ?>
-                                                        <div class="clear-both"></div>
-                                                    </div>
+                                                    
                                                     <div class="row">
                                                         <div class="col-sm-6 col-md-6 col-xs-12">
                                                             <div class="form-group">
@@ -2054,26 +2371,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-12">                                     
-                                                            <div id="desc-class2" class="mt-bottom-10">
-                                                                <span class="editor-top-left"></span>
-                                                                <span class="editor-top-right"></span>
-                                                                <span class="editor-bottom-left"></span>
-                                                                <span class="editor-bottom-right"></span>
-                                                                <?php
-                                                                $editor_settings = array(
-                                                                    'wpautop' => false,
-                                                                    'media_buttons' => false,
-                                                                    'quicktags' => false,
-                                                                    'editor_height' => 50,
-                                                                    'textarea_rows' => 3,
-                                                                    'tinymce' => array(
-                                                                        'toolbar1' => 'bold,italic,strikethrough,image,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,spellchecker,fullscreen,wp_adv'
-                                                                    )
-                                                                );
-                                                                ?>
-                                                                <?php wp_editor('', 'message-review', $editor_settings); ?>
-                                                                <div class="clear-both"></div>
-                                                            </div>
+                                                            
                                                             <!-- <div id="character_count"></div> -->
                                                         </div>
                                                     </div>
@@ -2134,7 +2432,7 @@
                                                                 <img class="schedule-left-btn" src="<?php echo get_template_directory_uri(); ?>/library/images/Chalendar_icon_Left_circle.png" data-day="<?php echo $dt_yesterday->format('Y-m-d') ?>" data-type="schedule">
                                                                 <img class="schedule-right-btn" src="<?php echo get_template_directory_uri(); ?>/library/images/Chalendar_icon_Rightt_circle.png"  data-day="<?php echo $dt_tomorrow->format('Y-m-d') ?>" data-type="schedule">
                                                             </div>
-                                                            <div class="col-xs-7 col-sm-7 col-md-7 no-padding">
+                                                            <div class="col-xs-7 col-sm-7 col-md-7 no-padding close-schedule">
                                                                 <span class="current-stuff">
                                                                     <span class="current-day"><?php echo $dt->format('F d') ?></span>
                                                                     <span class="stuff-day">(<?php echo $dt->format('D') ?>)</span>
@@ -2201,38 +2499,38 @@
                                                                     
                                                                 </tbody>
                                                             </table>
-															<div class="main-view-status" style="display: none;">
-																<div class="row">
-																	<div class="col-md-11">
-																		<p class="name-status-schedule">
-																			<img id="icon-status-schedule" src="<?php echo get_template_directory_uri(); ?>/library/images/TimeIcon_Completed.png">
-																			<span></span>
-																		</p>
-																	</div>
-																	<div class="col-md-1 text-right">
-																		<img class="close-status-schedule" src="<?php echo get_template_directory_uri(); ?>/library/images/03_Close_Icon.png">
-																	</div>
-																</div>
-																<p class="date-status-schedule">
-																	<span class="label-status-schedule">Date:</span>
-																	<span id="date-schedule"></span>
-																</p>
-																<p class="current-status-schedule">
-																	<span class="label-status-schedule">Status:</span>
-																	<span id="current-status"></span>
-																</p>
-																<p class="name-tutor-schedule">
-																	<span class="label-status-schedule">Tutor:</span>
-																	<span id="name-tutor-detail"></span>
-																</p>
-																<p class="point-status-schedule">
-																	<span class="label-status-schedule">Points:</span>
-																	<span id="point-schedule"></span>
-																</p>
-																<p class="review-status-schedule">
-																	<span class="label-status-schedule">Review:</span>
-																	<span id="review-schedule" class="review-schedule"></span>
-																</p>
+                                                            <div class="main-view-status" style="display: none;">
+                                                                <div class="row">
+                                                                    <div class="col-md-11">
+                                                                        <p class="name-status-schedule">
+                                                                            <img id="icon-status-schedule" src="<?php echo get_template_directory_uri(); ?>/library/images/TimeIcon_Completed.png">
+                                                                            <span></span>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col-md-1 text-right">
+                                                                        <img class="close-status-schedule" src="<?php echo get_template_directory_uri(); ?>/library/images/03_Close_Icon.png">
+                                                                    </div>
+                                                                </div>
+                                                                <p class="date-status-schedule">
+                                                                    <span class="label-status-schedule">Date:</span>
+                                                                    <span id="date-schedule"></span>
+                                                                </p>
+                                                                <p class="current-status-schedule">
+                                                                    <span class="label-status-schedule">Status:</span>
+                                                                    <span id="current-status"></span>
+                                                                </p>
+                                                                <p class="name-tutor-schedule">
+                                                                    <span class="label-status-schedule">Tutor:</span>
+                                                                    <span id="name-tutor-detail"></span>
+                                                                </p>
+                                                                <p class="point-status-schedule">
+                                                                    <span class="label-status-schedule">Points:</span>
+                                                                    <span id="point-schedule"></span>
+                                                                </p>
+                                                                <p class="review-status-schedule">
+                                                                    <span class="label-status-schedule">Review:</span>
+                                                                    <span id="review-schedule" class="review-schedule"></span>
+                                                                </p>
                                                                 <p class="cancel-this-schedule">
                                                                     <span class="label-status-schedule">Cancel:</span>
                                                                     <span class="this-cancel">Cancel This Schedule?<span id="cancel-now">Cancel it now</span></span>
@@ -2251,39 +2549,37 @@
                                                                         </li>
                                                                     </ul>
                                                                 </p>
-																<p class="note-status-schedule">
-																	<span class="label-status-schedule">Note:</span>
-																</p>
-																<div id="desc-class2" class="edit-description">
-																	<span class="editor-top-left"></span>
-																	<span class="editor-top-right"></span>
-																	<span class="editor-bottom-left"></span>
-																	<span class="editor-bottom-right"></span>
-																	<?php
-																	$editor_settings = array(
-																		'wpautop' => false,
-																		'media_buttons' => false,
-																		'quicktags' => false,
-																		'editor_height' => 50,
-																		'textarea_rows' => 3,
-																		'tinymce' => array(
-																			'toolbar1' => 'bold,italic,strikethrough,image,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,spellchecker,fullscreen,wp_adv'
-																		)
-																	);
-																	?>
-																	<?php wp_editor('', 'note_status_schedule', $editor_settings); ?>
-																	<div class="clear-both"></div>
-																</div>
-																<div class="row">
-																	<div class="col-sm-12 col-md-12 col-xs-12">
-																		<div class="form-group">
-																			<button class="btn-dark-blue border-btn btn-status-schedule" type="button" name="send-tutor">
-																				<?php _e('Save Note', 'iii-dictionary') ?>
-																			</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
+                                                                
+                                                                <div id="desc-class2" class="edit-description" style="display: none">
+                                                                    <span class="editor-top-left"></span>
+                                                                    <span class="editor-top-right"></span>
+                                                                    <span class="editor-bottom-left"></span>
+                                                                    <span class="editor-bottom-right"></span>
+                                                                    <?php
+                                                                    $editor_settings = array(
+                                                                        'wpautop' => false,
+                                                                        'media_buttons' => false,
+                                                                        'quicktags' => false,
+                                                                        'editor_height' => 50,
+                                                                        'textarea_rows' => 3,
+                                                                        'tinymce' => array(
+                                                                            'toolbar1' => 'bold,italic,strikethrough,image,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,spellchecker,fullscreen,wp_adv'
+                                                                        )
+                                                                    );
+                                                                    ?>
+                                                                    <?php wp_editor('', 'note_status_schedule', $editor_settings); ?>
+                                                                    <div class="clear-both"></div>
+                                                                </div>
+                                                                <!--<div class="row">-->
+                                                                <!--    <div class="col-sm-12 col-md-12 col-xs-12">-->
+                                                                <!--        <div class="form-group">-->
+                                                                <!--            <button class="btn-dark-blue border-btn btn-status-schedule" type="button" name="send-tutor">-->
+                                                                                <!--Save Note-->
+                                                                <!--            </button>-->
+                                                                <!--        </div>-->
+                                                                <!--    </div>-->
+                                                                <!--</div>-->
+                                                            </div>
                                                             <table class="table table-condensed table-tutoring">
                                                                 <tbody id="table-list-schedule" class="table-list-schedule">
                                                                 </tbody>
@@ -2487,8 +2783,10 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-xs-6">
                                             <p class="go-to-calendar">
-                                                <span>Go to Calendar</span>
-                                                <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Goto-Schedule.png" alt="">
+                                                <span class="goto-calendar">
+                                                    <span>Go to Calendar</span>
+                                                    <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Goto-Schedule.png" alt="">
+                                                </span>
                                             </p>
                                         </div>
                                     </div>
@@ -2587,13 +2885,14 @@
                     <div class="warp-menu">
                         <div id="menu-account-nav" class="menu-mb">
                             <div class="slide-menu-bg"></div>
+                           
                             <div class="section-left">
                                 <ul id="menu-left-myaccount" class="nav nav-tabs">
                                     <li class="active" id="account"><a data-toggle="tab" href="#hom"><img src="<?php echo get_template_directory_uri(); ?>/library/images/IconMenu_Profile.png" class="" alt="setting my account" style="width: 24px;margin:26px 0px 20px"></a>
                                     </li>
                                     <li id="itutoring"><a data-toggle="tab" href="#"><img src="<?php echo get_template_directory_uri(); ?>/library/images/IconMenu_Tutoring.png" class="" alt="setting my account" style="width: 24px;margin:15px 0px"></a>
                                     </li>
-                                    <li><a data-toggle="tab" href="#"><img src="<?php echo get_template_directory_uri(); ?>/library/images/IconMenu_ClassManager.png" class="" alt="setting my account" style="width: 24px;margin:15px 0px"></a>
+                                    <li id="online-course"><a data-toggle="tab" href="#"><img src="<?php echo get_template_directory_uri(); ?>/library/images/IconMenu_ClassManager.png" class="" alt="setting my account" style="width: 24px;margin:15px 0px"></a>
                                     </li>
                                     <li><a data-toggle="tab" href="#"><img src="<?php echo get_template_directory_uri(); ?>/library/images/IconMenu_Message.png" class="" alt="setting my account" style="width: 24px;margin:15px 0px"></a>
                                     </li>
@@ -2616,16 +2915,50 @@
                                     </li>
                                     <li><a class="header-menu-left padd-adjus redirect-create" id="mtutoring" data-toggle="tab">Tutoring</a>
                                         <ul class="sub-menu-left" id="sub-tutoring">
-                                            <li id="sub-findingtutor"><a class="redirect-create" data-toggle="tab" href="#tutoring-main">Find a Tutor</a></li>
+                                            <li id="getting-tutoring"><a class="redirect-create" data-toggle="tab" href="#tutoring-main">Getting Tutoring</a></li>
+                                            <li id="sub-findingtutor" class="go-to-find-tutor"><a class="redirect-create" data-toggle="tab" href="#tutoring-main">Find a Tutor</a></li>
                                             <li id="sub-schedule-li"><a class="redirect-create" data-toggle="tab" href="#tutoring-main">Schedule</a></li>
                                             <li id="sub-status"><a class="redirect-create" data-toggle="tab" href="#tutoring-main">Status</a></li>    
                                         </ul>
                                     </li>
-                                    <li><a class="header-menu-left padd-adjus" id="class-manager">My Class</a></li>
+                                    <li><a class="header-menu-left padd-adjus redirect-create" id="class-manager">Online Course</a>
+                                        <ul class="sub-menu-left" id="sub-course">
+                                            <li id="free-course-show"><img id="free-course-img" src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a data-toggle="tab">Free Course</a></li>
+                                            <ul id="free-course">
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a  href="https://iktutor.com/iklearn/en/?r=spelling-practice">Spelling</a> </li>
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a  href="https://iktutor.com/iklearn/en/?r=vocabulary-practice">Vocab & Grammar</a></li>
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a  href="https://iktutor.com/iklearn/en/?r=reading-comprehension">Reading Comprehen</a></li>
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://iktutor.com/iklearn/en/?r=writing-practice">Writing</a></li>
+                                            </ul>
+                                            <li id="english-conver-show"><img id="english-conver-img" src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a data-toggle="tab" >English Conversation</a></li>
+                                            <ul id="english-conver">
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://ael.iktutor.com/ael/index.php?r=exam/spelling&lang=en_US">Listening & Spell</a></li>
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://ael.iktutor.com/ael/index.php?r=exam/vocab&lang=en_US">Listening & Vocab</a></li>
+                                            </ul>
+                                            <li id=""><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="https://iktutor.com/iklearn/en/?r=flash-cards">Vocabulary Practice </a></li>
+                                            <li id="math-course-show"><img id="math-course-img" src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a data-toggle="tab" >Math</a></li>
+                                            <ul id="math-course">
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=arithmetics">Math Elementary </a></li>
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=algebra-i">Math Algebra 1 </a></li>
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width:8px !important">&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=algebra-ii">Math Algebra 2 </a></li>
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=geometry">Math Geometry </a></li>
+                                            
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=calculus">Math Calculus </a></li>
+                                            </ul>
+                                            <li id="sat-tutoring"><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="#" data-toggle="tab">SAT Tutoring </a></li>
+                                            <li id="sat-english"><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="#" data-toggle="tab">English SAT Practice </a></li>
+                                            <li id="sat-math1"><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="#" data-toggle="tab">Math SAT 1 </a></li>
+                                            <li id="sat-math2"><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="#" data-toggle="tab">Math SAT 2 </a></li>
+                                            
+                                            <li id="onl-course"><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="#" data-toggle="tab">Tutor’s Online Course</a></li>
+                                        </ul>
+                                    </li>
                                     <li><a class="header-menu-left padd-adjus redirect-create" href="#"> Message</a></li>
                                     <li><a class="header-menu-left padd-adjus redirect-create" href="#">Downloads</a></li>
+                                    
                                 </ul>
                             </div>
+                           
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -2672,21 +3005,30 @@
             <div class="main-nav-block"></div>
             <div class="container" style="position: relative">
                 <div id="sub-logo">
-                    <a href="https://iktutor.com" rel="nofollow" title="Innovative Knowledge">
+                    <a href="https://iktutor.com<?php echo $link_ss ?>" rel="nofollow" title="Innovative Knowledge">
                         <img src="<?php echo get_template_directory_uri(); ?>/library/images/ikLearn_Dark_LOGO.png" alt="">
-					</a>
+                    </a>
+                </div>
+                <?php 
+                $URL = $_SERVER['REQUEST_URI'];
+                $segment = explode('/',$URL);
+                $segment_ensat = explode('=',$URL); 
+                $ensat_exit = isset($segment_ensat[1])?isset($segment_ensat[1]):"";
+                ?>
+                <div id="header-tutor" class="cs-button-tutor">
+                    <a style="text-decoration: none;" id="show-find-tutor">TUTOR</a>
                 </div>
 
-                <div id="header-sat" class="cs-button-sat">
-                    <a style="color:#B0B0B0; text-decoration: none;" href="<?php echo site_home_url(); ?>/?r=ensat">SAT</a>
+                <div id="header-sat" class="cs-button-sat <?php if(isset($segment_ensat[1]) && $segment_ensat[1]=='ensat') echo 'active' ?>">
+                    <a style="text-decoration: none;" href="<?php echo site_home_url(); ?>/?r=ensat">SAT</a>
                 </div>
 
                 <div id="header-math" class="cs-button-math">
-                    <a style="color:#B0B0B0; text-decoration: none;" href="<?php echo site_math_url();?>">MATH</a>
+                    <a style="text-decoration: none;" href="<?php echo site_math_url();?>">MATH</a>
                 </div>
 
-                <div id="header-english" class="cs-button-english">
-                    <a style="color:#B0B0B0; text-decoration: none;" href="<?php echo site_home_url(); ?>">ENGLISH</a>
+                <div id="header-english" class="cs-button-english <?php if($segment[2] == 'home' || (isset($route[0]) && $route[0] != 'ensat')) echo 'active'?>">
+                    <a style="text-decoration: none;" href="<?php echo site_home_url(); ?>">ENGLISH</a>
                 </div>
 
                 <?php if(defined('IK_TEST_SERVER')) : ?>
@@ -2694,11 +3036,7 @@
                     <h2 style="margin: 0px;color: #fff;font-style: italic;text-shadow: 1px 1px #000">Test Site</h2>
                 </div>
                 <?php endif ?>
-
-                <?php 
-                $URL = $_SERVER['REQUEST_URI'];
-                $segment = explode('/',$URL);
-                $segment_ensat = explode('=',$URL);
+                <?php
                 if($segment[2] == 'home'){
                         MWHtml::sel_lang_switcher();
                 }elseif(isset($segment_ensat[1]) && $segment_ensat[1]=='ensat'){
@@ -2706,7 +3044,8 @@
                 }
                 else{
                         MWHtml::sel_lang_switcher(1);
-                } ?>
+                }
+                ?>
                 <?php if ($is_user_logged_in){ ?>
                 <ul id="user-nav" class="css-pad-log">
                 <?php }else{ ?>
@@ -2771,7 +3110,7 @@
                                 'link_after' => '',                             // after each link
                                 'depth' => 0,                                   // limit the depth of the nav
                                 'fallback_cb' => ''                             // fallback function (if there is one)
-    						)); 
+                            )); 
                         ?>
                     </nav>
 
@@ -2792,7 +3131,7 @@
                                 'depth' => 0,                                   // limit the depth of the nav
                                 'fallback_cb' => '',                             // fallback function (if there is one)
                                 'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>'
-    						)); 
+                            )); 
                         ?>
                     </nav>
                     <!-- <li><a href="http://ikteach.com/en" target="_blank" >'.__('Teacher','iii-dictionary').'</a></li> -->
@@ -2810,7 +3149,7 @@
                                 'link_after' => '',                             // after each link
                                 'depth' => 0,                                   // limit the depth of the nav
                                 'fallback_cb' => ''                             // fallback function (if there is one)
-    						)); 
+                            )); 
                         ?>
                     </nav>
                 </div>
@@ -2818,38 +3157,71 @@
                 <!-- Menu horizotal    -->
                 <nav class="navbar navbar-default" id="menu-horizontal-english">
                     <?php 
-                        wp_nav_menu(array(
-                            'container' => false,                           // remove nav container
-                            'container_class' => '',                 // class of container (should you choose to use it)
-                            'menu' => 'Dictionary Menu',  // nav name
-                            'menu_class' => 'main-menu nav navbar-nav',               // adding custom nav class
-                            'theme_location' => 'dictionary-nav',                 // where it's located in the theme
-                            'before' => '',                                 // before the menu
-                            'after' => '',                                  // after the menu
-                            'link_before' => '',                            // before each link
-                            'link_after' => '',                             // after each link
-                            'depth' => 0,                                   // limit the depth of the nav
-                            'fallback_cb' => ''                             // fallback function (if there is one)
-                        )); 
+                        if(isset($segment_ensat[1]) && $segment_ensat[1]=='ensat'){
+                            wp_nav_menu(array(
+                                'container' => false,                           // remove nav container
+                                'container_class' => '',                 // class of container (should you choose to use it)
+                                'menu' => 'Dictionary Menu',  // nav name
+                                'menu_class' => 'main-menu ensat-english nav navbar-nav',               // adding custom nav class
+                                'theme_location' => 'ensat-nav-english',                 // where it's located in the theme
+                                'before' => '',                                 // before the menu
+                                'after' => '',                                  // after the menu
+                                'link_before' => '',                            // before each link
+                                'link_after' => '',                             // after each link
+                                'depth' => 0,                                   // limit the depth of the nav
+                                'fallback_cb' => ''                             // fallback function (if there is one)
+                            ));
+                        }else{
+                            wp_nav_menu(array(
+                                'container' => false,                           // remove nav container
+                                'container_class' => '',                 // class of container (should you choose to use it)
+                                'menu' => 'Dictionary Menu',  // nav name
+                                'menu_class' => 'main-menu nav navbar-nav',               // adding custom nav class
+                                'theme_location' => 'dictionary-nav',                 // where it's located in the theme
+                                'before' => '',                                 // before the menu
+                                'after' => '',                                  // after the menu
+                                'link_before' => '',                            // before each link
+                                'link_after' => '',                             // after each link
+                                'depth' => 0,                                   // limit the depth of the nav
+                                'fallback_cb' => ''                             // fallback function (if there is one)
+                            )); 
+                        }
                     ?>
                 </nav>
                 <!-- Sub Menu horizotal    -->
                 <nav class="navbar navbar-default" id="sub-menu-horizontal-english">
                     <?php 
-                        wp_nav_menu(array(
-                            'container' => false,                           // remove nav container
-                            'container_class' => '',                 // class of container (should you choose to use it)
-                            'menu' => 'Function Menu',  // nav name
-                            'menu_class' => 'user-nav nav navbar-nav',               // adding custom nav class
-                            'theme_location' => 'user-nav-ensat',                 // where it's located in the theme
-                            'before' => '',                                 // before the menu
-                            'after' => '',                                  // after the menu
-                            'link_before' => '',                            // before each link
-                            'link_after' => '',                             // after each link
-                            'depth' => 0,                                   // limit the depth of the nav
-                            'fallback_cb' => '',                             // fallback function (if there is one)
-                            'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>'
-                        )); 
+                        if(isset($segment_ensat[1]) && $segment_ensat[1]=='ensat'){
+                            wp_nav_menu(array(
+                                'container' => false,                           // remove nav container
+                                'container_class' => '',                 // class of container (should you choose to use it)
+                                'menu' => 'Function Menu',  // nav name
+                                'menu_class' => 'user-nav nav navbar-nav',               // adding custom nav class
+                                'theme_location' => 'uensat-nav-english',                 // where it's located in the theme
+                                'before' => '',                                 // before the menu
+                                'after' => '',                                  // after the menu
+                                'link_before' => '',                            // before each link
+                                'link_after' => '',                             // after each link
+                                'depth' => 0,                                   // limit the depth of the nav
+                                'fallback_cb' => '',                             // fallback function (if there is one)
+                                'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>'
+                            )); 
+                        }else{
+                            wp_nav_menu(array(
+                                'container' => false,                           // remove nav container
+                                'container_class' => '',                 // class of container (should you choose to use it)
+                                'menu' => 'Function Menu',  // nav name
+                                'menu_class' => 'user-nav nav navbar-nav',               // adding custom nav class
+                                'theme_location' => 'user-nav-ensat',                 // where it's located in the theme
+                                'before' => '',                                 // before the menu
+                                'after' => '',                                  // after the menu
+                                'link_before' => '',                            // before each link
+                                'link_after' => '',                             // after each link
+                                'depth' => 0,                                   // limit the depth of the nav
+                                'fallback_cb' => '',                             // fallback function (if there is one)
+                                'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>'
+                            )); 
+                        }
                     ?>
                 </nav>
             </div>
@@ -2865,15 +3237,43 @@
         <link href="<?php echo get_template_directory_uri(); ?>/library/slick/slick.css" rel="stylesheet">
         <link href="<?php echo get_template_directory_uri(); ?>/library/slick/slick-theme.css" rel="stylesheet">
         <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/library/slick/slick.min.js"></script>
+        <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/library/js/detect-zoom.js"></script>
         <!-- <link href="<?php echo get_template_directory_uri(); ?>/library/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" >
         <script src="<?php echo get_template_directory_uri(); ?>/library/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> -->
         <script type="text/javascript">
             (function ($) {
+                $(document).ready(function () {
+                    $("#sub-createacc").removeClass("active");
+                    $("#sub-profile").addClass("active");
+                    $("#create-account").removeClass("active");
+                    $("#create-account").removeClass("in");                    
+                    $("#profile").addClass("active");
+                    $("#profile").addClass("in");
+                    $("#tutoring-main").removeClass("active");
+                    $("#tutoring-main").removeClass("in");
+                    $("#subscription").removeClass("active");
+                    $("#subscription").removeClass("in");
+                    $("#updateinfo").removeClass("active");
+                    $("#updateinfo").removeClass("in");
+                    $("#sub-myacc").css("display", "block");
+                    $("#sub-myacc").addClass("opensub");
+                    $("#sub-tutoring").css("display", "none");
+                    $("#sub-tutoring").removeClass("opensub");
+                    $("#sub-profile").addClass("active");
+                });
+                $('#iklearn-home').click(function(){
+                    $('#my-account-modal').css('display', 'none');
+                    $('body').removeClass('modal-open');
+                });
+
+            
                 $(function () {
                     var availability_checking = false;
                     var redirect = '<?php echo isset($redirect)?$redirect:"" ?>';
                     var interval, intervalmy, intervalcity;
                     var arr_tutor = [];
+                    var ref = '<?php echo $_REQUEST['ref'] ?>';
+                    var route = '<?php echo isset($route[0])?$route[0]:'' ?>';
                     $("#check-availability").click(function (e) {
                         e.preventDefault();
                         if (availability_checking) {
@@ -2907,7 +3307,6 @@
                             //tthis.find(".icon-loading").fadeIn();
                             $.getJSON(home_url + "/?r=ajax/availability/user", {user_login: user_login}, function (data) {
                                 if (isValidEmail(user_login)) {
-
                                     if (data [0] == 0) {                                            
                                         $("#checked-availability").addClass('not-availability');
                                         $("#checked-availability span").text('Not Available');    
@@ -2931,14 +3330,33 @@
 
                     $('.logout-link').click(function (e) {
                         localStorage.clear();
+                        var status_login = '0';
+                            $.post(home_url + "/?r=ajax/status_login", {
+                                status_login: status_login,
+                                type: "update"
+                            });
                     });
 
                     $('.close-modal-account').click(function () {
                         $("#my-account-modal").modal('hide');
+                        $(".sub-menu-left li").not("#sub-myacc li").removeClass("active");
+                        if(ref == "notepad"){
+                            window.history.replaceState(null, null, window.location.pathname);
+                        } 
                     });
 
                     $(".view-my-account").click(function () {
+                        var isMobile = window.matchMedia("only screen and (max-width: 955px)").matches;
+                        if (isMobile) {
+                            //Conditional script here
+    
+                           $(".sub-menu").css("display","none");
+                        }
                         $("#my-account-modal").modal('show');
+                        $("#sub-user-nav").find("> ul > li").removeClass("ic-close-arrow");
+                        $("#lang-switcher-nav").find("> ul > li").removeClass("ic-close-arrow");
+                        $('#main-nav').removeClass('show');
+                         $('#main-nav').css("display", "none");
                         var name = $(".display-name").text();
                         if (name !== '') {
                             $("#sub-createacc").removeClass("active");
@@ -2955,12 +3373,18 @@
                             $("#subscription").removeClass("in");
                             $("#updateinfo").removeClass("active");
                             $("#updateinfo").removeClass("in");
+
+                            $("#sub-myacc").css("display", "block");
+                            $("#sub-myacc").addClass("opensub");
+                            $("#sub-tutoring").css("display", "none");
+                            $("#sub-tutoring").removeClass("opensub");
+                            $("#sub-profile").addClass("active");
                         }else{
                             $("#login-user").removeClass("hidden");
                             $("#login-user").addClass("active");
                             $("#login-user").addClass("in");
                             $("#lost-password").removeClass("active");
-                            $("#lost-password").removeClass("in");
+                            $("#lost-password").removeClass("in");  
                             $("#lost-password").addClass("hidden");
                             $("#create-account").removeClass("active");
                             $("#create-account").removeClass("in");
@@ -2971,9 +3395,14 @@
                             $("#updateinfo").removeClass("active");
                             $("#updateinfo").removeClass("in");
                         }
+                        
+                
+                        
                     });
 
                     $("#show_signup").click(function () {
+                        document.getElementById('user_password_signup').value=null;
+                            document.getElementById('user_login_signup').value=null;
                         $("#my-account-modal").modal('show');
                         $("#login-user").removeClass("active");
                         $("#login-user").removeClass("in");
@@ -3005,6 +3434,272 @@
                             var left = (getTextWidth(text,font) + offset);
                             $(this).prev().css("padding-left",left+"px");
                         });
+                    });
+
+                    if(ref == 'notepad'){
+                        $("#my-account-modal").modal('show');
+                        $("#login-user").removeClass("active");
+                        $("#login-user").removeClass("in");
+                        $("#lost-password").removeClass("active");
+                        $("#lost-password").removeClass("in");
+                        $("#create-account").addClass("active");
+                        $("#create-account").addClass("in");
+
+                        var img = '<?php echo get_template_directory_uri() ?>/library/images/Profile_Image.png';
+                        $("#user-upload-avatar").attr('src',img);
+
+                        $('span.placeholder').each(function () {
+                            var text = $(this).text();
+                            var font = $(this).css("font");
+                            if(text == 'Year:'){
+                                var offset = 11;
+                            }
+                            else{
+                                if (document.documentMode || /Edge/.test(navigator.userAgent)) {
+                                    //console.log("Edge");
+                                    var offset = getDistancePlace(text, "Edge");
+                                }else if (navigator.userAgent.search("Firefox") >= 0){
+                                    var offset = getDistancePlace(text, "Firefox");
+                                    //console.log("Firefox");
+                                }else{
+                                    var offset = 18;
+                                }
+                            }
+                            var left = (getTextWidth(text,font) + offset);
+                            $(this).prev().css("padding-left",left+"px");
+                        });
+                    }
+
+                    $('#go-to-schedule').click(function(){
+                        var day = $('#today-tutor').val();
+                        closeNav();
+                        $('.new-request-list').text('SCHEDULE');      
+                        //$('#custom-timezone').css("display","block");
+                        //$("#menu-schedule-btn").text('Summary');
+                        $("#menu-schedule-btn").attr("data-type","summary");  
+                        $('#custom-timezone').attr("data-type","");
+                        $('#custom-timezone').attr("data-day","");
+                        
+                        $('.header-schedule').removeClass('active');
+                        $('#list-schedule-status').css("display","none");
+                        $('#table-status-schedule').html('');
+                        $("#open-menu-schedule").css("display","none");
+                        $(".main-view-status").css("display","none");
+                        $("#sub-schedule-li").addClass('active');
+                        $("#sub-findingtutor").removeClass('active');
+                        $("#sub-status").removeClass('active');
+                        $("#getting-tutoring").removeClass('active');
+                        if($('#body-my-scheduled').hasClass('status-schedule')){
+                            $('#body-my-scheduled').removeClass('status-schedule')
+                        }
+
+                        $('.radio_tutor_search').attr('checked',false);
+
+                        var today = new Date(day.replace("-", ","));
+                        var weekday = new Array(7);
+                            weekday[0] =  "Sun";
+                            weekday[1] = "Mon";
+                            weekday[2] = "Tue";
+                            weekday[3] = "Wed";
+                            weekday[4] = "Thur";
+                            weekday[5] = "Fri";
+                            weekday[6] = "Sat";                                
+                        var n = weekday[today.getDay()];
+                        var month_text = getMonthtoText(today.getMonth()+1);
+                        $('.current-day').text(month_text + ' ' + today.getDate());
+                        $('.stuff-day').text(' (' + n + ')');
+
+                        var prev_d = new Date(day.replace("-", ","));
+                        prev_d.setDate(prev_d.getDate() - 1);
+                        var dd = prev_d.getDate();
+                        var mm = prev_d.getMonth()+1; //January is 0!
+                        var yyyy = prev_d.getFullYear();
+                        if(dd < 10) {
+                            dd = "0"+dd;
+                        }
+                        if(mm < 10) {
+                            mm = "0"+mm;
+                        }
+
+                        var next_d = new Date(day.replace("-", ","));
+                        next_d.setDate(next_d.getDate() + 1); 
+                        var dd_n = next_d.getDate();
+                        var mm_n = next_d.getMonth()+1; //January is 0!
+                        var yyyy_n = next_d.getFullYear();
+                        if(dd_n < 10) {
+                            dd_n = "0"+dd_n;
+                        }
+                        if(mm_n < 10) {
+                            mm_n = "0"+mm_n;
+                        }
+                        
+                        $("#menu-schedule-btn").attr('data-day',day);
+                        $(".schedule-left-btn").attr('data-day',yyyy+'-'+mm+'-'+dd);
+                        $(".schedule-right-btn").attr('data-day',yyyy_n+'-'+mm_n+'-'+dd_n);
+
+                        $('.datepicker-days td.day').each(function () {
+                            var full_date = $(this).attr('data-day');
+                            var st = full_date.split("/");
+                            var formattedDate = st[2] + "-" + st[0] + "-" + st[1];
+                            
+                            if($(this).hasClass('active disabled')){
+                                $(this).removeClass('active disabled');
+                                $(this).attr('data-action','selectDay');
+                            }
+
+                            if(day == formattedDate){
+                                $(this).addClass('active disabled');
+                                $(this).attr('data-action','disabled');
+                            }
+                        });
+
+                        get_list_schedule();
+
+                        get_scheduled_day(day, 'schedule', true);
+
+                        if($(".main-my-schedule").hasClass('active-reschedule')){
+                            $(".main-my-schedule").removeClass('active-reschedule');
+                        }
+
+                        if(!$(".main-my-schedule").hasClass('active-tab-schedule')){
+                            $(".main-my-schedule").addClass("active-tab-schedule");
+                        }
+
+                        if($(".main-new-request").hasClass('active')){
+                            $(".main-new-request").removeClass('active');
+                        }
+                         $('.getting-tutor-main').css('display','none');
+                        $(".main-my-schedule").css("display","block");
+                        $(".section-tutor-main").css("display","none");
+                        $(".main-new-request").css("display","none"); 
+                        $(".main-view-request").css("display","none");
+                        $(".main-status-request").css("display","none");
+                        $(".writting-review").css("display","none");
+                        $('.header-title-newschedule').css("display","none");
+                        $("#my-account-modal").animate({ scrollTop: 0 }, "slow");
+                        var viewport = getViewport();
+                        if(viewport.width < 925){
+                            $('.box-schedule-left').css("display","block");
+                            $('#btn-open-calendar').css("display","block");
+                            if(viewport.width < 650){
+                                $('#tab-tutor-content .border-selectall').find('.col-md-6').css('width','53.8%');
+                            }else{
+                                $('#tab-tutor-content .border-selectall').find('.col-md-6').css('width','42.88%');
+                            }
+                        }else{
+                            $('#tab-tutor-content .border-selectall').find('.col-md-6').css('width','67.2%');
+                        }
+                    
+                    });
+
+                    $('#go-to-point').click(function(){
+                        var getprofile = window.location.href;                
+                        if(getprofile == 'https://iktutor.com/iklearn/en/?r=my-account#my-account-modal'){
+                        $("#my-account-modal").modal('hide');
+                        $("#purchase-points-dialog").modal('show');};
+                        // $("#purchase-points-dialog").css('display','block');
+                    });
+
+                    $('.go-to-find').click(function(){
+                        $('.getting-tutor-main').css('display','none');
+                         $("#getting-tutoring").removeClass("active");
+                            $('.section-tutor-main').css('display','block');
+                            
+                            $("#sub-findingtutor").addClass("active");
+                            $("#my-account-modal").animate({ scrollTop: 0 }, "slow");
+                            var path = '<?php echo get_template_directory_uri() ?>/library/images/';  
+                            $('.writting-review').css("display","none");
+                            $('.toggle-btn').css("display","none");
+                            
+                            var available_time = $("#mytime-clock").attr("data-available-time");
+                            $("#select-available-time").selectBoxIt('selectOption',available_time.toString()).data("selectBox-selectBoxIt");
+                            $("#select-available-time").data("selectBox-selectBoxIt").refresh();
+
+                            if(!$('#btn-find-tutoring').hasClass('active')){
+                                $('.btn-sub-tab').removeClass('active');
+                                $('#btn-find-tutoring').addClass('active');
+                                $('#btn-find-tutoring').find('img').attr('src',path + 'icon_Find.png');
+                                $('#btn-list-review').find('img').attr('src',path + 'icon_L_Review.png');
+                                $('#btn-list-favorite').find('img').attr('src',path + 'icon_L_Favorite.png');
+                                $('#btn-list-tutoring').find('img').attr('src',path + 'icon_L_list.png');
+                                $('#btn-available-now').find('img').attr('src',path + '04_Available_Now.png');
+                            }
+
+                            $('.radio_tutor_search').attr('checked',false);
+                            $('.frm-available-now').css("display","block");
+                            $('#table-detail-tutor').css("display","none");
+                            $(".slide-resume").css('visibility','hidden');
+                            var tr = '<tr><td class="no-results"><img src="' + path + 'icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';
+                            $('#table-list-tutor').html(tr);
+                            $('.result_quick').css("display","none");
+                    });
+
+                    $("#show-find-tutor").click(function () {
+                        $("#my-account-modal").modal('show');
+                        var name = $(".display-name").text();
+                        if (name !== '') {
+                            $("#sub-createacc").removeClass("active");
+                            $("#sub-profile").addClass("active");
+                            $("#create-account").removeClass("active");
+                            $("#create-account").removeClass("in");
+                            $("#login-user").removeClass("active");
+                            $("#login-user").removeClass("in");
+                            $("#profile").removeClass("active");
+                            $("#profile").removeClass("in");
+                            $("#tutoring-main").addClass("active");
+                            $("#tutoring-main").addClass("in");
+                            $("#subscription").removeClass("active");
+                            $("#subscription").removeClass("in");
+                            $("#updateinfo").removeClass("active");
+                            $("#updateinfo").removeClass("in");
+
+                            $("#sub-myacc").css("display", "none");
+                            $("#sub-myacc").removeClass("opensub");
+                            $("#sub-tutoring").css("display", "none");
+                            $("#sub-tutoring").removeClass("opensub");
+                            $("#sub-findingtutor").addClass("active");
+
+                            var path = '<?php echo get_template_directory_uri() ?>/library/images/';  
+                            $('.writting-review').css("display","none");
+                            $('.toggle-btn').css("display","none");
+                            
+                            var available_time = $("#mytime-clock").attr("data-available-time");
+                            $("#select-available-time").selectBoxIt('selectOption',available_time.toString()).data("selectBox-selectBoxIt");
+                            $("#select-available-time").data("selectBox-selectBoxIt").refresh();
+
+                            if(!$('#btn-find-tutoring').hasClass('active')){
+                                $('.btn-sub-tab').removeClass('active');
+                                $('#btn-find-tutoring').addClass('active');
+                                $('#btn-find-tutoring').find('img').attr('src',path + 'icon_Find.png');
+                                $('#btn-list-review').find('img').attr('src',path + 'icon_L_Review.png');
+                                $('#btn-list-favorite').find('img').attr('src',path + 'icon_L_Favorite.png');
+                                $('#btn-list-tutoring').find('img').attr('src',path + 'icon_L_list.png');
+                                $('#btn-available-now').find('img').attr('src',path + '04_Available_Now.png');
+                            }
+
+                            $('.radio_tutor_search').attr('checked',false);
+                            $('.frm-available-now').css("display","block");
+                            $('#table-detail-tutor').css("display","none");
+                            $(".slide-resume").css('visibility','hidden');
+                            var tr = '<tr><td class="no-results"><img src="' + path + 'icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';
+                            $('#table-list-tutor').html(tr);
+                            $('.result_quick').css("display","none");
+                        }else{
+                            $("#login-user").removeClass("hidden");
+                            $("#login-user").addClass("active");
+                            $("#login-user").addClass("in");
+                            $("#lost-password").removeClass("active");
+                            $("#lost-password").removeClass("in");
+                            $("#lost-password").addClass("hidden");
+                            $("#create-account").removeClass("active");
+                            $("#create-account").removeClass("in");
+                            $("#tutoring-main").removeClass("active");
+                            $("#tutoring-main").removeClass("in");
+                            $("#subscription").removeClass("active");
+                            $("#subscription").removeClass("in");
+                            $("#updateinfo").removeClass("active");
+                            $("#updateinfo").removeClass("in");
+                        }
                     });
 
                     $("#show_login").click(function () {
@@ -3059,6 +3754,8 @@
                     });
 
                     $("#account").click(function () {
+                        $("#my-timezone").css("display","none");
+                        $("#open-menu-schedule").css("display","none");
                         var name = $(".display-name").text();
                         var viewport = getViewport();  
                         if(viewport.width < 650){
@@ -3075,6 +3772,8 @@
                             $("#sub-myacc").addClass("opensub");
                             $("#sub-tutoring").css("display", "none");
                             $("#sub-tutoring").removeClass("opensub");
+                            $("#sub-course").css("display", "none");
+                            $("#sub-course").removeClass("opensub");
 
                             if (check) {
                                 //closeNav();
@@ -3093,6 +3792,8 @@
                     });                    
 
                     $("#itutoring").click(function () {
+                        $("#my-timezone").css("display","none");
+                        $("#open-menu-schedule").css("display","none");
                         var name = $(".display-name").text();
                         var viewport = getViewport();  
                         if(viewport.width < 650){
@@ -3109,24 +3810,75 @@
                             $("#sub-tutoring").addClass("opensub");
                             $("#sub-myacc").css("display", "none");
                             $("#sub-myacc").removeClass("opensub");
+                            $("#sub-course").css("display", "none");
+                            $("#sub-course").removeClass("opensub");
                             
                             if (check) {
                                 //closeNav();
                                 $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
-                                $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "96px");
+                                $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "131px");
                                 $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
                                 $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
                             } else {
                                 openNav();
                                 $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
-                                $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "96px");
+                                $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "131px");
                                 $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
                                 $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
                             }
                         }
                     });
 
+                    $("#online-course").click(function () {
+                        $("#my-timezone").css("display","none");
+                        $("#open-menu-schedule").css("display","none");
+                        var name = $(".display-name").text();
+                        var viewport = getViewport();  
+                        if(viewport.width < 650){
+                            var check = $("#menu-account-nav").hasClass("open");
+                        }else{
+                            if($('body').hasClass('open-myschedule')){
+                                var check = $("#menu-account-nav").hasClass("open");
+                            }else{
+                                var check = $("#mySidenav").hasClass("open");
+                            }
+                        }
+                        if (name !== '') {
+                            $("#sub-course").css("display", "block");
+                            $("#sub-course").addClass("opensub");
+                            $("#sub-myacc").css("display", "none");
+                            $("#sub-myacc").removeClass("opensub");
+                            $("#sub-tutoring").css("display", "none");
+                            $("#sub-tutoring").removeClass("opensub");
+                            
+                            if (check) {
+                                //closeNav();
+                                $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
+                                $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "7px");                         
+                                $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
+                                if($('#free-course-show').hasClass('active')){
+                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "333px");
+                                }else if($('#english-conver-show').hasClass('active')){
+                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "276px");
+                                }else if($('#math-course-show').hasClass('active')){
+                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "362px");
+                                }else{
+                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "248px")};
+                                
+                            } else {
+                                openNav();
+                                $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
+                                $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "7px");
+                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "248px");
+                                $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
+                            }
+                        }
+                    });
+
                     $("#menu_Taggle").click(function () {
+                        $("#my-timezone").css("display","none");
+                        $("#open-menu-quicknotifi").css("display","none");
+                        $("#open-menu-schedule").css("display","none");
                         var name = $(".display-name").text();
                         var viewport = getViewport();  
                         if(viewport.width < 650){
@@ -3146,17 +3898,41 @@
                                 if ($("#sub-tutoring").hasClass("opensub")) {                                    
                                     $("#sub-myacc").css("display", "none");
                                     $("#sub-myacc").removeClass("opensub");
+                                    $("#sub-course").css("display", "none");
+                                    $("#sub-course").removeClass("opensub");
                                     $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
-                                    $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "96px");
+                                    $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "131px");
                                     $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
                                     $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
-                                }else{
+                                }else if($("#sub-myacc").hasClass("opensub")){
                                     $("#sub-tutoring").css("display", "none");
                                     $("#sub-tutoring").removeClass("opensub");
+                                    $("#sub-course").css("display", "none");
+                                    $("#sub-course").removeClass("opensub");
                                     $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "88px");
                                     $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "2px");
                                     $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
                                     $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
+                                }else if($("#sub-course").hasClass("opensub")){
+                                    $("#sub-tutoring").css("display", "none");
+                                    $("#sub-tutoring").removeClass("opensub");
+                                    $("#sub-myacc").css("display", "none");
+                                    $("#sub-myacc").removeClass("opensub");
+                                    $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
+                                    $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "7px");
+                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "248px");
+                                    $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
+
+                                }else{
+                                    $("#sub-tutoring").css("display", "none");
+                                    $("#sub-tutoring").removeClass("opensub")
+                                    $("#sub-course").css("display", "none");
+                                    $("#sub-course").removeClass("opensub");
+                                    $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "88px");
+                                    $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "2px");
+                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
+                                    $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
+
                                 }
                             }
                         }
@@ -3172,6 +3948,8 @@
                         $("#sub-tutoring").addClass("opensub");
                         $("#sub-myacc").css("display", "none");
                         $("#sub-myacc").removeClass("opensub");
+                        $("#sub-course").css("display", "none");
+                        $("#sub-course").removeClass("opensub");
 
                         var viewport = getViewport();  
                         if(viewport.width < 650){
@@ -3190,10 +3968,99 @@
                         } else {
                             openNav();
                             $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
-                            $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "96px");
+                            $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "131px");
                             $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
                             $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
                         }
+                    });
+
+                    $('#class-manager').click(function(){
+                        $("#sub-course").css("display", "block");
+                        $("#sub-course").addClass("opensub");
+                        $("#sub-tutoring").css("display", "none");
+                        $("#sub-tutoring").removeClass("opensub");
+                        $("#sub-myacc").css("display", "none");
+                        $("#sub-myacc").removeClass("opensub");
+                        var viewport = getViewport();  
+                        if(viewport.width < 650){
+                            var check = $("#menu-account-nav").hasClass("open");
+                        }else{
+                            if($('body').hasClass('open-myschedule')){
+                                var check = $("#menu-account-nav").hasClass("open");
+                            }else{
+                                var check = $("#mySidenav").hasClass("open");
+                            }
+                        }
+                        if (check) {
+                            closeNav();
+                            $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0px");
+                        } else {
+                            openNav();
+                            $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
+                            $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "7px");
+                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "248px");
+                            $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
+                        }
+                    });
+
+                    $('#free-course-show a').click(function(){
+                        openNav();
+                        $('#free-course').css('display','block');
+                        $('#english-conver').css('display','none');
+                        $('#math-course').css('display','none');
+                        $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
+                        $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "5px");
+                        $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "333px");
+                        $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
+                        $('#free-course-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/02_Icon_Arrow_Opened.png");
+                        $('#english-conver-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png");
+                        $('#math-course-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png");
+                        $('#free-course-img').css('padding','0');
+                        $('#math-course-img').css('padding','0 1px 0 2px');                        
+                        $('#english-conver-img').css('padding','0 1px 0 2px');
+
+                    });
+
+                    $('#english-conver-show a').click(function(){
+                         openNav();
+                         $('#english-conver').css('display','block');
+                         $('#free-course').css('display','none');
+                          $('#math-course').css('display','none');
+                          $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
+                        $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "5px");
+                        $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "276px");
+                        $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
+                        $('#english-conver-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/02_Icon_Arrow_Opened.png");
+                        $('#free-course-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png");
+                        $('#math-course-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png");
+                        $('#english-conver-img').css('padding','0');                         
+                        $('#math-course-img').css('padding','0 1px 0 2px');                        
+                        $('#free-course-img').css('padding','0 1px 0 2px');                      
+                    });
+
+                    $('#sat-english').click(function(){closeCourse();});
+                    $('#sat-math1').click(function(){closeCourse();});
+                    $('#sat-math2').click(function(){closeCourse();});
+                    $('#onl-course').click(function(){closeCourse();});
+                    $('#sat-tutoring').click(function(){closeCourse();});
+
+
+
+                    $('#math-course-show a').click(function(){
+                        openNav();
+                        $('#math-course').css('display','block');                         
+                        $('#english-conver').css('display','none');
+                        $('#free-course').css('display','none');
+                        $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
+                        $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "5px");
+                        $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "362px");
+                        $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
+                        $('#math-course-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/02_Icon_Arrow_Opened.png");
+                        $('#english-conver-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png");
+                        $('#free-course-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png");
+                        $('#math-course-img').css('padding','0');
+                        $('#english-conver-img').css('padding','0 1px 0 2px');
+                        $('#free-course-img').css('padding','0 1px 0 2px');
                     });
 
                     $("#myacc").click(function () {
@@ -3201,7 +4068,8 @@
                         $("#sub-myacc").addClass("opensub");
                         $("#sub-tutoring").css("display", "none");
                         $("#sub-tutoring").removeClass("opensub");
-
+                        $("#sub-course").css("display", "none");
+                        $("#sub-course").removeClass("opensub");
                         var viewport = getViewport();  
                         if(viewport.width < 650){
                             var check = $("#menu-account-nav").hasClass("open");
@@ -3247,7 +4115,12 @@
                     $('#btn-login').click(function () {
                         var username = $('#username-login').val();
                         var password = $('#password-login').val();
-                        var redirect = '<?php echo locale_home_url(); ?>';
+
+                        if(route == '0' || route == 'login' || route == 'signup')
+                            var redirect = '<?php echo locale_home_url(); ?>';
+                        else
+                            var redirect = '';
+
                         $.post(home_url + "/?r=ajax/login_account", {
                             user_name: username,
                             user_password: password
@@ -3258,12 +4131,73 @@
                                 else
                                     document.location.href = redirect;
                             } else {
-                                $('#popup-message').html('<p class="text-used">' + data + '</p><button id="got-it" type="button" class="btn-orange form-control nopadding-r border-btn">OK</button>');
+                                $('#popup-message').html('<p class="text-used">' + data + '</p><button id="got-it" type="button" class="btn-orange form-control nopadding-r border-btn" style="height: 40px !important ">OK</button><span class="sign-up popup-sign">Register now?</span><br><span class="forgot-pass popup-sign" >Forgot password?</span>');
                                 $('#top-popup-message').css("display", "block");
                             }
                         });
                     });
-
+                    $("#save-lg").click(function () {
+                            $('.language_drop').css('display','none');
+                            var cb = document.getElementsByName('cb-lang');
+                            var lg = "";
+                            if (cb[0].checked === true){
+                                lg += 'English, ';
+                            }
+                            if (cb[1].checked === true){
+                                lg += 'Japanese, ';
+                            }
+                            if (cb[2].checked === true){
+                                lg += 'Korean, ';
+                            }
+                            if (cb[3].checked === true){
+                                lg += 'Chinese, ';
+                            }
+                            if (cb[4].checked === true){
+                                lg += 'Traditional Chinese, ';
+                            }
+                            if (cb[5].checked === true){
+                                lg += 'Vietnamese, ';
+                            }
+                            if (cb[6].checked === true){
+                                lg += 'Other, ';
+                            }
+                            var sl = lg.substring(0, lg.length - 2);
+                            document.getElementById("show-language").innerHTML = sl+'<span class="show-language-drop" style="margin-top: -2.5px;"><i style="opacity:0;">0</i></span>';
+                    });
+                    $("#save-lg-up").click(function () {
+                            $('.language_drop').css('display','none');
+                            var cb = document.getElementsByName('update-cb-lang');
+                            var lg = "";
+                            if (cb[0].checked === true){
+                                lg += 'English, ';
+                            }
+                            if (cb[1].checked === true){
+                                lg += 'Japanese, ';
+                            }
+                            if (cb[2].checked === true){
+                                lg += 'Korean, ';
+                            }
+                            if (cb[3].checked === true){
+                                lg += 'Chinese, ';
+                            }
+                            if (cb[4].checked === true){
+                                lg += 'Traditional Chinese, ';
+                            }
+                            if (cb[5].checked === true){
+                                lg += 'Vietnamese, ';
+                            }
+                            if (cb[6].checked === true){
+                                lg += 'Other, ';
+                            }
+                            var sl = lg.substring(0, lg.length - 2);
+                            document.getElementById("show-language-up").innerHTML = sl+'<span class="show-language-drop" style="margin-top: -2.5px;"><i style="opacity:0;">0</i></span>';
+                    });
+                    $("#cancel-lg").click(function () {
+                            $('.language_drop').css('display','none');
+                        });
+                    $("#cancel-lg-up").click(function () {
+                            $('.language_drop').css('display','none');
+                        });
                     $('#create-acc').click(function () {
                         $('#create-acc').attr("disabled", true);
                         var user_name = $('#user_login_signup').val();
@@ -3283,12 +4217,9 @@
                             if(val == '') var val = $(this).attr('data-lang');
                             cb_lang.push(val);
                         });
-                        var viewport = getViewport();
-                        if(viewport.width < 650){
-                            var gender = $("#birth-g_mbSelectBoxItText").attr("data-val");
-                        }else{
-                            var gender = $("#birth_g_pcSelectBoxItText").attr("data-val");
-                        }
+                        
+                        var gender = $("#birth_g_pcSelectBoxItText").attr("data-val");
+                        
                         $.post(home_url + "/?r=ajax/create_account", {
                             user_name: user_name,
                             user_password: user_password,
@@ -3315,6 +4246,7 @@
                         });
                     });
 
+
                     $('.cancel-update-teacher').click(function () {
                         var id = $(this).attr('data-id');
                         var tab = $(this).attr('data-tab');
@@ -3327,9 +4259,7 @@
                     $('#update-teacher').click(function () {
                         $("#update-teacher").attr("disabled", true);
                         var check_student = $('#chk-tutor-teacher').val();
-                        var check_gender = $('#chk-user-gender').val();
-
-                        //var user_email = $('#update_username').val();
+                       //var user_email = $('#update_username').val();
                         var new_password = $('#update_password').val();
                         var retype_new_password = $('#update_confirmpass').val();
                         var first_name = $('#update_first_name').val();
@@ -3368,17 +4298,11 @@
 
                         var birth_m = $("#update_birth_mSelectBoxItText").attr("data-val");
                         var birth_d = $("#update_birth_dSelectBoxItText").attr("data-val");
-                        var gender = '';
-                        if(check_gender == '' || $.trim(check_gender) == ''){
-                            var viewport = getViewport();
-                            if(viewport.width < 650){
-                                var gender = $("#update_birth_g_mbSelectBoxItText").attr("data-val");
-                            }else{
-                                var gender = $("#update_birth_g_pcSelectBoxItText").attr("data-val");
-                            }
-                        }else{
-                            gender = check_gender;
-                        }
+                                   
+                             
+                        var gender = $("#update_birth_g_pcSelectBoxItText").attr("data-val");
+                    
+                        
 
                         var cb_lang = [];
                         var subject_type = [];
@@ -3451,7 +4375,7 @@
                             }, function (data) {
                                 $("#update-teacher").attr("disabled", false);
                                 if ($.trim(data) == '1') {
-                                    $('#popup-message').html('<p class="text-used">Account Info Updated!<br/>Your account has been updated successfully.</p><button id="got-profile" type="button" class="btn-orange form-control nopadding-r border-btn" data-id="sub-update-info" data-tab="updateinfo">Got it</button>');
+                                    $('#popup-message').html('<p class="text-used">Your account has been updated successfully.</p><button id="got-profile" type="button" class="btn-orange form-control nopadding-r border-btn" data-id="sub-update-info" data-tab="updateinfo">Updated</button>');
                                     $('#top-popup-message').css("display", "block");
 
                                     initDateTimePicker(name, time_zone_index, time_zone, city, 'update');
@@ -3502,7 +4426,7 @@
                                 }, function (data) {
                                     $("#update-teacher").attr("disabled", false);
                                     if ($.trim(data) == '1') {                                        
-                                        $('#popup-message').html('<p class="text-used">Account Info Updated!<br/>Your account has been updated successfully.</p><button id="got-profile" type="button" class="btn-orange form-control nopadding-r border-btn" data-id="sub-update-info" data-tab="updateinfo">Got it</button>');
+                                        $('#popup-message').html('<p class="text-used">Your account has been updated successfully.</p><button id="got-profile" type="button" class="btn-orange form-control nopadding-r border-btn" data-id="sub-update-info" data-tab="updateinfo">Updated</button>');
                                         $('#top-popup-message').css("display", "block");
 
                                         initDateTimePicker(name, time_zone_index, time_zone, city, 'update');
@@ -3645,6 +4569,8 @@
                     });
 
                     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+                        $("#my-timezone").css("display","none");
+                        $("#open-menu-schedule").css("display","none");
                         if ($(this).hasClass('disabled')){
                             e.preventDefault();
                             return false;
@@ -3798,7 +4724,33 @@
                         }
                     });
 
-                    $('#sub-findingtutor').click(function(){
+                    $('#getting-tutoring').click(function(){
+                        $(".getting-tutor-main").css("display","block");
+                        $(".main-my-schedule").css("display","none");
+                        $(".section-tutor-main").css("display","none");
+                        $(".main-status-request").css("display","none");
+                       $('.header-title-newschedule').css("display","none");
+                       $("#getting-tutoring").addClass('active');
+                        $('.new-request-list').text('GETTING TUTORING'); 
+                        $("#create-account").removeClass("active");
+                        $("#create-account").removeClass("in");
+                        $("#login-user").removeClass("active");
+                        $("#login-user").removeClass("in");
+                        $("#updateinfo").removeClass("active");
+                        $("#updateinfo").removeClass("in");
+                        $("#subscription").removeClass("active");
+                        $("#subscription").removeClass("in");
+                        $("#profile").removeClass("active");
+                        $("#profile").removeClass("in");
+                        $("#tutoring-main").addClass("active");
+                        $("#tutoring-main").addClass("in");
+                        $("#sub-findingtutor").removeClass('active');
+                        $("#sub-status").removeClass('active');
+                        $("#sub-schedule-li").removeClass('active');
+                    });
+
+                    $('.go-to-find-tutor').click(function(){
+
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
                         $('.new-request-list').text('Find a tutor');
                         $('#btn-available-now').addClass('active');
@@ -3811,9 +4763,11 @@
                         $('.header-title-newschedule').css("display","none");
                         $('.frm-available-now').css("display","none"); 
                         $('#custom-timezone').css("display","none");
-
+                        $(".getting-tutor-main").css("display","none");
+                        $("#my-account-modal").animate({ scrollTop: 0 }, "slow");
                         $('.radio_tutor_search').attr('checked',false);
-
+                        $('#sub-findingtutor').addClass('active');
+                        $("#getting-tutoring").removeClass("active");
                         if($(".main-my-schedule").hasClass('active-tab-schedule')){
                             $(".main-my-schedule").removeClass("active-tab-schedule");
                         }
@@ -3916,10 +4870,12 @@
 
                         $('.radio_tutor_search').attr('checked',false);
                         $('.frm-available-now').css("display","block");
-						$('#table-detail-tutor').css("display","none");
-						$(".slide-resume").css('visibility','hidden');
+                        $('#table-detail-tutor').css("display","none");
+                        $(".slide-resume").css('visibility','hidden');
+                        $('#table-list-tutor').html('');
                         var tr = '<tr><td class="no-results"><img src="' + path + 'icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';
                         $('#table-list-tutor').html(tr);
+                        $('.result_quick').css("display","none");
                         
                         /*
                         var date = $('#today-tutor').val();
@@ -3940,6 +4896,7 @@
 
                     $('#btn-tutor').click(function(){
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                        closeNav();
                         $('.new-request-list').text('Find a tutor');
                         $(".main-my-schedule").css("display","none");
                         $(".section-tutor-main").css("display","block");
@@ -3950,16 +4907,22 @@
                         $('.header-title-newschedule').css("display","none");
                         $('.frm-available-now').css("display","none"); 
                         $('#custom-timezone').css("display","none");
-
+                         $('.getting-tutor-main').css('display','none');
                         $('.header-schedule').removeClass('active');
                         $('#list-schedule-status').css("display","none");
                         $('#table-status-schedule').html('');
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
+
 
                         if($(".main-my-schedule").hasClass('active-tab-schedule')){
-                            $(".main-my-schedule").removeClass("active-tab-schedule");
+                        $(".main-my-schedule").removeClass("active-tab-schedule");
                         }
+                        
+                            $("#sub-schedule-li").removeClass('active');
+                            $("#sub-findingtutor").addClass('active');
+                            $("#sub-status").removeClass('active');
+                            $("#getting-tutoring").removeClass('active');
 
                         var viewport = getViewport();
                         if(viewport.width < 925){
@@ -3976,6 +4939,7 @@
                         if(!$('#btn-available-now').hasClass('active')){
                             $('.btn-sub-tab').removeClass('active');
                             $('#btn-available-now').addClass('active');
+                            $('.result_quick').css("display","none");
                             $('#btn-available-now').find('img').attr('src',path + '04_Available_Now_Selected.png');
                             $('#btn-list-review').find('img').attr('src',path + 'icon_L_Review.png');
                             $('#btn-list-favorite').find('img').attr('src',path + 'icon_L_Favorite.png');
@@ -4117,6 +5081,7 @@
                         }
                         var tr = '<tr><td class="no-results"><img src="' + path + 'icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';
                         $('#table-list-tutor').html(tr);
+                        $('.result_quick').css("display","none");
                         //get_tutor_user('fromclass','table-list-tutor','tutor');
                     });
                     
@@ -4137,14 +5102,21 @@
                         var time = $("#select-available-timeSelectBoxItText").attr("data-val");
                         var time_view = $('#select-available-time :selected').attr("data-time-view");
                         var stime = $('#select-available-time :selected').attr("data-time");
-						var subject_name = $('#select-available-subject :selected').attr("data-name");
+                        var subject_name = $('#select-available-subject :selected').attr("data-name");
                         var subject_type = $("#select-available-subjectSelectBoxItText").attr("data-val");
                         var type_search = [];
 
-                        $('input[name="type_search"]:checked').each(function () {
-                            var val = this.value;
-                            type_search.push(val);
-                        });
+                        var option = $('#select-available-option :selected').attr("value");
+                        if(option == "all"){
+                            type_search.push("rating");
+                            type_search.push("favorite");
+                        }else{
+                            type_search.push(option);
+                        }
+                        // $('#select-available-subject :selected').each(function () {
+                        //     var val = this.value;
+                        //     type_search.push(val);
+                        // });
 
                         if(month != 0 && day != 0 && year != 0)
                             var date = year + '-' + month + '-' + day;
@@ -4157,7 +5129,14 @@
                                 $('#popup-message').html('<p class="text-used">Please select subject</p><button id="got-it" type="button" class="btn-orange form-control nopadding-r border-btn">OK</button>');
                                 $('#top-popup-message').css("display", "block");
                             }else{
-                                get_tutor_user('fromclass', 'table-list-tutor', 'tutor', search, '', '', subject_type, time, date, type_search,stime, time_view, '', subject_name);
+                                $('#table-list-tutor').html('');
+                                search_tutor_user('fromclass', 'table-list-tutor', 'tutor', search, '', '', subject_type, time, date, type_search,stime, time_view, '', subject_name);
+                                // var data = {
+                                //     "data":"data"
+                                // }
+                                // $.get(home_url + "/?r=ajax/search_tutor",data,function(resp){
+                                //     console.log(resp);
+                                // });
                             }
                         }else{
                             var tr = '<tr><td class="no-results"><img src="' + path + 'icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';
@@ -4167,7 +5146,7 @@
 
                     $('#btn-submit-review').click(function(){
                         var id = $(this).attr('data-id');
-						var userid = $(this).attr('data-userid');
+                        var userid = $(this).attr('data-userid');
                         var review_id = $(this).attr('data-review-id');
                         var subject = $('#write-review-subject').val();
                         var message = $('#message-review_ifr').contents().find('#tinymce').text();
@@ -4190,31 +5169,33 @@
                                 }
                             });
                         }
+                        $(this).attr("disabled", false);
                     });
 
                     $('.star_buttons').click(function(){
                         var star = $(this).val();
                         var cnt = $(this).attr('data-star');
-						
-						if(cnt > 1){
-							for(i=0; i<=5; i++){
-								if (i < cnt){
-									$("#star" + i).prop('checked', true);
-								} else {
-									if(i == cnt){
-										//var chk = true;
-										$("#star" + i).prop('checked', true);
-									}else{
-										$("#star" + i).prop('checked', false);
-									}
-								}
-							}
-						}else{
-							$("#star1").prop('checked', true);
-							for(i=2; i<=5; i++){
-								$("#star" + i).prop('checked', false);
-							}
-						}
+                        
+                        $(this).attr("disabled", false);
+                        if(cnt > 1){
+                            for(i=0; i<=5; i++){
+                                if (i < cnt){
+                                    $("#star" + i).prop('checked', true);
+                                } else {
+                                    if(i == cnt){
+                                        //var chk = true;
+                                        $("#star" + i).prop('checked', true);
+                                    }else{
+                                        $("#star" + i).prop('checked', false);
+                                    }
+                                }
+                            }
+                        }else{
+                            $("#star1").prop('checked', true);
+                            for(i=2; i<=5; i++){
+                                $("#star" + i).prop('checked', false);
+                            }
+                        }
                     });
 
                     $('.radio_buttons_tutor').live('click', function () {
@@ -4231,30 +5212,30 @@
                         var id = $(this).attr('data-id');
                         var name = $(this).attr('data-name');
                         var subject = $(this).attr('data-subject');
-						var subject_choose = $(this).attr('data-subject-choose');
+                        var subject_choose = $(this).attr('data-subject-choose');
                         var day = $(this).attr('data-day');
                         var time = $(this).attr('data-time');
                         var time_view = $(this).attr('data-time-view');
                         var price_tutoring = $(this).attr('data-price-tutoring');
                         if($('#selected-tutor').hasClass('active')){
-							$('#selected-tutor').removeClass('active');
+                            $('#selected-tutor').removeClass('active');
                             $('#btn-schedule-now').removeClass('active');
                             $('#selected-tutor').text('Not selected yet');
-							//$('#selected-subject').removeClass('active');
-							//$('#selected-subject').text('Not selected yet');
+                            //$('#selected-subject').removeClass('active');
+                            //$('#selected-subject').text('Not selected yet');
                             $('#btn-schedule-now').attr('data-tutor-id','');
                         }else{
                             $('#selected-tutor').addClass('active');
                             $('#btn-schedule-now').addClass('active');
                             $('#selected-tutor').text(name);
-							//$('#selected-subject').addClass('active');
-							/*if(subject_choose == ''){
-								$('#selected-subject').text(subject);
-								$('#btn-schedule-now').attr('data-subject',subject);
-							}else{
-								$('#selected-subject').text(subject_choose);
-								$('#btn-schedule-now').attr('data-subject',subject_choose);
-							}*/
+                            //$('#selected-subject').addClass('active');
+                            /*if(subject_choose == ''){
+                                $('#selected-subject').text(subject);
+                                $('#btn-schedule-now').attr('data-subject',subject);
+                            }else{
+                                $('#selected-subject').text(subject_choose);
+                                $('#btn-schedule-now').attr('data-subject',subject_choose);
+                            }*/
                             $('#btn-schedule-now').attr('data-name',name);
                             $('#btn-schedule-now').attr('data-tutor-id',id);
                             $('#btn-schedule-now').attr('data-total',price_tutoring);
@@ -4280,7 +5261,7 @@
                     $('#btn-schedule-now').click(function(){
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
                         var choose_tutor = $(this).attr("data-tutor-id");
-						var subject = $(this).attr("data-subject");
+                        var subject = $(this).attr("data-subject");
                         var ptype = $(this).attr("data-ptype");
                         var table = $(this).attr("data-table");
                         var time = $(this).attr("data-time");
@@ -4421,7 +5402,7 @@
                         var id = $(this).attr('data-id');
                     });
 
-                    $('.btn-resume').live('click', function (e) {
+                    $('.find-card-more').live('click', function (e) {
                         e.preventDefault();
 
                         var id = $(this).attr('data-id');
@@ -4431,8 +5412,8 @@
                         var day = $(this).attr('data-day');
                         var time = $(this).attr('data-time');
                         var time_view = $(this).attr('data-time-view');
-						var subject_name = $('#select-available-subject :selected').attr("data-name");
-						
+                        var subject_name = $('#select-available-subject :selected').attr("data-name");
+                        
                         $('.writting-review').css("display","none");
                         $('.frm-available-now').css("display","none");
 
@@ -4444,12 +5425,62 @@
                             $('#selected-tutor').text('Not selected yet');
                             $('#btn-schedule-now').attr('data-tutor-id','');
                         }
-						
-						if(subject_name != ''){
-							$('#selected-subject').text(subject_name);
-							$('#btn-schedule-now').attr('data-subject',subject_name);
-						}
-						
+                        
+                        if(subject_name != ''){
+                            $('#selected-subject').text(subject_name);
+                            $('#btn-schedule-now').attr('data-subject',subject_name);
+                        }
+                        
+                        if(time != ''){
+                            var today = new Date(day.replace("-", ","));                            
+                            var weekday = new Array(7);
+                                weekday[0] =  "Sun";
+                                weekday[1] = "Mon";
+                                weekday[2] = "Tue";
+                                weekday[3] = "Wed";
+                                weekday[4] = "Thur";
+                                weekday[5] = "Fri";
+                                weekday[6] = "Sat";                                
+                            var n = weekday[today.getDay()];
+                            var month_text = getMonthtoText(today.getMonth()+1);
+                            $('#selected-date').text(month_text + ' ' + today.getDate() +'('+n+')'+time_view);
+                            $('#btn-schedule-now').attr('data-day',day);
+                            $('#btn-schedule-now').attr('data-time',time);
+                            $('#btn-schedule-now').attr('data-time-view',time_view);
+                        }
+
+                        get_resume(id,'resume',ptype,table,"",time_view);
+                    });
+
+                    $('.find-card-select-btn').live('click', function (e) {
+                        e.preventDefault();
+
+                        var id = $(this).attr('data-id');
+                        var ptype = $(this).attr('data-type');
+                        var table = $(this).attr('data-table');
+                        var slide_index = $(this).attr('data-slide-index');
+                        var day = $(this).attr('data-day');
+                        var time = $(this).attr('data-time');
+                        var time_view = $(this).attr('data-time-view');
+                        var subject_name = $('#select-available-subject :selected').attr("data-name");
+                        
+                        $('.writting-review').css("display","none");
+                        $('.frm-available-now').css("display","none");
+
+                        $('.slide-resume').slick('slickGoTo', parseInt(slide_index));
+
+                        if($('#selected-tutor').hasClass('active')){
+                            $('#selected-tutor').removeClass('active');
+                            $('#btn-schedule-now').removeClass('active');
+                            $('#selected-tutor').text('Not selected yet');
+                            $('#btn-schedule-now').attr('data-tutor-id','');
+                        }
+                        
+                        if(subject_name != ''){
+                            $('#selected-subject').text(subject_name);
+                            $('#btn-schedule-now').attr('data-subject',subject_name);
+                        }
+                        
                         if(time != ''){
                             var today = new Date(day.replace("-", ","));                            
                             var weekday = new Array(7);
@@ -4526,7 +5557,7 @@
                         var ptype = $(this).attr('data-ptype');
                         var table = $(this).attr('data-table');
                         $('.writting-review').css("display","none");  
-					    
+                        
                         get_resume(id,'review',ptype,table);
                     });
 
@@ -4543,7 +5574,7 @@
                         $('#write-review-subject').val(subject);
                         tinymce.get('message-review').setContent(message);
                         $('#btn-submit-review').attr('data-id',tutor_id); 
-						$('#btn-submit-review').attr('data-userid',userid); 
+                        $('#btn-submit-review').attr('data-userid',userid); 
                         $('#btn-submit-review').attr('data-review-id',review_id); 
                         $('#btn-submit-review').attr('data-ptype',ptype);
 
@@ -4577,8 +5608,27 @@
                         get_resume(review_id,'write_review',ptype,table);
                     });
 
+                    $('#btn-getting').click(function(){
+                        closeNav();
+                        $('.new-request-list').text('GETTING TUTORING');   
+                        $('.getting-tutor-main').css('display','block');
+                        $(".main-my-schedule").css("display","none");
+                        $(".section-tutor-main").css("display","none");
+                        $(".main-new-request").css("display","none"); 
+                        $(".main-view-request").css("display","none");
+                        $(".main-status-request").css("display","none");
+                        $(".writting-review").css("display","none");
+                        $('.header-title-newschedule').css("display","none");
+                         $("#sub-findingtutor").removeClass('active');
+                        $("#sub-status").removeClass('active');
+                        $("#sub-schedule-li").removeClass('active');
+                        $("#getting-tutoring").addClass('active');
+                        $('.new-request-list').text('GETTING TUTORING');    
+                    });
+
                     $("#btn-schedule").click(function(){   
                         var day = $('#today-tutor').val();
+                        closeNav();
                         $('.new-request-list').text('SCHEDULE');      
                         //$('#custom-timezone').css("display","block");
                         //$("#menu-schedule-btn").text('Summary');
@@ -4590,8 +5640,11 @@
                         $('#list-schedule-status').css("display","none");
                         $('#table-status-schedule').html('');
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
-
+                        $(".main-view-status").css("display","none");
+                        $("#sub-schedule-li").addClass('active');
+                        $("#sub-findingtutor").removeClass('active');
+                        $("#sub-status").removeClass('active');
+                        $("#getting-tutoring").removeClass('active');
                         if($('#body-my-scheduled').hasClass('status-schedule')){
                             $('#body-my-scheduled').removeClass('status-schedule')
                         }
@@ -4671,7 +5724,136 @@
                         if($(".main-new-request").hasClass('active')){
                             $(".main-new-request").removeClass('active');
                         }
+                         $('.getting-tutor-main').css('display','none');
+                        $(".main-my-schedule").css("display","block");
+                        $(".section-tutor-main").css("display","none");
+                        $(".main-new-request").css("display","none"); 
+                        $(".main-view-request").css("display","none");
+                        $(".main-status-request").css("display","none");
+                        $(".writting-review").css("display","none");
+                        $('.header-title-newschedule').css("display","none");
 
+                        var viewport = getViewport();
+                        if(viewport.width < 925){
+                            $('.box-schedule-left').css("display","block");
+                            $('#btn-open-calendar').css("display","block");
+                            if(viewport.width < 650){
+                                $('#tab-tutor-content .border-selectall').find('.col-md-6').css('width','53.8%');
+                            }else{
+                                $('#tab-tutor-content .border-selectall').find('.col-md-6').css('width','42.88%');
+                            }
+                        }else{
+                            $('#tab-tutor-content .border-selectall').find('.col-md-6').css('width','67.2%');
+                        }
+                    });
+
+                    $("#go-to-all").click(function(){   
+                        var day = $('#today-tutor').val();
+                        closeNav();
+                        $('.new-request-list').text('SCHEDULE');      
+                        //$('#custom-timezone').css("display","block");
+                        //$("#menu-schedule-btn").text('Summary');
+                        $("#menu-schedule-btn").attr("data-type","summary");  
+                        $('#custom-timezone').attr("data-type","");
+                        $('#custom-timezone').attr("data-day","");
+                        $("#my-account-modal").animate({ scrollTop: 0 }, "slow");
+                        $('.header-schedule').removeClass('active');
+                        
+                        $('#all-status-btn').addClass('active');
+                        $("#open-menu-schedule").css("display","none");
+                        $(".main-view-status").css("display","none");
+                        $("#sub-schedule-li").addClass('active');
+                        $("#sub-findingtutor").removeClass('active');
+                        $("#sub-status").removeClass('active');
+                        $("#getting-tutoring").removeClass('active');
+                        $("#open-menu-schedule li").removeClass('active');
+                        $(this).parent().addClass('active');
+                        $('.header-schedule').addClass('active');
+                        $('#list-schedule-status').css("display","block");
+                        $("#open-menu-schedule").css("display","none");
+                        
+
+                        
+                        if($('#body-my-scheduled').hasClass('status-schedule')){
+                            $('#body-my-scheduled').removeClass('status-schedule')
+                        }
+
+                        $('.radio_tutor_search').attr('checked',false);
+
+                        var today = new Date(day.replace("-", ","));
+                        var weekday = new Array(7);
+                            weekday[0] =  "Sun";
+                            weekday[1] = "Mon";
+                            weekday[2] = "Tue";
+                            weekday[3] = "Wed";
+                            weekday[4] = "Thur";
+                            weekday[5] = "Fri";
+                            weekday[6] = "Sat";                                
+                        var n = weekday[today.getDay()];
+                        var month_text = getMonthtoText(today.getMonth()+1);
+                        $('.current-day').text(month_text + ' ' + today.getDate());
+                        $('.stuff-day').text(' (' + n + ')');
+
+                        var prev_d = new Date(day.replace("-", ","));
+                        prev_d.setDate(prev_d.getDate() - 1);
+                        var dd = prev_d.getDate();
+                        var mm = prev_d.getMonth()+1; //January is 0!
+                        var yyyy = prev_d.getFullYear();
+                        if(dd < 10) {
+                            dd = "0"+dd;
+                        }
+                        if(mm < 10) {
+                            mm = "0"+mm;
+                        }
+
+                        var next_d = new Date(day.replace("-", ","));
+                        next_d.setDate(next_d.getDate() + 1); 
+                        var dd_n = next_d.getDate();
+                        var mm_n = next_d.getMonth()+1; //January is 0!
+                        var yyyy_n = next_d.getFullYear();
+                        if(dd_n < 10) {
+                            dd_n = "0"+dd_n;
+                        }
+                        if(mm_n < 10) {
+                            mm_n = "0"+mm_n;
+                        }
+                        
+                        $("#menu-schedule-btn").attr('data-day',day);
+                        $(".schedule-left-btn").attr('data-day',yyyy+'-'+mm+'-'+dd);
+                        $(".schedule-right-btn").attr('data-day',yyyy_n+'-'+mm_n+'-'+dd_n);
+
+                        $('.datepicker-days td.day').each(function () {
+                            var full_date = $(this).attr('data-day');
+                            var st = full_date.split("/");
+                            var formattedDate = st[2] + "-" + st[0] + "-" + st[1];
+                            
+                            if($(this).hasClass('active disabled')){
+                                $(this).removeClass('active disabled');
+                                $(this).attr('data-action','selectDay');
+                            }
+
+                            if(day == formattedDate){
+                                $(this).addClass('active disabled');
+                                $(this).attr('data-action','disabled');
+                            }
+                        });
+
+                        get_list_schedule();
+                        get_status_schedule(status);
+                        get_scheduled_day(day, 'schedule', true);
+
+                        if($(".main-my-schedule").hasClass('active-reschedule')){
+                            $(".main-my-schedule").removeClass('active-reschedule');
+                        }
+
+                        if(!$(".main-my-schedule").hasClass('active-tab-schedule')){
+                            $(".main-my-schedule").addClass("active-tab-schedule");
+                        }
+
+                        if($(".main-new-request").hasClass('active')){
+                            $(".main-new-request").removeClass('active');
+                        }
+                         $('.getting-tutor-main').css('display','none');
                         $(".main-my-schedule").css("display","block");
                         $(".section-tutor-main").css("display","none");
                         $(".main-new-request").css("display","none"); 
@@ -4907,10 +6089,10 @@
 
                             if(hftime > 12) hftime = hftime - 12;
                             if(httime > 12) httime = httime - 12;
-							
-							var time_sc1 = hftime+':'+ftime[1]+':'+ftime[2].toLowerCase();
+                            
+                            var time_sc1 = hftime+':'+ftime[1]+':'+ftime[2].toLowerCase();
                             var time_sc2 = httime+':'+totime[1]+':'+totime[2].toLowerCase();
-							
+                            
                             var time = hftime+':'+ftime[1]+ftime[2] +'-'+ httime+':'+totime[1]+totime[2];
 
                             $('#btn-sent-request').attr("data-id","");
@@ -4998,7 +6180,7 @@
                     $('.btn-cancel-time').click(function(){
                         $('#duration-tutoring-request').css("display", "none");
                     });
-					
+                    
                     $(".btn-new-request").live("click",function(){ 
                         var user_points = $(this).attr('data-points');
                         var fromtime = $(this).attr("data-fromtime");
@@ -5021,7 +6203,7 @@
                         var hrtoday = $("#mytime-clock").attr("data-hour");
                         var mttoday = $("#mytime-clock").attr("data-minute");
 
-                        var scurr = parseInt(hrtoday) * 60 + parseInt(mttoday);
+                        var scurr = parseInt(hrtoday) * 60; // + parseInt(mttoday);
                         var egive = hr * 60 + parseInt(str[1]);
                         
                         if((today == day && egive >= scurr) || GivenDate > CurrentDate){  
@@ -5118,7 +6300,7 @@
                             $('#table-list-tutor').html(tr);
                         }                     
                     });
-					
+                    
                     $('#btn-find-tutor').click(function(){
                         var search = $('#search-title').val();
                         var time_zone = $("#request-time-zoneSelectBoxItText").attr("data-val");
@@ -5436,7 +6618,7 @@
                         $('#list-schedule-status').css("display","none");
                         $('#table-status-schedule').html('');
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
 
                         if($('#body-my-scheduled').hasClass('status-schedule')){
                             $('#body-my-scheduled').removeClass('status-schedule')
@@ -5529,7 +6711,7 @@
                         get_list_schedule();
 
                         get_scheduled_day(day, 'schedule', true);
-
+                        $(".getting-tutor-main").css("display","none");
                         $(".main-my-schedule").css("display","block");
                         $(".section-tutor-main").css("display","none");
                         $('.main-new-request').css("display","none"); 
@@ -5570,7 +6752,7 @@
                             $('#top-my-schedules').css({"display":"none"});
                             $('body').removeClass('open-myschedule');
                             $('#btn-my-schedule').removeClass('active');
-                            $('#btn-my-schedule').find('img').attr('src',path + 'icon_MySchedule_Top.png');
+                            $('#btn-my-schedule').find('img').attr('src',path + '01_icon_Schedule_Starter.png');
                         }else{
                             $('#top-my-schedules').css({"display":"block"});
                             $('body').addClass('open-myschedule');
@@ -5579,140 +6761,146 @@
 
                             //$('.btn-cancel-schedule').attr('data-id',id);
                         }*/
-						var cl = $(this).attr("data-class");
-						var subject = $(this).attr("data-subject");
-						var private_subject = $(this).attr("data-private-subject");
-						var student_name = $(this).attr("data-student-name");
-						var tutor_name = $(this).attr("data-tutor-name");
-						var date = $(this).attr("data-date");
-						var stuff = $(this).attr("data-stuff");
-						var message = $(this).attr("data-message");
-						var note = $(this).attr("data-note");
-						var time = $(this).attr("data-time");
-						var time_view = $(this).attr("data-time-view");
-						var fromtime = $(this).attr("data-fromtime");
-						var totime = $(this).attr("data-totime");
-						var total = $(this).attr("data-total");
-						var total_time = $(this).attr("data-total-time");
-						var day = $(this).attr("data-day");
-						var confirmed = $(this).attr("data-confirmed");
-						var canceled = $(this).attr("data-canceled");
-						var id = $(this).attr("data-id");
-						var student_id = $(this).attr("data-student-id");
-						var teacher_id = $(this).attr("data-teacher-id");
-						var status = $(this).attr("data-status");
+                        var cl = $(this).attr("data-class");
+                        var subject = $(this).attr("data-subject");
+                        var private_subject = $(this).attr("data-private-subject");
+                        var student_name = $(this).attr("data-student-name");
+                        var tutor_name = $(this).attr("data-tutor-name");
+                        var date = $(this).attr("data-date");
+                        var stuff = $(this).attr("data-stuff");
+                        var message = $(this).attr("data-message");
+                        var note = $(this).attr("data-note");
+                        var time = $(this).attr("data-time");
+                        var time_view = $(this).attr("data-time-view");
+                        var fromtime = $(this).attr("data-fromtime");
+                        var totime = $(this).attr("data-totime");
+                        var total = $(this).attr("data-total");
+                        var total_time = $(this).attr("data-total-time");
+                        var day = $(this).attr("data-day");
+                        var confirmed = $(this).attr("data-confirmed");
+                        var canceled = $(this).attr("data-canceled");
+                        var id = $(this).attr("data-id");
+                        var student_id = $(this).attr("data-student-id");
+                        var teacher_id = $(this).attr("data-teacher-id");
+                        var status = $(this).attr("data-status");
                         var accepted = $(this).attr("data-accepted");
-						var icon = $(this).attr("data-icon");
-						var create_on = $(this).attr("data-create-on");
-						var created = $(this).attr("data-created");
-						var path = '<?php echo get_template_directory_uri() ?>/library/images/';
-						
-						var review_schedule = 'Session Not Completed Yet';
-						var point_schedule = ' <span class="spent"></span>';
-						
-						if($.trim(note) == 'null') note = '';
-						
-						if($.trim(cl) == 'accepted'){
-							var current_status = 'Completed';
-							var type_status = 'confirmed';
-							point_schedule = ' <span class="spent">(spent)</span>';
-							review_schedule = '<a href="https://notepad.iktutor.com/en/?sid='+id+'&user_id='+student_id+'&teacher_id='+teacher_id+'" target="_blank">Review Session Again</a>';
-							
-							if(!$('#completed-status-btn').hasClass('active')){
-								$('.list-schedule-status').removeClass('active');
-								$('#completed-status-btn').addClass('active');
-								$('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed.png');
-								$('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
-								$('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
-								$('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
-							}
-							
-							if(!$('.btn-status-schedule').hasClass('active')){
-								$('.btn-status-schedule').addClass('active');
-							}
+                        var icon = $(this).attr("data-icon");
+                        var create_on = $(this).attr("data-create-on");
+                        var created = $(this).attr("data-created");
+                        var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                        
+                        var review_schedule = 'Session Not Completed Yet';
+                        var point_schedule = ' <span class="spent"></span>';
+                        
+                        if($.trim(note) == 'null') note = '';
+                        
+                        if($.trim(cl) == 'accepted'){
+                            var current_status = 'Completed';
+                            var type_status = 'confirmed';
+                            point_schedule = ' <span class="spent">(spent)</span>';
+                            review_schedule = '<a href="https://notepad.iktutor.com/en/?sid='+id+'&user_id='+student_id+'&teacher_id='+teacher_id+'" target="_blank">Review Session Again</a>';
+                            
+                            if(!$('#completed-status-btn').hasClass('active')){
+                                $('.list-schedule-status').removeClass('active');
+                                $('#completed-status-btn').addClass('active');
+                                $('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed.png');
+                                $('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
+                                $('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
+                                $('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
+                            }
+                            
+                            if(!$('.btn-status-schedule').hasClass('active')){
+                                $('.btn-status-schedule').addClass('active');
+                            }
 
                             $('.cancel-this-schedule').css("display","none");
-						}else if($.trim(cl) == 'canceled'){
-							if(accepted == 2)
+                        }else if($.trim(cl) == 'canceled'){
+                            if(accepted == 2)
                                 var current_status = 'Canceled by Tutor';
                             else
                                 var current_status = 'Canceled';
 
-							var type_status = 'canceled';
-							
-							if(!$('#expired-status-btn').hasClass('active')){
-								$('.list-schedule-status').removeClass('active');
-								$('#expired-status-btn').addClass('active');
-								$('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired.png');
-								$('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
-								$('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
-								$('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
-							}
-							
-							if(!$('.btn-status-schedule').hasClass('active')){
-								$('.btn-status-schedule').addClass('active');
-							}
+                            var type_status = 'canceled';
+                            
+                            if(!$('#expired-status-btn').hasClass('active')){
+                                $('.list-schedule-status').removeClass('active');
+                                $('#expired-status-btn').addClass('active');
+                                $('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired.png');
+                                $('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
+                                $('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
+                                $('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
+                            }
+                            
+                            if(!$('.btn-status-schedule').hasClass('active')){
+                                $('.btn-status-schedule').addClass('active');
+                            }
 
                             $('.cancel-this-schedule').css("display","none");
-						}else{
+                        }else{
                             if(accepted == 1)
-							    var current_status = 'Confirmed';
+                                var current_status = 'Confirmed';
+                            else if(accepted == 2)
+                                var current_status = 'Canceled by Tutor';
                             else
                                 var current_status = 'Waiting for Confirmation';
 
-							var type_status = 'waiting';
-							
-							if(!$('#scheduled-status-btn').hasClass('active')){
-								$('.list-schedule-status').removeClass('active');
-								$('#scheduled-status-btn').addClass('active');
-								$('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled.png');
-								$('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
-								$('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
-								$('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
-							}
-							
-							if(!$('.btn-status-schedule').hasClass('active')){
-								$('.btn-status-schedule').addClass('active');
-							}
+                            var type_status = 'waiting';
+                            
+                            if(!$('#scheduled-status-btn').hasClass('active')){
+                                $('.list-schedule-status').removeClass('active');
+                                $('#scheduled-status-btn').addClass('active');
+                                $('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled.png');
+                                $('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
+                                $('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
+                                $('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
+                            }
+                            
+                            if(!$('.btn-status-schedule').hasClass('active')){
+                                $('.btn-status-schedule').addClass('active');
+                            }
 
                             $('.cancel-this-schedule').css("display","block");     
-						}
-						
-						if(note == ''){
-							$('.btn-status-schedule').text('Save Note');
-						}else{
-							$('.btn-status-schedule').text('Edit Note');
-							tinymce.get('note_status_schedule').setContent(note);
-						}
-						
-						$('.name-status-schedule').find('img').attr('src',path + icon);
-						if($.trim(subject) == 'null')
-							$('.name-status-schedule').find('span').text(private_subject);
-						else
-							$('.name-status-schedule').find('span').text(subject);
-						$('#date-schedule').text(date + stuff + ' ' + time_view);
-						$('#current-status').text(current_status);
-						$('#name-tutor-detail').text(tutor_name);
-						$('#point-schedule').html(total + 'Points($)' + point_schedule);
-						$('#review-schedule').addClass($.trim(cl));
-						$('#review-schedule').html(review_schedule);
-						$('.close-status-schedule').attr('data-status',type_status);
-						$('.btn-status-schedule').attr('data-id',id);
+                        }
+                        
+                        if(note == ''){
+                            $('.btn-status-schedule').text('Save Note');
+                        }else{
+                            $('.btn-status-schedule').text('Edit Note');
+                            tinymce.get('note_status_schedule').setContent(note);
+                        }
+                        
+                        $('.name-status-schedule').find('img').attr('src',path + icon);
+                        if($.trim(subject) == 'null')
+                            $('.name-status-schedule').find('span').text(private_subject);
+                        else
+                            $('.name-status-schedule').find('span').text(subject);
+                        $('#date-schedule').text(date + stuff + ' ' + time_view);
+                        $('#current-status').text(current_status);
+                        $('#name-tutor-detail').text(tutor_name);
+                        $('#point-schedule').html(total + 'Points($)' + point_schedule);
+                        $('#review-schedule').addClass($.trim(cl));
+                        $('#review-schedule').html(review_schedule);
+                        $('.close-status-schedule').attr('data-status',type_status);
+                        $('.btn-status-schedule').attr('data-id',id);
                         $('#yes-cancel-it').attr('data-id',id);
                         $('#no-cancel-it').attr('data-id',id);
-						
-						$('#list-schedule-status').css("display","block");
-						$('#table-status-schedule').html('');
-						$('#table-list-schedule').html('');
-						$('#tutoring-scheduled').html('');
-						$("#open-menu-schedule").css("display","none");
+                        
+                        $('#list-schedule-status').css("display","block");
+                        $('#table-status-schedule').html('');
+                        $('#table-list-schedule').html('');
+                        $('#tutoring-scheduled').html('');
+                        $("#open-menu-schedule").css("display","none");
                         $("#open-menu-cancel").css("display","none");
-						$(".header-schedule").addClass('active');
-						$(".body-my-scheduled").addClass('status-schedule');
-						$(".main-view-status").css("display","block");
+                        $(".header-schedule").addClass('active');
+                        $(".body-my-scheduled").addClass('status-schedule');
+                        $(".main-view-status").css("display","block");
                     });
 
                     $('#btn-my-schedule').click(function(e){
+                        $('#open-menu-quicknotifi').css({"display":"none"});
+                        $('#open-list-quicknotifi').css({"display":"none"});
+                        $("#my-timezone").css("display","none");
+
                         e.preventDefault();
                         var id = $(this).attr("data-id");
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
@@ -5726,7 +6914,7 @@
                             $('#top-my-schedules').css({"display":"none"});
                             $('body').removeClass('open-myschedule');
                             $(this).removeClass('active');
-                            $(this).find('img').attr('src',path + 'icon_MySchedule_Top.png');
+                            $(this).find('img').attr('src',path + '01_icon_Schedule_Starter.png');
                         }else{
                             $.get(home_url + "/?r=ajax/get_my_schedules", {timezone: ''}, function (data) {
                                 //console.log(data);
@@ -5809,19 +6997,20 @@
                             $('#top-my-schedules').css({"display":"block"});
                             $('body').addClass('open-myschedule');
                             $(this).addClass('active');
-                            $(this).find('img').attr('src',path + 'icon_CONFIRM-CLOSE.png');
+                            //$(this).find('img').attr('src',path + 'icon_CONFIRM-CLOSE.png');
 
                             //$('.btn-cancel-schedule').attr('data-id',id);
                         }
+                        
                     });
 
-                    $('.go-to-calendar').click(function(){
+                    $('.goto-calendar').click(function(){
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
                         if($('#btn-my-schedule').hasClass('active')){
                             $('#top-my-schedules').css({"display":"none"});
                             $('body').removeClass('open-myschedule');
                             $('#btn-my-schedule').removeClass('active');
-                            $('#btn-my-schedule').find('img').attr('src',path + 'icon_MySchedule_Top.png');
+                            $('#btn-my-schedule').find('img').attr('src',path + '01_icon_Schedule_Starter.png');
                         }
 
                         $("#create-account").removeClass("active");
@@ -6043,13 +7232,13 @@
                                 var index = $("#select-timezoneSelectBoxItText").attr("data-val");
                                 
                                 $.post(home_url + "/?r=ajax/get_tutoring_date_active", {                                   
-									timezone: timezone,
-									name: name,
-									index: index
-								}, function (data) {
-									$('#active-day-tutor').val(data);
-									initCalendar('update', data);
-								});
+                                    timezone: timezone,
+                                    name: name,
+                                    index: index
+                                }, function (data) {
+                                    $('#active-day-tutor').val(data);
+                                    initCalendar('update', data);
+                                });
 
                                 if(table == 'table-list-tutor'){
                                     var retype = 'tutor';
@@ -6103,8 +7292,8 @@
                     $('#got-canceled').live("click",function(){
                         $('#top-popup-message').css("display", "none");
                     });
-					
-					$('.view-status-scheduled').live("click",function(){
+                    
+                    $('.view-status-scheduled').live("click",function(){
                         var cl = $(this).attr("data-class");
                         var subject = $(this).attr("data-subject");
                         var private_subject = $(this).attr("data-private-subject");
@@ -6113,7 +7302,7 @@
                         var date = $(this).attr("data-date");
                         var stuff = $(this).attr("data-stuff");
                         var message = $(this).attr("data-message");
-						var note = $(this).attr("data-note");
+                        var note = $(this).attr("data-note");
                         var time = $(this).attr("data-time");
                         var time_view = $(this).attr("data-time-view");
                         var fromtime = $(this).attr("data-fromtime");
@@ -6125,142 +7314,144 @@
                         var confirmed = $(this).attr("data-confirmed");
                         var canceled = $(this).attr("data-canceled");
                         var id = $(this).attr("data-id");
-						var student_id = $(this).attr("data-student-id");
-						var teacher_id = $(this).attr("data-teacher-id");
+                        var student_id = $(this).attr("data-student-id");
+                        var teacher_id = $(this).attr("data-teacher-id");
                         var status = $(this).attr("data-status");
                         var accepted = $(this).attr("data-accepted");
                         var icon = $(this).attr("data-icon");
                         var create_on = $(this).attr("data-create-on");
                         var created = $(this).attr("data-created");
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
-						
-						var review_schedule = 'Session Not Completed Yet';
-						var point_schedule = ' <span class="spent"></span>';
-						
-						if($.trim(note) == 'null') note = '';
-						
-						if($.trim(cl) == 'accepted'){
-							var current_status = 'Completed';
-							var type_status = 'confirmed';
-							point_schedule = ' <span class="spent">(spent)</span>';
-							review_schedule = '<a href="https://notepad.iktutor.com/en/?sid='+id+'&user_id='+student_id+'&teacher_id='+teacher_id+'" target="_blank">Review Session Again</a>';
-							
-							if(!$('#completed-status-btn').hasClass('active')){
-								$('.list-schedule-status').removeClass('active');
-								$('#completed-status-btn').addClass('active');
-								$('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed.png');
-								$('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
-								$('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
-								$('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
-							}
-							
-							if(!$('.btn-status-schedule').hasClass('active')){
-								$('.btn-status-schedule').addClass('active');
-							}
+                        
+                        var review_schedule = 'Session Not Completed Yet';
+                        var point_schedule = ' <span class="spent"></span>';
+                        
+                        if($.trim(note) == 'null') note = '';
+                        
+                        if($.trim(cl) == 'accepted'){
+                            var current_status = 'Completed';
+                            var type_status = 'confirmed';
+                            point_schedule = ' <span class="spent">(spent)</span>';
+                            review_schedule = '<a href="https://notepad.iktutor.com/en/?sid='+id+'&user_id='+student_id+'&teacher_id='+teacher_id+'" target="_blank">Review Session Again</a>';
+                            
+                            if(!$('#completed-status-btn').hasClass('active')){
+                                $('.list-schedule-status').removeClass('active');
+                                $('#completed-status-btn').addClass('active');
+                                $('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed.png');
+                                $('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
+                                $('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
+                                $('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
+                            }
+                            
+                            if(!$('.btn-status-schedule').hasClass('active')){
+                                $('.btn-status-schedule').addClass('active');
+                            }
 
                             $('.cancel-this-schedule').css("display","none");
-						}else if($.trim(cl) == 'canceled'){
+                        }else if($.trim(cl) == 'canceled'){
                             if(accepted == 2)
-							    var current_status = 'Canceled by Tutor';
+                                var current_status = 'Canceled by Tutor';
                             else
                                 var current_status = 'Canceled';
 
-							var type_status = 'canceled';
-							
-							if(!$('#expired-status-btn').hasClass('active')){
-								$('.list-schedule-status').removeClass('active');
-								$('#expired-status-btn').addClass('active');
-								$('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired.png');
-								$('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
-								$('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
-								$('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
-							}
+                            var type_status = 'canceled';
+                            
+                            if(!$('#expired-status-btn').hasClass('active')){
+                                $('.list-schedule-status').removeClass('active');
+                                $('#expired-status-btn').addClass('active');
+                                $('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired.png');
+                                $('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
+                                $('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
+                                $('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled_disable.png');
+                            }
 
                             $('.cancel-this-schedule').css("display","none");
-						}else{
+                        }else{
                             if(accepted == 1)
-						        var current_status = 'Confirmed';
+                                var current_status = 'Confirmed';
+                            else if(accepted == 2)
+                                var current_status = 'Canceled by Tutor';
                             else
                                 var current_status = 'Waiting for Confirmation';
 
-							var type_status = 'waiting';
-							
-							if(!$('#scheduled-status-btn').hasClass('active')){
-								$('.list-schedule-status').removeClass('active');
-								$('#scheduled-status-btn').addClass('active');
-								$('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled.png');
-								$('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
-								$('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
-								$('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
-							}
+                            var type_status = 'waiting';
+                            
+                            if(!$('#scheduled-status-btn').hasClass('active')){
+                                $('.list-schedule-status').removeClass('active');
+                                $('#scheduled-status-btn').addClass('active');
+                                $('#scheduled-status-btn').find('img').attr('src',path + 'TimeIcon_Scheduled.png');
+                                $('#all-status-btn').find('img').attr('src',path + 'TimeIcon_Summary_disable.png');
+                                $('#completed-status-btn').find('img').attr('src',path + 'TimeIcon_Completed_disable.png');
+                                $('#expired-status-btn').find('img').attr('src',path + 'TimeIcon_Expired_disable.png');
+                            }
 
                             $('.cancel-this-schedule').css("display","block");
-						}
-						
-						if(note == ''){
-							$('.btn-status-schedule').text('Save Note');
-							tinymce.get('note_status_schedule').setContent('');
-						}else{
-							$('.btn-status-schedule').text('Edit Note');
-							tinymce.get('note_status_schedule').setContent(note);
-						}
-						
-						$('.name-status-schedule').find('img').attr('src',path + icon);
-						if($.trim(subject) == 'null')
-							$('.name-status-schedule').find('span').text(private_subject);
-						else
-							$('.name-status-schedule').find('span').text(subject);
-						$('#date-schedule').text(date + stuff + ' ' + time_view);
-						$('#current-status').text(current_status);
-						$('#name-tutor-detail').text(tutor_name);
-						$('#point-schedule').html(total + 'Points($)' + point_schedule);
-						$('#review-schedule').addClass($.trim(cl));
-						$('#review-schedule').html(review_schedule);
-						$('.close-status-schedule').attr('data-status',type_status);
-						$('.btn-status-schedule').attr('data-id',id);
+                        }
+                        
+                        if(note == ''){
+                            $('.btn-status-schedule').text('Save Note');
+                            tinymce.get('note_status_schedule').setContent('');
+                        }else{
+                            $('.btn-status-schedule').text('Edit Note');
+                            tinymce.get('note_status_schedule').setContent(note);
+                        }
+                        
+                        $('.name-status-schedule').find('img').attr('src',path + icon);
+                        if($.trim(subject) == 'null')
+                            $('.name-status-schedule').find('span').text(private_subject);
+                        else
+                            $('.name-status-schedule').find('span').text(subject);
+                        $('#date-schedule').text(date + stuff + ' ' + time_view);
+                        $('#current-status').text(current_status);
+                        $('#name-tutor-detail').text(tutor_name);
+                        $('#point-schedule').html(total + 'Points($)' + point_schedule);
+                        $('#review-schedule').addClass($.trim(cl));
+                        $('#review-schedule').html(review_schedule);
+                        $('.close-status-schedule').attr('data-status',type_status);
+                        $('.btn-status-schedule').attr('data-id',id);
                         $('#yes-cancel-it').attr('data-id',id);
                         $('#no-cancel-it').attr('data-id',id);
-						
-						$('#list-schedule-status').css("display","block");
-						$('#table-status-schedule').html('');
-						$("#open-menu-schedule").css("display","none");
+                        
+                        $('#list-schedule-status').css("display","block");
+                        $('#table-status-schedule').html('');
+                        $("#open-menu-schedule").css("display","none");
                         $("#open-menu-cancel").css("display","none");
-						$(".main-view-status").css("display","block");
-					});
-					
-					$('.close-status-schedule').click(function(){
-						$("#open-menu-schedule li").removeClass('active');
-						$("#scheduled-btn").parent().addClass('active');
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","block");
+                    });
+                    
+                    $('.close-status-schedule').click(function(){
+                        $("#open-menu-schedule li").removeClass('active');
+                        $("#scheduled-btn").parent().addClass('active');
+                        $(".main-view-status").css("display","none");
 
-						if(!$('#body-my-scheduled').hasClass('status-schedule')){
-							$('#body-my-scheduled').addClass('status-schedule')
-						}
-						
-						if($('.btn-status-schedule').hasClass('active')){
-							$('.btn-status-schedule').removeClass('active');
-						}
-						var status = $(this).attr("data-status");
-						get_status_schedule(status);
-					});
-					
-					$('.btn-status-schedule').click(function(){
-						var id = $(this).attr("data-id");
-						if($(this).hasClass('active')){
-							var description = $('#note_status_schedule_ifr').contents().find('#tinymce').text();
-							if($.trim(description) != ''){
-								$.post(home_url + "/?r=ajax/save_tutoring_desc", {                                   
-									id: id,
-									description: description,
-									type: "note"
-								}, function (data) {
-									if ($.trim(data) == '1') {
-										$('.btn-status-schedule').text('Edit Note');
-									}                                         
-								});
-							}
-						}
-					});
+                        if(!$('#body-my-scheduled').hasClass('status-schedule')){
+                            $('#body-my-scheduled').addClass('status-schedule')
+                        }
+                        
+                        if($('.btn-status-schedule').hasClass('active')){
+                            $('.btn-status-schedule').removeClass('active');
+                        }
+                        var status = $(this).attr("data-status");
+                        get_status_schedule(status);
+                    });
+                    
+                    $('.btn-status-schedule').click(function(){
+                        var id = $(this).attr("data-id");
+                        if($(this).hasClass('active')){
+                            var description = $('#note_status_schedule_ifr').contents().find('#tinymce').text();
+                            if($.trim(description) != ''){
+                                $.post(home_url + "/?r=ajax/save_tutoring_desc", {                                   
+                                    id: id,
+                                    description: description,
+                                    type: "note"
+                                }, function (data) {
+                                    if ($.trim(data) == '1') {
+                                        $('.btn-status-schedule').text('Edit Note');
+                                    }                                         
+                                });
+                            }
+                        }
+                    });
 
                     $('.view-detail-status').live("click",function(){
                         var cl = $(this).attr("data-class");
@@ -6309,10 +7500,10 @@
                         $('.goto-main-schedule').attr("data-type",'status');
                         $('.goto-main-schedule').attr("data-tab",'main-status-request');  
                         $('#custom-timezone').attr("data-type","view");
-						$('#custom-timezone').attr("data-id",id);
+                        $('#custom-timezone').attr("data-id",id);
                         $('#custom-timezone').attr("data-day",day);
                         $('#custom-timezone').attr("data-created",created); 
-						$('#custom-timezone').attr("data-id",id);
+                        $('#custom-timezone').attr("data-id",id);
                         if($.trim(cl) == "accepted"){
                             $('.name-request-vew').find('img').attr('src',path+'icon_Status_Confirmed.png');
                             $('.name-request-vew').find('span').text('CONFIRMED');
@@ -6457,10 +7648,10 @@
 
                             if(hftime > 12) hftime = hftime - 12;
                             if(httime > 12) httime = httime - 12;
-							
-							var time_sc1 = hftime+':'+ftime[1]+':'+ftime[2].toLowerCase();
+                            
+                            var time_sc1 = hftime+':'+ftime[1]+':'+ftime[2].toLowerCase();
                             var time_sc2 = httime+':'+totime[1]+':'+totime[2].toLowerCase();
-							
+                            
                             var time = hftime+':'+ftime[1]+ftime[2] +' - '+ httime+':'+totime[1]+totime[2];
 
                             $('#btn-sent-request').attr("data-id",id);
@@ -6508,7 +7699,7 @@
                             $('#search-title').val('');
                             tinymce.get('description_request').setContent('');
                             $('.radio_buttons_search').attr('checked',false);
-							
+                            
                             $('#table-search-tutor').html("");
                             var tr = '<tr><td colspan="3" class="no-list"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_No_Schedule.png" alt="">Currently, there are no list</td></tr>';
                             $('#table-search-tutor').append(tr);
@@ -6589,7 +7780,7 @@
                         $('#list-schedule-status').css("display","none");
                         $('#table-status-schedule').html('');
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
 
                         if($(".main-my-schedule").hasClass('active-tab-schedule')){
                             $(".main-my-schedule").removeClass("active-tab-schedule");
@@ -6631,7 +7822,7 @@
                         $('#list-schedule-status').css("display","none");
                         $('#table-status-schedule').html('');
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
 
                         $('#custom-timezone').attr("data-type","status");
                         $('#custom-timezone').attr("data-status","all");
@@ -6656,7 +7847,7 @@
                             $('#tab-tutor-content .border-selectall').find('.col-md-4').css('width','62.65%');
                         }
                         get_status_request(type);
-
+                        $(".getting-tutor-main").css("display","none");
                         $(".main-status-request").css("display","block");
                         $(".section-tutor-main").css("display","none");
                         $('.main-new-request').css("display","none"); 
@@ -6835,39 +8026,39 @@
                         var GivenDate = new Date(date);
                         if(GivenDate > CurrentDate){
                             var type = 'am'; 
-                        	var html = '<option value="0">Select Time</option>';
-                        	for (var i = 0; i < 24; i++) {                            
-                        	    var id = i;
-                        	    if (i > 11){
-                        	        var j = i - 12;                                    
-                        	        type = 'pm'; 
-                        	    }else{
-                        	        var j = i;
-                        	    }
+                            var html = '';
+                            for (var i = 0; i < 24; i++) {                            
+                                var id = i;
+                                if (i > 11){
+                                    var j = i - 12;                                    
+                                    type = 'pm'; 
+                                }else{
+                                    var j = i;
+                                }
                         
-                        	    if(j == 0) id = j = 12;
+                                if(j == 0) id = j = 12;
                         
-                        	    var kl = (parseInt(id) + 1);
-                        	    if(kl > 12){
-                        	        var ks  = kl - 12;
-                        	    }else{
-                        	        var ks = kl;
-                        	    }
+                                var kl = (parseInt(id) + 1);
+                                if(kl > 12){
+                                    var ks  = kl - 12;
+                                }else{
+                                    var ks = kl;
+                                }
                         
-                        	    if(ks < 10) 
-                        	        var kll = '0'+ks;
-                        	    else
-                        	        var kll = ks;
+                                if(ks < 10) 
+                                    var kll = '0'+ks;
+                                else
+                                    var kll = ks;
                         
-                        	    if(j < 10) 
-                        	        var jk = '0'+j;
-                        	    else
-                        	        var jk = j;
-                        	    
-                        	    html += '<option data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
-                        	    html += '<option data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
-                        	}
-                        	$('#select-available-time').html(html).data("selectBox-selectBoxIt").refresh();
+                                if(j < 10) 
+                                    var jk = '0'+j;
+                                else
+                                    var jk = j;
+                                
+                                html += '<option data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
+                                html += '<option data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
+                            }
+                            $('#select-available-time').html(html).data("selectBox-selectBoxIt").refresh();
                         }else{
                             if(current_day == date){
                                 var current_hour = $("#mytime-clock").attr("data-hour");
@@ -6875,59 +8066,59 @@
                                 var available_time = $("#mytime-clock").attr("data-available-time");
                                 
                                 var type = 'am'; 
-                                var html = '<option value="0">Select Time</option>';
-                            	for (var i = current_hour; i < 24; i++) {                            
-                            	    var id = i;
-                            	    if (i > 11){
-                            	        var j = i - 12;                                    
-                            	        type = 'pm'; 
-                            	    }else{
-                            	        var j = i;
-                            	    }
+                                var html = '';
+                                for (var i = current_hour; i < 24; i++) {                            
+                                    var id = i;
+                                    if (i > 11){
+                                        var j = i - 12;                                    
+                                        type = 'pm'; 
+                                    }else{
+                                        var j = i;
+                                    }
                             
-                            	    if(j == 0) id = j = 12;
+                                    if(j == 0) id = j = 12;
                             
-                            	    var kl = (parseInt(id) + 1);
-                            	    if(kl > 12){
-                            	        var ks  = kl - 12;
-                            	    }else{
-                            	        var ks = kl;
-                            	    }
+                                    var kl = (parseInt(id) + 1);
+                                    if(kl > 12){
+                                        var ks  = kl - 12;
+                                    }else{
+                                        var ks = kl;
+                                    }
                             
-                            	    if(ks < 10) 
-                            	        var kll = '0'+ks;
-                            	    else
-                            	        var kll = ks;
+                                    if(ks < 10) 
+                                        var kll = '0'+ks;
+                                    else
+                                        var kll = ks;
                             
-                            	    if(j < 10) 
-                            	        var jk = '0'+j;
-                            	    else
-                            	        var jk = j;
-                            	    
-                            	    if(current_minute > 29 && i == current_hour){
-                            	        var sel_time = j+':30'+type;
-                            	        if(sel_time == available_time)
-                            	            var sel = 'selected="selected"';
-                            	        else
-                            	            var sel = '';
-                            	        html += '<option '+sel+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
-                            	    }else{
-                            	        var sel_time1 = j+':00'+type;
-                            	        if(sel_time1 == available_time)
-                            	            var sel1 = 'selected="selected"';
-                            	        else
-                            	            var sel1 = '';
-                            	            
-                            	        var sel_time2 = j+':30'+type;
-                            	        if(sel_time2 == available_time)
-                            	            var sel2 = 'selected="selected"';
-                            	        else
-                            	            var sel2 = '';
-                            	        html += '<option '+sel1+' data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
-                            	        html += '<option '+sel2+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
-                            	    }
-                            	}
-                            	$('#select-available-time').html(html).data("selectBox-selectBoxIt").refresh();
+                                    if(j < 10) 
+                                        var jk = '0'+j;
+                                    else
+                                        var jk = j;
+                                    
+                                    if(current_minute > 29 && i == current_hour){
+                                        var sel_time = j+':30'+type;
+                                        if(sel_time == available_time)
+                                            var sel = 'selected="selected"';
+                                        else
+                                            var sel = '';
+                                        html += '<option '+sel+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
+                                    }else{
+                                        var sel_time1 = j+':00'+type;
+                                        if(sel_time1 == available_time)
+                                            var sel1 = 'selected="selected"';
+                                        else
+                                            var sel1 = '';
+                                            
+                                        var sel_time2 = j+':30'+type;
+                                        if(sel_time2 == available_time)
+                                            var sel2 = 'selected="selected"';
+                                        else
+                                            var sel2 = '';
+                                        html += '<option '+sel1+' data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
+                                        html += '<option '+sel2+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
+                                    }
+                                }
+                                $('#select-available-time').html(html).data("selectBox-selectBoxIt").refresh();
                             }
                         }
                     });
@@ -6952,34 +8143,34 @@
                         initTimeClock(name);
                         initMyTimeClock(name);
                         $('#mycity-name').text(city);
-						
+                        
                         if(ptype == 'status'){
                             var status = $('#custom-timezone').attr("data-status");
                             if(status != 'finished'){
                                 get_status_request(status);
                             }
                         }else if(ptype == 'view'){
-							var id = $('#custom-timezone').attr("data-id");
-							$.post(home_url + "/?r=ajax/get_view_by_timezone", {  
-								id: id,
-								timezone: timezone,
-								name: name,
-								index: index
-							}, function (data) {
-								var result = $.parseJSON(data);
-								if(result.date){
-									$('.current-view-day').text(result.date);
-									$('.stuff-view-day').text(result.stuff);
-									$('.time-current-view').text(result.time_view);
-									$('.create-time').text(result.create_on);
-									$('.btn-reschedule-request').attr("data-day",result.day);
-									$('.btn-view-request').attr("data-day",result.day);
-									$('.goto-main-schedule').attr("data-day",result.day);
-									$('#custom-timezone').attr("data-day",result.day);  
-									$('#custom-timezone').attr("data-created",result.created);
-								}
-							});
-						}
+                            var id = $('#custom-timezone').attr("data-id");
+                            $.post(home_url + "/?r=ajax/get_view_by_timezone", {  
+                                id: id,
+                                timezone: timezone,
+                                name: name,
+                                index: index
+                            }, function (data) {
+                                var result = $.parseJSON(data);
+                                if(result.date){
+                                    $('.current-view-day').text(result.date);
+                                    $('.stuff-view-day').text(result.stuff);
+                                    $('.time-current-view').text(result.time_view);
+                                    $('.create-time').text(result.create_on);
+                                    $('.btn-reschedule-request').attr("data-day",result.day);
+                                    $('.btn-view-request').attr("data-day",result.day);
+                                    $('.goto-main-schedule').attr("data-day",result.day);
+                                    $('#custom-timezone').attr("data-day",result.day);  
+                                    $('#custom-timezone').attr("data-created",result.created);
+                                }
+                            });
+                        }
                     });
 
                     /*$('#sandbox-container-tutor').datepicker({
@@ -7077,6 +8268,11 @@
                             id: id,
                             status: status
                         }, function (data) {
+                            $('#menu-quick-notification').find('img').attr('src',path + '08_Top_Trigger_NOTIFICATION.png');
+                            if(!$('#menu-quick-notification').find('img').hasClass('active')){
+                                $('#menu-quick-notification').find('img').addClass('active');
+                            }
+
                             get_scheduled_day(day, 'schedule', true);
 
                             $.post(home_url + "/?r=ajax/get_tutoring_date_active", {                                   
@@ -7187,6 +8383,11 @@
                             id: id,
                             status: status
                         }, function (data) {
+                            $('#menu-quick-notification').find('img').attr('src',path + '08_Top_Trigger_NOTIFICATION.png');
+                            if(!$('#menu-quick-notification').find('img').hasClass('active')){
+                                $('#menu-quick-notification').find('img').addClass('active');
+                            }
+
                             get_scheduled_day(day, 'schedule', true);
 
                             $.post(home_url + "/?r=ajax/get_tutoring_date_active", {                                   
@@ -7278,11 +8479,13 @@
                         });
                     });
 
-                    $("#cancel-now").click(function(){
+                    $("#cancel-now").click(function(e){
+                        e.stopPropagation();
                         $("#open-menu-cancel").toggle();
                     });
 
-                    $("#yes-cancel-it").click(function(){
+                    $("#yes-cancel-it").click(function(e){
+                        e.stopPropagation();
                         var id = $(this).attr("data-id");
                         var name = $('#select-timezone :selected').attr("data-name");
                         var city = $('#select-timezone :selected').attr("data-city");
@@ -7290,6 +8493,7 @@
                         var index = $("#select-timezoneSelectBoxItText").attr("data-val");
                         var day = $("#menu-schedule-btn").attr("data-day");
                         var status = 1;
+                        var path = '<?php echo get_template_directory_uri() ?>/library/images/';
                         
                         var today = new Date(day.replace("-", ","));
                         var weekday = new Array(7);
@@ -7353,6 +8557,11 @@
                             id: id,
                             status: status
                         }, function (data) {
+                            $('#menu-quick-notification').find('img').attr('src',path + '08_Top_Trigger_NOTIFICATION.png');
+                            if(!$('#menu-quick-notification').find('img').hasClass('active')){
+                                $('#menu-quick-notification').find('img').addClass('active');
+                            }
+
                             $("#open-menu-cancel").css("display","none");
                             $('.header-schedule').removeClass('active');
                             $('#list-schedule-status').css("display","none");
@@ -7411,10 +8620,11 @@
                             $(".main-status-request").css("display","none");
                             $(".writting-review").css("display","none");
                             $('.header-title-newschedule').css("display","none");
-                        });
+                        }); 
                     });
 
-                    $("#no-cancel-it").click(function(){
+                    $("#no-cancel-it").click(function(e){
+                        e.stopPropagation();
                         var id = $(this).attr("data-id");
                         var status = 2;
                         var name = $('#select-timezone :selected').attr("data-name");
@@ -7422,6 +8632,7 @@
                         var timezone = $('#select-timezone :selected').attr("data-value");
                         var index = $("#select-timezoneSelectBoxItText").attr("data-val");
                         var day = $("#menu-schedule-btn").attr("data-day");
+                        var path = '<?php echo get_template_directory_uri() ?>/library/images/';
                         $("#open-menu-cancel").css("display","none");
 
                         var today = new Date(day.replace("-", ","));
@@ -7486,6 +8697,11 @@
                             id: id,
                             status: status
                         }, function (data) {
+                            $('#menu-quick-notification').find('img').attr('src',path + '08_Top_Trigger_NOTIFICATION.png');
+                            if(!$('#menu-quick-notification').find('img').hasClass('active')){
+                                $('#menu-quick-notification').find('img').addClass('active');
+                            }
+
                             $("#open-menu-cancel").css("display","none");
                             $('.header-schedule').removeClass('active');
                             $('#list-schedule-status').css("display","none");
@@ -7557,7 +8773,7 @@
                         $('.header-schedule').addClass('active');
                         $('#list-schedule-status').css("display","block");
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
 
                         if(!$('#body-my-scheduled').hasClass('status-schedule')){
                             $('#body-my-scheduled').addClass('status-schedule')
@@ -7582,7 +8798,7 @@
                         $(this).parent().addClass('active');
                         $('#list-schedule-status').css("display","block");
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
 
                         if(!$('#body-my-scheduled').hasClass('status-schedule')){
                             $('#body-my-scheduled').addClass('status-schedule')
@@ -7608,7 +8824,7 @@
                         $('.header-schedule').addClass('active');
                         $('#list-schedule-status').css("display","block");
                         $("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
 
                         if(!$('#body-my-scheduled').hasClass('status-schedule')){
                             $('#body-my-scheduled').addClass('status-schedule')
@@ -7657,7 +8873,7 @@
                     $("#all-status-btn").click(function(){
                         $("#open-menu-schedule li").removeClass('active');
                         $("#all-schedule-btn").parent().addClass('active');
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
                         $("#open-menu-schedule").css("display","none");
 
                         if(!$('#body-my-scheduled').hasClass('status-schedule')){
@@ -7681,7 +8897,7 @@
                     $("#scheduled-status-btn").click(function(){
                         $("#open-menu-schedule li").removeClass('active');
                         $("#scheduled-btn").parent().addClass('active');
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
                         $("#open-menu-schedule").css("display","none");
 
                         if(!$('#body-my-scheduled').hasClass('status-schedule')){
@@ -7705,7 +8921,7 @@
                     $("#completed-status-btn").click(function(){
                         $("#open-menu-schedule li").removeClass('active');
                         $("#completed-btn").parent().addClass('active');
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
                         $("#open-menu-schedule").css("display","none");
 
                         if(!$('#body-my-scheduled').hasClass('status-schedule')){
@@ -7729,7 +8945,7 @@
                     $("#expired-status-btn").click(function(){
                         $("#open-menu-schedule li").removeClass('active');
                         $("#expired-btn").parent().addClass('active');
-						$(".main-view-status").css("display","none");
+                        $(".main-view-status").css("display","none");
                         $("#open-menu-schedule").css("display","none");
 
                         if(!$('#body-my-scheduled').hasClass('status-schedule')){
@@ -7750,39 +8966,214 @@
                         get_status_schedule(status);
                     });
 
-                    $("#menu-quick-notification").click(function(){
+                    $("#menu-quick-notification").click(function(e){
+                        e.stopPropagation();
+                        var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                        $("#my-timezone").css("display","none");
                         $("#open-list-quicknotifi").css("display","none");
-                        $("#open-menu-quicknotifi").toggle();
+
+                        if($("#open-list-quicknotifi").hasClass('active')){
+                            $("#open-menu-quicknotifi").css("display","none");
+                            $("#open-list-quicknotifi").removeClass('active');
+                        }else if($('#btn-my-schedule').hasClass('active')){
+                            if($('body').hasClass('open-myschedule')){
+                                $('body').removeClass('open-myschedule');
+                            }
+                            $('#btn-my-schedule').removeClass('active');
+                            $("#open-menu-quicknotifi").css("display","none");
+                            $('#top-my-schedules').css({"display":"none"});
+                            $('#btn-my-schedule').find('img').attr('src',path + '01_icon_Schedule_Starter.png');
+                        }else{
+                            $("#open-menu-quicknotifi").toggle();
+                        }
                     });
 
-                    $("#quick-notification-btn").click(function(){
+                    $("#quick-notification-btn").click(function(e){
+                        e.stopPropagation();
                         $("#open-menu-quicknotifi").css("display","none");
+
+                        getQuickNotification(true);
+                    });
+
+                    $('#close-modal').click( function (e){
+                        e.stopPropagation();
+                        $('#my-account-modal').css('display','none');
+                        $('body').removeClass('modal-open');
+                        
+                        var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                        $('#my-account-modal').modal("hide");//location.reload();         
+                        document.getElementById('user_password_signup').value=null;
+                        document.getElementById('user_login_signup').value=null;
+                        $("#open-menu-quicknotifi").css("display","none");
+                        $("#open-list-quicknotifi").css("display","none");
+
+                        if($("#open-list-quicknotifi").hasClass('active')){
+                            $("#open-list-quicknotifi").removeClass('active');
+                        } 
+
+                        if($('body').hasClass('open-myschedule')){
+                            $('body').removeClass('open-myschedule');
+                        }
+
+                        if($('#btn-my-schedule').hasClass('active')){
+                            $('#btn-my-schedule').removeClass('active');
+                        }
+                        
+                        $('#top-my-schedules').css({"display":"none"});
+                        $('#btn-my-schedule').find('img').attr('src',path + '01_icon_Schedule_Starter.png');
+
+                        if(ref == "notepad"){
+                            window.history.replaceState(null, null, window.location.pathname);
+                        }
+
+                        $("#sub-myacc").css("display", "none");
+                        $("#sub-myacc").removeClass("opensub");
+                        $("#sub-tutoring").css("display", "none");
+                        $("#sub-tutoring").removeClass("opensub");
+                        $(".sub-menu-left li").removeClass("active");
+
+                        closeNav();
+
+                    });
+
+                    $(".close-quicknotifi").live("click",function(e){
+                        e.stopPropagation();
+                        var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+
+                        $("#open-menu-quicknotifi").css("display","none");
+
+                        var tid = $(this).attr("data-tid");
+                        $.post(home_url + "/?r=ajax/remove_quick_notification", {
+                            id: tid
+                        }, function (data) {
+                            $('#quicknotifi'+tid).remove();
+                            if ($.trim(data) == '0') {
+                                var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                                $('#menu-quick-notification').find('img').attr('src',path + '07_Top_Trigger.png');
+                                if($('#menu-quick-notification').find('img').hasClass('active')){
+                                    $('#menu-quick-notification').find('img').removeClass('active');
+                                }
+
+                                if($("#open-list-quicknotifi").hasClass('active')){
+                                    $("#open-list-quicknotifi").removeClass('active');
+                                }
+                            }
+                        });
+                    });
+
+                    $(".modal-content-signup").click( function (e){
+                        if (e.target !== this){
+                            return;
+                        }
+                        closeNav();
+                        $("#open-menu-quicknotifi").css("display","none");
+                        $("#open-list-quicknotifi").css("display","none");
+                        $("#my-timezone").css("display","none");
+                        $("#open-menu-schedule").css("display","none");
+
+
+
+                        if($("#open-list-quicknotifi").hasClass('active')){
+                            $("#open-list-quicknotifi").removeClass('active');
+                        }
+                        $("#open-menu-cancel").css("display","none");
+                    });
+
+                    $(".modal-body-signup").click( function (e){
 
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
-                        $('#menu-quick-notification').find('img').attr('src',path + '08_Top_Trigger_NOTIFICATION.png');
-                        getQuickNotification();
 
-                        $("#open-list-quicknotifi").css("display","block");
-                    });
-
-                    $('#close-modal').click( function (e)
-                    {
-                        var close = $('#close-modal').attr('data-tab');
-                        if(close == 'create-class'){
-                            $('#my-account-modal').modal("show");
-                        } else{
-                            location.reload();
-                        }                
-                    });
-
-                    $(".close-quicknotifi").live("click",function(){
                         $("#open-menu-quicknotifi").css("display","none");
                         $("#open-list-quicknotifi").css("display","none");
+                        $("#my-timezone").css("display","none");
+                        $("#open-menu-cancel").css("display","none");
+                        
+                        
+                        if($("#open-list-quicknotifi").hasClass('active')){
+                            $("#open-list-quicknotifi").removeClass('active');
+                        }
+                        
+                       
+                    });
+                    $(".student-center").click( function (e){
+                        closeNav();
+                         $("#open-menu-schedule").css("display","none");
+                    });
+                    $(".body-my-scheduled").click( function (){
+
+                        $("#open-menu-schedule").css("display","none");
                     });
 
-                    $('.view-detail-quicknotifi').live("click",function(){
+                    $(".title-div").click( function (e){
+                        var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                        if (e.target !== this){
+                            return;
+                        }
+                        closeNav();
                         $("#open-menu-quicknotifi").css("display","none");
                         $("#open-list-quicknotifi").css("display","none");
+                        $("#my-timezone").css("display","none");
+                        $("#open-menu-cancel").css("display","none");
+                        $("#open-menu-schedule").css("display","none");
+
+                        if($("#open-list-quicknotifi").hasClass('active')){
+                            $("#open-list-quicknotifi").removeClass('active');
+                        }
+
+                        if($('body').hasClass('open-myschedule')){
+                            $('body').removeClass('open-myschedule');
+                        }
+
+                        if($('#btn-my-schedule').hasClass('active')){
+                            $('#btn-my-schedule').removeClass('active');
+                        }
+                        
+                        $('#top-my-schedules').css({"display":"none"});
+                        $('#btn-my-schedule').find('img').attr('src',path + '01_icon_Schedule_Starter.png');
+                    });
+
+                    /*$("#top-my-schedules .modal-body").click( function (e){
+                        var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                        if (e.target !== this){
+                            return;
+                        }
+                        
+                        if($('body').hasClass('open-myschedule')){
+                            $('body').removeClass('open-myschedule');
+                        }
+
+                        if($('#btn-my-schedule').hasClass('active')){
+                            $('#btn-my-schedule').removeClass('active');
+                        }
+                        
+                        $('#top-my-schedules').css({"display":"none"});
+                        $('#btn-my-schedule').find('img').attr('src',path + '01_icon_Schedule_Starter.png');
+                    });*/
+
+                    $(".bg-overload").click( function (e){
+                        var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                        
+                        if($('body').hasClass('open-myschedule')){
+                            $('body').removeClass('open-myschedule');
+                        }
+
+                        if($('#btn-my-schedule').hasClass('active')){
+                            $('#btn-my-schedule').removeClass('active');
+                        }
+                        
+                        $('#top-my-schedules').css({"display":"none"});
+                        $('#btn-my-schedule').find('img').attr('src',path + '01_icon_Schedule_Starter.png');
+                    });
+
+                    $('.view-detail-quicknotifi').live("click",function(e){
+                        e.stopPropagation();
+                        
+                        $("#open-menu-quicknotifi").css("display","none");
+                        $("#open-list-quicknotifi").css("display","none");
+
+                        if($("#open-list-quicknotifi").hasClass('active')){
+                            $("#open-list-quicknotifi").removeClass('active');
+                        } 
 
                         var cl = $(this).attr("data-class");
                         var subject = $(this).attr("data-subject");
@@ -7862,6 +9253,8 @@
                         }else{
                             if(accepted == 1)
                                 var current_status = 'Confirmed';
+                            else if(accepted == 2)
+                                var current_status = 'Canceled by Tutor';
                             else
                                 var current_status = 'Waiting for Confirmation';
 
@@ -7895,6 +9288,7 @@
                             $('.name-status-schedule').find('span').text(private_subject);
                         else
                             $('.name-status-schedule').find('span').text(subject);
+
                         $('#date-schedule').text(date + stuff + ' ' + time_view);
                         $('#current-status').text(current_status);
                         $('#name-tutor-detail').text(tutor_name);
@@ -7906,6 +9300,14 @@
                         $('#yes-cancel-it').attr('data-id',id);
                         $('#no-cancel-it').attr('data-id',id);
                         
+                        $(".main-my-schedule").css("display","block");
+                        $(".section-tutor-main").css("display","none");
+                        $('.main-new-request').css("display","none"); 
+                        $(".main-view-request").css("display","none");
+                        $(".main-status-request").css("display","none");
+                        $(".writting-review").css("display","none");
+                        $('.header-title-newschedule').css("display","none");
+
                         $('#list-schedule-status').css("display","block");
                         $('#table-status-schedule').html('');
                         $('#table-list-schedule').html('');
@@ -7931,17 +9333,17 @@
                     });
 
                     $(".schedule-left-btn").click(function(){
-						$('.header-schedule').removeClass('active');
-						$('#list-schedule-status').css("display","none");
-						$('#table-status-schedule').html('');
-						$("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $('.header-schedule').removeClass('active');
+                        $('#list-schedule-status').css("display","none");
+                        $('#table-status-schedule').html('');
+                        $("#open-menu-schedule").css("display","none");
+                        $(".main-view-status").css("display","none");
 
-						if($("#body-my-scheduled").hasClass('status-schedule')){
-							$("#body-my-scheduled").removeClass("status-schedule");
-						}
+                        if($("#body-my-scheduled").hasClass('status-schedule')){
+                            $("#body-my-scheduled").removeClass("status-schedule");
+                        }
                         $("#body-my-scheduled").animate({scrollTop: 0});
-				
+                
                         var day = $(this).attr("data-day");
                         var type = $(this).attr("data-type");
 
@@ -8008,15 +9410,15 @@
                     });
 
                     $(".schedule-right-btn").click(function(){
-						$('.header-schedule').removeClass('active');
-						$('#list-schedule-status').css("display","none");
-						$('#table-status-schedule').html('');
-						$("#open-menu-schedule").css("display","none");
-						$(".main-view-status").css("display","none");
+                        $('.header-schedule').removeClass('active');
+                        $('#list-schedule-status').css("display","none");
+                        $('#table-status-schedule').html('');
+                        $("#open-menu-schedule").css("display","none");
+                        $(".main-view-status").css("display","none");
 
-						if($("#body-my-scheduled").hasClass('status-schedule')){
-							$("#body-my-scheduled").removeClass("status-schedule");
-						}
+                        if($("#body-my-scheduled").hasClass('status-schedule')){
+                            $("#body-my-scheduled").removeClass("status-schedule");
+                        }
                         $("#body-my-scheduled").animate({scrollTop: 0});
 
                         var day = $(this).attr("data-day");
@@ -8079,13 +9481,18 @@
                                 $(this).attr('data-action','disabled');
                             }
                         });
-						
+                        
                         get_list_schedule('schedule');
                         get_scheduled_day(day,type);
                     });
 
                     $("#btn-my-timezone").click(function () {
                         $('#my-timezone').toggle();
+                        $("#open-menu-quicknotifi").css("display","none");
+
+                    });
+                    $(".close-schedule").click(function () {
+                        $("#open-menu-schedule").css("display","none");
                     });
 
                     $('.my-timezone').click(function(){
@@ -8102,16 +9509,16 @@
                             $(this).addClass('active');
                             $('#mycity-name').text(city);
 
-                            $("#select-timezone").selectBoxIt('selectOption',index.toString()).data("selectBox-selectBoxIt");
-                            $("#select-timezone").data("selectBox-selectBoxIt").refresh();
+                            // $("#select-timezone").selectBoxIt('selectOption',index.toString()).data("selectBox-selectBoxIt");
+                            // $("#select-timezone").data("selectBox-selectBoxIt").refresh();
 
                             $('#my-timezone').toggle();
 
-                            $.post(home_url + "/?r=ajax/update_timezone", {                                   
-                                timezone: timezone,
-                                name: name,
-                                index: index
-                            }, function (data) {});
+                            // $.post(home_url + "/?r=ajax/update_timezone", {                                   
+                            //     timezone: timezone,
+                            //     name: name,
+                            //     index: index
+                            // }, function (data) {});
 
                             initDateTimePicker(name, index, timezone, city);
                             clearInterval(interval);
@@ -8238,8 +9645,10 @@
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
 
                         let mytime = moment.tz(timezone_name).format('hh:mm A');
-                        document.getElementById('mytime-clock').innerHTML = mytime;
-                        
+                        if (document.getElementById('mytime-clock')) {
+                            document.getElementById('mytime-clock').innerHTML = mytime;
+                        }
+
                         if(moment.tz(timezone_name).format('m') < 30)
                             var available_time = moment.tz(timezone_name).format('h')+':00'+moment.tz(timezone_name).format('a');
                         else
@@ -8250,7 +9659,7 @@
                         $('#mytime-clock').attr('data-type',moment.tz(timezone_name).format('a'));
                         $('#mytime-clock').attr('data-available-time',available_time);
                         
-                        var html1 = '<option value="0">Select Time</option>';
+                        var html1 = '';
                         var current_hour1 =  parseInt(moment.tz(timezone_name).format('H'));
                         var current_minute1 = parseInt(moment.tz(timezone_name).format('m'));
                         var type = 'am';
@@ -8283,16 +9692,16 @@
                                 var jk = j;
                             
                             if(current_minute1 > 29 && i == current_hour1){
-                    	        html1 += '<option data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
-                    	    }else{
-                    	        html1 += '<option data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
-                    	        html1 += '<option data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
-                    	    }
+                                html1 += '<option data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
+                            }else{
+                                html1 += '<option data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
+                                html1 += '<option data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
+                            }
                         }
                         $('#select-available-time').html(html1).data("selectBox-selectBoxIt").refresh();
                         
                         var current_date = $('#today-tutor').val();
-                        var html2 = '<option value="0">Select Day</option>';
+                        var html2 = '';
                         var current_day = parseInt(current_date.split('-')[2]);
                         for (var jd = current_day; jd < 32; jd++) {
                             if(current_day == jd)
@@ -8311,7 +9720,9 @@
 
                         intervalmy = setInterval(() => {
                             mytime = moment.tz(timezone_name).format('hh:mm A');
-                            document.getElementById('mytime-clock').innerHTML = mytime;
+                            if (document.getElementById('mytime-clock')) {
+                                document.getElementById('mytime-clock').innerHTML = mytime;
+                            }
                             
                             if(moment.tz(timezone_name).format('m') < 30)
                                 var available_time_sel = moment.tz(timezone_name).format('h')+':00'+moment.tz(timezone_name).format('a');
@@ -8342,7 +9753,14 @@
                                     var today = $('#today-tutor').val();
                                   
                                     if(today == day && parseInt(chour) >= parseInt(hour) && parseInt(cminute) >= parseInt(minute)){
+                                        $('#menu-quick-notification').find('img').attr('src',path + '08_Top_Trigger_NOTIFICATION.png');
+                                        if(!$('#menu-quick-notification').find('img').hasClass('active')){
+                                            $('#menu-quick-notification').find('img').addClass('active');
+                                        }
+
                                         $('.slide-my-schedule').slick('slickRemove',index).slick('refresh');
+
+                                        get_scheduled_day(today,'schedule');
                                     }
                                     iSlide++;
                                 });
@@ -8440,7 +9858,7 @@
                                 //console.log(parseInt('00'));
                                     
                                 if(date == current_day && (current_minute == 0 || current_minute == 30)){
-                                    var html = '<option value="0">Select Time</option>';
+                                    var html = '';
                                     for (var i = current_hour; i < 24; i++) {                            
                                         var id = i;
                                         if (i > 11){
@@ -8470,38 +9888,47 @@
                                             var jk = j;
                                         
                                         if(current_minute > 29 && i == current_hour){
-                                	        var sel_time = j+':30'+type;
-                                	        if(sel_time == available_time_sel)
-                                	            var sel = 'selected="selected"';
-                                	        else
-                                	            var sel = '';
-                                	        html += '<option '+sel+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
-                                	    }else{
-                                	        var sel_time1 = j+':00'+type;
-                                	        if(sel_time1 == available_time_sel)
-                                	            var sel1 = 'selected="selected"';
-                                	        else
-                                	            var sel1 = '';
-                                	            
-                                	        var sel_time2 = j+':30'+type;
-                                	        if(sel_time2 == available_time_sel)
-                                	            var sel2 = 'selected="selected"';
-                                	        else
-                                	            var sel2 = '';
-                                	        html += '<option '+sel1+' data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
-                                	        html += '<option '+sel2+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
-                                	    }
+                                            var sel_time = j+':30'+type;
+                                            if(sel_time == available_time_sel)
+                                                var sel = 'selected="selected"';
+                                            else
+                                                var sel = '';
+                                            html += '<option '+sel+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
+                                        }else{
+                                            var sel_time1 = j+':00'+type;
+                                            if(sel_time1 == available_time_sel)
+                                                var sel1 = 'selected="selected"';
+                                            else
+                                                var sel1 = '';
+                                                
+                                            var sel_time2 = j+':30'+type;
+                                            if(sel_time2 == available_time_sel)
+                                                var sel2 = 'selected="selected"';
+                                            else
+                                                var sel2 = '';
+                                            html += '<option '+sel1+' data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
+                                            html += '<option '+sel2+' data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
+                                        }
                                     }
                                     $('#select-available-time').html(html).data("selectBox-selectBoxIt").refresh();
                                 }
                             }
 
-                            if(ct%5 == 0){
-                                if($('#tutoring-scheduled').hasClass('active')){
+                            if(ct%10 == 0){
+                                if($('#tutoring-scheduled').hasClass('active') && $('body').hasClass('modal-open')){
                                     var day = $('#menu-schedule-btn').attr('data-day');
-                                    getAcceptTutor(day);
+                                    //getAcceptTutor(day);
+                                    get_scheduled_day(day,'schedule', false, false);
+                                }
+
+                                var displayName = $(".display-name").text();
+                                if (displayName !== '' && $('body').hasClass('modal-open')) {
+                                    getQuickNotification(false);
                                 }
                             }
+
+
+                            //get_list_schedule('schedule', current_hour);
                         }, 1000);
 
                         $('.my-timezone').each(function () {
@@ -8539,14 +9966,18 @@
                         var date_utc = moment.utc().format('YYYY-MM-DD HH:mm:ss');
 
                         let time = moment.tz(timezone_name).format('h:mm a');
-                        document.getElementById('time-clock').innerHTML = time;
+                        if (document.getElementById('time-clock')) {
+                            document.getElementById('time-clock').innerHTML = time;
+                        }
                         $('#time-clock').attr('data-hour',moment.tz(timezone_name).format('H'));
                         $('#time-clock').attr('data-minute',moment.tz(timezone_name).format('m'));
                         $('#time-clock').attr('data-type',moment.tz(timezone_name).format('a'));
                           
                         interval = setInterval(() => {
                             time = moment.tz(timezone_name).format('h:mm a');
-                            document.getElementById('time-clock').innerHTML = time;
+                            if (document.getElementById('time-clock')) {
+                                document.getElementById('time-clock').innerHTML = time;
+                            }
                             $('#time-clock').attr('data-hour',moment.tz(timezone_name).format('H'));
                             $('#time-clock').attr('data-minute',moment.tz(timezone_name).format('m'));
                             $('#time-clock').attr('data-type',moment.tz(timezone_name).format('a'));
@@ -8705,7 +10136,9 @@
                                         weekday[5] = "Fri";
                                         weekday[6] = "Sat";                                
                                     var n = weekday[day.getDay()];
-                                    $('.current-day').text(month_text + ' ' + day.getDate());
+                                    const monthNames = ["January", "February", "March", "April", "May", "June",
+                                        "July", "August", "September", "October", "November", "December"];                         
+                                    $('.current-day').text(monthNames[full_date.split("/")[0]-1] + ' ' + day.getDate());
                                     $('.stuff-day').text(' (' + n + ')');
 
                                     var prev = new Date(full_date.replace("/", ","));
@@ -8739,21 +10172,21 @@
                                     $("#menu-schedule-btn").attr('data-day',formattedDate);
                                     $(".schedule-left-btn").attr('data-day',yyyy+'-'+mm+'-'+dd);
                                     $(".schedule-right-btn").attr('data-day',yyyy_n+'-'+mm_n+'-'+dd_n);
-    								
-    								$('.header-schedule').removeClass('active');
-    								$('#list-schedule-status').css("display","none");
-    								$('#table-status-schedule').html('');
-    								$("#open-menu-schedule").css("display","none");
-    								$(".main-view-status").css("display","none");
+                                    
+                                    $('.header-schedule').removeClass('active');
+                                    $('#list-schedule-status').css("display","none");
+                                    $('#table-status-schedule').html('');
+                                    $("#open-menu-schedule").css("display","none");
+                                    $(".main-view-status").css("display","none");
 
-    								if($(".main-my-schedule").hasClass('active-tab-schedule')){
-    									$(".main-my-schedule").removeClass("active-tab-schedule");
-    								}
+                                    if($(".main-my-schedule").hasClass('active-tab-schedule')){
+                                        $(".main-my-schedule").removeClass("active-tab-schedule");
+                                    }
 
-    								if($("#body-my-scheduled").hasClass('status-schedule')){
-    									$("#body-my-scheduled").removeClass("status-schedule");
-    								}
-    								
+                                    if($("#body-my-scheduled").hasClass('status-schedule')){
+                                        $("#body-my-scheduled").removeClass("status-schedule");
+                                    }
+                                    
                                     if($(this).hasClass('today')){
                                         var th = $('#time-clock').attr('data-hour');
                                         get_list_schedule('schedule', th);
@@ -8833,8 +10266,33 @@
                         }
                         return month
                     }
+                    function GetURLParameter(sParam) {
+                        var sPageURL = window.location.search.substring(1);
+                        var sURLVariables = sPageURL.split('&');
+                        for (var i = 0; i < sURLVariables.length; i++) {
+                            var sParameterName = sURLVariables[i].split('=');
+                            if (sParameterName[0] == sParam) {
+                                return sParameterName[1];
+                            }
+                        }
+                    }
+                    // function getStatusLogin(){
+                    //     $.get(home_url + "/?r=ajax/get_status_login", {}, function (data) {
+                    //             data = JSON.parse(data);
+                    //             if ($.trim(data) == '0') {
+                    //                location.reload();};
+                    //         });
+                        
+                    // }setInterval(getStatusLogin, 1000);
+                    // function getStatus(){
+                    //     $.get(home_url + "/?r=ajax", {}, function (data) {
+                    //             data = JSON.parse(data);
+                    //             if ($.trim(data) == '1')
+                    //                alert("111");
+                    //         });
+                    // }
 
-                    function get_scheduled_day(day = '', type = 'schedule', reload = false){
+                    function get_scheduled_day(day = '', type = 'schedule', reload = false, realtime = true){
                         if(type == 'schedule'){
                             //$('.table-tutoring').removeClass('hide');
                             $('#tutoring-scheduled').removeClass('list-summary');
@@ -8849,7 +10307,10 @@
 
                         var ul_scheduled = $("#tutoring-scheduled");
                         var ul_upcoming = $("#upcoming-schedule");
-                        ul_scheduled.html('');
+
+                        if(realtime){
+                            ul_scheduled.html('');
+                        }
 
                         if(reload){
                            ul_upcoming.html('');
@@ -8871,20 +10332,20 @@
                                     $('#'+$.trim(v.start_id)).addClass('start-time');                                    
 
                                     var top = index_st * 48 + 8 + index_ed; 
-                                    height = index_ed - index_st;
+                                    height = 1;//index_ed - index_st;
 
                                     if(v.confirmed == 1 && v.canceled == 0){
                                         var cl = ' accepted';   
                                         var confirmed = 'edf9eb';  
-										var icon = 'TimeIcon_Completed.png';										
+                                        var icon = 'TimeIcon_Completed.png';                                        
                                     }else if(v.canceled == 1 && v.confirmed == 0){
                                         var cl = ' canceled';  
                                         var confirmed = 'f4f7f7';  
-										var icon = 'TimeIcon_Expired.png';	
+                                        var icon = 'TimeIcon_Expired.png';  
                                     }else{
                                         var cl = ' wait';
                                         var confirmed = 'e7feff';
-										var icon = 'TimeIcon_Scheduled.png';
+                                        var icon = 'TimeIcon_Scheduled.png';
                                     }
 
                                     if(type == 'schedule'){                                        
@@ -8893,10 +10354,14 @@
                                             top = top - height + 1;
                                             h = h + height - 1;
                                         }
+                                        if(v.end_id == '12_00_am') top = top + 11;
+                                        if(top < 0) top = top - 8;
                                         var style = 'style="top: ' + top + 'px; background: #' + confirmed +';height: ' + h + 'px;"';    
-                                        var class_type = cl;                             
+                                        var class_type = cl;    
+                                        var attr_style = 'top: ' + top + 'px; background: #' + confirmed +';height: ' + h + 'px;';                         
                                     }else{
                                         var style = ' style="top: ' + (i+1) + 'px; height: 78px;"';
+                                        var attr_style = 'top: ' + (i+1) + 'px; height:78px;';   
                                         var class_type = cl;//' summary' + cl;
                                     }
 
@@ -8910,11 +10375,32 @@
                                     }
 
                                     //var icon = getIconTutoring(v.subject);
-                                    var li = '<li id="view-detail-schedule' + v.id + '" class="view-detail-schedule' + class_type + '" ' + style + ' data-id="' + v.id + '" data-teacher-id="' + v.tutor_id + '" data-student-id="' + v.id_user + '" data-subject="' + v.subject + '" data-private-subject="' + v.private_subject + '" data-message="' + v.short_message + '"  data-note="' + v.note + '" data-student-name="' + v.student_name + '" data-time="' + v.time + '" data-location="' + v.location + '" data-status="' + v.status + '" data-accepted="' + v.accepted + '" data-confirmed="' + v.confirmed + '" data-date="' + v.date_view + '" data-icon="' + icon + '" data-class="' + cl + '" data-total="' + v.total + '" data-time-view="' + v.time_view2 + '" data-create-on="' + v.create_on + '" data-tutor-name="' + v.tutor_name + '" data-stuff="' + v.stuff + '" data-fromtime="' + v.fromtime + '" data-totime="' + v.totime + '" data-day="' + v.day + '" data-total-time="' + v.total_time + '" data-canceled="' + v.canceled + '" data-created="' + v.created + '"><span ' + fl + '>';
-                                    li += '<span class="time-scheduled">' + v.time + '</span>';
-                                    li += '<span class="subject-scheduled">' + private_subject + '</span>';
-                                    li += '</span>' + icon_arrow + '</li>';
-                                    ul_scheduled.append(li);
+                                    if(realtime){
+                                        var li = '<li id="view-detail-schedule' + v.id + '" class="view-detail-schedule' + class_type + '" ' + style + ' data-id="' + v.id + '" data-teacher-id="' + v.tutor_id + '" data-student-id="' + v.id_user + '" data-subject="' + v.subject + '" data-private-subject="' + v.private_subject + '" data-message="' + v.short_message + '"  data-note="' + v.note + '" data-student-name="' + v.student_name + '" data-time="' + v.time + '" data-location="' + v.location + '" data-status="' + v.status + '" data-accepted="' + v.accepted + '" data-confirmed="' + v.confirmed + '" data-date="' + v.date_view + '" data-icon="' + icon + '" data-class="' + cl + '" data-total="' + v.total + '" data-time-view="' + v.time_view2 + '" data-create-on="' + v.create_on + '" data-tutor-name="' + v.tutor_name + '" data-stuff="' + v.stuff + '" data-fromtime="' + v.fromtime + '" data-totime="' + v.totime + '" data-day="' + v.day + '" data-total-time="' + v.total_time + '" data-canceled="' + v.canceled + '" data-created="' + v.created + '"><span ' + fl + '>';
+                                        li += '<span class="time-scheduled">' + v.time + '</span>';
+                                        li += '<span class="subject-scheduled">' + private_subject + '</span>';
+                                        li += '</span>' + icon_arrow + '</li>';
+                                        ul_scheduled.append(li);
+                                    }else{
+                                        var ck_class = $('#view-detail-schedule'+v.id).attr('data-class');
+                                        if(ck_class != cl || v.accepted == 1){
+                                            if($('#view-detail-schedule'+ v.id).hasClass('accepted')){
+                                                $('#view-detail-schedule'+ v.id).removeClass('accepted');
+                                            }
+                                            if($('#view-detail-schedule'+ v.id).hasClass('canceled')){
+                                                $('#view-detail-schedule'+ v.id).removeClass('canceled');
+                                            }
+                                            if($('#view-detail-schedule'+ v.id).hasClass('wait')){
+                                                $('#view-detail-schedule'+ v.id).removeClass('wait');
+                                            }
+                                            $('#view-detail-schedule'+ v.id).addClass($.trim(cl));
+                                            $('#view-detail-schedule'+ v.id).removeAttr("style");
+                                            $('#view-detail-schedule'+ v.id).attr("style", attr_style);
+                                            $('#view-detail-schedule'+ v.id).attr("data-class", cl);
+                                            $('#view-detail-schedule'+ v.id).find('span.subject-scheduled').text(private_subject);
+                                            $('#view-detail-schedule'+ v.id).attr('data-accepted',v.accepted);
+                                        }
+                                    }
                                 });
                             }else{
                                 if($('#tutoring-scheduled').hasClass('active')){
@@ -8965,6 +10451,12 @@
                             data = JSON.parse(data);
                             //$('.btn-new-request').attr('data-points',data.points);
                             if (data.accepted.length > 0) {
+                                var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                                $('#menu-quick-notification').find('img').attr('src',path + '08_Top_Trigger_NOTIFICATION.png');
+                                if(!$('#menu-quick-notification').find('img').hasClass('active')){
+                                    $('#menu-quick-notification').find('img').addClass('active');
+                                }
+
                                 $.each(data.accepted, function (i, v) {                                   
                                     $('#view-detail-schedule'+ v.id).find('span.subject-scheduled').text(v.subject);
                                 });
@@ -8972,63 +10464,88 @@
                         });
                     }
 
-                    function getQuickNotification(){
-                        $("#open-list-quicknotifi").html('');
+                    function getQuickNotification(realtime = false){
+                        if(realtime){
+                            $(".add-list-quicknotifi").html('');
+                            $(".add-list-quicknotifi").removeClass('slick-initialized');
+                            $(".add-list-quicknotifi").removeClass('slick-slider');
+                        }
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
 
                         $.get(home_url + "/?r=ajax/get_quick_notification", {day: ''}, function (data) {
                             //console.log(data);
                             data = JSON.parse(data);
                             if (data.notifications.length > 0) {
-                                $.each(data.notifications, function (i, v) {  
-                                    //var icon = getIconTutoring(v.subject);   
-                                    if(v.confirmed == 1){
-                                        var cl = ' accepted'; 
-                                        var icon = 'TimeIcon_Completed.png'; 
-                                        var status_notifi = '';   
-                                        var icon_quicknotifi = '';
-                                    }else if(v.canceled == 1){
-                                        var cl = ' canceled';  
-                                        var icon = 'TimeIcon_Expired.png';
-                                        var status_notifi = ' has been Expired.';
-                                        var icon_quicknotifi = '05_warn_Expired.png';
-                                    }else{
-                                        var cl = ' wait';
-                                        var icon = 'TimeIcon_Scheduled.png';
-                                        var status_notifi = ' is coming up soon.';
-                                        var icon_quicknotifi = '06_warn_Comingup.png';
-                                    }
-                                    
-                                    if(v.accepted == 1){
-                                        var icon_quicknotifi = '13_Confirmed.png';
-                                        var status_notifi = ' is Confirmed by Tutor.';
+                                $('#menu-quick-notification').find('img').attr('src',path + '08_Top_Trigger_NOTIFICATION.png');
+                                if(!$('#menu-quick-notification').find('img').hasClass('active')){
+                                    $('#menu-quick-notification').find('img').addClass('active');
+                                }
+
+                                if(realtime){
+                                    $("#open-list-quicknotifi").css("display","block");
+                                    if(!$("#open-list-quicknotifi").hasClass('active')){
+                                        $("#open-list-quicknotifi").addClass('active');
                                     }
 
-                                    if(v.accepted == 2){
-                                        var icon_quicknotifi = '04_warn_Canceled.png';
-                                        var status_notifi = ' has been Canceled by Tutor.';
-                                    }
+                                    $.each(data.notifications, function (i, v) {  
+                                        //var icon = getIconTutoring(v.subject);   
+                                        if(v.confirmed == 1){
+                                            var cl = ' accepted'; 
+                                            var icon = 'TimeIcon_Completed.png'; 
+                                            var status_notifi = '';   
+                                            var icon_quicknotifi = '';
+                                        }else if(v.canceled == 1){
+                                            var cl = ' canceled';  
+                                            var icon = 'TimeIcon_Expired.png';
+                                            var status_notifi = ' has been Expired.';
+                                            var icon_quicknotifi = '05_warn_Expired.png';
+                                        }else{
+                                            var cl = ' wait';
+                                            var icon = 'TimeIcon_Scheduled.png';
+                                            var status_notifi = ' is coming up soon.';
+                                            var icon_quicknotifi = '06_warn_Comingup.png';
+                                        }
+                                        
+                                        if(v.accepted == 1){
+                                            var icon_quicknotifi = '13_Confirmed.png';
+                                            var status_notifi = ' is Confirmed by Tutor.';
+                                        }
 
-                                    if(v.subject == "")
-                                        var private_subject = v.private_subject;
-                                    else
-                                        var private_subject = v.subject;
+                                        if(v.accepted == 2){
+                                            var icon_quicknotifi = '04_warn_Canceled.png';
+                                            var status_notifi = ' has been Canceled by Tutor.';
+                                        }
 
-                                    var li = '<li>';
-                                            li += '<img class="icon-quicknotifi" src="' + path + icon_quicknotifi + '">';
-                                            li += '<span>';
-                                                li += '<span class="info-quicknotifi">'+ v.date_view + v.stuff +' ' + v.time_view2 + ' - ' + private_subject + ' ' + v.short_message + '</span>';
-                                                li += '<span class="status-quicknotifi">'+ status_notifi +'</span>';
-                                            li += '</span>';
-                                            li += '<button type="button" class="close-quicknotifi">';
-                                                li += '<img src="' + path + '12_Tab_Close.png">';
-                                            li += '</button>';
-                                            li += '<button type="button" class="view-detail-quicknotifi' + cl + '" data-id="' + v.id + '" data-teacher-id="' + v.tutor_id + '" data-student-id="' + v.id_user + '" data-subject="' + v.subject + '" data-private-subject="' + v.private_subject + '" data-message="' + v.short_message + '" data-note="' + v.note + '" data-student-name="' + v.student_name + '" data-time="' + v.time + '" data-location="' + v.location + '" data-status="' + v.status + '" data-accepted="' + v.accepted + '" data-confirmed="' + v.confirmed + '" data-date="' + v.date_view + '" data-icon="' + icon + '" data-class="' + cl + '" data-total="' + v.total + '" data-time-view="' + v.time_view2 + '" data-create-on="' + v.create_on + '" data-tutor-name="' + v.tutor_name + '" data-stuff="' + v.stuff + '" data-fromtime="' + v.fromtime + '" data-totime="' + v.totime + '" data-day="' + v.day + '" data-total-time="' + v.total_time + '" data-canceled="' + v.canceled + '" data-created="' + v.created + '">';
-                                                li += '<img src="' + path + '11_Tab_Detail.png">';
-                                            li += '</button>';
-                                        li += '</li>';
-                                    $("#open-list-quicknotifi").append(li);
-                                });
+                                        if(v.subject == "")
+                                            var private_subject = v.private_subject;
+                                        else
+                                            var private_subject = v.subject;
+
+                                        var li = '<div id="quicknotifi' + v.tid + '" class="item">';
+                                                li += '<div class="open-list-quicknotifi">';  
+                                                    li += '<img class="icon-quicknotifi" src="' + path + icon_quicknotifi + '">';
+                                                    li += '<span>';
+                                                        li += '<span class="info-quicknotifi">'+ v.date_view + v.stuff +' ' + v.time_view2 + ' - ' + private_subject + ' ' + v.short_message + '</span>';
+                                                        li += '<span class="status-quicknotifi">'+ status_notifi +'</span>';
+                                                    li += '</span>';
+                                                    li += '<button type="button" data-tid="' + v.tid + '" class="close-quicknotifi">';
+                                                        li += '<img src="' + path + '12_Tab_Close.png">';
+                                                    li += '</button>';
+                                                    li += '<button type="button" class="view-detail-quicknotifi' + cl + '" data-id="' + v.id + '" data-teacher-id="' + v.tutor_id + '" data-student-id="' + v.id_user + '" data-subject="' + v.subject + '" data-private-subject="' + v.private_subject + '" data-message="' + v.short_message + '" data-note="' + v.note + '" data-student-name="' + v.student_name + '" data-time="' + v.time + '" data-location="' + v.location + '" data-status="' + v.status + '" data-accepted="' + v.accepted + '" data-confirmed="' + v.confirmed + '" data-date="' + v.date_view + '" data-icon="' + icon + '" data-class="' + cl + '" data-total="' + v.total + '" data-time-view="' + v.time_view2 + '" data-create-on="' + v.create_on + '" data-tutor-name="' + v.tutor_name + '" data-stuff="' + v.stuff + '" data-fromtime="' + v.fromtime + '" data-totime="' + v.totime + '" data-day="' + v.day + '" data-total-time="' + v.total_time + '" data-canceled="' + v.canceled + '" data-created="' + v.created + '">';
+                                                        li += '<img src="' + path + '11_Tab_Detail.png">';
+                                                    li += '</button>';
+                                                li += '</div>';
+                                            li += '</div>';
+                                        $(".add-list-quicknotifi").append(li);
+                                    });
+
+                                    $(".add-list-quicknotifi").not('.slick-initialized').slick(getSliderVerticalSettings(data.notifications.length));
+                                }
+                            }else{
+                                $('#menu-quick-notification').find('img').attr('src',path + '07_Top_Trigger.png');
+                                if($('#menu-quick-notification').find('img').hasClass('active')){
+                                    $('#menu-quick-notification').find('img').removeClass('active');
+                                } 
                             }
                         });
                     }
@@ -9039,7 +10556,7 @@
                         }
 
                         $("#table-list-schedule").html('');
-						$("#tutoring-scheduled").html('');
+                        $("#tutoring-scheduled").html('');
                         var tbody_request = $("#table-status-schedule");
                         tbody_request.html('');
                         $.get(home_url + "/?r=ajax/get_request_status", {type: type}, function (data) {
@@ -9050,16 +10567,16 @@
                                     //var icon = getIconTutoring(v.subject);   
                                     if(v.confirmed == 1){
                                         var cl = ' accepted'; 
-										var icon = 'TimeIcon_Completed.png';										
+                                        var icon = 'TimeIcon_Completed.png';                                        
                                     }else if(v.canceled == 1){
                                         var cl = ' canceled';  
-										var icon = 'TimeIcon_Expired.png';	
+                                        var icon = 'TimeIcon_Expired.png';  
                                     }else{
                                         var cl = ' wait';
-										var icon = 'TimeIcon_Scheduled.png';
+                                        var icon = 'TimeIcon_Scheduled.png';
                                     }  
-									
-									if(v.accepted == 1){
+                                    
+                                    if(v.accepted == 1){
                                         var private_subject = 'Confirmed';
                                     }else{
                                         if(v.subject == "")
@@ -9067,7 +10584,7 @@
                                         else
                                             var private_subject = v.subject;
                                     }
-									
+                                    
                                     var tr = '<tr class="tr-status">';
                                         tr += '<td class="view-status-scheduled' + cl + '" data-id="' + v.id + '" data-teacher-id="' + v.tutor_id + '" data-student-id="' + v.id_user + '" data-subject="' + v.subject + '" data-private-subject="' + v.private_subject + '" data-message="' + v.short_message + '" data-note="' + v.note + '" data-student-name="' + v.student_name + '" data-time="' + v.time + '" data-location="' + v.location + '" data-status="' + v.status + '" data-accepted="' + v.accepted + '" data-confirmed="' + v.confirmed + '" data-date="' + v.date_view + '" data-icon="' + icon + '" data-class="' + cl + '" data-total="' + v.total + '" data-time-view="' + v.time_view2 + '" data-create-on="' + v.create_on + '" data-tutor-name="' + v.tutor_name + '" data-stuff="' + v.stuff + '" data-fromtime="' + v.fromtime + '" data-totime="' + v.totime + '" data-day="' + v.day + '" data-total-time="' + v.total_time + '" data-canceled="' + v.canceled + '" data-created="' + v.created + '"><span>' + private_subject + '</span></td>'; 
                                         tr += '<td class="time-request-status">' + v.date + v.stuff +' '+ v.time_view + '</td>';
@@ -9094,12 +10611,12 @@
                                     }else{
                                         var cl = ' wait';
                                     }      
-										
-									if(v.subject == "")
-										var private_subject = v.private_subject;
-									else
-										var private_subject = v.subject;
-									
+                                        
+                                    if(v.subject == "")
+                                        var private_subject = v.private_subject;
+                                    else
+                                        var private_subject = v.subject;
+                                    
                                     var tr = '<tr class="tr-status">';
                                         tr += '<td class="view-detail-status' + cl + '" data-id="' + v.id + '" data-subject="' + v.subject + '" data-private-subject="' + v.private_subject + '" data-message="' + v.short_message + '" data-note="' + v.note + '" data-student-name="' + v.student_name + '" data-time="' + v.time + '" data-location="' + v.location + '" data-status="' + v.status + '" data-accepted="' + v.accepted + '" data-confirmed="' + v.confirmed + '" data-date="' + v.date + '" data-icon="' + icon + '" data-class="' + cl + '" data-total="' + v.total + '" data-time-view="' + v.time_view + '" data-create-on="' + v.create_on + '" data-tutor-name="' + v.tutor_name + '" data-stuff="' + v.stuff + '" data-fromtime="' + v.fromtime + '" data-totime="' + v.totime + '" data-day="' + v.day + '" data-total-time="' + v.total_time + '" data-canceled="' + v.canceled + '" data-created="' + v.created + '"><span>' + private_subject + '</span></td>'; 
                                         tr += '<td class="by-tutor">by <span class="view-tutor-detail" data-id="' + v.tutor_id + '">' + v.tutor_name + '</span></td>';
@@ -9152,11 +10669,17 @@
                         tbody_schedule.html("");
                         var type = 'am';
                         var formattedDate = $('#today-tutor').val();
+                        var minute = 0;
 
                         if(formattedDate == date && time == 0){
                             time = $('#time-clock').attr('data-hour');
                         }
-                        var html = '<option value="0">Select Time</option>';
+
+                        if(formattedDate == date){
+                            minute = $('#time-clock').attr('data-minute');
+                        }
+
+                        var html = '';
                         for (var i = time; i < 24; i++) {                            
                             var id = i;
                             if (i > 11){
@@ -9201,8 +10724,16 @@
                                 tr_half += '<td class="half-time"><button class="btn-new-request" data-fromtime="' + id + ':30:' + type + '" data-totime="' + (id + 1) + ':00:' + type + '" data-day="' + date + '" data-time="' + id + ':30' + type + ' - ' + (id + 1) + ':30' + type + '" data-id="' + id + '_30_' + type + '" data-index="' + i + '" data-half="30"><img src="<?php echo get_template_directory_uri(); ?>/library/images/TimeIcon_No-Scheduled.png">No Schedule</button></td>';
                                 tr_half += '</tr>';
                             }
-                            tbody_schedule.append(tr_am);
-                            tbody_schedule.append(tr_half);
+                            if(time == i && minute > 0 && minute < 30){
+                                //tbody_schedule.append(tr_am);
+                                tbody_schedule.append(tr_am);
+                                tbody_schedule.append(tr_half);
+                            }else if(time == i && minute > 30){
+                                tbody_schedule.append(tr_half);
+                            }else{
+                                tbody_schedule.append(tr_am);
+                                tbody_schedule.append(tr_half);
+                            }
                         }
                         $('#select-available-time').html(html).data("selectBox-selectBoxIt").refresh();
 
@@ -9277,7 +10808,7 @@
                         $(".slide-resume").css('visibility','visible');
 
                         if(type == 'review'){
-							updateReview(id);
+                            updateReview(id);
                             $('#tr-tutor' + id).css('display','block');
                             $('#tr-info' + id).css('display','none');
                             $('#tr-review' + id).css('display','block');
@@ -9324,6 +10855,18 @@
                         var metrics = context.measureText(text);
                         return metrics.width;
                     };
+
+                    function closeCourse(){
+                        $('#free-course').css('display','none');
+                        $('#math-course').css('display','none');
+                        $('#english-conver').css('display','none');
+                        $('#math-course-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png");
+                        $('#english-conver-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png");
+                        $('#free-course-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png");
+                        $('#english-conver-img').css('padding','0 1px 0 2px');
+                        $('#free-course-img').css('padding','0 1px 0 2px');
+                        $('#math-course-img').css('padding','0 1px 0 2px');
+                    }
 
                     function openNav() {
                         var viewport = getViewport();  
@@ -9381,7 +10924,7 @@
 
                             $('#tutor-regis-update').css("display","none");
                             $('#chk-tutor-teacher').val($chk_teacher);
-                            $('#chk-user-gender').val(data.gender);
+                            // $('##update_birth_g_pc').val(data.gender);
                             $('#update_username').val(data.user_email);
                             $('#update_password').val(data.user_password);
                             $('#update_confirmpass').val(data.user_password);
@@ -9420,6 +10963,10 @@
                             $("#update-time-zone").data("selectBox-selectBoxIt").refresh();
 
                             if(data.birth_m != ''){
+                                $("#update_birth_g_pc").selectBoxIt('selectOption',data.gender.toString()).data("selectBox-selectBoxIt");
+                                $("#update_birth_g_pc").data("selectBox-selectBoxIt").refresh();
+                            }
+                            if(data.birth_m != ''){
                                 $("#update_birth_m").selectBoxIt('selectOption',data.birth_m.toString()).data("selectBox-selectBoxIt");
                                 $("#update_birth_m").data("selectBox-selectBoxIt").refresh();
                             }
@@ -9433,17 +10980,7 @@
                             }
 
                             var viewport = getViewport();
-                            if(viewport.width < 650){
-                                if(data.gender != ''){
-                                    $('#update_gender').html('');
-                                    $('#update_gender').html('<input readonly="" type="text" name="update_birth_g_mb" class="form-control" value="' + data.gender + '" id="update_birth_g_mb">');
-                                }
-                            }else{
-                                if(data.gender != ''){
-                                    $('#gender_up').html('');
-                                    $('#gender_up').html('<input type="text" class="form-control" name="update_birth_g_pc" value="' + data.gender + '" id="update_birth_g_pc" readonly="">');
-                                }
-                            }
+                            
                             $('input[name="update-cb-lang"]').each(function () {
                                 if( $.inArray(this.value, data.cb_lang) >= 0 ) {
                                     $(this).attr("checked",true);
@@ -9483,6 +11020,7 @@
                     }
 
                     function initDateTimePicker(timezone_name = 'Europe/London', timezone_index = 18, time_zone = 0, location_time = 'London', type = 'schedule'){
+                        var timezone_name = '<?php echo $timezone_name ?>';
                         var ptype = $('#custom-timezone').attr("data-type");
                         var pday = $('#custom-timezone').attr("data-day");
                         if($('.datepicker-days').find('.day').hasClass('active')){
@@ -9560,7 +11098,7 @@
                             weekday[4] = "Thur";
                             weekday[5] = "Fri";
                             weekday[6] = "Sat";
-						/*
+                        /*
                         if(ptype == 'view'){
                             var created = $('#custom-timezone').attr("data-created");
                            
@@ -9623,16 +11161,16 @@
                             $('#btn-sent-request').attr('data-day',yyyy_s+'-'+mm_s+'-'+dd_s);
                             $(".schedule-left-btn").attr('data-day',yyyy+'-'+mm+'-'+dd);
                             $(".schedule-right-btn").attr('data-day',yyyy_n+'-'+mm_n+'-'+dd_n);
-							
-							$('.header-schedule').removeClass('active');
-							$('#list-schedule-status').css("display","none");
-							$('#table-status-schedule').html('');
-							$("#open-menu-schedule").css("display","none");
-							$(".main-view-status").css("display","none");
+                            
+                            $('.header-schedule').removeClass('active');
+                            $('#list-schedule-status').css("display","none");
+                            $('#table-status-schedule').html('');
+                            $("#open-menu-schedule").css("display","none");
+                            $(".main-view-status").css("display","none");
 
-							if($("#body-my-scheduled").hasClass('status-schedule')){
-								$("#body-my-scheduled").removeClass("status-schedule");
-							}
+                            if($("#body-my-scheduled").hasClass('status-schedule')){
+                                $("#body-my-scheduled").removeClass("status-schedule");
+                            }
 
                             get_list_schedule('schedule');
                             get_scheduled_day(yyyy_s+'-'+mm_s+'-'+dd_s,'schedule', true);
@@ -9708,16 +11246,16 @@
                             $('#btn-sent-request').attr('data-day',yyyy_s+'-'+mm_s+'-'+dd_s);
                             $(".schedule-left-btn").attr('data-day',yyyy+'-'+mm+'-'+dd);
                             $(".schedule-right-btn").attr('data-day',yyyy_n+'-'+mm_n+'-'+dd_n);
-							
-							$('.header-schedule').removeClass('active');
-							$('#list-schedule-status').css("display","none");
-							$('#table-status-schedule').html('');
-							$("#open-menu-schedule").css("display","none");
-							$(".main-view-status").css("display","none");
+                            
+                            $('.header-schedule').removeClass('active');
+                            $('#list-schedule-status').css("display","none");
+                            $('#table-status-schedule').html('');
+                            $("#open-menu-schedule").css("display","none");
+                            $(".main-view-status").css("display","none");
 
-							if($("#body-my-scheduled").hasClass('status-schedule')){
-								$("#body-my-scheduled").removeClass("status-schedule");
-							}
+                            if($("#body-my-scheduled").hasClass('status-schedule')){
+                                $("#body-my-scheduled").removeClass("status-schedule");
+                            }
 
                             get_list_schedule('schedule');
                             get_scheduled_day(yyyy_s+'-'+mm_s+'-'+dd_s,'schedule', true);
@@ -9756,21 +11294,51 @@
                         }
                     }
 
+                    function getSliderVerticalSettings(countSlide = 0){
+                        if(countSlide < 6)
+                            var count = countSlide;
+                        else
+                            var count = 6;
+                        return {
+                            arrows: false,
+                            vertical: true,
+                            slidesToShow: count,
+                            slidesToScroll: count,
+                            dots: false,
+                            infinite: false,
+                            verticalSwiping: true,
+                            prevArrow:"<img class='a-left slick-prev' src='<?php echo get_template_directory_uri(); ?>/library/images/icon_Arrow_Left.png'>",
+                            nextArrow:"<img class='a-right slick-next' src='<?php echo get_template_directory_uri(); ?>/library/images/icon_Arrow_Right.png'>"
+                        } 
+                    }
+
                     function get_tutor_user(type = 'list', table = 'table-list-tutor', retype = 'tutor', search = '', time_zone = '', description = '', subject_type = '', time = '', date = '', type_search = '', stime = '', time_view = '', available = '', subject_name = ''){
                         var tbody_request = $("#"+table);
                         var uid = '<?php if ($is_user_logged_in) echo $current_user->ID; else echo 0; ?>';
+
+                        var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                        var year = $('#available_year').val();
+                        var day = $("#select-available-daySelectBoxItText").attr("data-val");
+                        var month = $("#select-available-monthSelectBoxItText").attr("data-val");
+                        var time = $("#select-available-timeSelectBoxItText").attr("data-val");
+                        var time_view = $('#select-available-time :selected').attr("data-time-view");
+                        var stime = $('#select-available-time :selected').attr("data-time");    
+
                         tbody_request.html("");
                         $('#table-detail-tutor').css('display','none');
                         $(".slide-resume").html('');
                         $(".slide-resume").removeClass('slick-initialized');
                         $(".slide-resume").removeClass('slick-slider');
                         $(".slide-resume").css('visibility','hidden');
-						if(subject_name != ''){
-							$('#selected-subject').text(subject_name);
-							$('#btn-schedule-now').attr('data-subject',subject_name);
-						}
-                        $.get(home_url + "/?r=ajax/get_users_tutor", {type:type, search:search, time_zone:time_zone, description:description, subject_type:subject_type, time:time, date:date, type_search: type_search, available: available}, function (data) {
-                            //console.log(data);
+                        if(subject_name != ''){
+                            $('#selected-subject').text(subject_name);
+                            $('#btn-schedule-now').attr('data-subject',subject_name);
+                        }
+
+                        var post_data = {type:type, search:search, time_zone:time_zone, description:description, subject_type:subject_type, time:time, date:date, type_search: type_search, available: available};
+                        console.log(post_data);
+                        $.get(home_url + "/?r=ajax/get_users_tutor", post_data, function (data) {
+                            console.log(data);
                             data = JSON.parse(data);
                             if (data.users.length > 0) {
                                 if(type == 'fromclass' && stime != ''){
@@ -9801,21 +11369,45 @@
                                     }
                                     for(var m = 0; m < max_star; m++){
                                         img_star += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
-                                    }    
+                                        
+                                    } 
+                                    if(type == 'fromclass'){
+                                        $('#btn-available-search').attr("disabled", false);
+                                    }   
                                     if( $.inArray(uid, v.user_favorites) >= 0 ) {
                                         var img_bookmark = 'icon_Favorite_BookMark.png';
                                     }else{
                                         var img_bookmark = 'Icon_Favorite_Unselected.png';
                                     }                       
-                                      
-                                    var tr = '<tr class="tr-tutor">'; 
+                                    // var quickresult = `Result for : <b>${getMonthtoText(month)} ${day}, ${year}, ${time_view}</b>`;
+                                    var tr = '<tr class="tr-tutor btn-resume" data-type="' + type + '" data-table="' + table + '" data-id="' + v.ID + '" data-time="'+stime+'" data-time-view="'+time_view+'" data-day="'+date+'" data-slide-index="' + i + '" data-subject="'+ subject_name +'" data-price-tutoring="' + v.price_tutoring + '" name="resume">'; 
                                     if(retype == 'findtutor'){
                                         tr+='<td><input type="radio" class="radio_buttons_tutor class_cb_search option-input-2 radio" value="' + v.ID + '" data-id="' + v.ID + '" data-name="' + v.display_name + '" name="choose_tutor"></td>';
                                     }                          
-                                    tr+='<td class="avatar-tutor"><img src="' + v.user_avatar + '" alt="' + v.display_name + '"/></td>'; 
-                                    tr+='<td><p class="name-tutor">' + v.display_name + '<img id="book-mark' + v.ID + '" class="book-mark" data-id="' + v.ID + '" src="<?php echo get_template_directory_uri(); ?>/library/images/' + img_bookmark + '" alt=""></p><p class="icon-star">' + img_star + '<span>(' + v.cnt + ')<span></p><p class="subject-tutor">' + v.user_subject + '</p></td>';
-                                    tr+='<td><button type="button" class="btn-resume" data-type="' + type + '" data-table="' + table + '" data-id="' + v.ID + '" data-time="'+stime+'" data-time-view="'+time_view+'" data-day="'+date+'" data-slide-index="' + i + '" data-subject="'+ subject_name +'" data-price-tutoring="' + v.price_tutoring + '" name="resume"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_NewResume.png" alt=""></button></td>';
+                                    
+                                     tr+='<td class="avatar-tutor"><img src="' + v.user_avatar + '" alt="' + v.display_name + '"/><img id="book-mark' + v.ID + '" class="find-card-img-bookmark find-card-bookmarked" data-id="' + v.ID + '" src="<?php echo get_template_directory_uri(); ?>/library/images/' + img_bookmark + '" alt=""></td>'; 
+
+                                    var subject = "";
+                                    v.subject_type.forEach(function(item, index){
+                                        if(index == v.subject_type.length - 1){
+                                            subject += item;
+                                        }else{
+                                            subject += item + ", ";
+                                        }
+                                    })
+                                    //DUMMY DATA
+                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Group.png" alt="" style="width:43px;margin-top: -15px;"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
+                                        <div><b style="font-size:14px">${v.display_name}</b></div><div><p class="find-card-marketing-tag">
+                                        ${v.previous_school}</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
+                                        <span class="find-card-more" data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume"><u>+Read more</u></span></p></div>
+                                    </td>`;
+                                    tr+=`<td><div>
+                                    <p style="text-align:center;"><span class="find-card-price">$${v.price_tutoring}</span><span class="find-card-time">&nbsp;/&nbsp;30 min</span></p></div>
+                                    <div style="margin-top:5px"><button class="find-card-select-btn btn orange"  data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume">Select This Tutor</button></div>
+                                    <div class="find-card-send-message"><img class="find-card-envelope" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Message.png" style="width:13px; margin-top:-2px;">&nbsp; Contact Tutor</p></div>
+                                    </td>`;
                                     tr+='</tr>';
+
                                     tbody_request.append(tr);  
 
                                     //Slide resume tutor
@@ -9946,62 +11538,315 @@
                                 });   
 
                                 $(".slide-resume").not('.slick-initialized').slick(getSliderSettings());
+                                
+                                let quickresult = `Result for : <b>${getMonthtoText(month)} ${day}, ${year}, ${time_view}</b>`;
+                                    $('.result_quick').html(quickresult);
+                                    $('.result_quick').css("display","block");
                             }else{
-                                //var tr = '<tr><td colspan="3" class="no-list"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_No_Schedule.png" alt="">Currently, there are no list</td></tr>';
-
                                 var tr = '<tr><td class="no-results"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';
                                 if(type == 'fromclass'){
-                                    tbody_request.append(tr);  
+                                    tbody_request.append(tr); 
+                                     $('.result_quick').css("display","none");
                                 }
                             } 
-                            
-                            return true;
+                           
                         });
                     }   
-					
-					function updateReview(tutor_id = 0){
-						var userid = '<?php if ($is_user_logged_in) echo $current_user->ID; else echo 0; ?>';
-						$.get(home_url + "/?r=ajax/get_users_reviews", {tutor_id: tutor_id}, function (data) {
-							data = JSON.parse(data);
-							if (data.reviews.length > 0) {
-								var div = '<p class="head-title-resum">REVIEW</p>';
-								$.each(data.reviews, function (ir, vr) {
-									var img_star1 = '';
-									var max_star1 = 5;
 
-									if(vr.star > 0){
-										for(var k = 0; k < vr.star; k++){
-											img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_ON.png" alt="">';
-										}
-										max_star1 = max_star1 - vr.star;
-									}
+                    function search_tutor_user(type = 'list', table = 'table-list-tutor', retype = 'tutor', search = '', time_zone = '', description = '', subject_type = '', time = '', date = '', type_search = '', stime = '', time_view = '', available = '', subject_name = ''){
+                        var tbody_request = $("#"+table);
+                        var uid = '<?php if ($is_user_logged_in) echo $current_user->ID; else echo 0; ?>';
 
-									for(var j = 0; j < max_star1; j++){
-										img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
-									}
-									
-									if(userid == vr.userid){
-										$('#view-write-review' + tutor_id).attr('data-id',vr.id);
-										$('#view-write-review' + tutor_id).attr('data-review-id',vr.review_id);
-										$('#view-write-review' + tutor_id).attr('data-userid',vr.userid);
-										$('#view-write-review' + tutor_id).attr('data-star',vr.star);
-										$('#view-write-review' + tutor_id).attr('data-subject',vr.subject);
-										$('#view-write-review' + tutor_id).attr('data-message',vr.message);
-									}
+                        var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                        var year = $('#available_year').val();
+                        var day = $("#select-available-daySelectBoxItText").attr("data-val");
+                        var month = $("#select-available-monthSelectBoxItText").attr("data-val");
+                        var time = $("#select-available-timeSelectBoxItText").attr("data-val");
+                        var time_view = $('#select-available-time :selected').attr("data-time-view");
+                        var stime = $('#select-available-time :selected').attr("data-time");    
 
-									if(ir == 0)
-										var cl = 'first';
-									else
-										var cl = '';
+                        tbody_request.html("");
+                        $('#table-detail-tutor').css('display','none');
+                        $(".slide-resume").html('');
+                        $(".slide-resume").removeClass('slick-initialized');
+                        $(".slide-resume").removeClass('slick-slider');
+                        $(".slide-resume").css('visibility','hidden');
+                        if(subject_name != ''){
+                            $('#selected-subject').text(subject_name);
+                            $('#btn-schedule-now').attr('data-subject',subject_name);
+                        }
 
-									div += '<div class="tr-info ' + cl + ' clearfix">';
-										div += '<p class="subject-review">' + vr.subject + '</p><p class="icon-star">' + img_star1 + '<span class="name-review">' + vr.review_name + '<span></p><p class="view-tutor-message">' + vr.message + '</p>';
-									div += '</div>';
-								});
-								$('#tr-review' + tutor_id).html(div);
-							}
-						});
-					}
+                        var post_data = {type:type, search:search, time_zone:time_zone, description:description, subject_type:subject_type, time:time, date:date, type_search: type_search, available: available};
+                        console.log(post_data);
+                        $.get(home_url + "/?r=ajax/search_tutor", post_data, function (data) {
+                            console.log(data);
+                            data = JSON.parse(data);
+                            if (data.users.length > 0) {
+                                if(type == 'fromclass' && stime != ''){
+                                    var time_zone = $('#user-time-zone :selected').attr("data-value");
+                                    var today = new Date(date.replace("-", ","));                            
+                                    var weekday = new Array(7);
+                                        weekday[0] =  "Sun";
+                                        weekday[1] = "Mon";
+                                        weekday[2] = "Tue";
+                                        weekday[3] = "Wed";
+                                        weekday[4] = "Thur";
+                                        weekday[5] = "Fri";
+                                        weekday[6] = "Sat";                                
+                                    var n = weekday[today.getDay()];
+                                    var month_text = getMonthtoText(today.getMonth()+1);
+                                    $('#selected-date').text(month_text + ' ' + today.getDate() +'('+n+')'+time_view);
+                                }
+                                $.each(data.users, function (i, v) {  
+                                    var img_star = '';
+                                    var max_star = 5;
+                                    arr_tutor.push(v.ID);
+
+                                    if(v.star > 0){
+                                        for(var l = 0; l < v.star; l++){
+                                            img_star += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_ON.png" alt="">';
+                                        }
+                                        max_star = max_star - v.star;
+                                    }
+                                    for(var m = 0; m < max_star; m++){
+                                        img_star += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
+                                        
+                                    } 
+                                    if(type == 'fromclass'){
+                                        $('#btn-available-search').attr("disabled", false);
+                                    }   
+                                    if( $.inArray(uid, v.user_favorites) >= 0 ) {
+                                        var img_bookmark = 'icon_Favorite_BookMark.png';
+                                    }else{
+                                        var img_bookmark = 'Icon_Favorite_Unselected.png';
+                                    }                       
+                                    // var quickresult = `Result for : <b>${getMonthtoText(month)} ${day}, ${year}, ${time_view}</b>`;
+                                    var tr = '<tr class="tr-tutor btn-resume" data-type="' + type + '" data-table="' + table + '" data-id="' + v.ID + '" data-time="'+stime+'" data-time-view="'+time_view+'" data-day="'+date+'" data-slide-index="' + i + '" data-subject="'+ subject_name +'" data-price-tutoring="' + v.price_tutoring + '" name="resume">'; 
+                                    if(retype == 'findtutor'){
+                                        tr+='<td><input type="radio" class="radio_buttons_tutor class_cb_search option-input-2 radio" value="' + v.ID + '" data-id="' + v.ID + '" data-name="' + v.display_name + '" name="choose_tutor"></td>';
+                                    }                          
+                                    
+                                     tr+='<td class="avatar-tutor"><img src="' + v.user_avatar + '" alt="' + v.display_name + '"/><img id="book-mark' + v.ID + '" class="find-card-img-bookmark find-card-bookmarked" data-id="' + v.ID + '" src="<?php echo get_template_directory_uri(); ?>/library/images/' + img_bookmark + '" alt=""></td>'; 
+
+                                    var subject = v.tutoring_subject;
+                                    if(v.tutoring_subject_type == "all"){
+                                        v.subject_type.forEach(function(item, index){
+                                        if(index == v.subject_type.length - 1){
+                                            subject += item;
+                                        }else{
+                                            subject += item + ", ";
+                                        }
+                                    })
+                                    }
+                                    var price_type = v.price_tutoring;
+                                    var type = "/library/images/icon_1on1.png";
+                                    console.log( "value is " + v.enable_group_tutoring);
+                                    if(v.enable_group_tutoring == "timelot_group_tutoring"){
+                                        type = "/library/images/icon_Group.png";
+                                          
+                                        price_type = v.price_group_tutoring;
+                                    }
+                                    //DUMMY DATA
+                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>${type}" alt="" style="width:43px;margin-top: -15px;"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
+                                        <div><b style="font-size:14px">${v.display_name}</b></div><div><p class="find-card-marketing-tag">
+                                        ${v.previous_school}</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
+                                        <span class="find-card-more" data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${price_type}" name="resume"><u>+Read more</u></span></p></div>
+                                    </td>`;
+                                    tr+=`<td><div>
+                                    <p style="text-align:center;"><span class="find-card-price">$${price_type}</span><span class="find-card-time">&nbsp;/&nbsp;30 min</span></p></div>
+                                    <div style="margin-top:5px"><button class="find-card-select-btn btn orange"  data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${price_type}" name="resume">Select This Tutor</button></div>
+                                    <div class="find-card-send-message"><img class="find-card-envelope" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Message.png" style="width:13px; margin-top:-2px;">&nbsp; Contact Tutor</p></div>
+                                    </td>`;
+                                    tr+='</tr>';
+
+                                    tbody_request.append(tr);  
+
+                                    //Slide resume tutor
+                                    var attr_data = 'data-id="" data-userid="" data-star="" data-subject="" data-message="" data-ptype="' + type + '"';
+                                    if (v.reviews.length > 0) {
+                                        $.each(v.reviews, function (index, value) {
+                                            if(value.userid == uid){
+                                                attr_data = 'data-id="' + value.id + '" data-userid="' + value.userid + '" data-star="' + value.star + '" data-subject="' + value.subject + '" data-message="' + value.message + '" data-ptype="' + type + '"';
+                                            }
+                                        });
+                                    }
+
+                                    var view = '<img src="<?php echo get_template_directory_uri(); ?>/library/images/iconM_Resume_ON-O.png" alt="" id="view-resume' + v.ID + '" class="btn-view view-resume" data-id="' + v.ID + '" data-ptype="' + type + '" data-table="' + table + '"><img id="view-review' + v.ID + '" class="btn-view view-review" data-id="' + v.ID + '" data-ptype="' + type + '" data-table="' + table + '" src="<?php echo get_template_directory_uri(); ?>/library/images/iconM_Review_OFF.png" alt="">';
+                                    if(uid != v.ID){
+                                        view += '<img id="view-write-review' + v.ID + '" class="btn-view view-write-review" data-review-id="' + v.ID + '" '+ attr_data +' data-table="' + table + '" src="<?php echo get_template_directory_uri(); ?>/library/images/iconM_Write_Review_OFF.png" alt="">';
+                                    }
+                                    var title_resum = 'RESUME';
+
+                                    view += '<button type="button" data-id="' + v.ID + '" data-subject="' + v.user_subject + '"  data-subject-choose="'+ subject_name +'" data-name="' + v.display_name + '" data-ptype="' + type + '" data-time="'+stime+'" data-time-view="'+time_view+'" data-day="'+date+'" data-price-tutoring="' + price_type + '" class="btn-orange2 nopadding-r border-btn" id="btn-select-tutor"><span>Select</span></button>';
+                                    var div = '<div class="item">';
+                                            div += '<div class="tr-tutor resume clearfix" id="tr-tutor' + v.ID + '">';
+                                                div +='<div class="avatar-tutor"><img src="' + v.user_avatar + '" alt="' + v.display_name + '"/></div>'; 
+                                                div +='<div class="item-name"><p class="name-tutor">' + v.display_name + '</p><p class="icon-star">' + img_star + '<span>('+v.cnt+')<span></p><p class="view-tutor">' + view + '</p></div>';
+                                            div +='</div>';
+
+                                            div +='<div class="tr-info clearfix" id="tr-info' + v.ID + '">';
+                                                div += '<p class="head-title-resum">' + title_resum + '</p>';
+                                                div += '<h4>Why I like teaching and tutoring:</h4>';
+                                                div += '<p>' + v.desc_tell_me + '<p>';
+                                                div += '<h4>Subjects I can teach:</h4>';
+                                                div += '<ul>';
+                                                if(v.subject_type.length > 0){
+                                                    for(var i = 0; i < v.subject_type.length; i++){
+                                                        div += '<li>'+ v.subject_type[i] +'</li>';
+                                                    }
+                                                }
+                                                div += '</ul>';
+                                                
+                                                if(v.school_name != '' || v.teaching_link != '' || v.user_years != '' || v.teaching_subject != ''){
+                                                    $class_teaching = '';
+                                                }else{
+                                                    $class_teaching = ' class="hidden"';
+                                                }    
+                                                div += '<h4' + $class_teaching + '>Teaching Experlence at School:</h4>';
+                                                div += '<ul' + $class_teaching + '>';
+                                                if(v.school_name != '' || v.teaching_link != ''){
+                                                    div += '<li>School Name: ' + v.school_name + ' (' + v.teaching_link + ')</li>';
+                                                }
+                                                if(v.teaching_subject != ''){
+                                                    div += '<li>Subject: ' + v.teaching_subject + '</li>';
+                                                }
+                                                if(v.user_years != ''){
+                                                    div += '<li>Years: ' + v.user_years + '</li>';
+                                                }
+                                                div += '</ul>';
+
+                                                if(v.school_attend != '' || v.user_grade != '' || v.user_gpa != '' || v.user_major != '' || v.student_link != ''){
+                                                    $class_student = '';
+                                                }else{
+                                                    $class_student = ' class="hidden"';
+                                                }
+                                                div += '<h4' + $class_student + '>Teaching Experlence as a Student:</h4>';
+                                                div += '<ul' + $class_student + '>';
+                                                if(v.school_attend != ''){
+                                                    div += '<li>Attending: ' + v.school_attend + ' (' + v.student_link + ')</li>';
+                                                }
+                                                if(v.user_grade == '1'){
+                                                    div += '<li>Grade: Freshman</li>';
+                                                }else if(v.user_grade == '2'){
+                                                    div += '<li>Grade: Sophomore</li>';
+                                                }else if(v.user_grade == '3'){
+                                                    div += '<li>Grade: Junior</li>';
+                                                }else if(v.user_grade == '4'){
+                                                    div += '<li>Grade: Senior</li>';
+                                                }
+                                                if(v.user_gpa != ''){
+                                                    div += '<li>GPA: ' + v.user_gpa + '</li>';
+                                                }
+                                                if(v.user_major != ''){
+                                                    div += '<li>Major: ' + v.user_major + '</li>';
+                                                }
+                                                div += '</ul>';
+                                                div += '<h4>Educational Background:</h4>';
+                                                div += '<ul>';
+                                                if(v.school_name1 != ''){
+                                                    div += '<li>School Name: ' + v.school_name1 + ' (' + data.school_link1 + ')</li>';
+                                                }
+                                                if(v.school_name2 != ''){
+                                                    div += '<li>School Name: ' + v.school_name2 + ' (' + data.school_link2 + ')</li>';
+                                                }
+                                                if(v.any_other != ''){
+                                                    div += '<li>Others: ' + v.any_other + '</li>';
+                                                }
+                                                div += '</ul>';
+                                            div += '</div>';
+
+                                    if (v.reviews.length > 0) {
+                                        div += '<div id="tr-review' + v.ID + '" style="display: none">';
+                                        div += '<p class="head-title-resum">REVIEW</p>';
+                                        $.each(v.reviews, function (ir, vr) {
+                                            var img_star1 = '';
+                                            var max_star1 = 5;
+
+                                            if(vr.star > 0){
+                                                for(var k = 0; k < vr.star; k++){
+                                                    img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_ON.png" alt="">';
+                                                }
+                                                max_star1 = max_star1 - vr.star;
+                                            }
+
+                                            for(var j = 0; j < max_star1; j++){
+                                                img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
+                                            }
+
+                                            if(ir == 0)
+                                                var cl = 'first';
+                                            else
+                                                var cl = '';
+
+                                            div += '<div class="tr-info ' + cl + ' clearfix">';
+                                                div += '<p class="subject-review">' + vr.subject + '</p><p class="icon-star">' + img_star1 + '<span class="name-review">' + vr.review_name + '<span></p><p class="view-tutor-message">' + vr.message + '</p>';
+                                            div += '</div>';
+                                        });
+                                        div += '</div>';
+                                    }
+                                    div +='</div>';
+                                    $('.slide-resume').append(div);
+                                });   
+
+                                $(".slide-resume").not('.slick-initialized').slick(getSliderSettings());
+                                
+                                let quickresult = `Result for : <b>${getMonthtoText(month)} ${day}, ${year}, ${time_view}</b>`;
+                                    $('.result_quick').html(quickresult);
+                                    $('.result_quick').css("display","block");
+                            }else{
+                                var tr = '<tr><td class="no-results"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Not_Available.png" alt="">Currently, there are no results.</td></tr>';
+                                if(type == 'fromclass'){
+                                    tbody_request.append(tr); 
+                                     $('.result_quick').css("display","none");
+                                }
+                            } 
+                           
+                        });
+                    }   
+                    
+                    function updateReview(tutor_id = 0){
+                        var userid = '<?php if ($is_user_logged_in) echo $current_user->ID; else echo 0; ?>';
+                        $.get(home_url + "/?r=ajax/get_users_reviews", {tutor_id: tutor_id}, function (data) {
+                            data = JSON.parse(data);
+                            if (data.reviews.length > 0) {
+                                var div = '<p class="head-title-resum">REVIEW</p>';
+                                $.each(data.reviews, function (ir, vr) {
+                                    var img_star1 = '';
+                                    var max_star1 = 5;
+
+                                    if(vr.star > 0){
+                                        for(var k = 0; k < vr.star; k++){
+                                            img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_ON.png" alt="">';
+                                        }
+                                        max_star1 = max_star1 - vr.star;
+                                    }
+
+                                    for(var j = 0; j < max_star1; j++){
+                                        img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
+                                    }
+                                    
+                                    if(userid == vr.userid){
+                                        $('#view-write-review' + tutor_id).attr('data-id',vr.id);
+                                        $('#view-write-review' + tutor_id).attr('data-review-id',vr.review_id);
+                                        $('#view-write-review' + tutor_id).attr('data-userid',vr.userid);
+                                        $('#view-write-review' + tutor_id).attr('data-star',vr.star);
+                                        $('#view-write-review' + tutor_id).attr('data-subject',vr.subject);
+                                        $('#view-write-review' + tutor_id).attr('data-message',vr.message);
+                                    }
+
+                                    if(ir == 0)
+                                        var cl = 'first';
+                                    else
+                                        var cl = '';
+
+                                    div += '<div class="tr-info ' + cl + ' clearfix">';
+                                        div += '<p class="subject-review">' + vr.subject + '</p><p class="icon-star">' + img_star1 + '<span class="name-review">' + vr.review_name + '<span></p><p class="view-tutor-message">' + vr.message + '</p>';
+                                    div += '</div>';
+                                });
+                                $('#tr-review' + tutor_id).html(div);
+                            }
+                        });
+                    }
 
                     function getDistancePlace(text = '', type = ''){
                         var distance = '';
@@ -10245,6 +12090,73 @@
                         }
                         return distance;
                     }
+                    $('#edit-profile').click(function(){
+                get_update_info();
+               document.getElementById('update_password').value=null;
+                $('#updateinfo').addClass('active in');
+                $('#profile').removeClass('active in');
+                $('#sub-update-info').addClass('active');
+                $('#sub-profile').removeClass('active');
+            });
                 });
+
+
+             
             })(jQuery);
+            $('body').on('click', '.sign-up', function () {
+                $("#login-user").removeClass("active");
+                        $("#login-user").removeClass("in");
+                        $("#lost-password").removeClass("active");
+                        $("#lost-password").removeClass("in");
+                        $("#create-account").addClass("active");
+                        $("#create-account").addClass("in");
+
+                        var img = '<?php echo get_template_directory_uri() ?>/library/images/icon_Tutor_ID.png';
+                        $("#user-upload-avatar").attr('src',img);
+
+                        
+                        $("#top-popup-message").css("display","none");
+            });
+            $('body').on('click','.forgot-pass', function () {
+                        $("#login-user").addClass("hidden");
+                        $("#create-account").removeClass("active");
+                        $("#create-account").removeClass("in");
+                        $("#login-user").removeClass("active");
+                        $("#login-user").removeClass("in");
+                        $("#lost-password").removeClass("hidden");
+                        $("#lost-password").addClass("active");
+                        $("#lost-password").addClass("in");
+                    
+                        $("#top-popup-message").css("display","none");
+                    });
+            $('.language-input').click(function () {
+                $('.language_drop').slideToggle(0);
+            });
+            $(document).click(function (e){
+            // Đối tượng container chứa popup
+            var containerlang = $("#language-timezone");
+            var containerlang_up = $("#language-timezone-update");
+            // Nếu click bên ngoài đối tượng container thì ẩn nó đi
+            if (!containerlang.is(e.target) && containerlang.has(e.target).length === 0){
+                var isopened = containerlang.find('.language_drop').css("display");
+                    if (isopened == 'block') {
+                        containerlang.find('.language_drop').slideToggle(0);
+                    }
+            }
+            if (!containerlang_up.is(e.target) && containerlang_up.has(e.target).length === 0){
+                var isopened = containerlang_up.find('.language_drop').css("display");
+                    if (isopened == 'block') {
+                        containerlang_up.find('.language_drop').slideToggle(0);
+                    }
+            }
+            });
+             $( document ).ready(function() {
+               if( $('#my-timezone').find('.my-timezone').hasClass('active')){
+                 var city = $('#my-timezone').find('.active').attr("data-city");
+                 document.getElementById('mycity-name').innerHTML= city;
+               };
+            });
+
+
+
         </script>

@@ -13,7 +13,8 @@ if(isset($route[1]) && $route[1] == 'logged'){
         $return = str_replace(array(',',';'),array('/','?'),$return_url); 
         wp_redirect($return);
     }else{
-        wp_redirect( 'https://iktutor.com/iklearn/en');
+        wp_redirect( 'https://iktutor.com/iklearn/en/?r=profile');
+        
     }
     exit();
 }
@@ -40,6 +41,15 @@ if($task == "status_login"){
     $status_login = $_REQUEST['status_login'];
     $current_user = wp_get_current_user();
     update_user_meta($current_user->ID, 'status_login', '0');
+
+}
+if ($task == 'get_status_login') {
+
+    $current_user = wp_get_current_user();
+    $status_login_2 = get_user_meta($current_user->ID, 'status_login_2', true);
+    if($status_login_2 == '0'){
+        echo $status_login_2;
+    }else echo $status_login_2;
 
 }
 if ($task == 'dictionary') {
@@ -5185,7 +5195,29 @@ if ($task == "update_info") {
         }
 
         if (trim($gender) == '') {
-            $html .= '<strong>' . __('Error', 'iii-dictionary') . '</strong>: ' . __('Please choose Gender', 'iii-dictionary');
+            $html .=  __('Please choose Gender', 'iii-dictionary');
+            $html .= '<br/>';
+            $form_valid = false;
+        }
+        if (trim($first_name) == '') {
+            $html .=  __('Please enter First Name', 'iii-dictionary');
+            $html .= '<br/>';
+            $form_valid = false;
+        }
+        if (trim($last_name) == '') {
+            $html .=  __('Please enter Last Name', 'iii-dictionary');
+            $html .= '<br/>';
+            $form_valid = false;
+        }
+
+        if ($cb_lang == '') {
+            $html .=  __('Please choose Language', 'iii-dictionary');
+            $html .= '<br/>';
+            $form_valid = false;
+        }
+
+        if ($time_zone_index == '0') {
+            $html .=  __('Please choose Timezone', 'iii-dictionary');
             $html .= '<br/>';
             $form_valid = false;
         }
@@ -5530,6 +5562,7 @@ if($task == "search_tutor"){
             $other_preference = get_user_meta($value->ID, 'other_preference', true);
 
             $price_tutoring = get_user_meta($value->ID, 'price_tutoring', true);
+            $price_group_tutoring = get_user_meta($value->ID, 'price_group_tutoring', true);
             $price_tutoring = empty($price_tutoring)? 15 : $price_tutoring;
 
             $user_subject = '';
@@ -5715,9 +5748,11 @@ if($task == "search_tutor"){
             $item['any_other'] =  $any_other;
             $item['subject_description'] =  $subject_description;
             $item['price_tutoring'] = $price_tutoring;
+            $item['price_group_tutoring'] = $price_group_tutoring;
             $item['MAGIC']="MAGIC";
             $item['enable_one_tutoring'] = $value->enable_one_tutoring;
             $item['enable_group_tutoring'] = $value->enable_group_tutoring;
+            
             $item['tutoring_subject'] = $value->subject_name;
             $item['tutoring_subject_type'] = $value->subject_type;
 

@@ -312,7 +312,7 @@ if (strpos($link_current, 'my-account') !== false) {
 <div id="purchase-points-dialog" class="modal fade modal-red-brown">
     <div class="modal-dialog modal-custom-first">
         <div class="modal-content boder-black">
-            <div class="modal-header custom-header">
+            <div id="close-pur" class="modal-header custom-header">
                 <span style="right: 3%;padding-top: 2%;" href="#" data-dismiss="modal" aria-hidden="true" class="close close-dialog"></span>
                 <h3><?php _e('Purchase Points', 'iii-dictionary') ?></h3>
             </div>
