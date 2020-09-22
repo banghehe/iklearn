@@ -61,6 +61,7 @@
             <meta name="theme-color" content="#121212">
 
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
+		<script src="<?php echo get_template_directory_uri(); ?>/library/js/common-math.js"></script>
 
 		<?php // wordpress head functions ?>
 		<?php wp_head(); ?>

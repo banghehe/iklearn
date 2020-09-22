@@ -1056,6 +1056,9 @@ a.btn.grey:focus {
     margin-right: 10px;
 
 }
+.star-lab {
+    padding: 15px 0 10px 0px;
+}
 
 .icon-submit {
     background: url(../images/icon-submit.png) no-repeat;
@@ -8895,7 +8898,7 @@ textarea.textarea-style2 {
 .selectboxit-btn.selectboxit-enabled:focus, 
 .selectboxit-btn.selectboxit-enabled:active {
     background: #eaeaea;
-    border: 1px solid #c2c2c2;
+    border: 1px solid #d9d9d9;
     line-height: 34px;
 }
 #sl-option .selectboxit-container .selectboxit-options {
@@ -19477,12 +19480,12 @@ table.table-critical-lesson > tbody > tr > td {
     -o-appearance: none;
     appearance: none;
     position: relative;
-    top: -6px;
+    top: 4px;
     right: 0;
     bottom: 0;
     left: 0;
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
     color: #fff;
     cursor: pointer;
     display: inline-block;
@@ -19629,7 +19632,7 @@ table.table-critical-lesson > tbody > tr > td {
 #createAccount input[type="password"], #earningFrom input[type="text"], #tutorForm input[type="text"], 
 .style-form input[type="text"], #myUpdate input[type="password"], .style-form textarea,
 .main-new-request input[type="text"],
-.frm-available-now input[type="text"] {
+.frm-available-now input[type="text"], #purchase-points input[type="text"]{
     font-size: 15px;
     color: #515151;
     border-radius: 25px;
@@ -19754,7 +19757,7 @@ table.table-critical-lesson > tbody > tr > td {
 
 .select-style .selectboxit-container * {
     font-family: Myriad_regular;
-    color: #9c9c9c !important;
+    color: #929292 !important;
     font-size: 14px !important;
 }
 span.select-box-it.form-control, span.select-box-it.form-control > span {
@@ -19770,7 +19773,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 #date .selectboxit-arrow-container, #myUpdate .selectboxit-arrow-container, .cb-type4 .selectboxit-arrow-container,
 .main-new-request .selectboxit-arrow-container, .user-timezone .selectboxit-arrow-container,
 #custom-timezone .selectboxit-arrow-container, .frm-available-now .selectboxit-arrow-container,
-#top-my-schedules .selectboxit-arrow-container{
+#top-my-schedules .selectboxit-arrow-container, .chose-rate .show-list-rate{
     background-image: url(../images/icon_dropdown_arrow.png) !important;
     background-repeat: no-repeat;
     background-size: 10px;
@@ -20354,8 +20357,8 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     margin-top: 10px;
 }
 .icon-star span{
-    color: #9c9c9c;
-    font-size: 12px;
+    color: #929292;
+    font-size: 13px;
     font-family: Myriad_regular;
     vertical-align: bottom;
     margin-left: 5px;
@@ -20381,6 +20384,10 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 #tutor-sent-message{
     cursor: pointer;
 }
+.btn-view {
+    padding: 10px;
+    font-size: 13px;
+}
 .icon-detail-tutor{
     width: 25px;
 }
@@ -20393,16 +20400,19 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     margin-bottom: 0;
 }
 .view-tutor{
-    color: #aeaeae;
+    color: #a5a5a5;
     font-size: 14px;
     font-family: Myriad_regular;
-    margin-top: 9px;
+    position: absolute;
+    border-bottom: 1px solid #EBEBEB;
+    width: 100%;
+    left: 10px;
 }
 .view-tutor img{
     height: 22px;
 }
 .view-tutor .active{
-    color: #4b4b4b;
+    color: #199eca;
 }
 .view-tutor img:nth-child(1){
     padding-right: 0;
@@ -20440,7 +20450,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     font-size: 14pt;
     color: #b9b9b9;
     padding-left: 0px !important;
-    padding-top: 0;
+    
 }
 .find-page-title{
     color:black;
@@ -20524,13 +20534,13 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 .tr-info td p{
     margin-bottom: 0;
 }
-.tr-info h4{
+/*.tr-info h4{
     color: #000;
     font-size: 13px;
     font-family: Semibold;
     padding-top: 8px;
     margin: 0;
-}
+}*/
 .tr-info ul{
     list-style: 0;
     margin: 0;
@@ -20556,16 +20566,18 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     font-family: Myriad_regular;
 }
 .view-tutor-message{
-    margin-top: 16px;
+    padding-bottom: 20px;
 }
 .subject-review{
-    color: #000;
-    font-size: 13px;
+        color: #a15f00;
+    font-size: 14px;
     font-family: Semibold;
-    margin-top: 39px;
+    padding: 5px 0;
+    background: #f5f6f8;
+    margin-top: 15px;
 }
 .tr-info.first .subject-review{
-    margin-top: 0;
+    
 }
 .name-review{
     color: #929292;
@@ -20590,7 +20602,10 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     padding-bottom: 30px;
 }
 .select-style .selectboxit-option-first {
-    margin-top: 15px;
+    margin-top: 10px;
+}
+.select-style .selectboxit-option-last{
+    margin-bottom: 10px;
 }
 .select-style .selectboxit-options a {
     padding-left: 2px;
@@ -20877,7 +20892,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 .upcoming-schedule ul li span.time-upcoming.no-time-schedule{
     color: #cacaca;
 }
-#sandbox-container-tutor .datepicker-inline{
+#sandbox-container-tutor .datepicker-inline, #sandbox-calender-tutor .datepicker-inline{
     width: 100%;
 }
 .datepicker th.picker-switch,
@@ -20888,10 +20903,10 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     font-size: 17px;
     text-transform: unset;
 }
-#sandbox-container-tutor .table-condensed .prev{
+#sandbox-container-tutor .table-condensed .prev,#sandbox-calender-tutor .table-condensed .prev{
     background: none!important;
 }
-#sandbox-container-tutor .table-condensed .next{
+#sandbox-container-tutor .table-condensed .next, #sandbox-calender-tutor .table-condensed .next{
     background: none!important;
 }
 .table-condensed > thead > tr > th.dow{
@@ -20910,37 +20925,39 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     font-family: "Semibold";
 }
 #sandbox-container-tutor .datepicker td,
-#sandbox-container-tutor .datepicker th.dow{
+#sandbox-container-tutor .datepicker th.dow,
+#sandbox-calender-tutor .datepicker td, 
+#sandbox-calender-tutor .datepicker th.dow{
     width: 33px!important;
     height: 33px!important;
     margin: 3px 11px 3px 0;
     display: inline-block;
 }
-#sandbox-container-tutor .datepicker th.prev,
-#sandbox-container-tutor .datepicker th.next{
+#sandbox-container-tutor .datepicker th.prev, #sandbox-calender-tutor .datepicker th.prev,
+#sandbox-container-tutor .datepicker th.next, #sandbox-calender-tutor .datepicker th.next{
     width: 33px!important;
     height: 33px!important;
     margin: 3px 5px 17px 0;
     display: inline-block;
 }
-#sandbox-container-tutor .datepicker td{
+#sandbox-container-tutor .datepicker td, #sandbox-calender-tutor .datepicker td{
     padding: 6px;
 }
-#sandbox-container-tutor .datepicker th.picker-switch{
+#sandbox-container-tutor .datepicker th.picker-switch, #sandbox-calender-tutor .datepicker th.picker-switch{
     height: 33px!important;
     display: inline-block;
     margin: 3px 5px 17px 0; 
     min-width: 220px;
     padding: 6px 8px;
 }
-#sandbox-container-tutor .datepicker-days{
+#sandbox-container-tutor .datepicker-days, #sandbox-calender-tutor .datepicker-days{
     padding: 0;
 }
 
-#sandbox-container-tutor .datepicker-days table{
+#sandbox-container-tutor .datepicker-days table, #sandbox-calender-tutor .datepicker-days table{
     height: auto;
 }
-#sandbox-container-tutor .table-condensed thead tr:nth-child(2){
+#sandbox-container-tutor .table-condensed thead tr:nth-child(2), #sandbox-calender-tutor .table-condensed thead tr:nth-child(2){
     border: 0;
 }
 .datepicker table tr td.today, 
@@ -21402,7 +21419,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 }
 .btn-schedule-now{
     background: #D5D5D5;
-    width: 50%;
+    width: 97%;
 }
 #btn-available-search,
 .btn-schedule-now.active{
@@ -21695,47 +21712,48 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 }
 .a-left, .a-right, .close-detail{
     width: 18px;
+    right: 20px;
     cursor: pointer;
 }
 .close-detail{
     position: absolute;
-    right: 20px;
-    top: 20px;
+    margin-top: 5px;
 }
 .head-title-resum{
-    padding-top: 14px;
-    padding-bottom: 2px;
-    font-size: 14px;
-    color: #a0a0a0;
+    padding-top: 45px;
+    padding-bottom: 10px;
+    font-size: 23px;
+    color: #343434;
     font-family: Semibold;
 }
 .writting-review .head-title-resum{
-    padding-top: 22px;
+    padding-top: 0px;
 }
 .schedule-detail{
     font-size: 12px;
     color: #9f9f9f;
     font-family: Myriad_regular;
 }
-.date-detail,
+.date-detail,.type-detail,
 .tutor-detail,
 .subject-selected-detail{
     font-size: 14px;
     color: #000;
     font-family: Semibold;
 }
-.date-detail,
+.date-detail, .type-detail,
 .subject-selected-detail{
     margin: 0; 
 }
 .date-detail span,
 .tutor-detail span,
+.type-detail span,
 .subject-selected-detail span{
     font-size: 14px;
     color: #58aec8;
     font-family: Myriad_regular;
 }
-.date-detail span,
+.date-detail span, .type-detail span:first-child,
 .tutor-detail span:first-child,
 .subject-selected-detail span:first-child{
     width: 50px;
@@ -21744,11 +21762,11 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 #selected-date{
     width: 90%;
 }
-.tutor-detail span.not-selected,
+.tutor-detail span.not-selected,.type-detail span.not-selected,
 .subject-selected-detail span.not-selected{
     color: #9c9c9c;
 }
-.tutor-detail span.not-selected.active,
+.tutor-detail span.not-selected.active, .type-detail span.not-selected.active,
 .subject-selected-detail span.not-selected.active,
 .date-detail #selected-date{
     color: #000;
@@ -21777,6 +21795,7 @@ div.tr-info p{
     position: absolute;
     top: 330px;
     width: 100%;
+    background: white;
 }
 .slide-resume{
     min-height: 500px;
@@ -23500,7 +23519,7 @@ position: absolute;
     position: absolute;
     z-index: 100;
      display: none;
-     padding: 10px;
+     padding: 10px 10px 3px 10px;
     width: 90%;
     margin: 12px;
     border-top: 0;
@@ -23555,16 +23574,16 @@ position: absolute;
     overflow: hidden;
     text-overflow: ellipsis;
     height: 30px;
-    margin-top: -3px;
+    
     cursor: pointer;
     font-size: 15px;
     font-family: Myriad_regular;
 }
 .Available-lg{
     padding-left: 8px;
-    font-family: semibold;
-    font-size: 13pt;
-    color: #515151;
+    font-size: 14px;
+    color: black;
+    font-family: Myriad_regular;
 }
 .show-language-drop{
 background-image: url(../images/icon_dropdown_arrow.png) !important;
@@ -23579,7 +23598,7 @@ background-image: url(../images/icon_dropdown_arrow.png) !important;
     padding-bottom: 17px;
 }
 #user-time-zoneSelectBoxItContainer{
-    margin-top: -10px;
+    margin-top: -7px;
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
@@ -23596,7 +23615,7 @@ select:-webkit-autofill:focus {
 }
 .required-star {
     color: red;
-    padding-top: 4px;
+    padding-top: 3px;
     position: absolute;
     font-weight: bold;
     padding-left: 2px;
@@ -23647,7 +23666,7 @@ cursor: pointer;
     }
 }
 .heading-acc {
-    font-size: 15pt;
+    font-size: 15px;
     font-family: semibold;
 }
 body input:-internal-autofill-selected {
@@ -23657,9 +23676,7 @@ body input:-internal-autofill-selected {
     
 }
 .find-general-border .selectboxit-container {
-    padding-bottom: 15px;
-    padding-top: 0;
-    margin-top: -4px;
+   top: -24px;
 }
 #math-course, #english-conver, #free-course {
     margin-left: 12px;
@@ -23705,6 +23722,8 @@ width: 460px;
 }
 .list-getting img{
     width: 7px;
+        position: absolute;
+    padding-top: 13px;
 
 }
 .list-getting li{
@@ -23713,14 +23732,207 @@ font-size: 17px;
 color: #8a8a8a;
 padding: 5px;
 width: 450px;
+padding-left: 20px;
 }
 .link-getting {
     padding-top: 20px; 
-    font-size: 17px;
+    font-size: 19px;
     padding-right: 60px;
     display: inline-block;
     cursor: pointer;
 }
 .link-getting img {
     width: 25px;
+}
+.selectboxit-options::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #d8d8d8;
+}
+.selectboxit-options::-webkit-scrollbar {
+    background-color: #ececec;
+    width: 6px;
+}
+
+.selectboxit-option-icon {
+    color: #929292 !important;
+}
+.find-general-border div .selectboxit-container .selectboxit { 
+    overflow: visible;
+    height: 49px !important;
+    padding-top: 20px !important;
+}
+#save-lg, #cancel-lg, #save-lg-up, #cancel-lg-up {
+   border-radius: 0px !important;
+    height: 36px;
+    width:  182px; 
+    font-size: 15px;
+}
+.img-tutor {
+    padding: 20px 10px 10px 20px;
+    float: left;
+
+}
+.img-tutor img {
+    width: 70px;
+    height: 70px;
+    border-radius: 5%;
+}
+.price-tutor {
+    color: #8f8f8f;
+    font-size:13px;
+}
+.taget-tutor {
+    padding: 10px 0;
+    font-style: italic;
+    font-size: 17px;
+    color: #7b7b7b;
+}
+.title-head {
+    font-size: 17px;
+    color: #343434;
+    
+    padding: 8px 0;
+}
+.sub-head {
+    font-size: 13px;
+    font-family: semibold;
+    color: #199eca;
+}
+.img-rate img{
+    width: 21px;
+    padding-bottom: 5px;
+}
+.select-rating {
+        float: right;
+    padding-right: 14px;
+    margin-top: -3px;
+    font-size: 13px;
+}
+.chose-rate {
+    width: 179px;
+    border: 1px solid #9c9c9c;
+    display: inline-block;
+    border-radius: 7px;
+    padding-left: 5px;
+    color: #515151;
+    height: 28px;
+        padding-top: 4px;
+    cursor: pointer;
+}
+.show-list-rate {
+    width: 30px;
+    position: absolute;
+    margin-top: -5px;
+}
+.view-write-review {
+   float: right;
+    height: 28px;
+    margin-top: -3px;
+    color: white;
+    background: #009dcb;
+    border: 0;
+    border-radius: 7px;
+    font-size: 13px;
+
+}
+.list-rating {
+    border: 1px solid #9c9cc9;
+    border-top: 0;
+    width: 160px;
+    padding-left: 10p;
+    margin-left: 9px;
+    padding: 5px;
+    display: none;
+    position: absolute;
+    background: white;
+}
+.list-rating li {
+        padding: 2px 5px;
+        color: #929292;
+}
+.list-rating li:hover {
+    background: #f5f6f8;
+}
+#cancel-writing {
+    float: right;
+        width: 135px;
+    height: 28px;
+    border: 0;
+    color: white;
+    background: #c9c9c9;
+    border-radius: 7px;
+}
+.input-write{
+
+}
+#btn-submit-review {
+    background: #009dcb !important;   
+    border-radius: 8px !important;
+}
+.step-below {
+        width: 50px;
+     float: left; 
+    margin-top: -31px;
+}
+#purchase-points{
+    margin-left: -33px;
+
+}
+.number-point{
+        border-bottom: 1px solid #d9d9d9;
+    padding-bottom: 14px;
+    padding-left: 33px;
+}
+.title-payment {
+    font-family: Myriad_regular;
+    font-size: 18px;
+
+}
+.table-payment {
+    color: #9c9c9c;
+    font-size: 12px;
+    border-bottom: 1px solid #d9d9d9;
+        padding-bottom: 5px;
+}
+.table-payment-list{
+    color: #9c9c9c;
+    padding: 15px 0;
+    border-bottom: 1px solid #d9d9d9;
+    height: 50px;
+}
+.sum-price {
+    height: 50px; 
+    background: #f4f7f7;    
+    padding-top: 15px;
+
+}
+.sum-prices{
+    font-size: 20px;
+    color: black;
+    font-family: semibold;
+    margin-top: -5.5px; 
+}
+.sum-price span {
+    float: right;
+}
+#remove-payment {
+    color: 13px;
+    text-decoration: underline;
+    padding-left: 13px;
+    cursor: pointer;
+}
+.payment-method span {
+    color: #929292;
+}
+.payment-method .option-input-3:checked +span{
+    color: #4eacc8;
+}
+#chase-point {
+    background: #cecece;
+    color: white;
+    
+    border: 2px solid #cecece;
+    margin-left: 20px;
+    margin-top: -4px;
+    position: absolute;
 }

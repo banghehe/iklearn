@@ -51,8 +51,8 @@
     return $data;
  
     }
-    $ip_user = $_SERVER['REMOTE_ADDR'];
-    $time_zone_user = json_decode(file_get_contents_curl("https://ipinfo.io/{$ip_user}"));
+    // $ip_user = $_SERVER['REMOTE_ADDR'];
+    $time_zone_user = json_decode(file_get_contents("https://ipinfo.io/"));
     $time_zone_user1 = $time_zone_user->city;
     $timezone_name = $time_zone_user->timezone;
     if($is_user_logged_in){
@@ -284,8 +284,8 @@
                     </div>
                     <img id="menu_Taggle" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Menu_Trigger.png">
                     <span class="modal-title text-uppercase">
-                        <a id="iklearn-home"  href="#">
-                            <img data-dismiss="modal" src="<?php echo get_template_directory_uri(); ?>/library/images/ikTeach_Logo.png">
+                        <a id="iklearn-home"  href="https://iktutor.com/en/<?php echo $link_ss?>">
+                            <img src="<?php echo get_template_directory_uri(); ?>/library/images/ikTeach_Logo.png">
                         </a>
                     </span>
                 </div>
@@ -394,10 +394,10 @@
                             <!-- Create Basic Account -->
                             <div id="create-account" class="tab-pane fade">
                                 <div class="student-center">
-                                    <p class="my-account">MY ACCOUNT</p>
+                                    <p class="my-account">My Account</p>
                                     <p class="tutor-acc">CREATE A STUDENT ACCOUNT</p>
                                 </div>
-                                <p class="mt-top-14 heading-acc" style="color: #36a93f; font-size: 22px; font-family: Myriad_regular;">Create Basic Account <img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"><span id="create-overview">overview</span></p>
+                                <p class="mt-top-14 heading-acc" style="color: #36a93f; font-size: 20px; font-family: Myriad_regular;">Basic Account <img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"><span id="create-overview">overview</span></p>
                                 <p style="color: red; font-size: 14px; "> (<span style=" position: absolute;  font-weight: bold;   padding-left: 1px; font-size: 14pt">*</span>&nbsp &nbsp) Required</p>
                                 <form method="post" id="createAccount" action="" name="registerform" enctype="multipart/form-data" autocomplete="off">
                                     <div class="row">
@@ -407,8 +407,8 @@
                                                 <span class="find-label"><?php _e('Email Address', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                                 <input id="user_login_signup" class="form-control" name="user_login" type="text" value=" "  required>
                                                 
-                                                <span id="checked-availability" class="not-check-available" style="    margin-right: 20px; "><span></span></span>
-                                                <button class="btn-dark-blue border-btn check-availability" id="check-availability" style="background: #FFA523; width: 50px; margin-top: -43px; float: right; border-radius: 8px !important;" type="button" name="wp-submit">Check</button>
+                                                <span id="checked-availability" class="not-check-available" style="    margin-right: 20px;     margin-top: 11px;"><span></span></span>
+                                                <button class="btn-dark-blue border-btn check-availability" id="check-availability" style="background: #FFA523; width: 50px; margin-top: -41px; float: right; border-radius: 8px !important;" type="button" name="wp-submit">Check</button>
                                             </div>
                                         </div>
                                         </div>
@@ -541,13 +541,13 @@
                                                 <span class="find-label"><?php _e('Language', 'iii-dictionary') ?><span class="required-star"> *</span></span>
                                                 <div id="show-language" class="show-language">
                                                   
-                                                <span class="show-language-drop" style="margin-top: -2.5px;"><i style="opacity:0;">0</i></span>
+                                                <span class="show-language-drop" style="margin-top: -2.5px; padding-right: 5px;"><i style="opacity:0;">0</i></span>
                                                 </div>
                                                 </div>
                                             
                                                 <div class="form__boolean mt-bottom-10 clearfix language_drop" id="checkBoxSearch" style="margin-top: -14px">
                                                     <span class="Available-lg">Available language</span>
-                                                    <ul id="list-language" style="font-size: 11pt; color: #9c9c9c;">
+                                                    <ul id="list-language" style="font-size: 12px; color: #9c9c9c;">
                                                         <li>
                                                             <input type="checkbox" class="radio_buttons class_cb_search option-input-3 radio" value="en" data-lang="en" name="cb-lang"/>
                                                             <span>&ensp; English</span>
@@ -580,12 +580,12 @@
                                                     </ul>
                                                     <div style="padding:12px 0;">
                                                     <div class="ol-sm-6 col-md-6">
-                                                        <button id="save-lg" class="btn-dark-blue border-btn" style="background: #009dcb;" type="button" name="save_timelot">
+                                                        <button id="save-lg" class="btn-dark-blue border-btn" style="background: #009dcb;margin-left: -13px;" type="button" name="save_timelot">
                                                                                 SAVE   
                                                                             </button>
                                                     </div>
                                                     <div class="ol-sm-6 col-md-6">
-                                                        <button id="cancel-lg" class="btn-dark-blue border-btn" style="background: #CECECE;" type="button" name="cancel_timelot" >
+                                                        <button id="cancel-lg" class="btn-dark-blue border-btn" style="background: #CECECE;     margin-left: -5px;" type="button" name="cancel_timelot" >
                                                                                 CANCEL
                                                                             </button>
                                                 </div>
@@ -732,6 +732,7 @@
                                                         _e('N/A', 'iii-dictionary');
                                                     ?> (USD)
                                                 </span>
+                                                <button type="button" id="chase-point" class="border-btn">Purchase Points</button>
                                             </div>
                                             <hr>
                                         </div>
@@ -1043,12 +1044,12 @@
                                     }
                                 ?>
                                 <div class="student-center">
-                                    <p class="my-account">MY ACCOUNT</p>
+                                    <p class="my-account">My Account</p>
                                     <p class="tutor-acc">UPDATE MY ACCOUNT</p>
                                 </div>
                                 <form method="post" id="myUpdate" action="" name="updateAccount" enctype="multipart/form-data" autocomplete="off">
                                     
-                                    <p class="heading-acc" style="color: #36a93f; margin-top: 16px; font-size: 22px; font-family: Myriad_regular;">Basic Account <img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"></p>
+                                    <p class="heading-acc" style="color: #36a93f; margin-top: 16px; font-size: 20px; font-family: Myriad_regular;">Basic Account <img class="icon-about" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_About.png" alt="info"></p>
                                     <span style="color: red; font-size: 14px; float: right; margin-top: -30px;"> (<span style=" position: absolute;  font-weight: bold;   padding-left: 1px; font-size: 14pt">*</span>&nbsp &nbsp) Required</span>
                                     <div class="row">
                                         <div class="col-sm-9 col-md-9">
@@ -1129,6 +1130,7 @@
                                                     <div class="col-xs-12 col-sm-4 col-md-4 border-ras select-style" id="update_month">
                                                         <div class="find-general-border">
                                                             <span class="find-label"><?php _e('Month', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                                        <div class="form-group">
                                                         <select id="update_birth_m" class="select-box-it form-control" name="update-birth-m">
                                                             <option value="">(Month)</option>
                                                             <?php 
@@ -1146,9 +1148,11 @@
                                                         </select>
                                                     </div>
                                                     </div>
+                                                    </div>
                                                     <div class="col-xs-12 col-sm-4 col-md-4 border-ras select-style" id="update_date">
                                                         <div class="find-general-border">
                                                             <span class="find-label"><?php _e('Day', 'iii-dictionary') ?><span class="required-star"> *</span></span>
+                                                        <div class="form-group">
                                                         <select id="update_birth_d" class="select-box-it form-control" name="update-birth-d">
                                                             <option value="">(Day)</option>
                                                             <?php 
@@ -1164,6 +1168,7 @@
                                                             </option>
                                                             <?php endfor ?>
                                                         </select>
+                                                    </div>
                                                     </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-4 col-md-4 year-mb">
@@ -1210,7 +1215,7 @@
                                                 </div>
                                                 <div class="form__boolean mt-bottom-10 clearfix language_drop" id="checkBoxSearch" style="margin-top: -14px">
                                                     <span class="Available-lg">Available language</span>
-                                                    <ul id="list-language" style="font-size: 11pt; color: #9c9c9c;">
+                                                    <ul id="list-language" style="font-size: 12px; color: #9c9c9c;">
                                                         <li>
                                                             <input type="checkbox" class="radio_buttons option-input-3 radio" value="en" <?php if(count($update_language) > 0 && in_array("en", $update_language)) echo 'checked="checked"'; ?> name="update-cb-lang"/>
                                                             <span>&ensp; English</span>
@@ -1248,12 +1253,12 @@
                                                     </ul>
                                                     <div style="padding:12px 0;">
                                                 <div class="ol-sm-6 col-md-6">
-                                                   <button id="save-lg-up" class="btn-dark-blue border-btn" style="background: #009dcb;" type="button" name="save_timelot">
+                                                   <button id="save-lg-up" class="btn-dark-blue border-btn" style="background: #009dcb;margin-left: -13px;" type="button" name="save_timelot">
                                                                                 SAVE   
                                                                             </button>
                                                 </div>
                                                 <div class="ol-sm-6 col-md-6">
-                                                     <button id="cancel-lg-up" class="btn-dark-blue border-btn" style="background: #CECECE;" type="reset" name="cancel_timelot" >
+                                                     <button id="cancel-lg-up" class="btn-dark-blue border-btn" style="background: #CECECE;margin-left: -5px;" type="reset" name="cancel_timelot" >
                                                                                 CANCEL
                                                                             </button>
                                                 </div>
@@ -1515,7 +1520,7 @@
                                     <div class="row mt-top-14">
                                         <div class="col-sm-6 col-md-6 col-xs-12 mt-top-4">
                                             <div class="form-group">
-                                                <button id="update-teacher" class="btn-dark-blue border-btn" style="background: #65C762;" type="button" name="send-tutor">
+                                                <button id="update-teacher" class="btn-dark-blue border-btn" style="background: #009dcb;" type="button" name="send-tutor">
                                                     <?php _e('Update', 'iii-dictionary') ?>
                                                 </button>
                                             </div>
@@ -1843,6 +1848,113 @@
                             </div>
                             <!-- Subscription & Points -->
 
+                            <div id="purchase-points" class="tab-pane fade">
+                                <div class="student-center" style="margin-left: 0">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-6 col-xs-6">
+                                            <p class="mt-bottom-12 student-center-title">Student Information Center</p>
+                                            <div class="new-request-list">PURCHASE POINTS</div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="purchase-points">
+                                    <div class="number-point">
+                                        <p class="mt-top-14 title-payment">Number of Points</p>
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6- col-xs-6">
+                                                <div class="find-general-border">
+                                                    <span class="find-label">Points</span>
+                                                    <div class="form-group">
+                                                        <input id="point-input" class="form-control" type="text" name="point-input" value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6- col-xs-6 ">
+                                                <div class="find-general-border" style="background: #f4f7f7;">
+                                                    <span class="find-label">Total Amount</span>
+                                                    <div class="form-group">
+                                                        <input id="total-amount" class="form-control" type="text" name="point-input" value="" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6- col-xs-6  mt-bottom-14">
+                                                <button id="confirm-point" style="background: #009dcb;" class="border-btn btn-dark-blue" type="button">CONFIRM</button>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6- col-xs-6  mt-bottom-14">
+                                                <button id="confirm-point" class="border-btn btn-dark-blue" style="background: #CECECE;" onclick="document.getElementById('total-amount').value=null;document.getElementById('point-input').value=null;">RESET</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="checkout-point" style="padding-left: 33px;">
+                                        <p class="mt-top-14 mt-bottom-5 title-payment">Checkout</p>
+                                        <div class="row" style="padding-left:8px;">
+                                            <div class="col-sm-12 mt-bottom-5 table-payment">
+                                                <div class="col-sm-3">
+                                                    <span>Type</span>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <span>Price</span>
+                                                </div>
+                                            </div>
+                                            <div id="list-payment" class="col-sm-12  table-payment-list">
+                                                <div class="col-sm-3">
+                                                    <span id="type-payment">No Item Seclect</span>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <div class="row">
+                                                        <div class="col-sm-10" id="price-payment">$0.00</div>
+                                                        <div class="col-sm-2"><span id="remove-payment">Remove<span><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_icon_trash.png" style="height: 22px;margin-top: -3px; float: right;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 sum-price">
+                                                <span id="sum-price" class="sum-prices">0.00</span><span class="sum-prices">&nbsp;$</span><span>Total Amount:&nbsp;&nbsp;</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="payment-method mt-bottom-14" style="padding-left: 33px;">
+                                        <p class="mt-top-14  title-payment">Payment Method</p>
+                                        <div class="mt-top-10 mt-bottom-8" >
+                                            <input type="checkbox" name="payment_paypal" id="payment_paypal" class="radio_buttons option-input-3 radio">
+                                            <span>&nbsp;&nbsp;Pay with PayPal</span>
+                                            
+                                        </div>
+                                        <div id="paypal-box" class="row mt-top-10" style="display: none;">
+                                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                                    <input type="image" id="paypal-submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" alt="PayPal - The safer, easier way to pay online!">
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                                                    <p class="text-alert">
+                                                        <strong>Note:</strong> Paypal might take sometimes to process your payment. If you don't see the item you paid in Subscription history, please log out and log in again after a few minutes                        </p>
+                                                </div>
+                                                <div id="paypal-button-container"></div>
+                                                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="hidden">
+                                                    <input type="hidden" name="cmd" value="_xclick">
+                                                    <input type="hidden" name="business" value="sb-v2dak3246073@business.example.com">
+                                                    <input type="hidden" name="item_name" value="Subscription">
+                                                    <input id="paypal-price" type="hidden" name="amount" value="">
+                                                    <input type="hidden" name="custom" value="<?php echo get_current_user_id() ?>">
+                                                    <input type="hidden" name="return" value="<?php echo home_url_ssl() ?>/iklearn/?r=payments">
+                                                    <input type="image" id="paypal-btn" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit">
+                                                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                                                </form>
+                                            </div>
+                                        
+                                        <div style="height: 50px; border-bottom:  1px solid #d9d9d9; border-top:  1px solid #d9d9d9; padding-top: 7px">
+                                            <input type="checkbox" name="payment_paypal" class="radio_buttons option-input-3 radio" disabled>
+                                            <span>&nbsp;&nbsp;Use existing credit cards?</span>
+                                        </div>
+                                        <div class="mt-bottom-14">
+                                            <input type="checkbox" name="payment_paypal" class="radio_buttons option-input-3 radio" disabled>
+                                            <span>&nbsp;&nbsp;Use new credit card?</span>
+                                        </div>
+                                        <button id="purchase-now" style="background: #cecece; width: 100%; margin-top: 10px;" class="border-btn btn-dark-blue" type="button">PURCHASE NOW</button>
+                                    </div>
+
+                                </div>
+                            </div>
+
                             <div id="tutoring-main" class="tab-pane fade">
                                 <div class="student-center">
                                     <div class="row">
@@ -1864,6 +1976,8 @@
                                         </div>
                                     </div>
                                 </div>
+
+
 
                                 <div class="tutoring-main">
                                     <div id="tab-sub-tutoring" class="tab-style2">
@@ -1917,67 +2031,71 @@
                                                         </div>
                                                     </div>
                                                     <div class="step-box" >
-                                                        <div class="step-btn" style=" background: #49a1bc;">STEP 1</div>
+                                                        <img class="step-below" src="<?php echo get_template_directory_uri(); ?>/library/images/13_Step_BelowArrow.png">
+                                                        <div class="step-btn" style=" background: #58aec8;">STEP 1</div>
                                                         <br>
                                                         <img class="getting-img" style="width: 305px" src="<?php echo get_template_directory_uri(); ?>/library/images/06_Step1.jpg">
                                                         <div>
                                                             <p class="tit-getting">Do you have enough points for <br>tutoring? If not, here’s what <br>you can do!</p>
                                                             <ul class="list-getting">
-                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp;  You will spend points to schedule a Tutoring.</li>
-                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp;  1 point = $1 dollar. Simple as that!</li>
-                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp;  Anytime you are short on points, simply “Recharge” them.</li>
-                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp;  That’s all, now you are ready to begin!</li>
+                                                                <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>You will spend points to schedule a Tutoring.</li>
+                                                                <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>1 point = $1 dollar. Simple as that!</li>
+                                                                <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>Anytime you are short on points, simply “Recharge” them.</li>
+                                                                <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>That’s all, now you are ready to begin!</li>
                                                             </ul>
                                                         </div>
                                                         <a id="go-to-point" href="<?php echo locale_home_url() ?>/?r=my-account#purchase-points"><div class="link-getting" style="color: #49a1bc;">Go to Purchase Points &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Step1.png"></div></a>
                                                     </div>
                                                     <div class="step-box">
-                                                         <div class="step-btn"  style=" background: #dc8c23;">STEP 2</div>
+                                                        <img class="step-below" src="<?php echo get_template_directory_uri(); ?>/library/images/13_Step_BelowArrow.png">
+                                                         <div class="step-btn"  style=" background: #ffad42;">STEP 2</div>
                                                         <br>
                                                         <img class="getting-img" style="width: 260px" src="<?php echo get_template_directory_uri(); ?>/library/images/07_Step2.jpg">
                                                         <div>
                                                             <p class="tit-getting">What and when do you want your schedule to be?</p>
                                                             <ul class="list-getting">
-                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; There are two ways to make a schedule. Through “<u>Find Tutor Page</u>” or “<u>Schedule Page</u>”</li>
-                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; Find Tutor Page: To set a schedule, a student defines “<u>Subject</u>”, “<u>Date</u>”, and “<u>Other Parameters</u>” from the search area. </li>
-                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; Schedule Page: From the calendar, select the “<u>Date</u>”, then it will take you to the “Fnd Tutor Page”. From there, finish the remaining parameters</li>
-                                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; Now you are almost ready to meet your tutor! </li>
+                                                                <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>There are two ways to make a schedule. Through “<u>Find Tutor Page</u>” or “<u>Schedule Page</u>”</li>
+                                                                <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>Find Tutor Page: To set a schedule, a student defines “<u>Subject</u>”, “<u>Date</u>”, and “<u>Other Parameters</u>” from the search area. </li>
+                                                                <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>Schedule Page: From the calendar, select the “<u>Date</u>”, then it will take you to the “Fnd Tutor Page”. From there, finish the remaining parameters</li>
+                                                                <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>Now you are almost ready to meet your tutor! </li>
                                                             </ul>
 
-                                                            <div class="go-to-find link-getting" style="color: #dc8c23;">Go to Find Tutor Page &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/02_Icon_Step2.png"></div>
-                                                            <div id="go-to-schedule" class="link-getting" style="color: #dc8c23;">Go to Schedule Page &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/02_Icon_Step2.png"></div>
+                                                            <div class="go-to-find link-getting" style="color: #ffad42;">Go to Find Tutor Page &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/02_Icon_Step2.png"></div>
+                                                            <div id="go-to-schedule" class="link-getting" style="color: #ffad42;">Go to Schedule Page &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/02_Icon_Step2.png"></div>
                                                         </div>
                                                     </div>
                                                     <div class="step-box">
+                                                        <img class="step-below" src="<?php echo get_template_directory_uri(); ?>/library/images/13_Step_BelowArrow.png">
                                                         <div class="step-btn"  style=" background: #ff6d6d;">STEP 3</div>
                                                         <br>
                                                         <img class="getting-img" style="width: 250px" src="<?php echo get_template_directory_uri(); ?>/library/images/08_Step3.jpg">
                                                         <p class="tit-getting">It’s time to select the right tutor!</p>
                                                         <ul class="list-getting">
-                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; Once Preference is set, click on “<u>Search</u>”. Now you will be presented with “<u>Lists of Tutors</u>”.</li>
-                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; Alternatively, go to “<u>Available Tutor List</u>”, if you don’t have any preference.</li>
-                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; Before finalizing a tutor, you can check their details like, “<u>Marketing Words</u>”, “<u>Background</u>”, “<u>Reviews</u>”, and “<u>Scheduling Status</u>”. These will help you to decide the right tutor for your schedule.</li>
-                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; When everything looks good, make a schedule by clicking on the “<u>Schedule Button</u>”.</li>
+                                                            <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>Once Preference is set, click on “<u>Search</u>”. Now you will be presented with “<u>Lists of Tutors</u>”.</li>
+                                                            <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>Alternatively, go to “<u>Available Tutor List</u>”, if you don’t have any preference.</li>
+                                                            <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>Before finalizing a tutor, you can check their details like, “<u>Marketing Words</u>”, “<u>Background</u>”, “<u>Reviews</u>”, and “<u>Scheduling Status</u>”. These will help you to decide the right tutor for your schedule.</li>
+                                                            <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>When everything looks good, make a schedule by clicking on the “<u>Schedule Button</u>”.</li>
 
                                                         </ul>
                                                         <div class="link-getting go-to-find-tutor" style="color: #ff6d6d;">Go to Available Tutor List &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Step3.png"></div>
                                                         <div class="go-to-find link-getting" style="color: #ff6d6d;">Go to Find Tutor Page &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Step3.png"></div>
                                                     </div>
-                                                    <div class="step-box">
-                                                        <div class="step-btn"  style=" background: #4ba618;">STEP 4</div>
+                                                    <div class="step-box" style="border: 0">
+                                                        <img class="step-below" src="<?php echo get_template_directory_uri(); ?>/library/images/13_Step_BelowArrow.png">
+                                                        <div class="step-btn"  style=" background: #65d02a;">STEP 4</div>
                                                         <br>
                                                         <img class="getting-img" style="width: 309px" src="<?php echo get_template_directory_uri(); ?>/library/images/09_Step4.jpg">
                                                         <p class="tit-getting">What to expect after everything is set.</p>
                                                         <ul class="list-getting">
-                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; At this point, students need to wait for the tutor to ”<u>Confirm</u>” the schedule.</li>
-                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; When confirmed, both tutor and student meet up at the “<u>Online Tutoring Notepad</u>” from the appointed time. </li>
-                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; For whatever reason, if the tutor hasn’t confirmed yet, students have the option to “<u>Cancel</u>” the schedule. </li>
-                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; All the schedule status can be checked from the student's “<u>Schedule Detailed Page</u>”. </li>
-                                                            <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png">&nbsp; That’s it! Enjoy your online tutoring! </li>
+                                                            <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>At this point, students need to wait for the tutor to “<u>Confirm</u>” the schedule.</li>
+                                                            <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>When confirmed, both tutor and student meet up at the “<u>Online Tutoring Notepad</u>” from the appointed time. </li>
+                                                            <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>For whatever reason, if the tutor hasn’t confirmed yet, students have the option to “<u>Cancel</u>” the schedule. </li>
+                                                            <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>All the schedule status can be checked from the student's “<u>Schedule Detailed Page</u>”. </li>
+                                                            <img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png"><li>That’s it! Enjoy your online tutoring! </li>
 
                                                         </ul>
-                                                        <div id=go-to-all class="link-getting" style="color: #4ba618;">Go to Schedule Detail Page &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/04_Icon_Step4.png"></div>
-                                                        <a href="https://notepad.iktutor.com/" target="_bank"><div class="link-getting" style="color: #4ba618;">Go to Online Tutoring Notepad &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/04_Icon_Step4.png"></div></a>
+                                                        <div id=go-to-all class="link-getting" style="color: #65d02a;">Go to Schedule Detail Page &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/04_Icon_Step4.png"></div>
+                                                        <a href="https://notepad.iktutor.com/" target="_bank"><div class="link-getting" style="color: #65d02a;">Go to Online Tutoring Notepad &nbsp;<img src="<?php echo get_template_directory_uri(); ?>/library/images/04_Icon_Step4.png"></div></a>
                                                     </div>
 
                                                 </div>
@@ -2220,10 +2338,14 @@
                                                             <tbody>
                                                                 <tr class="tr-detail">
                                                                     <td>
-                                                                        <p class="schedule-detail">Your Scheduling detail:</p>
+                                                                        
                                                                         <p class="subject-selected-detail">
                                                                             <span>Subject:</span>
                                                                             <span id="selected-subject" class="not-selected active">Not selected yet</span>
+                                                                        </p>
+                                                                        <p class="type-detail">
+                                                                            <span>Type:</span>
+                                                                            <span id="selected-type" class="not-selected">Not selected yet</span>
                                                                         </p>
                                                                         <p class="date-detail">
                                                                             <span>Date:</span>
@@ -2341,17 +2463,12 @@
                                                 <div class="writting-review" style="display: none;">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <p class="head-title-resum">WRITE A REVIEW</p>
+                                                            <p class="head-title-resum">Create Review</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-5 col-sm-9 col-md-9">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control border-ras" name="subject" value="" id="write-review-subject">
-                                                                <span class="placeholder"><?php _e('Title', 'iii-dictionary') ?>:</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-7 col-sm-3 col-md-3 cb-type-star">
+                                                    <div>
+                                                        <span style="font-size: 14px;color: #515151;">Tutor Rating &nbsp;</span>
+                                                        <span>
                                                             <label>
                                                                 <input id="star1" type="checkbox" class="star_buttons option-input-star radio" value="1" data-star="1" name="star">
                                                             </label>
@@ -2367,17 +2484,58 @@
                                                             <label>
                                                                 <input id="star5" type="checkbox" class="star_buttons option-input-star radio" value="1" data-star="5" name="star">
                                                             </label>
-                                                        </div>
+                                                        </span>
+                                                        <button id="cancel-writing">Cancel</button>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">                                     
-                                                            
-                                                            <!-- <div id="character_count"></div> -->
+
+                                                    
+                                                        <div class="find-general-border">
+                                                        <span class="find-label">Headline:</span>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control border-ras" name="subject" value="" id="write-review-subject" placeholder="What's most important to know?" style="padding-left: 0; border-radius: 0 !important; font-size: 15px;">
+                                                                
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                        <div id="desc-class2" class="mt-bottom-10">
+                                                                <span class="editor-top-left"></span>
+                                                                <span class="editor-top-right"></span>
+                                                                <span class="editor-bottom-left"></span>
+                                                                <span class="editor-bottom-right"></span>
+                                                                <?php
+                                                                $editor_settings = array(
+                                                                    'wpautop' => false,
+                                                                    'media_buttons' => false,
+                                                                    'quicktags' => false,
+                                                                    'editor_height' => 50,
+                                                                    'textarea_rows' => 3,
+                                                                    'tinymce' => array(
+                                                                        'toolbar1' => ''
+                                                                    )
+                                                                );
+                                                                ?>
+                                                                <?php wp_editor('', 'message-review', $editor_settings); ?>
+                                                                <div class="clear-both"></div>
+                                                            </div>
+                                                           
+                                                       
                                                     <div class="row">
                                                         <div class="col-sm-6 col-md-6">
                                                             <button type="button" class="btn-orange2 btn-green border-ras" name="submit_review" id="btn-submit-review">Submit Review</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="schedule-view" style="display: none;">
+                                                    <p class="head-title-resum">Schedule</p>
+                                                    <p>This time calender shows the current tutor's available time. The current time can be  adjusted to local timezone with the timezone switch.</p>
+                                                    <div class="row">
+                                                    <div class="col-md-6 mbsc-form-group">
+                                                     <div id="sandbox-calender-tutor"></div>
+                                                     </div>
+                                                     <div class="col-md-6">
+                                                     <table class="table table-condensed table-tutoring">
+                                                                <tbody id="list-schedule-tutor" class="table-list-schedule">
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2916,7 +3074,7 @@
                                     <li><a class="header-menu-left padd-adjus redirect-create" id="mtutoring" data-toggle="tab">Tutoring</a>
                                         <ul class="sub-menu-left" id="sub-tutoring">
                                             <li id="getting-tutoring"><a class="redirect-create" data-toggle="tab" href="#tutoring-main">Getting Tutoring</a></li>
-                                            <li id="sub-findingtutor" class="go-to-find-tutor"><a class="redirect-create" data-toggle="tab" href="#tutoring-main">Find a Tutor</a></li>
+                                            <li id="sub-findingtutor" ><a class="redirect-create" data-toggle="tab" href="#tutoring-main">Find a Tutor</a></li>
                                             <li id="sub-schedule-li"><a class="redirect-create" data-toggle="tab" href="#tutoring-main">Schedule</a></li>
                                             <li id="sub-status"><a class="redirect-create" data-toggle="tab" href="#tutoring-main">Status</a></li>    
                                         </ul>
@@ -2925,30 +3083,31 @@
                                         <ul class="sub-menu-left" id="sub-course">
                                             <li id="free-course-show"><img id="free-course-img" src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a data-toggle="tab">Free Course</a></li>
                                             <ul id="free-course">
-                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a  href="https://iktutor.com/iklearn/en/?r=spelling-practice">Spelling</a> </li>
-                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a  href="https://iktutor.com/iklearn/en/?r=vocabulary-practice">Vocab & Grammar</a></li>
-                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a  href="https://iktutor.com/iklearn/en/?r=reading-comprehension">Reading Comprehen</a></li>
-                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://iktutor.com/iklearn/en/?r=writing-practice">Writing</a></li>
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a  href="https://iktutor.com/iklearn/en/?r=spelling-practice" target="_bank">Spelling</a> </li>
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a  href="https://iktutor.com/iklearn/en/?r=vocabulary-practice" target="_bank">Vocab & Grammar</a></li>
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a  href="https://iktutor.com/iklearn/en/?r=reading-comprehension" target="_bank">Reading Comprehen</a></li>
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://iktutor.com/iklearn/en/?r=writing-practice" target="_bank">Writing</a></li>
+                                                <li id="math-course-show"><img id="math-course-img" src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a data-toggle="tab"  target="_bank" style="width: 80%">Math</a></li>
+                                                <ul id="math-course">
+                                                    <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=arithmetics" target="_bank"style="width: 80%">Math Elementary </a></li>
+                                                    <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=algebra-i" target="_bank"style="width: 80%">Math Algebra 1 </a></li>
+                                                    <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width:8px !important">&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=algebra-ii" target="_bank"style="width: 80%">Math Algebra 2 </a></li>
+                                                    <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=geometry" target="_bank"style="width: 80%">Math Geometry </a></li>
+                                                
+                                                    <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=calculus" target="_bank"style="width: 80%">Math Calculus </a></li>
+                                                </ul>
                                             </ul>
                                             <li id="english-conver-show"><img id="english-conver-img" src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a data-toggle="tab" >English Conversation</a></li>
                                             <ul id="english-conver">
-                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://ael.iktutor.com/ael/index.php?r=exam/spelling&lang=en_US">Listening & Spell</a></li>
-                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://ael.iktutor.com/ael/index.php?r=exam/vocab&lang=en_US">Listening & Vocab</a></li>
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://ael.iktutor.com/ael/index.php?r=exam/spelling&lang=en_US" target="_bank">Listening & Spell</a></li>
+                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://ael.iktutor.com/ael/index.php?r=exam/vocab&lang=en_US" target="_bank">Listening & Vocab</a></li>
                                             </ul>
-                                            <li id=""><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="https://iktutor.com/iklearn/en/?r=flash-cards">Vocabulary Practice </a></li>
-                                            <li id="math-course-show"><img id="math-course-img" src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a data-toggle="tab" >Math</a></li>
-                                            <ul id="math-course">
-                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=arithmetics">Math Elementary </a></li>
-                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=algebra-i">Math Algebra 1 </a></li>
-                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width:8px !important">&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=algebra-ii">Math Algebra 2 </a></li>
-                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=geometry">Math Geometry </a></li>
+                                            <li id=""><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="https://iktutor.com/iklearn/en/?r=flash-cards" target="_bank">Vocabulary Practice </a></li>
                                             
-                                                <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=calculus">Math Calculus </a></li>
-                                            </ul>
-                                            <li id="sat-tutoring"><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="#" data-toggle="tab">SAT Tutoring </a></li>
-                                            <li id="sat-english"><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="#" data-toggle="tab">English SAT Practice </a></li>
-                                            <li id="sat-math1"><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="#" data-toggle="tab">Math SAT 1 </a></li>
-                                            <li id="sat-math2"><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="#" data-toggle="tab">Math SAT 2 </a></li>
+                                            <li id="sat-tutoring"><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="https://iktutor.com/iklearn/en/?r=sat-preparation"  target="_bank">English SAT </a></li>
+                                            <li id="sat-english"><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=sat-preparation/emathk&client=math-emathk"  target="_bank">Math Tutoring Plan </a></li>
+                                            <li id="sat-math1"><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=sat-preparation/sat1prep&client=math-sat1"  target="_bank">Math SAT 1 </a></li>
+                                            <li id="sat-math2"><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="https://math.iktutor.com/iklearn/en/?r=sat-preparation/sat2prep&client=math-sat2"  target="_bank">Math SAT 2 </a></li>
                                             
                                             <li id="onl-course"><img src="<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png" >&nbsp;&nbsp;<a href="#" data-toggle="tab">Tutor’s Online Course</a></li>
                                         </ul>
@@ -3076,11 +3235,7 @@
                         <a class="sign-up-link" id="show_signup" title="<?php _e('Sign-up', 'iii-dictionary') ?>">
                             <?php _e('Sign-up', 'iii-dictionary') ?><span class="signup-icon"></span></a>
                     </li>
-                    <?php else : ?>
-                    <li class="css-li-logout">
-                        <a class="logout-link" href="<?php echo wp_logout_url(home_url()) ?>" title="<?php _e('Logout', 'iii-dictionary') ?>">
-                            <?php _e('Logout', 'iii-dictionary') ?><span class="logout-icon"></span></a>
-                    </li>
+                    
                     <?php endif ?>
                     <li id="icon-home-hidden">
                         <a href="<?php echo site_home_url(); ?>/home" title="<?php _e('Home', 'iii-dictionary') ?>">
@@ -3229,6 +3384,7 @@
                 <?php get_template_part('ajax', 'auth'); ?>
             </div>
         </header>
+        
         <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/library/moment/min/moment.min.js"></script>
         <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/library/moment/min/moment-with-locales.min.js"></script>
         <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/library/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
@@ -3236,13 +3392,21 @@
         <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/library/moment/min/moment-timezone-with-data.js"></script>
         <link href="<?php echo get_template_directory_uri(); ?>/library/slick/slick.css" rel="stylesheet">
         <link href="<?php echo get_template_directory_uri(); ?>/library/slick/slick-theme.css" rel="stylesheet">
+        <link href="<?php echo get_template_directory_uri(); ?>/library/css/mobiscroll.jquery.min.css" rel="stylesheet">
         <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/library/slick/slick.min.js"></script>
         <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/library/js/detect-zoom.js"></script>
+       
+        
+        
+        
+        
+       
+        
         <!-- <link href="<?php echo get_template_directory_uri(); ?>/library/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" >
         <script src="<?php echo get_template_directory_uri(); ?>/library/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> -->
         <script type="text/javascript">
             (function ($) {
-                $(document).ready(function () {
+               $(document).ready(function () {
                 var getprofile = window.location.href;
                 if(getprofile == 'https://iktutor.com/iklearn/en/##my-account-modal'){
                     $("#my-account-modal").modal('show');
@@ -3872,19 +4036,19 @@
                                 $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "7px");                         
                                 $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
                                 if($('#free-course-show').hasClass('active')){
-                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "333px");
+                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "363px");
                                 }else if($('#english-conver-show').hasClass('active')){
                                     $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "276px");
                                 }else if($('#math-course-show').hasClass('active')){
-                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "362px");
+                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "390px");
                                 }else{
-                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "248px")};
+                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "222px")};
                                 
                             } else {
                                 openNav();
                                 $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
                                 $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "7px");
-                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "248px");
+                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "222px");
                                 $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
                             }
                         }
@@ -3933,9 +4097,12 @@
                                     $("#sub-tutoring").removeClass("opensub");
                                     $("#sub-myacc").css("display", "none");
                                     $("#sub-myacc").removeClass("opensub");
+                                    $("#free-course").css("display", "none");
+                                    $("#math-course").css("display", "none");
+                                    $("#english-conver").css("display", "none");
                                     $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
                                     $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "7px");
-                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "248px");
+                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "222px");
                                     $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
 
                                 }else{
@@ -4013,7 +4180,7 @@
                             openNav();
                             $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
                             $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "7px");
-                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "248px");
+                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "222px");
                             $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
                         }
                     });
@@ -4025,7 +4192,7 @@
                         $('#math-course').css('display','none');
                         $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
                         $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "5px");
-                        $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "333px");
+                        $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "363px");
                         $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
                         $('#free-course-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/02_Icon_Arrow_Opened.png");
                         $('#english-conver-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png");
@@ -4065,17 +4232,27 @@
                         openNav();
                         $('#math-course').css('display','block');                         
                         $('#english-conver').css('display','none');
-                        $('#free-course').css('display','none');
+                         $('#math-course').css('display','block'); 
                         $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "-7px");
                         $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "5px");
-                        $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "362px");
+                        $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "503px");
                         $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "8px");
                         $('#math-course-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/02_Icon_Arrow_Opened.png");
                         $('#english-conver-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png");
-                        $('#free-course-img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/01_Icon_Arrow_Static.png");
+                        
                         $('#math-course-img').css('padding','0');
                         $('#english-conver-img').css('padding','0 1px 0 2px');
-                        $('#free-course-img').css('padding','0 1px 0 2px');
+                        
+                    });
+
+                    
+                    // $('#free-course a').click(function(){
+                    //     $('#free-course').css('display','none'); 
+                    //     $('#free-course-show').removeClass('active');  
+                    // });
+                    $('#english-conver a').click(function(){
+                        $('#english-conver').css('display','none');  
+                        $('#english-conver-show').removeClass('active'); 
                     });
 
                     $("#myacc").click(function () {
@@ -4177,7 +4354,7 @@
                                 lg += 'Other, ';
                             }
                             var sl = lg.substring(0, lg.length - 2);
-                            document.getElementById("show-language").innerHTML = sl+'<span class="show-language-drop" style="margin-top: -2.5px;"><i style="opacity:0;">0</i></span>';
+                            document.getElementById("show-language").innerHTML = sl+'<span class="show-language-drop" style="margin-top: -2.5px;padding-right: 5px;"><i style="opacity:0;">0</i></span>';
                     });
                     $("#save-lg-up").click(function () {
                             $('.language_drop').css('display','none');
@@ -4205,7 +4382,7 @@
                                 lg += 'Other, ';
                             }
                             var sl = lg.substring(0, lg.length - 2);
-                            document.getElementById("show-language-up").innerHTML = sl+'<span class="show-language-drop" style="margin-top: -2.5px;"><i style="opacity:0;">0</i></span>';
+                            document.getElementById("show-language-up").innerHTML = sl+'<span class="show-language-drop" style="margin-top: -2.5px;padding-right: 5px;"><i style="opacity:0;">0</i></span>';
                     });
                     $("#cancel-lg").click(function () {
                             $('.language_drop').css('display','none');
@@ -4261,7 +4438,43 @@
                         });
                     });
 
+                    $('#point-input').blur(function(){
+                        var point = $('#point-input').val();
+                        if(point != ''){
+                            point = parseFloat(point);
+                            point = point.toFixed(2);
+                        
+                            $('#total-amount').val(point);
+                        }else{$('#total-amount').val('')};
+                    });
 
+                    $('#confirm-point').click(function(){
+                        var point = $('#total-amount').val();
+                        var dpoint = $('#point-input').val();
+                        if(dpoint != ''){
+                            $('#type-payment').text(dpoint + ' Point');
+                            $('#type-payment').css('color','#515151');
+                            $('#price-payment').text('$'+point);
+                            $('#price-payment').css('color','#515151');
+                            $('#sum-price').text(point);
+                            $('#paypal-price').val(point);
+
+                        }
+
+                    });
+                    $('#remove-payment').click(function(){
+                        $('#type-payment').text('No Item Seclect');
+                        $('#type-payment').css('color','#9c9c9c');
+                        $('#price-payment').text('$0.00');
+                        $('#price-payment').css('color','#9c9c9c');
+                        $('#sum-price').text('0.00');
+                    });
+                    $("#paypal-submit").click(function (e) {
+                        e.preventDefault();
+                        if ($("#paypal-price").val() != "") {
+                            $("#paypal-btn").click();
+                        }
+                    });
                     $('.cancel-update-teacher').click(function () {
                         var id = $(this).attr('data-id');
                         var tab = $(this).attr('data-tab');
@@ -4269,6 +4482,24 @@
                         $('#sub-profile').addClass('active');
                         $("#" + tab).removeClass("active in");
                         $("#" + id).removeClass("active");
+                    });
+
+                    $('#payment_paypal').change(function(){
+                        if(this.checked){
+                            $('#paypal-box').css('display','block');
+                            $('#purchase-now').css('background','#009dcb');
+                        }else{
+                            $('#paypal-box').css('display','none');
+                            $('#purchase-now').css('background','#cecece');
+                        }
+                    });
+                    $('#chase-point').click(function(){
+                        $('#purchase-points').addClass('active in');
+                        $('#profile').removeClass('active');
+                        $('#profile').removeClass('in');
+                        $('.new-request-list').text('PURCHASE POINTS');
+                        $('#sub-profile').removeClass('active');
+
                     });
 
                     $('#update-teacher').click(function () {
@@ -4762,6 +4993,7 @@
                         $("#sub-findingtutor").removeClass('active');
                         $("#sub-status").removeClass('active');
                         $("#sub-schedule-li").removeClass('active');
+                        $('#purchase-points').removeClass('active in');
                     });
 
                     $('.go-to-find-tutor').click(function(){
@@ -4783,6 +5015,54 @@
                         $('.radio_tutor_search').attr('checked',false);
                         $('#sub-findingtutor').addClass('active');
                         $("#getting-tutoring").removeClass("active");
+                        if($(".main-my-schedule").hasClass('active-tab-schedule')){
+                            $(".main-my-schedule").removeClass("active-tab-schedule");
+
+                        }
+
+                        var viewport = getViewport();
+                        if(viewport.width < 925){
+                            $('#btn-open-calendar').css("display","none");
+                            if(viewport.width < 650){
+                                $('#tab-tutor-content .border-selectall').find('.col-md-6').css('width','66.2%');
+                            }else{
+                                $('#tab-tutor-content .border-selectall').find('.col-md-6').css('width','51.2%');
+                            }
+                        }else{
+                            $('#tab-tutor-content .border-selectall').find('.col-md-6').css('width','67.2%');
+                        }
+
+                        $('.btn-sub-tab').removeClass('active');
+                        if(!$('#btn-available-now').hasClass('active')){
+                            $('#btn-available-now').addClass('active');
+                            $('#btn-available-now').find('img').attr('src',path + '04_Available_Now_Selected.png');
+                            $('#btn-list-review').find('img').attr('src',path + 'icon_L_Review.png');
+                            $('#btn-list-favorite').find('img').attr('src',path + 'icon_L_Favorite.png');
+                            $('#btn-list-tutoring').find('img').attr('src',path + 'icon_L_list.png');
+                            $('#btn-find-tutoring').find('img').attr('src',path + 'icon_Find_off.png');
+                        }
+
+                        get_tutor_user('available');
+                    });
+
+                    $('#sub-findingtutor').click(function(){
+
+                        var path = '<?php echo get_template_directory_uri() ?>/library/images/';
+                        $('.new-request-list').text('Find a tutor');
+                        $('#btn-available-now').addClass('active');
+                        $(".main-my-schedule").css("display","none");
+                        $(".main-new-request").css("display","none"); 
+                        $(".main-view-request").css("display","none");
+                        $(".main-status-request").css("display","none");
+                        $(".section-tutor-main").css("display","block");
+                        $('.writting-review').css("display","none");
+                        $('.header-title-newschedule').css("display","none");
+                        $('.frm-available-now').css("display","none"); 
+                        $('#custom-timezone').css("display","none");
+                        $('.getting-tutor-main').css("display","none");
+
+                        $('.radio_tutor_search').attr('checked',false);
+
                         if($(".main-my-schedule").hasClass('active-tab-schedule')){
                             $(".main-my-schedule").removeClass("active-tab-schedule");
                         }
@@ -5235,6 +5515,8 @@
                         if($('#selected-tutor').hasClass('active')){
                             $('#selected-tutor').removeClass('active');
                             $('#btn-schedule-now').removeClass('active');
+                            $('#selected-type').removeClass('active');
+                            $('#selected-type').text('Not selected yet');
                             $('#selected-tutor').text('Not selected yet');
                             //$('#selected-subject').removeClass('active');
                             //$('#selected-subject').text('Not selected yet');
@@ -5243,6 +5525,8 @@
                             $('#selected-tutor').addClass('active');
                             $('#btn-schedule-now').addClass('active');
                             $('#selected-tutor').text(name);
+                            $('#selected-type').addClass('active');
+                            $('#selected-type').text(price_tutoring);
                             //$('#selected-subject').addClass('active');
                             /*if(subject_choose == ''){
                                 $('#selected-subject').text(subject);
@@ -5481,7 +5765,7 @@
                         
                         $('.writting-review').css("display","none");
                         $('.frm-available-now').css("display","none");
-
+                        $('.result_quick').css('display','none');
                         $('.slide-resume').slick('slickGoTo', parseInt(slide_index));
 
                         if($('#selected-tutor').hasClass('active')){
@@ -5576,6 +5860,10 @@
                         get_resume(id,'review',ptype,table);
                     });
 
+                    $('.chose-rate').live('click', function(){
+                       $(".list-rating").toggle();
+                    });
+
                     $('.view-write-review').live('click', function () {
                         var tutor_id = $(this).attr('data-id');
                         var review_id = $(this).attr('data-review-id');
@@ -5621,6 +5909,130 @@
                             $(this).prev().css("padding-left",left+"px");
                         });
                         get_resume(review_id,'write_review',ptype,table);
+                    });
+
+                    $('.sort-new').live('click', function () {
+                        $('.list-rating').css('display','none');
+                        $('#sort-view').text('Sort by Newest');
+                        var tutor_id = $(this).attr('data-review-id');
+                        var userid = '<?php if ($is_user_logged_in) echo $current_user->ID; else echo 0; ?>';
+                        $.get(home_url + "/?r=ajax/get_users_reviews", {tutor_id: tutor_id, type: 'normal'}, function (data) {
+                            data = JSON.parse(data);
+                            if (data.reviews.length > 0) {
+                                var div = '';
+                               
+                                        $.each(data.reviews, function (ir, vr) {
+                                            var img_star1 = '';
+                                            var max_star1 = 5;
+
+                                            if(vr.star > 0){
+                                                for(var k = 0; k < vr.star; k++){
+                                                    img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_ON.png" alt="">';
+                                                }
+                                                max_star1 = max_star1 - vr.star;
+                                            }
+
+                                            for(var j = 0; j < max_star1; j++){
+                                                img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
+                                            }
+
+                                            if(ir == 0)
+                                                var cl = 'first';
+                                            else
+                                                var cl = '';
+
+                                            div += '<div class="tr-info ' + cl + ' clearfix">';
+                                                div += '<p class="subject-review">' + vr.subject + '</p><p class="icon-star star-lab">' + img_star1 + '<span class="name-review">' + vr.review_name + '<span></p><p class="view-tutor-message">' + vr.message + '</p>';
+                                            div += '</div>';
+                                        });
+                                        
+                                $('#list-review' + tutor_id).html(div);
+                            }
+                        });
+                         });
+
+
+                    $('.sort-low').live('click', function () {
+                        $('.list-rating').css('display','none');
+                        $('#sort-view').text('Sort by Lowest Rating');
+                        var tutor_id = $(this).attr('data-review-id');
+                        var userid = '<?php if ($is_user_logged_in) echo $current_user->ID; else echo 0; ?>';
+                        $.get(home_url + "/?r=ajax/get_users_reviews", {tutor_id: tutor_id, type: 'lowstar'}, function (data) {
+                            data = JSON.parse(data);
+                            if (data.reviews.length > 0) {
+                                var div = '';
+                               
+                                        $.each(data.reviews, function (ir, vr) {
+                                            var img_star1 = '';
+                                            var max_star1 = 5;
+
+                                            if(vr.star > 0){
+                                                for(var k = 0; k < vr.star; k++){
+                                                    img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_ON.png" alt="">';
+                                                }
+                                                max_star1 = max_star1 - vr.star;
+                                            }
+
+                                            for(var j = 0; j < max_star1; j++){
+                                                img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
+                                            }
+
+                                            if(ir == 0)
+                                                var cl = 'first';
+                                            else
+                                                var cl = '';
+
+                                            div += '<div class="tr-info ' + cl + ' clearfix">';
+                                                div += '<p class="subject-review">' + vr.subject + '</p><p class="icon-star star-lab">' + img_star1 + '<span class="name-review">' + vr.review_name + '<span></p><p class="view-tutor-message">' + vr.message + '</p>';
+                                            div += '</div>';
+                                        });
+                                        
+                                $('#list-review' + tutor_id).html(div);
+                            }
+                        });
+
+                    });
+                    $('.sort-high').live('click', function () {
+                        $('.list-rating').css('display','none');
+                        $('#sort-view').text('Sort by Highest Rating');
+                     
+                        var tutor_id = $(this).attr('data-review-id');
+                         
+                        var userid = '<?php if ($is_user_logged_in) echo $current_user->ID; else echo 0; ?>';
+                        $.get(home_url + "/?r=ajax/get_users_reviews", {tutor_id: tutor_id, type: 'highstar'}, function (data) {
+                            data = JSON.parse(data);
+                            if (data.reviews.length > 0) {
+                                var div = '';
+                               
+                                        $.each(data.reviews, function (ir, vr) {
+                                            var img_star1 = '';
+                                            var max_star1 = 5;
+
+                                            if(vr.star > 0){
+                                                for(var k = 0; k < vr.star; k++){
+                                                    img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_ON.png" alt="">';
+                                                }
+                                                max_star1 = max_star1 - vr.star;
+                                            }
+
+                                            for(var j = 0; j < max_star1; j++){
+                                                img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
+                                            }
+
+                                            if(ir == 0)
+                                                var cl = 'first';
+                                            else
+                                                var cl = '';
+
+                                            div += '<div class="tr-info ' + cl + ' clearfix">';
+                                                div += '<p class="subject-review">' + vr.subject + '</p><p class="icon-star star-lab">' + img_star1 + '<span class="name-review">' + vr.review_name + '<span></p><p class="view-tutor-message">' + vr.message + '</p>';
+                                            div += '</div>';
+                                        });
+                                        
+                                $('#list-review' + tutor_id).html(div);
+                            }
+                        });
+
                     });
 
                     $('#btn-getting').click(function(){
@@ -6724,6 +7136,7 @@
                         });
 
                         get_list_schedule();
+                        get_tutor_schedule();
 
                         get_scheduled_day(day, 'schedule', true);
                         $(".getting-tutor-main").css("display","none");
@@ -8244,7 +8657,21 @@
                             next: '<img src="<?php echo get_template_directory_uri(); ?>/library/images/Chalendar_icon_Right.png" height="15">'
                         }
                     });
-
+                   
+                    $('#sandbox-calender-tutor').datetimepicker({
+                            useCurrent: false,
+                        inline: true,
+                        sideBySide: true,
+                        viewMode: 'days',
+                        timeZone: timezone_name,
+                        defaultDate: 'now',
+                        format: 'MM/DD/YYYY',
+                        icons: {
+                            previous: '<img src="<?php echo get_template_directory_uri(); ?>/library/images/Chalendar_icon_Left.png" height="15">',
+                            next: '<img src="<?php echo get_template_directory_uri(); ?>/library/images/Chalendar_icon_Right.png" height="15">'
+                        }
+                        });
+                    
                     $('.picker-switch').click(function() { return false; });
 
                     initCalendar();    
@@ -9009,9 +9436,11 @@
 
                         getQuickNotification(true);
                     });
-
                     $('#close-modal').click( function (e){
                         e.stopPropagation();
+                        $('#my-account-modal').css('display','none');
+                        $('body').removeClass('modal-open');
+                        
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
                         $('#my-account-modal').modal("hide");//location.reload();         
                         document.getElementById('user_password_signup').value=null;
@@ -9071,6 +9500,10 @@
                                 }
                             }
                         });
+                    });
+                    $('#cancel-writing').click(function(){
+                        $('.writting-review').removeClass('active');
+                         $('.writting-review').css('display','none');
                     });
 
                     $(".modal-content-signup").click( function (e){
@@ -10676,6 +11109,91 @@
                     }
 
                     function get_list_schedule(stype = 'schedule', time = 0){
+                        var tbody_schedule = $("#list-schedule-tutor");
+                        var date = $('#menu-schedule-btn').attr('data-day');
+                        tbody_schedule.html("");
+                        var type = 'am';
+                        var formattedDate = $('#today-tutor').val();
+                        var minute = 0;
+
+                        if(formattedDate == date && time == 0){
+                            time = $('#time-clock').attr('data-hour');
+                        }
+
+                        if(formattedDate == date){
+                            minute = $('#time-clock').attr('data-minute');
+                        }
+
+                        var html = '';
+                        for (var i = time; i < 24; i++) {                            
+                            var id = i;
+                            if (i > 11){
+                                var j = i - 12;                                    
+                                type = 'pm'; 
+                            }else{
+                                var j = i;
+                            }
+
+                            if(j == 0) id = j = 12;
+
+                            var kl = (parseInt(id) + 1);
+                            if(kl > 12){
+                                var ks  = kl - 12;
+                            }else{
+                                var ks = kl;
+                            }
+
+                            if(ks < 10) 
+                                var kll = '0'+ks;
+                            else
+                                var kll = ks;
+
+                            if(j < 10) 
+                                var jk = '0'+j;
+                            else
+                                var jk = j;
+
+                            html += '<option data-time="'+j+':00:'+type+' ~ '+j+':30:'+type+'" data-time-view="'+j+':00'+type+'-'+j+':30'+type+'" value="'+j+':00'+type+'">'+jk+':00 '+type+' - '+jk+':30 '+type+'</option>';
+                            html += '<option data-time="'+j+':30:'+type+' ~ '+ks+':00:'+type+'" data-time-view="'+j+':30'+type+'-'+ks+':00'+type+'" value="'+j+':30'+type+'">'+jk+':30 '+type+' - '+kll+':00 '+type+'</option>';
+                            
+                            if(stype == 'summary'){    
+                                var tr_am = '';
+                            }else{
+                                var tr_am = '<tr id="' + id + '_00_' + type + '" class="schedule-time" data-index="' + i + '" data-half="0">';
+                                tr_am += '<td class="time-type">' + j + type + '</td>'; 
+                                tr_am += '<td><button class="btn-new-request" data-fromtime="' + id + ':00:' + type + '" data-totime="' + id + ':30:' + type + '" data-day="' + date + '" data-time="' + id + ':00' + type + ' - ' + id + ':30' + type + '" data-id="' + id + '_00_' + type + '" data-index="' + i + '" data-half="0"><img src="<?php echo get_template_directory_uri(); ?>/library/images/TimeIcon_No-Scheduled.png">No Schedule</button></td>';
+                                tr_am += '</tr>';
+
+                                var tr_half = '<tr id="' + id + '_30_' + type + '"  class="schedule-time" data-index="' + i + '" data-half="30">';
+                                tr_half += '<td class="time-type"></td>'; 
+                                tr_half += '<td class="half-time"><button class="btn-new-request" data-fromtime="' + id + ':30:' + type + '" data-totime="' + (id + 1) + ':00:' + type + '" data-day="' + date + '" data-time="' + id + ':30' + type + ' - ' + (id + 1) + ':30' + type + '" data-id="' + id + '_30_' + type + '" data-index="' + i + '" data-half="30"><img src="<?php echo get_template_directory_uri(); ?>/library/images/TimeIcon_No-Scheduled.png">No Schedule</button></td>';
+                                tr_half += '</tr>';
+                            }
+                            if(time == i && minute > 0 && minute < 30){
+                                //tbody_schedule.append(tr_am);
+                                tbody_schedule.append(tr_am);
+                                tbody_schedule.append(tr_half);
+                            }else if(time == i && minute > 30){
+                                tbody_schedule.append(tr_half);
+                            }else{
+                                tbody_schedule.append(tr_am);
+                                tbody_schedule.append(tr_half);
+                            }
+                        }
+                        $('#select-available-time').html(html).data("selectBox-selectBoxIt").refresh();
+
+                        if(stype == 'summary'){ 
+                            var tr_24 = '';
+                                tbody_schedule.append(tr_24);
+                        }else{
+                            var tr_24 = '<tr id="24_00_pm">';
+                                tr_24 += '<td class="time-type"></td>'; 
+                                tr_24 += '<td></td>';
+                                tr_24 += '</tr>';
+                                tbody_schedule.append(tr_24);
+                        }
+                    }
+                    function get_tutor_schedule(stype = 'schedule', time = 0){
                         var tbody_schedule = $("#table-list-schedule");
                         var date = $('#menu-schedule-btn').attr('data-day');
                         tbody_schedule.html("");
@@ -10829,21 +11347,19 @@
                                 $('.writting-review').removeClass("active");
                             }
 
-                            $('#view-review' + id).attr('src','<?php echo get_template_directory_uri(); ?>/library/images/iconM_Review_ON-O.png');
-                            $('#view-resume' + id).attr('src','<?php echo get_template_directory_uri(); ?>/library/images/iconM_Resume_OFF.png');
-                            $('#view-write-review' + id).attr('src','<?php echo get_template_directory_uri(); ?>/library/images/iconM_Write_Review_OFF.png');
+                            $('#view-review' + id).addClass('active');
+                            $('#view-resume' + id).removeClass('active');
+                            $('#view-write-review' + id).removeClass('active');
                         }else if(type == 'write_review'){
-                            $('#tr-tutor' + id).css('display','block');
-                            $('#tr-info' + id).css('display','none');
-                            $('#tr-review' + id).css('display','none');
+                            
+                            
                             if(!$('.writting-review').hasClass("active")){
                                 $('.writting-review').addClass("active");
                                 $('.writting-review').css("display","block");
                             }
 
-                            $('#view-review' + id).attr('src','<?php echo get_template_directory_uri(); ?>/library/images/iconM_Review_OFF.png');
-                            $('#view-resume' + id).attr('src','<?php echo get_template_directory_uri(); ?>/library/images/iconM_Resume_OFF.png');
-                            $('#view-write-review' + id).attr('src','<?php echo get_template_directory_uri(); ?>/library/images/iconM_Write_Review_ON-O.png');
+                            
+                            $('#view-write-review' + id).addClass('active');
                         }else{
                             if($('.writting-review').hasClass("active")){
                                 $('.writting-review').removeClass("active");
@@ -10853,9 +11369,9 @@
                             $('#tr-info' + id).css('display','block');
                             $('#tr-review' + id).css('display','none');
 
-                            $('#view-review' + id).attr('src','<?php echo get_template_directory_uri(); ?>/library/images/iconM_Review_OFF.png');
-                            $('#view-resume' + id).attr('src','<?php echo get_template_directory_uri(); ?>/library/images/iconM_Resume_ON-O.png');
-                            $('#view-write-review' + id).attr('src','<?php echo get_template_directory_uri(); ?>/library/images/iconM_Write_Review_OFF.png');
+                            $('#view-review' + id).removeClass('active');
+                            $('#view-resume' + id).addClass('active');
+                            $('#view-write-review' + id).removeClass('active');;
                         }  
                     }
 
@@ -11092,7 +11608,19 @@
                                 next: '<img src="<?php echo get_template_directory_uri(); ?>/library/images/Chalendar_icon_Right.png" height="15">'
                             }
                         });
-
+                        $('#sandbox-calender-tutor').datetimepicker({
+                            inline: true,
+                            sideBySide: true,
+                            viewMode: 'days',
+                            timeZone: timezone_name,
+                            defaultDate: new Date(mDate),
+                            format: "MM/DD/YYYY",
+                            icons: {
+                                previous: '<img src="<?php echo get_template_directory_uri(); ?>/library/images/Chalendar_icon_Left.png" height="15">',
+                                next: '<img src="<?php echo get_template_directory_uri(); ?>/library/images/Chalendar_icon_Right.png" height="15">'
+                            }
+                        });
+                        
                         $.post(home_url + "/?r=ajax/get_tutoring_date_active", {                                   
                             timezone: time_zone,
                             name: timezone_name,
@@ -11407,15 +11935,23 @@
                                             subject += item + ", ";
                                         }
                                     })
+                                    var price_type = v.price_tutoring;
+                                    var type = "/library/images/icon_1on1.png";
+                                    console.log( "value is " + v.enable_group_tutoring);
+                                    if(v.enable_group_tutoring == "timelot_group_tutoring"){
+                                        type = "/library/images/icon_Group.png";
+                                          
+                                        price_type = v.price_group_tutoring;
+                                    }
                                     //DUMMY DATA
-                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Group.png" alt="" style="width:43px;margin-top: -15px;"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
+                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_1on1.png" alt="" style="width:43px;margin-top: -10px;"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
                                         <div><b style="font-size:14px">${v.display_name}</b></div><div><p class="find-card-marketing-tag">
                                         ${v.previous_school}</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
-                                        <span class="find-card-more" data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume"><u>+Read more</u></span></p></div>
+                                        <span class="find-card-more" data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${price_type}" name="resume"><u>+Read more</u></span></p></div>
                                     </td>`;
                                     tr+=`<td><div>
                                     <p style="text-align:center;"><span class="find-card-price">$${v.price_tutoring}</span><span class="find-card-time">&nbsp;/&nbsp;30 min</span></p></div>
-                                    <div style="margin-top:5px"><button class="find-card-select-btn btn orange"  data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${v.price_tutoring}" name="resume">Select This Tutor</button></div>
+                                    <div style="margin-top:5px"><button class="find-card-select-btn btn orange"  data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${price_type}" name="resume">Select This Tutor</button></div>
                                     <div class="find-card-send-message"><img class="find-card-envelope" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Message.png" style="width:13px; margin-top:-2px;">&nbsp; Contact Tutor</p></div>
                                     </td>`;
                                     tr+='</tr>';
@@ -11432,93 +11968,106 @@
                                         });
                                     }
 
-                                    var view = '<img src="<?php echo get_template_directory_uri(); ?>/library/images/iconM_Resume_ON-O.png" alt="" id="view-resume' + v.ID + '" class="btn-view view-resume" data-id="' + v.ID + '" data-ptype="' + type + '" data-table="' + table + '"><img id="view-review' + v.ID + '" class="btn-view view-review" data-id="' + v.ID + '" data-ptype="' + type + '" data-table="' + table + '" src="<?php echo get_template_directory_uri(); ?>/library/images/iconM_Review_OFF.png" alt="">';
-                                    if(uid != v.ID){
-                                        view += '<img id="view-write-review' + v.ID + '" class="btn-view view-write-review" data-review-id="' + v.ID + '" '+ attr_data +' data-table="' + table + '" src="<?php echo get_template_directory_uri(); ?>/library/images/iconM_Write_Review_OFF.png" alt="">';
-                                    }
-                                    var title_resum = 'RESUME';
-
-                                    view += '<button type="button" data-id="' + v.ID + '" data-subject="' + v.user_subject + '"  data-subject-choose="'+ subject_name +'" data-name="' + v.display_name + '" data-ptype="' + type + '" data-time="'+stime+'" data-time-view="'+time_view+'" data-day="'+date+'" data-price-tutoring="' + v.price_tutoring + '" class="btn-orange2 nopadding-r border-btn" id="btn-select-tutor"><span>Select</span></button>';
+                                   var view = '<span id="view-resume' + v.ID + '" class="btn-view view-resume" data-id="' + v.ID + '" data-ptype="' + type + '" data-table="' + table + '">About Tutor</span>';
+                                    
+                                        view += '<span id="view-schedule' + v.ID + '" class="btn-view view-schedule" data-review-id="' + v.ID + '" '+ attr_data +' data-table="' + table + '" >Schedule</span>';
+                                    var title_resum = 'About the Tutor';
+                                    view += '<span id="view-review' + v.ID + '" class="btn-view view-review" data-id="' + v.ID + '" data-ptype="' + type + '" data-table="' + table + '" >Review</span><span id="send-message' + v.ID + '" class="btn-view send-message" data-id="' + v.ID + '" data-ptype="' + type + '" data-table="' + table + '" >Send Message</span><button type="button" data-id="' + v.ID + '" data-subject="' + v.user_subject + '"  data-subject-choose="'+ subject_name +'" data-name="' + v.display_name + '" data-ptype="' + type + '" data-time="'+stime+'" data-time-view="'+time_view+'" data-day="'+date+'" data-price-tutoring="' + price_type + '" class="btn-orange2 nopadding-r border-btn" id="btn-select-tutor"><span>Select</span></button>';
+                                    
                                     var div = '<div class="item">';
                                             div += '<div class="tr-tutor resume clearfix" id="tr-tutor' + v.ID + '">';
-                                                div +='<div class="avatar-tutor"><img src="' + v.user_avatar + '" alt="' + v.display_name + '"/></div>'; 
-                                                div +='<div class="item-name"><p class="name-tutor">' + v.display_name + '</p><p class="icon-star">' + img_star + '<span>('+v.cnt+')<span></p><p class="view-tutor">' + view + '</p></div>';
+                                                div +='<div class="img-tutor"><img src="' + v.user_avatar + '" alt="' + v.display_name + '"/></div>'; 
+                                                div +='<div class="item-name"><p class="name-tutor">' + v.display_name + '</p><p class="icon-star">' + img_star + '<span>('+v.cnt+')<span></p><p><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_1on1.png" style="height:12px"><span class="price-tutor"><b>&nbsp;$'+v.price_tutoring+'</b>&nbsp;/ 30m</span></p><p><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Group.png" style="height:12px"><span class="price-tutor"><b>&nbsp;$'+v.price_group_tutoring+'</b>&nbsp;/ 30m</span></p></div>';
                                             div +='</div>';
-
+                                            div +='<div><div class="view-tutor">' + view + '</div>'
+                                            div += '</div>'
                                             div +='<div class="tr-info clearfix" id="tr-info' + v.ID + '">';
                                                 div += '<p class="head-title-resum">' + title_resum + '</p>';
-                                                div += '<h4>Why I like teaching and tutoring:</h4>';
-                                                div += '<p>' + v.desc_tell_me + '<p>';
-                                                div += '<h4>Subjects I can teach:</h4>';
-                                                div += '<ul>';
+                                                div += '<img style="max-height: 200px" src="'+v.main_image+'">';
+                                                div += '<p class="taget-tutor">" ' + v.taget_tutor + ' "</p>';
+                                                div += '<p class="title-head">Why I like Tutoring</p>';
+                                                div += '<p style="font-size: 13px; color: #656565">' + v.desc_tell_me + '<p>';
+                                                div += '<p class="title-head">Subjects I can Tutor</p>';
+                                                div += '<ul style="padding-bottom: 10px">';
+                                                var sub_english = '';
+                                                var sub_math = '';
+                                                var sub_science = '';
                                                 if(v.subject_type.length > 0){
                                                     for(var i = 0; i < v.subject_type.length; i++){
-                                                        div += '<li>'+ v.subject_type[i] +'</li>';
+
+                                                        var sub_name = v.subject_type[i];
+                                                      if(sub_name.search("English:")!= -1){
+                                                        sub_english += sub_name.replace("English:", "")+' / ';
+
+                                                      } else if(sub_name.search("Math:")!= -1){
+                                                        sub_math += sub_name.replace("Math:", "")+' / ';
+                                                      } else if(sub_name.search("Science:")!= -1){
+                                                        sub_science += sub_name.replace("Science:", "")+' / ';
+                                                      }
                                                     }
                                                 }
+                                                if(sub_english != ""){div += '<li><span class="sub-head">English:</span>'+sub_english.substring(0, sub_english.length - 2)+'</li>';};
+                                                if(sub_math != ""){div += '<li><span class="sub-head">Math:</span>'+sub_math.substring(0, sub_math.length - 2)+'</li>';};
+                                                if(sub_science != ""){div += '<li><span class="sub-head">Science:</span>'+sub_science.substring(0, sub_science.length - 2)+'</li>';};
+                                                
                                                 div += '</ul>';
                                                 
-                                                if(v.school_name != '' || v.teaching_link != '' || v.user_years != '' || v.teaching_subject != ''){
+                                                if(v.school_name != ''){
                                                     $class_teaching = '';
                                                 }else{
-                                                    $class_teaching = ' class="hidden"';
+                                                    $class_teaching = 'hidden';
                                                 }    
-                                                div += '<h4' + $class_teaching + '>Teaching Experlence at School:</h4>';
-                                                div += '<ul' + $class_teaching + '>';
-                                                if(v.school_name != '' || v.teaching_link != ''){
-                                                    div += '<li>School Name: ' + v.school_name + ' (' + v.teaching_link + ')</li>';
+                                                div += '<p class="title-head ' + $class_teaching + '">Teaching Experlence</p>';
+                                                div += '<ul class="' + $class_teaching + '">';
+                                                if(v.school_name != ''){
+                                                    div += '<li><span class="sub-head">' + v.school_name + ': </span>'+v.teaching_subject+'</li>';
                                                 }
-                                                if(v.teaching_subject != ''){
-                                                    div += '<li>Subject: ' + v.teaching_subject + '</li>';
+                                                if(v.school_name_02 != ''){
+                                                    div += '<li><span class="sub-head">' + v.school_name_02 + ': </span>'+v.teaching_subject_02+'</li>';
                                                 }
-                                                if(v.user_years != ''){
-                                                    div += '<li>Years: ' + v.user_years + '</li>';
+                                                if(v.school_name_03 != ''){
+                                                    div += '<li><span class="sub-head">' + v.school_name_03 + ': </span>'+v.teaching_subject_03+'</li>';
                                                 }
+                                                if(v.school_name_04 != ''){
+                                                    div += '<li><span class="sub-head">' + v.school_name_04 + ': </span>'+v.teaching_subject_04+'</li>';
+                                                }
+                                                if(v.school_name_05 != ''){
+                                                    div += '<li><span class="sub-head">' + v.school_name_05 + ': </span>'+v.teaching_subject_05+'</li>';
+                                                }                                              
+                                                
                                                 div += '</ul>';
 
-                                                if(v.school_attend != '' || v.user_grade != '' || v.user_gpa != '' || v.user_major != '' || v.student_link != ''){
-                                                    $class_student = '';
-                                                }else{
-                                                    $class_student = ' class="hidden"';
-                                                }
-                                                div += '<h4' + $class_student + '>Teaching Experlence as a Student:</h4>';
-                                                div += '<ul' + $class_student + '>';
-                                                if(v.school_attend != ''){
-                                                    div += '<li>Attending: ' + v.school_attend + ' (' + v.student_link + ')</li>';
-                                                }
-                                                if(v.user_grade == '1'){
-                                                    div += '<li>Grade: Freshman</li>';
-                                                }else if(v.user_grade == '2'){
-                                                    div += '<li>Grade: Sophomore</li>';
-                                                }else if(v.user_grade == '3'){
-                                                    div += '<li>Grade: Junior</li>';
-                                                }else if(v.user_grade == '4'){
-                                                    div += '<li>Grade: Senior</li>';
-                                                }
-                                                if(v.user_gpa != ''){
-                                                    div += '<li>GPA: ' + v.user_gpa + '</li>';
-                                                }
-                                                if(v.user_major != ''){
-                                                    div += '<li>Major: ' + v.user_major + '</li>';
-                                                }
-                                                div += '</ul>';
-                                                div += '<h4>Educational Background:</h4>';
+                                                div += '<p class="title-head">Educational Background:</p>';
                                                 div += '<ul>';
                                                 if(v.school_name1 != ''){
-                                                    div += '<li>School Name: ' + v.school_name1 + ' (' + data.school_link1 + ')</li>';
+                                                    div += '<li><span  class="sub-head">' + v.school_name1 + '</span></li>';
                                                 }
                                                 if(v.school_name2 != ''){
-                                                    div += '<li>School Name: ' + v.school_name2 + ' (' + data.school_link2 + ')</li>';
+                                                    div += '<li><span  class="sub-head">' + v.school_name2 + '</span></li>';
                                                 }
-                                                if(v.any_other != ''){
-                                                    div += '<li>Others: ' + v.any_other + '</li>';
+                                                if(v.school_name3 != ''){
+                                                    div += '<li><span  class="sub-head">' + v.school_name3 + '</span></li>';
                                                 }
+                                                if(v.school_name4 != ''){
+                                                    div += '<li><span  class="sub-head">' + v.school_name4 + '</span></li>';
+                                                }
+                                                if(v.school_name5 != ''){
+                                                    div += '<li><span  class="sub-head">' + v.school_name5 + '</span></li>';
+                                                }
+                                                
                                                 div += '</ul>';
                                             div += '</div>';
+                                            
 
-                                    if (v.reviews.length > 0) {
+                                    
                                         div += '<div id="tr-review' + v.ID + '" style="display: none">';
-                                        div += '<p class="head-title-resum">REVIEW</p>';
+                                        div += '<p class="head-title-resum">Review</p>';
+                                        div += '<div><span style="font-size:15px; color:#656565;"><span Style="font-family:semibold;" >'+v.cnt+'&nbsp;</span><span Style="font-size=15px;">Total Reviews &nbsp;</span></span><span class="img-rate">'+img_star+'</span>';
+                                        div += '<button class="view-write-review" id="view-write-review' + v.ID + '" data-review-id="' + v.ID + '" '+ attr_data +' data-table="' + table + '">create review</button>';
+                                        div += '<span class="select-rating"><span class="chose-rate"><span id="sort-view" style="width: 150px; display: inline-block;">Sort by Newest</span><span class="show-list-rate" unselectable="on"><i style="opacity: 0;">0</i></span></span><ul class="list-rating"><li class="sort-new" id="sort-new' + v.ID + '" data-review-id="' + v.ID + '">Sort by Newest</li><li class="sort-high" id="sort-high' + v.ID + '" data-review-id="' + v.ID + '">Sort by Highest Rating</li><li class="sort-low" id="sort-low' + v.ID + '" data-review-id="' + v.ID + '" data-review-id="' + v.ID + '">Sort by Lowest Rating</li></ul></span>';
+
+                                        div += '</div>'   ; 
+                                        div += '<div id="list-review'+v.ID+'">';
                                         $.each(v.reviews, function (ir, vr) {
                                             var img_star1 = '';
                                             var max_star1 = 5;
@@ -11540,11 +12089,12 @@
                                                 var cl = '';
 
                                             div += '<div class="tr-info ' + cl + ' clearfix">';
-                                                div += '<p class="subject-review">' + vr.subject + '</p><p class="icon-star">' + img_star1 + '<span class="name-review">' + vr.review_name + '<span></p><p class="view-tutor-message">' + vr.message + '</p>';
+                                                div += '<p class="subject-review">' + vr.subject + '</p><p class="icon-star star-lab">' + img_star1 + '<span class="name-review">' + vr.review_name + '<span></p><p class="view-tutor-message">' + vr.message + '</p>';
                                             div += '</div>';
                                         });
                                         div += '</div>';
-                                    }
+                                        div += '</div>';
+                                    
                                     div +='</div>';
                                     $('.slide-resume').append(div);
                                 });   
@@ -11650,16 +12200,16 @@
                                         }
                                     })
                                     }
-                                    var price_type = v.price_tutoring;
+                                    var price_type = v.up_price_one;
                                     var type = "/library/images/icon_1on1.png";
                                     console.log( "value is " + v.enable_group_tutoring);
                                     if(v.enable_group_tutoring == "timelot_group_tutoring"){
                                         type = "/library/images/icon_Group.png";
                                           
-                                        price_type = v.price_group_tutoring;
+                                        price_type = v.up_price_group;
                                     }
                                     //DUMMY DATA
-                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>${type}" alt="" style="width:43px;margin-top: -15px;"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
+                                    tr+=`<td> <div class="row"><div class="col-sm-1 col-md-1" style="margin-bottom="15px";><img src="<?php echo get_template_directory_uri(); ?>${type}" alt="" style="width:43px;margin-top: -10px;"></div><div class="col-sm-11 col-md-11"><p class="find-card-sibject"> ${subject}</p></div></div>
                                         <div><b style="font-size:14px">${v.display_name}</b></div><div><p class="find-card-marketing-tag">
                                         ${v.previous_school}</p></div><div><p class="icon-star">${img_star}<span class="find-card-star-count">(${v.cnt})<span>
                                         <span class="find-card-more" data-type="${type}" data-table="${table}" data-id="${v.ID}" data-time="${stime}" data-time-view="${time_view}" data-day="${date}" data-slide-index="${i}" data-subject="${subject_name}" data-price-tutoring="${price_type}" name="resume"><u>+Read more</u></span></p></div>
@@ -11683,93 +12233,175 @@
                                         });
                                     }
 
-                                    var view = '<img src="<?php echo get_template_directory_uri(); ?>/library/images/iconM_Resume_ON-O.png" alt="" id="view-resume' + v.ID + '" class="btn-view view-resume" data-id="' + v.ID + '" data-ptype="' + type + '" data-table="' + table + '"><img id="view-review' + v.ID + '" class="btn-view view-review" data-id="' + v.ID + '" data-ptype="' + type + '" data-table="' + table + '" src="<?php echo get_template_directory_uri(); ?>/library/images/iconM_Review_OFF.png" alt="">';
-                                    if(uid != v.ID){
-                                        view += '<img id="view-write-review' + v.ID + '" class="btn-view view-write-review" data-review-id="' + v.ID + '" '+ attr_data +' data-table="' + table + '" src="<?php echo get_template_directory_uri(); ?>/library/images/iconM_Write_Review_OFF.png" alt="">';
-                                    }
-                                    var title_resum = 'RESUME';
+                                    var view = '<span id="view-resume' + v.ID + '" class="btn-view view-resume" data-id="' + v.ID + '" data-ptype="' + type + '" data-table="' + table + '">About Tutor</span>';
+                                    
+                                        view += '<span id="view-schedule' + v.ID + '" class="btn-view view-schedule" data-review-id="' + v.ID + '" '+ attr_data +' data-table="' + table + '" >Schedule</span>';
+                                    
+                                    var title_resum = 'About the Tutor';
 
-                                    view += '<button type="button" data-id="' + v.ID + '" data-subject="' + v.user_subject + '"  data-subject-choose="'+ subject_name +'" data-name="' + v.display_name + '" data-ptype="' + type + '" data-time="'+stime+'" data-time-view="'+time_view+'" data-day="'+date+'" data-price-tutoring="' + price_type + '" class="btn-orange2 nopadding-r border-btn" id="btn-select-tutor"><span>Select</span></button>';
+                                    view += '<span id="view-review' + v.ID + '" class="btn-view view-review" data-id="' + v.ID + '" data-ptype="' + type + '" data-table="' + table + '" >Review</span><span id="send-message' + v.ID + '" class="btn-view send-message" data-id="' + v.ID + '" data-ptype="' + type + '" data-table="' + table + '" >Send Message</span><button type="button" data-id="' + v.ID + '" data-subject="' + v.user_subject + '"  data-subject-choose="'+ subject_name +'" data-name="' + v.display_name + '" data-ptype="' + type + '" data-time="'+stime+'" data-time-view="'+time_view+'" data-day="'+date+'" data-price-tutoring="' + price_type + '" class="btn-orange2 nopadding-r border-btn" id="btn-select-tutor"><span>Select</span></button>';
                                     var div = '<div class="item">';
                                             div += '<div class="tr-tutor resume clearfix" id="tr-tutor' + v.ID + '">';
-                                                div +='<div class="avatar-tutor"><img src="' + v.user_avatar + '" alt="' + v.display_name + '"/></div>'; 
-                                                div +='<div class="item-name"><p class="name-tutor">' + v.display_name + '</p><p class="icon-star">' + img_star + '<span>('+v.cnt+')<span></p><p class="view-tutor">' + view + '</p></div>';
+                                                div +='<div class="img-tutor"><img src="' + v.user_avatar + '" alt="' + v.display_name + '"/></div>'; 
+                                                div +='<div class="item-name"><p class="name-tutor">' + v.display_name + '</p><p class="icon-star">' + img_star + '<span>('+v.cnt+')<span></p><p><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_1on1.png" style="height:12px"><span class="price-tutor"><b>&nbsp;$'+v.price_tutoring+'</b>&nbsp;/ 30m</span></p><p><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Group.png" style="height:12px"><span class="price-tutor"><b>&nbsp;$'+v.price_group_tutoring+'</b>&nbsp;/ 30m</span></p></div>';
                                             div +='</div>';
-
+                                            div +='<div><div class="view-tutor">' + view + '</div>'
+                                            div += '</div>'
                                             div +='<div class="tr-info clearfix" id="tr-info' + v.ID + '">';
                                                 div += '<p class="head-title-resum">' + title_resum + '</p>';
-                                                div += '<h4>Why I like teaching and tutoring:</h4>';
-                                                div += '<p>' + v.desc_tell_me + '<p>';
-                                                div += '<h4>Subjects I can teach:</h4>';
-                                                div += '<ul>';
+                                                div += '<img style="max-height: 200px" src="'+v.main_image+'">';
+                                                div += '<p class="taget-tutor">" ' + v.taget_tutor + ' "</p>';
+                                                div += '<p class="title-head">Why I like Tutoring</p>';
+                                                div += '<p style="font-size: 13px; color: #656565">' + v.desc_tell_me + '<p>';
+                                                div += '<p class="title-head">Subjects I can Tutor</p>';
+                                                div += '<ul style="padding-bottom: 10px">';
+                                                var sub_english = '';
+                                                var sub_math = '';
+                                                var sub_science = '';
                                                 if(v.subject_type.length > 0){
                                                     for(var i = 0; i < v.subject_type.length; i++){
-                                                        div += '<li>'+ v.subject_type[i] +'</li>';
+
+                                                        var sub_name = v.subject_type[i];
+                                                      if(sub_name.search("English:")!= -1){
+                                                        sub_english += sub_name.replace("English:", "")+' / ';
+
+                                                      } else if(sub_name.search("Math:")!= -1){
+                                                        sub_math += sub_name.replace("Math:", "")+' / ';
+                                                      } else if(sub_name.search("Science:")!= -1){
+                                                        sub_science += sub_name.replace("Science:", "")+' / ';
+                                                      }
                                                     }
                                                 }
+                                                if(sub_english != ""){div += '<li><span class="sub-head">English:</span>'+sub_english.substring(0, sub_english.length - 2)+'</li>';};
+                                                if(sub_math != ""){div += '<li><span class="sub-head">Math:</span>'+sub_math.substring(0, sub_math.length - 2)+'</li>';};
+                                                if(sub_science != ""){div += '<li><span class="sub-head">Science:</span>'+sub_science.substring(0, sub_science.length - 2)+'</li>';};
+                                                
                                                 div += '</ul>';
                                                 
-                                                if(v.school_name != '' || v.teaching_link != '' || v.user_years != '' || v.teaching_subject != ''){
+                                                if(v.school_name != ''){
                                                     $class_teaching = '';
                                                 }else{
-                                                    $class_teaching = ' class="hidden"';
+                                                    $class_teaching = 'hidden';
                                                 }    
-                                                div += '<h4' + $class_teaching + '>Teaching Experlence at School:</h4>';
-                                                div += '<ul' + $class_teaching + '>';
-                                                if(v.school_name != '' || v.teaching_link != ''){
-                                                    div += '<li>School Name: ' + v.school_name + ' (' + v.teaching_link + ')</li>';
+                                                div += '<p class="title-head ' + $class_teaching + '">Teaching Experlence</p>';
+                                                div += '<ul class="' + $class_teaching + '">';
+                                                if(v.school_name != ''){
+                                                    div += '<li><span class="sub-head">' + v.school_name + ': </span>'+v.teaching_subject+'</li>';
                                                 }
-                                                if(v.teaching_subject != ''){
-                                                    div += '<li>Subject: ' + v.teaching_subject + '</li>';
+                                                if(v.school_name_02 != ''){
+                                                    div += '<li><span class="sub-head">' + v.school_name_02 + ': </span>'+v.teaching_subject_02+'</li>';
                                                 }
-                                                if(v.user_years != ''){
-                                                    div += '<li>Years: ' + v.user_years + '</li>';
+                                                if(v.school_name_03 != ''){
+                                                    div += '<li><span class="sub-head">' + v.school_name_03 + ': </span>'+v.teaching_subject_03+'</li>';
                                                 }
+                                                if(v.school_name_04 != ''){
+                                                    div += '<li><span class="sub-head">' + v.school_name_04 + ': </span>'+v.teaching_subject_04+'</li>';
+                                                }
+                                                if(v.school_name_05 != ''){
+                                                    div += '<li><span class="sub-head">' + v.school_name_05 + ': </span>'+v.teaching_subject_05+'</li>';
+                                                }                                              
+                                                
                                                 div += '</ul>';
 
-                                                if(v.school_attend != '' || v.user_grade != '' || v.user_gpa != '' || v.user_major != '' || v.student_link != ''){
-                                                    $class_student = '';
-                                                }else{
-                                                    $class_student = ' class="hidden"';
-                                                }
-                                                div += '<h4' + $class_student + '>Teaching Experlence as a Student:</h4>';
-                                                div += '<ul' + $class_student + '>';
-                                                if(v.school_attend != ''){
-                                                    div += '<li>Attending: ' + v.school_attend + ' (' + v.student_link + ')</li>';
-                                                }
-                                                if(v.user_grade == '1'){
-                                                    div += '<li>Grade: Freshman</li>';
-                                                }else if(v.user_grade == '2'){
-                                                    div += '<li>Grade: Sophomore</li>';
-                                                }else if(v.user_grade == '3'){
-                                                    div += '<li>Grade: Junior</li>';
-                                                }else if(v.user_grade == '4'){
-                                                    div += '<li>Grade: Senior</li>';
-                                                }
-                                                if(v.user_gpa != ''){
-                                                    div += '<li>GPA: ' + v.user_gpa + '</li>';
-                                                }
-                                                if(v.user_major != ''){
-                                                    div += '<li>Major: ' + v.user_major + '</li>';
-                                                }
-                                                div += '</ul>';
-                                                div += '<h4>Educational Background:</h4>';
+                                                // if(v.school_attend != '' || v.user_grade != '' || v.user_gpa != '' || v.user_major != '' || v.student_link != ''){
+                                                //     $class_student = '';
+                                                // }else{
+                                                //     $class_student = ' class="hidden"';
+                                                // }
+                                                // div += '<h4' + $class_student + '>Teaching Experlence as a Student:</h4>';
+                                                // div += '<ul' + $class_student + '>';
+                                                // if(v.school_attend != ''){
+                                                //     div += '<li>Attending: ' + v.school_attend + ' (' + v.student_link + ')</li>';
+                                                // }
+                                                // if(v.user_grade == '1'){
+                                                //     div += '<li>Grade: Freshman</li>';
+                                                // }else if(v.user_grade == '2'){
+                                                //     div += '<li>Grade: Sophomore</li>';
+                                                // }else if(v.user_grade == '3'){
+                                                //     div += '<li>Grade: Junior</li>';
+                                                // }else if(v.user_grade == '4'){
+                                                //     div += '<li>Grade: Senior</li>';
+                                                // }
+                                                // if(v.user_gpa != ''){
+                                                //     div += '<li>GPA: ' + v.user_gpa + '</li>';
+                                                // }
+                                                // if(v.user_major != ''){
+                                                //     div += '<li>Major: ' + v.user_major + '</li>';
+                                                // }
+                                                // div += '</ul>';
+                                                div += '<p class="title-head">Educational Background:</p>';
                                                 div += '<ul>';
                                                 if(v.school_name1 != ''){
-                                                    div += '<li>School Name: ' + v.school_name1 + ' (' + data.school_link1 + ')</li>';
+                                                    div += '<li><span  class="sub-head">' + v.school_name1 + '</span></li>';
                                                 }
                                                 if(v.school_name2 != ''){
-                                                    div += '<li>School Name: ' + v.school_name2 + ' (' + data.school_link2 + ')</li>';
+                                                    div += '<li><span  class="sub-head">' + v.school_name2 + '</span></li>';
                                                 }
-                                                if(v.any_other != ''){
-                                                    div += '<li>Others: ' + v.any_other + '</li>';
+                                                if(v.school_name3 != ''){
+                                                    div += '<li><span  class="sub-head">' + v.school_name3 + '</span></li>';
                                                 }
+                                                if(v.school_name4 != ''){
+                                                    div += '<li><span  class="sub-head">' + v.school_name4 + '</span></li>';
+                                                }
+                                                if(v.school_name5 != ''){
+                                                    div += '<li><span  class="sub-head">' + v.school_name5 + '</span></li>';
+                                                }
+                                                
                                                 div += '</ul>';
                                             div += '</div>';
+                                            // div +='<div class="tr-write clearfix" id="tr-write' + v.ID + '" style="display: none">';
+                                            //     div += '<p class="head-title-resum">Write a Review</p>';
+                                            //     div += `<div>
+                                            //                 <span>Tutor Rating &nbsp;</span>
+                                            //                 <span>
+                                            //                 <label>
+                                            //                     <input id="star1" type="checkbox" class="star_buttons option-input-star radio" value="1" data-star="1" name="star">
+                                            //                 </label>
+                                            //                 <label>
+                                            //                     <input id="star2" type="checkbox" class="star_buttons option-input-star radio" value="1" data-star="2" name="star">
+                                            //                 </label>
+                                            //                 <label>
+                                            //                     <input id="star3" type="checkbox" class="star_buttons option-input-star radio" value="1" data-star="3" name="star">
+                                            //                 </label>
+                                            //                 <label>
+                                            //                     <input id="star4" type="checkbox" class="star_buttons option-input-star radio" value="1" data-star="4" name="star">
+                                            //                 </label>
+                                            //                 <label>
+                                            //                     <input id="star5" type="checkbox" class="star_buttons option-input-star radio" value="1" data-star="5" name="star">
+                                            //                 </label>
+                                            //                 </span>
+                                            //                 <button>Cancel</button>
+                                            //             </div>`;
+                                            //     div += `<div class="find-general-border">
+                                            //             <span class="find-label">Headline</span>
+                                            //                 <div class="form-group">
+                                            //                     <input type="text" class="form-control border-ras" name="subject" value="" id="write-review-subject" placeholder="What's most important to know?">
+                                                                
+                                            //                 </div>
+                                            //             </div>`;
+                                            //     div += `<div class="find-general-border">
+                                            //             <span class="find-label">Review:</span>
+                                            //                 <div class="form-group">
+                                            //                     <input type="text" class="form-control border-ras" name="" value="" id="" placeholder="What did you like or dislike about this tutor">
+                                                                
+                                            //                 </div>
+                                            //             </div>`;
+                                            //     div += `<div class="col-sm-6 col-md-6">
+                                            //                 <button type="button" class="btn-orange2 btn-green border-ras" name="submit_review" id="btn-submit-review">Submit Review</button>
+                                                        
+                                            //             </div>` 
+                                            // div += '</div>';
 
-                                    if (v.reviews.length > 0) {
+                                    
                                         div += '<div id="tr-review' + v.ID + '" style="display: none">';
-                                        div += '<p class="head-title-resum">REVIEW</p>';
+                                        div += '<p class="head-title-resum">Review</p>';
+                                        div += '<div><span style="font-size:15px; color:#656565;"><span Style="font-family:semibold;" >'+v.cnt+'&nbsp;</span><span Style="font-size=15px;">Total Reviews &nbsp;</span></span><span class="img-rate">'+img_star+'</span>';
+                                        div += '<button class="view-write-review" id="view-write-review' + v.ID + '" data-review-id="' + v.ID + '" '+ attr_data +' data-table="' + table + '">create review</button>';
+                                         div += '<span class="select-rating"><span class="chose-rate"><span id="sort-view" style="width: 150px; display: inline-block;">Sort by Newest</span><span class="show-list-rate" unselectable="on"><i style="opacity: 0;">0</i></span></span><ul class="list-rating"><li class="sort-new" id="sort-new' + v.ID + '" data-review-id="' + v.ID + '">Sort by Newest</li><li class="sort-high" id="sort-high' + v.ID + '" data-review-id="' + v.ID + '">Sort by Highest Rating</li><li class="sort-low" id="sort-low' + v.ID + '" data-review-id="' + v.ID + '" data-review-id="' + v.ID + '">Sort by Lowest Rating</li></ul></span>';
+
+
+                                        div += '</div>'   ; 
+                                        div += '<div id="list-review'+v.ID+'">';
                                         $.each(v.reviews, function (ir, vr) {
                                             var img_star1 = '';
                                             var max_star1 = 5;
@@ -11791,12 +12423,20 @@
                                                 var cl = '';
 
                                             div += '<div class="tr-info ' + cl + ' clearfix">';
-                                                div += '<p class="subject-review">' + vr.subject + '</p><p class="icon-star">' + img_star1 + '<span class="name-review">' + vr.review_name + '<span></p><p class="view-tutor-message">' + vr.message + '</p>';
+                                                div += '<p class="subject-review">' + vr.subject + '</p><p class="icon-star star-lab">' + img_star1 + '<span class="name-review">' + vr.review_name + '<span></p><p class="view-tutor-message">' + vr.message + '</p>';
                                             div += '</div>';
                                         });
                                         div += '</div>';
-                                    }
+                                        div += '</div>';
+
+                                    
                                     div +='</div>';
+                                    // div += '<div id="tr-schedule' + v.ID + '" style="display: block">';
+                                    //     div += '<p class="head-title-resum">Schedule</p>';
+                                    //     div += '<p>This time calender shows the current tutor\'s available time. The current time can be  adjusted to local timezone with the timezone switch.</p>';
+
+                                    // div += '</div>';
+
                                     $('.slide-resume').append(div);
                                 });   
 
@@ -11818,44 +12458,37 @@
                     
                     function updateReview(tutor_id = 0){
                         var userid = '<?php if ($is_user_logged_in) echo $current_user->ID; else echo 0; ?>';
-                        $.get(home_url + "/?r=ajax/get_users_reviews", {tutor_id: tutor_id}, function (data) {
+                        $.get(home_url + "/?r=ajax/get_users_reviews", {tutor_id: tutor_id, type: 'normal'}, function (data) {
                             data = JSON.parse(data);
                             if (data.reviews.length > 0) {
-                                var div = '<p class="head-title-resum">REVIEW</p>';
-                                $.each(data.reviews, function (ir, vr) {
-                                    var img_star1 = '';
-                                    var max_star1 = 5;
+                                var div = '';
+                               
+                                        $.each(data.reviews, function (ir, vr) {
+                                            var img_star1 = '';
+                                            var max_star1 = 5;
 
-                                    if(vr.star > 0){
-                                        for(var k = 0; k < vr.star; k++){
-                                            img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_ON.png" alt="">';
-                                        }
-                                        max_star1 = max_star1 - vr.star;
-                                    }
+                                            if(vr.star > 0){
+                                                for(var k = 0; k < vr.star; k++){
+                                                    img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_ON.png" alt="">';
+                                                }
+                                                max_star1 = max_star1 - vr.star;
+                                            }
 
-                                    for(var j = 0; j < max_star1; j++){
-                                        img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
-                                    }
-                                    
-                                    if(userid == vr.userid){
-                                        $('#view-write-review' + tutor_id).attr('data-id',vr.id);
-                                        $('#view-write-review' + tutor_id).attr('data-review-id',vr.review_id);
-                                        $('#view-write-review' + tutor_id).attr('data-userid',vr.userid);
-                                        $('#view-write-review' + tutor_id).attr('data-star',vr.star);
-                                        $('#view-write-review' + tutor_id).attr('data-subject',vr.subject);
-                                        $('#view-write-review' + tutor_id).attr('data-message',vr.message);
-                                    }
+                                            for(var j = 0; j < max_star1; j++){
+                                                img_star1 += '<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Rating_OFF.png" alt="">';
+                                            }
 
-                                    if(ir == 0)
-                                        var cl = 'first';
-                                    else
-                                        var cl = '';
+                                            if(ir == 0)
+                                                var cl = 'first';
+                                            else
+                                                var cl = '';
 
-                                    div += '<div class="tr-info ' + cl + ' clearfix">';
-                                        div += '<p class="subject-review">' + vr.subject + '</p><p class="icon-star">' + img_star1 + '<span class="name-review">' + vr.review_name + '<span></p><p class="view-tutor-message">' + vr.message + '</p>';
-                                    div += '</div>';
-                                });
-                                $('#tr-review' + tutor_id).html(div);
+                                            div += '<div class="tr-info ' + cl + ' clearfix">';
+                                                div += '<p class="subject-review">' + vr.subject + '</p><p class="icon-star star-lab">' + img_star1 + '<span class="name-review">' + vr.review_name + '<span></p><p class="view-tutor-message">' + vr.message + '</p>';
+                                            div += '</div>';
+                                        });
+                                        
+                                $('#list-review' + tutor_id).html(div);
                             }
                         });
                     }
@@ -12102,19 +12735,36 @@
                         }
                         return distance;
                     }
-                    $('#edit-profile').click(function(){
+            $('#edit-profile').click(function(){
                 get_update_info();
-               document.getElementById('update_password').value=null;
+                document.getElementById('update_password').value=null;
                 $('#updateinfo').addClass('active in');
                 $('#profile').removeClass('active in');
                 $('#sub-update-info').addClass('active');
                 $('#sub-profile').removeClass('active');
             });
                 });
+                $.fn.inputFilter = function(inputFilter) {
+                    return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
+                      if (inputFilter(this.value)) {
+                        this.oldValue = this.value;
+                        this.oldSelectionStart = this.selectionStart;
+                        this.oldSelectionEnd = this.selectionEnd;
+                      } else if (this.hasOwnProperty("oldValue")) {
+                        this.value = this.oldValue;
+                        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                      } else {
+                        this.value = "";
+                      }
+                    });
+                  };
+                $("#point-input").inputFilter(function(value) {
+                    return /^\d*$/.test(value); 
+                });
 
-
-             
+                             
             })(jQuery);
+
             $('body').on('click', '.sign-up', function () {
                 $("#login-user").removeClass("active");
                         $("#login-user").removeClass("in");
@@ -12148,6 +12798,7 @@
             // Đối tượng container chứa popup
             var containerlang = $("#language-timezone");
             var containerlang_up = $("#language-timezone-update");
+           
             // Nếu click bên ngoài đối tượng container thì ẩn nó đi
             if (!containerlang.is(e.target) && containerlang.has(e.target).length === 0){
                 var isopened = containerlang.find('.language_drop').css("display");
@@ -12161,14 +12812,18 @@
                         containerlang_up.find('.language_drop').slideToggle(0);
                     }
             }
+            
             });
              $( document ).ready(function() {
                if( $('#my-timezone').find('.my-timezone').hasClass('active')){
                  var city = $('#my-timezone').find('.active').attr("data-city");
                  document.getElementById('mycity-name').innerHTML= city;
                };
-            });
+               
+           });
+        
 
 
 
         </script>
+        

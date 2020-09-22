@@ -69,7 +69,7 @@
 	function ik_enqueue_math_css() {
 		wp_enqueue_style('common-math', get_stylesheet_directory_uri() . '/library/css/common-math.css');
 		wp_enqueue_script('touch-punch', get_stylesheet_directory_uri() . '/library/js/touch-punch.min.js', array('common-js'));
-		wp_enqueue_script('nodejs', 'https://notepad.iktutor.com:3000/socket.io/socket.io.js', array('common-js'));
+		wp_enqueue_script('nodejs', 'https://notepad.iktutor.com/wp-content/plugins/iii-notepad/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js', array('common-js'));
 		wp_enqueue_script('common-math', get_stylesheet_directory_uri() . '/library/js/common-math.js', array('common-js'));
 	}
 	add_action('wp_enqueue_scripts', 'ik_enqueue_math_css', '999');
@@ -2958,6 +2958,8 @@
                                 $("#updateinfo").removeClass("in");
                             }
                         });
+
+                        
 
                         $("#show_signup").click(function () {
                             $("#my-account-modal").modal('show');

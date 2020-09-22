@@ -5529,16 +5529,8 @@ if($task == "search_tutor"){
             $desc_tell_me = get_user_meta($value->ID, 'desc_tell_me', true);
             $subject_description = get_user_meta($value->ID, 'subject_description', true);
             $school_name = get_user_meta($value->ID, 'school_name', true);
-            $school_name_05 = get_user_meta($value->ID, 'school_name_05', true);
-            $school_name_02 = get_user_meta($value->ID, 'school_name_02', true);
-            $school_name_03 = get_user_meta($value->ID, 'school_name_03', true);
-            $school_name_04 = get_user_meta($value->ID, 'school_name_04', true);
             $teaching_link = get_user_meta($value->ID, 'teaching_link', true);
             $teaching_subject = get_user_meta($value->ID, 'teaching_subject', true);
-            $teaching_subject_02 = get_user_meta($value->ID, 'teaching_subject_02', true);
-            $teaching_subject_03 = get_user_meta($value->ID, 'teaching_subject_03', true);
-            $teaching_subject_04 = get_user_meta($value->ID, 'teaching_subject_04', true);
-            $teaching_subject_05 = get_user_meta($value->ID, 'teaching_subject_05', true);
             $student_link = get_user_meta($value->ID, 'student_link', true);
             $user_years = get_user_meta($value->ID, 'user_years', true);
             $school_attend = get_user_meta($value->ID, 'school_attend', true);
@@ -5547,21 +5539,10 @@ if($task == "search_tutor"){
             $user_major = get_user_meta($value->ID, 'user_major', true);
             $school_name1 = get_user_meta($value->ID, 'school_name1', true);
             $school_name2 = get_user_meta($value->ID, 'school_name2', true);
-            $school_name3 = get_user_meta($value->ID, 'school_name3', true);
-            $school_name4 = get_user_meta($value->ID, 'school_name4', true);
-            $school_name5 = get_user_meta($value->ID, 'school_name5', true);
             $school_link1 = get_user_meta($value->ID, 'school_link1', true);
-            $school_link2 = get_user_meta($value->ID, 'school_link2', true);            
-            $school_link3 = get_user_meta($value->ID, 'school_link3', true);
-            $school_link4 = get_user_meta($value->ID, 'school_link4', true);
-            $school_link5 = get_user_meta($value->ID, 'school_link5', true);
+            $school_link2 = get_user_meta($value->ID, 'school_link2', true);
             $any_other = get_user_meta($value->ID, 'any_other', true);
             $previous_school = get_user_meta($value->ID, 'previous_school', true);
-            $up_price_one = get_user_meta($value->ID, 'price_array', true);
-            $up_price_group = get_user_meta($value->ID, 'group_price_array', true);
-            $keyprice = $date.$time;
-            $price_one = $up_price_one[$keyprice];
-            $price_group = $up_price_group[$keyprice];
 
             if (!empty($profile_value))
                 $user_avatar = $profile_value;
@@ -5579,10 +5560,9 @@ if($task == "search_tutor"){
 
             $description_preference = get_user_meta($value->ID, 'description_preference', true);
             $other_preference = get_user_meta($value->ID, 'other_preference', true);
-            $main_image = get_user_meta($value->ID, 'main_image', true);
+
             $price_tutoring = get_user_meta($value->ID, 'price_tutoring', true);
             $price_group_tutoring = get_user_meta($value->ID, 'price_group_tutoring', true);
-            $taget_tutor = get_user_meta($value->ID, 'previous_school', true);
             $price_tutoring = empty($price_tutoring)? 15 : $price_tutoring;
 
             $user_subject = '';
@@ -5590,9 +5570,9 @@ if($task == "search_tutor"){
             if (!empty($english_subject) && $english_subject != '') {
                 $subs_english = array(
                     'english_conversation' => 'English: Conversation for Foreign Students',
-                    'english_grammar' => 'English: English Grammar',
-                    'english_writting' => 'English: English Writting',            
-                    'english_reading_comprehension' => 'English: English Reading Comprehension',
+                    'english_grammar' => 'Enlgish: Grammar',
+                    'english_writting' => 'English: Writting',            
+                    'english_reading_comprehension' => 'English: Reading Comprehension',
                     'others' => 'English: Others'
                 );
                 $subjects_english = explode(',', $english_subject);                
@@ -5618,10 +5598,10 @@ if($task == "search_tutor"){
 
             if (!empty($math_subject) && $math_subject != '') {
                 $subs_math = array( 
-                    'elemenatary_school_math' => 'Math: Elemenatary School Math',
-                    'middle_school_math' => 'Math: Middle School Math',
-                    'high_school_math' => 'Math: High School Math',
-                    'advanced_math' => 'Math: Advanced Math',
+                    'elemenatary_school_math' => 'Math: Elementary',
+                    'middle_school_math' => 'Math: Middle School',
+                    'high_school_math' => 'Math: High School',
+                    'advanced_math' => 'Math: Advanced',
                     'others' => 'Math: Others'
                 );
                 $subjects_math = explode(',', $math_subject);                
@@ -5646,8 +5626,8 @@ if($task == "search_tutor"){
 
             if (!empty($science_subject) && $science_subject != '') {
                 $subs_science = array( 
-                    'science_middle_school' => 'Science: Science of Middle, Elementary School',
-                    'physics_high_school' => 'Science: Physics for High School',
+                    'science_middle_school' => 'Science: Elementary/Middle School',
+                    'physics_high_school' => 'Science: High School',
                     'chemistry_high_school' => 'Science: Chemistry for High School',
                     'others' => 'Science: Others'
                 );
@@ -5752,16 +5732,8 @@ if($task == "search_tutor"){
             $item['desc_tell_me'] =  $desc_tell_me;
             $item['subject_type'] =  $subject_type_update;
             $item['school_name'] =  $school_name;
-            $item['school_name_02'] =  $school_name_02;
-            $item['school_name_03'] =  $school_name_03;
-            $item['school_name_04'] =  $school_name_04;
-            $item['school_name_05'] =  $school_name_05;
             $item['teaching_link'] =  $teaching_link;
             $item['teaching_subject'] =  $teaching_subject;
-            $item['teaching_subject_02'] =  $teaching_subject_02;
-            $item['teaching_subject_03'] =  $teaching_subject_03;
-            $item['teaching_subject_04'] =  $teaching_subject_04;
-            $item['teaching_subject_05'] =  $teaching_subject_05;
             $item['user_years'] =  $user_years;
             $item['school_attend'] =  $school_attend;
             $item['student_link'] =  $student_link;
@@ -5770,28 +5742,20 @@ if($task == "search_tutor"){
             $item['user_major'] =  $user_major;
             $item['school_name1'] =  $school_name1;
             $item['school_name2'] =  $school_name2;
-            $item['school_name3'] =  $school_name3;
-            $item['school_name4'] =  $school_name4;
-            $item['school_name5'] =  $school_name5;
             $item['school_link1'] =  $school_link1;
             $item['school_link2'] =  $school_link2;
-            $item['school_link3'] =  $school_link3;
-            $item['school_link4'] =  $school_link4;
-            $item['school_link5'] =  $school_link5;
             $item['previous_school'] =  $previous_school;
             $item['any_other'] =  $any_other;
             $item['subject_description'] =  $subject_description;
             $item['price_tutoring'] = $price_tutoring;
             $item['price_group_tutoring'] = $price_group_tutoring;
-            $item['taget_tutor'] = $taget_tutor;
             $item['MAGIC']="MAGIC";
             $item['enable_one_tutoring'] = $value->enable_one_tutoring;
             $item['enable_group_tutoring'] = $value->enable_group_tutoring;
-            $item['main_image'] = $main_image;
+            $item['price_custom'] = $$value->price_custom;
+            $item['price_custom_group'] = $value->price_custom_group;
             $item['tutoring_subject'] = $value->subject_name;
             $item['tutoring_subject_type'] = $value->subject_type;
-            $item['up_price_one'] = $price_one;
-            $item['up_price_group'] = $price_group;
 
 
             if($type == 'favorite' && $favorite > 0){
@@ -5837,7 +5801,6 @@ if($task == "search_tutor"){
 }
 if ($task == "get_users_reviews") {
     $tutor_id = $_REQUEST['tutor_id'];
-    $type = $_REQUEST['type'];
     $query = 'SELECT rv.* FROM ' . $wpdb->prefix . 'dict_tutor_review AS rv WHERE rv.review_id = '.$tutor_id;
     $reviews = $wpdb->get_results($query);
     $star = 0;
@@ -5862,23 +5825,11 @@ if ($task == "get_users_reviews") {
             $arr_review[] = $itemrv;
         }
     }
-    if($type == 'lowstar'){
-        array_multisort(
-        array_column($arr_review, 'star'), SORT_NUMERIC, SORT_ASC,
-        $arr_review
-        );
-    }
-    if ($type == 'highstar') {
-         array_multisort(
+    
+    array_multisort(
         array_column($arr_review, 'star'), SORT_NUMERIC, SORT_DESC,
         $arr_review
-        );
-    }
-    if($type == 'normal'){
-        rsort($arr_review);
-    }
-    
-    
+    );
     echo json_encode(array('reviews' => $arr_review));
     die;
 }
@@ -5989,7 +5940,9 @@ if ($task == "get_users_tutor") {
             $display_name = get_user_meta($value->ID, 'display_name', true);
             $first_name = get_user_meta($value->ID, 'first_name', true);
             $last_name = get_user_meta($value->ID, 'last_name', true);
-            $desc_tell_me = get_user_meta($value->ID, 'desc_tell_me', true);            
+            $desc_tell_me = get_user_meta($value->ID, 'desc_tell_me', true);
+            $subject_description = get_user_meta($value->ID, 'subject_description', true);
+            $school_name = get_user_meta($value->ID, 'school_name', true);
             $teaching_link = get_user_meta($value->ID, 'teaching_link', true);
             $teaching_subject = get_user_meta($value->ID, 'teaching_subject', true);
             $student_link = get_user_meta($value->ID, 'student_link', true);
@@ -5997,33 +5950,13 @@ if ($task == "get_users_tutor") {
             $school_attend = get_user_meta($value->ID, 'school_attend', true);
             $user_gpa = get_user_meta($value->ID, 'user_gpa', true);
             $user_grade = get_user_meta($value->ID, 'user_grade', true);
-            $user_major = get_user_meta($value->ID, 'user_major', true);            
-            $any_other = get_user_meta($value->ID, 'any_other', true);
-            $previous_school = get_user_meta($value->ID, 'previous_school', true);
-            $main_image = get_user_meta($value->ID, 'main_image',true);
-
-            $school_name = get_user_meta($value->ID, 'school_name', true);
-            $school_name_05 = get_user_meta($value->ID, 'school_name_05', true);
-            $school_name_02 = get_user_meta($value->ID, 'school_name_02', true);
-            $school_name_03 = get_user_meta($value->ID, 'school_name_03', true);
-            $school_name_04 = get_user_meta($value->ID, 'school_name_04', true);
-            $teaching_link = get_user_meta($value->ID, 'teaching_link', true);
-            $teaching_subject = get_user_meta($value->ID, 'teaching_subject', true);
-            $teaching_subject_02 = get_user_meta($value->ID, 'teaching_subject_02', true);
-            $teaching_subject_03 = get_user_meta($value->ID, 'teaching_subject_03', true);
-            $teaching_subject_04 = get_user_meta($value->ID, 'teaching_subject_04', true);
-            $teaching_subject_05 = get_user_meta($value->ID, 'teaching_subject_05', true);
+            $user_major = get_user_meta($value->ID, 'user_major', true);
             $school_name1 = get_user_meta($value->ID, 'school_name1', true);
             $school_name2 = get_user_meta($value->ID, 'school_name2', true);
-            $school_name3 = get_user_meta($value->ID, 'school_name3', true);
-            $school_name4 = get_user_meta($value->ID, 'school_name4', true);
-            $school_name5 = get_user_meta($value->ID, 'school_name5', true);
             $school_link1 = get_user_meta($value->ID, 'school_link1', true);
-            $school_link2 = get_user_meta($value->ID, 'school_link2', true);            
-            $school_link3 = get_user_meta($value->ID, 'school_link3', true);
-            $school_link4 = get_user_meta($value->ID, 'school_link4', true);
-            $school_link5 = get_user_meta($value->ID, 'school_link5', true);
-            $taget_tutor = get_user_meta($value->ID, 'previous_school', true);
+            $school_link2 = get_user_meta($value->ID, 'school_link2', true);
+            $any_other = get_user_meta($value->ID, 'any_other', true);
+            $previous_school = get_user_meta($value->ID, 'previous_school', true);
 
             if (!empty($profile_value))
                 $user_avatar = $profile_value;
@@ -6043,7 +5976,6 @@ if ($task == "get_users_tutor") {
             $other_preference = get_user_meta($value->ID, 'other_preference', true);
 
             $price_tutoring = get_user_meta($value->ID, 'price_tutoring', true);
-            $price_group_tutoring = get_user_meta($value->ID, 'price_group_tutoring', true);
             $price_tutoring = empty($price_tutoring)? 15 : $price_tutoring;
 
             $user_subject = '';
@@ -6051,9 +5983,9 @@ if ($task == "get_users_tutor") {
             if (!empty($english_subject) && $english_subject != '') {
                 $subs_english = array(
                     'english_conversation' => 'English: Conversation for Foreign Students',
-                    'english_grammar' => 'English: English Grammar',
-                    'english_writting' => 'English: English Writting',            
-                    'english_reading_comprehension' => 'English: English Reading Comprehension',
+                    'english_grammar' => 'Enlgish: Grammar',
+                    'english_writting' => 'English: Writting',            
+                    'english_reading_comprehension' => 'English: Reading Comprehension',
                     'others' => 'English: Others'
                 );
                 $subjects_english = explode(',', $english_subject);                
@@ -6079,10 +6011,10 @@ if ($task == "get_users_tutor") {
 
             if (!empty($math_subject) && $math_subject != '') {
                 $subs_math = array( 
-                    'elemenatary_school_math' => 'Math: Elemenatary School Math',
-                    'middle_school_math' => 'Math: Middle School Math',
-                    'high_school_math' => 'Math: High School Math',
-                    'advanced_math' => 'Math: Advanced Math',
+                    'elemenatary_school_math' => 'Math: Elementary',
+                    'middle_school_math' => 'Math: Middle School',
+                    'high_school_math' => 'Math: High School',
+                    'advanced_math' => 'Math: Advanced',
                     'others' => 'Math: Others'
                 );
                 $subjects_math = explode(',', $math_subject);                
@@ -6107,8 +6039,8 @@ if ($task == "get_users_tutor") {
 
             if (!empty($science_subject) && $science_subject != '') {
                 $subs_science = array( 
-                    'science_middle_school' => 'Science: Science of Middle, Elementary School',
-                    'physics_high_school' => 'Science: Physics for High School',
+                    'science_middle_school' => 'Science: Elementary/Middle School',
+                    'physics_high_school' => 'Science: High School',
                     'chemistry_high_school' => 'Science: Chemistry for High School',
                     'others' => 'Science: Others'
                 );
@@ -6212,42 +6144,23 @@ if ($task == "get_users_tutor") {
             $item['reviews'] = $arr_review;
             $item['desc_tell_me'] =  $desc_tell_me;
             $item['subject_type'] =  $subject_type_update;
-            $item['teaching_link'] =  $teaching_link;;
+            $item['school_name'] =  $school_name;
+            $item['teaching_link'] =  $teaching_link;
+            $item['teaching_subject'] =  $teaching_subject;
             $item['user_years'] =  $user_years;
             $item['school_attend'] =  $school_attend;
             $item['student_link'] =  $student_link;
             $item['user_gpa'] =  $user_gpa;
             $item['user_grade'] =  $user_grade;
             $item['user_major'] =  $user_major;
+            $item['school_name1'] =  $school_name1;
+            $item['school_name2'] =  $school_name2;
+            $item['school_link1'] =  $school_link1;
+            $item['school_link2'] =  $school_link2;
             $item['any_other'] =  $any_other;
             $item['subject_description'] =  $subject_description;
             $item['price_tutoring'] = $price_tutoring;
-            $item['price_group_tutoring'] = $price_group_tutoring;
-            $item['previous_school'] = $previous_school;            
-            $item['school_name'] =  $school_name;
-            $item['school_name_02'] =  $school_name_02;
-            $item['school_name_03'] =  $school_name_03;
-            $item['school_name_04'] =  $school_name_04;
-            $item['school_name_05'] =  $school_name_05;           
-            $item['teaching_subject'] =  $teaching_subject;
-            $item['teaching_subject_02'] =  $teaching_subject_02;
-            $item['teaching_subject_03'] =  $teaching_subject_03;
-            $item['teaching_subject_04'] =  $teaching_subject_04;
-            $item['teaching_subject_05'] =  $teaching_subject_05;
-            $item['school_name1'] =  $school_name1;
-            $item['school_name2'] =  $school_name2;
-            $item['school_name3'] =  $school_name3;
-            $item['school_name4'] =  $school_name4;
-            $item['school_name5'] =  $school_name5;
-            $item['school_link1'] =  $school_link1;
-            $item['school_link2'] =  $school_link2;
-            $item['school_link3'] =  $school_link3;
-            $item['school_link4'] =  $school_link4;
-            $item['school_link5'] =  $school_link5;
-            $item['taget_tutor'] = $taget_tutor;
-            $item['main_image'] = $main_image;
-            $item['enable_one_tutoring'] = $value->enable_one_tutoring;
-            $item['enable_group_tutoring'] = $value->enable_group_tutoring;
+            $item['previous_school'] = $previous_school;
 
             if($type == 'favorite' && $favorite > 0){
                 $arr_user1[] = $item;
