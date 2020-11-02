@@ -26,6 +26,17 @@ if (strpos($link_current, '/en') !== false) {
 ik_enqueue_js_messages('login_req_h', __('Login Required', 'iii-dictionary'));
 ik_enqueue_js_messages('login_req_err', __('Please login in order to continue to use this function.', 'iii-dictionary'));
 ik_enqueue_js_messages('login_req_lbl', __('Login', 'iii-dictionary'));
+if (isset($_POST['add-to-cart'])) {
+    
+    $_SESSION['home'] = $_POST; 
+    
+       // echo '<pre>';
+       // print_r($_POST);
+       // die;
+    ik_add_to_cart($_POST);
+    wp_redirect('https://iktutor.com/iklearn/en/?r=home&add=cart');
+    exit;
+}
 
 $URL = $_SERVER['REQUEST_URI'];
 $segment = explode('/', $URL);
@@ -55,7 +66,7 @@ if ($segment[2] == 'home') {
                         <span class="glyphicon glyphicon-ok span-english-custom-1"></span><p class="p-custom-1 css-width1"><?php _e('Dictionary from Merriam-Webster', 'iii-dictionary') ?></p>
                         <span class="glyphicon glyphicon-ok span-english-custom-1"></span><p class="p-custom-1 css-width2"><?php _e('On-demand Tutor Available', 'iii-dictionary') ?></p>
                     </div>
-                    <div id="online-tool"><a href="#popup-tool-english-dialog" target="_blank" data-toggle="modal">How does it work? </a></div>
+                    <div id="online-tool"><a href="#popup-tool-english-dialog" target="_blank" data-toggle="modal">How does it work?</a></div>
                 </div>
             </div>
             <div class="bottom-content">

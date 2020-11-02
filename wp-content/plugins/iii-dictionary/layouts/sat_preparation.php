@@ -8,7 +8,7 @@
         get_dict_page_title($_page_title, '', '', array());
     }else if($check=="math-sat1"){
         $_page_title = __('SAT Preparation', 'iii-dictionary');
-        $subtitle = '2016 version';
+        $subtitle = '2020 version';
         get_math_header($_page_title);
         get_dict_page_title($_page_title, '', '', array());
     }else if($check=="math-sat2"){
@@ -42,7 +42,7 @@
         jQuery('#span-title').css("display","none");
         jQuery('#span-title-first').css("display","none");
     }else if(check_js == "0"){
-        jQuery('#span-title').html('2016 version');
+        jQuery('#span-title').html('2020 version');
         jQuery('#span-title').attr("style","color: #ffc750;bottom: -5px;font-size: 15px;margin-left: -20px;");
         jQuery('#span-title-first').css("visibility","hidden");
     } else if(check_js == "1" || check_js == "3" ) {
@@ -77,7 +77,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6" >
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-38">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 20.00 / month</span>
+                    <span class='css-txt-month case-38'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="38">
@@ -97,7 +97,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-39">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 20.00 / month</span>
+                    <span class='css-txt-month case-39'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="39">
@@ -117,7 +117,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-40">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 20.00 / month</span>
+                    <span class='css-txt-month case-40'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="40">
@@ -137,7 +137,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-41">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 30.00 / month</span>
+                    <span class='css-txt-month case-41'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="41">
@@ -158,7 +158,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-42">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 30.00 / month</span>
+                    <span class='css-txt-month case-42'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="42">
@@ -179,7 +179,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-43">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 30.00 / month</span>
+                    <span class='css-txt-month case-43'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="43">
@@ -199,7 +199,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-44">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 30.00 / month</span>
+                    <span class='css-txt-month case-44'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="44">
@@ -220,7 +220,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-45">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 40.00 / month</span>
+                    <span class='css-txt-month case-45'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="45">
@@ -241,7 +241,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-46">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 40.00 / month</span>
+                    <span class='css-txt-month case-46'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="46">
@@ -261,7 +261,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-47">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 50.00 / month</span>
+                    <span class='css-txt-month case-47'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="47">
@@ -282,7 +282,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-48">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 50.00 / month</span>
+                    <span class='css-txt-month case-48'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="48">
@@ -302,7 +302,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-49">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 50.00 / month</span>
+                    <span class='css-txt-month case-49'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="49">
@@ -322,7 +322,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-50">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 50.00 / month</span>
+                    <span class='css-txt-month case-50'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="50">
@@ -345,7 +345,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-15">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 30.00 / month</span>
+                    <span class='css-txt-month case-pre2'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="15">
@@ -365,7 +365,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-16">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 80.00 / month</span>
+                    <span class='css-txt-month case-20'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="16">
@@ -385,7 +385,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-17">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 80.00 / month</span>
+                    <span class='css-txt-month case-20'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="17">
@@ -405,7 +405,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-18">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 80.00 / month</span>
+                    <span class='css-txt-month case-20'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="18">
@@ -426,7 +426,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-19">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 80.00 / month</span>
+                    <span class='css-txt-month case-20'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="19">
@@ -447,7 +447,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-20">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 80.00 / month</span>
+                    <span class='css-txt-month case-20'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="20">
@@ -469,7 +469,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-9">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 30.00 / month</span>
+                    <span class='css-txt-month case-pre'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="9">
@@ -489,7 +489,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-10">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 50.00 / month</span>
+                    <span class='css-txt-month case-10'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="10">
@@ -509,7 +509,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-11">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 50.00 / month</span>
+                    <span class='css-txt-month case-10'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="11">
@@ -529,7 +529,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-12">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 50.00 / month</span>
+                    <span class='css-txt-month case-10'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="12">
@@ -550,7 +550,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-13">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 50.00 / month</span>
+                    <span class='css-txt-month case-10'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="13">
@@ -571,7 +571,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-14">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 50.00 / month</span>
+                    <span class='css-txt-month case-10'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="14">
@@ -594,7 +594,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-1">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 50.00 / month</span>
+                    <span class='css-txt-month case-gra'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="1">
@@ -614,7 +614,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-2">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 20.00 / month</span>
+                    <span class='css-txt-month case-prac'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="2">
@@ -634,7 +634,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-3">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 50.00 / month</span>
+                    <span class='css-txt-month case-t1'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="3">
@@ -654,7 +654,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-4">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 50.00 / month</span>
+                    <span class='css-txt-month case-t1'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="4">
@@ -675,7 +675,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-5">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 50.00 / month</span>
+                    <span class='css-txt-month case-t1'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="5">
@@ -696,7 +696,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-6">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 50.00 / month</span>
+                    <span class='css-txt-month case-t1'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="6">
@@ -716,7 +716,7 @@
             <div class="col-md-6 col-xs-12 col-xs-6">
                 <div class="css-div-text" data-toggle="collapse" data-target="#section-7">
                     <span class='css-color-7F7F7F'>Subscription Fee:</span>
-                    <span class='css-txt-month'>$ 50.00 / month</span>
+                    <span class='css-txt-month case-t1'></span>
                 </div>
                 <div>
                     <input type="button" id="btn-math-kinder" class="css-btn-ikmath btn-subscrible" value="Subscribe" data-type="7">
@@ -781,7 +781,7 @@
                 <span style="right: 3%;padding-top: 2%;" href="#" data-dismiss="modal" aria-hidden="true" class="close close-dialog"></span>
                 <h3><?php _e('Purchase SAT Subscriptions', 'iii-dictionary') ?></h3>
             </div>
-            <form method="post" action="<?php echo locale_home_url() ?>/?r=payments">
+            <form method="post" action="<?php echo locale_home_url() ?>">
                 <input type="hidden" name="sub-type" id="grammar-sub-type" value="3">
                 <input type="hidden" name="sat-class" id="grammar-class" value="1">
                 <input type="hidden" name="sub-id" value="0">
@@ -807,7 +807,7 @@
                         
                         <div class="col-sm-12 padding-top-2">
                             <div class="box-gray-dialog" style="text-align: right">
-                                <?php _e('Total amount:', 'iii-dictionary') ?> <span class="currency color708b23">$<span id="total-amount-grammar" class="color708b23">0</span></span>
+                                <?php _e('Total amount:', 'iii-dictionary') ?> <span class="currency color708b23"><span id="total-amount-grammar" class="color708b23">0</span>&nbsp;Points</span>
                             </div>
                         </div>
                     </div>				
@@ -837,7 +837,7 @@
                 <span style="right: 3%;padding-top: 2%;" href="#" data-dismiss="modal" aria-hidden="true" class="close close-dialog"></span>
                 <h3><?php _e('Purchase SAT Subscriptions', 'iii-dictionary') ?></h3>
             </div>
-            <form method="post" action="<?php echo locale_home_url() ?>/?r=payments">
+            <form method="post" action="<?php echo locale_home_url() ?>">
                 <input type="hidden" name="sub-type" id="writing-sub-type" value="3">
                 <input type="hidden" name="sat-class" id="writing-class" value="2">
                 <input type="hidden" name="sub-id" value="0">
@@ -863,7 +863,7 @@
                         
                         <div class="col-sm-12 padding-top-2">
                             <div class="box-gray-dialog" style="text-align: right">
-                                <?php _e('Total amount:', 'iii-dictionary') ?> <span class="currency color708b23">$<span id="total-amount-writing" class="color708b23">0</span></span>
+                                <?php _e('Total amount:', 'iii-dictionary') ?> <span class="currency color708b23"><span id="total-amount-writing" class="color708b23">0</span>&nbsp;Points</span>
                             </div>
                         </div>
                     </div>				
@@ -892,7 +892,7 @@
                 <span style="right: 3%;padding-top: 2%;" href="#" data-dismiss="modal" aria-hidden="true" class="close close-dialog"></span>
                 <h3><?php _e('Purchase SAT Subscriptions', 'iii-dictionary') ?></h3>
             </div>
-            <form method="post" action="<?php echo locale_home_url() ?>/?r=payments">
+            <form method="post" action="<?php echo locale_home_url() ?>">
                 <input type="hidden" name="sub-type" id="sat-test-sub-type" value="3">
                 <input type="hidden" name="sat-class" id="sat-test-class" value="">
                 <input type="hidden" name="sub-id" value="0">
@@ -932,7 +932,7 @@
                             </div>  
                         <div class="col-sm-12 padding-top-2">
                             <div class="box-gray-dialog" style="text-align: right">
-                                <?php _e('Total amount:', 'iii-dictionary') ?> <span class="currency color708b23">$<span id="total-sat-test" class="color708b23">0</span></span>
+                                <?php _e('Total amount:', 'iii-dictionary') ?> <span class="currency color708b23"><span id="total-sat-test" class="color708b23">&nbsp;Points</span></span>
                             </div>
                         </div>
                     </div>				
@@ -962,7 +962,7 @@
                 <span style="right: 3%;padding-top: 2%;" href="#" data-dismiss="modal" aria-hidden="true" class="close close-dialog"></span>
                 <h3><?php _e('Purchase SAT Subscriptions', 'iii-dictionary') ?></h3>
             </div>
-            <form method="post" action="<?php echo locale_home_url() ?>/?r=payments">
+            <form method="post" action="<?php echo locale_home_url() ?>">
                 <input type="hidden" name="sub-type" id="sat1-sub-type" value="7">
                 <input type="hidden" name="sat-class" id="sat1-class" value="">
                 <input type="hidden" name="sub-id" value="0">
@@ -1002,7 +1002,7 @@
                             </div>  
                         <div class="col-sm-12 padding-top-2">
                             <div class="box-gray-dialog" style="text-align: right">
-                                <?php _e('Total amount:', 'iii-dictionary') ?> <span class="currency color708b23">$<span id="total-amount-sat1-class" class="color708b23">1</span></span>
+                                <?php _e('Total amount:', 'iii-dictionary') ?> <span class="currency color708b23"><span id="total-amount-sat1-class" class="color708b23">1</span>&nbsp;Points</span>
                             </div>
                         </div>
                     </div>				
@@ -1032,7 +1032,7 @@
                 <span style="right: 3%;padding-top: 2%;" href="#" data-dismiss="modal" aria-hidden="true" class="close close-dialog"></span>
                 <h3><?php _e('Purchase SAT Subscriptions', 'iii-dictionary') ?></h3>
             </div>
-            <form method="post" action="<?php echo locale_home_url() ?>/?r=payments">
+            <form method="post" action="<?php echo locale_home_url() ?>">
                 <input type="hidden" name="sub-type" id="sat1-preparation-sub-type" value="7">
                 <input type="hidden" name="sat-class" id="sat1-preparation-class" value="9">
                 <input type="hidden" name="sub-id" value="0">
@@ -1065,7 +1065,7 @@
                         </div>  
                         <div class="col-sm-12 padding-top-2">
                             <div class="box-gray-dialog" style="text-align: right">
-                                <?php _e('Total amount:', 'iii-dictionary') ?> <span class="currency color708b23">$<span id="total-amount-sat1-preparation" class="color708b23">1</span></span>
+                                <?php _e('Total amount:', 'iii-dictionary') ?> <span class="currency color708b23"><span id="total-amount-sat1-preparation" class="color708b23">1</span>&nbsp;Points</span>
                             </div>
                         </div>
                     </div>				
@@ -1095,7 +1095,7 @@
                 <span style="right: 3%;padding-top: 2%;" href="#" data-dismiss="modal" aria-hidden="true" class="close close-dialog"></span>
                 <h3><?php _e('Purchase SAT Subscriptions', 'iii-dictionary') ?></h3>
             </div>
-            <form method="post" action="<?php echo locale_home_url() ?>/?r=payments">
+            <form method="post" action="<?php echo locale_home_url() ?>">
                 <input type="hidden" name="sub-type" id="sat2-sub-type" value="7">
                 <input type="hidden" name="sat-class" id="sat2-class" value="">
                 <input type="hidden" name="sub-id" value="0">
@@ -1135,7 +1135,7 @@
                             </div>  
                         <div class="col-sm-12 padding-top-2">
                             <div class="box-gray-dialog" style="text-align: right">
-                                <?php _e('Total amount:', 'iii-dictionary') ?> <span class="currency color708b23">$<span id="total-amount-sat2-class" class="color708b23">1</span></span>
+                                <?php _e('Total amount:', 'iii-dictionary') ?> <span class="currency color708b23"><span id="total-amount-sat2-class" class="color708b23">1</span>&nbsp;Points</span>
                             </div>
                         </div>
                     </div>				
@@ -1165,7 +1165,7 @@
                 <span style="right: 3%;padding-top: 2%;" href="#" data-dismiss="modal" aria-hidden="true" class="close close-dialog"></span>
                 <h3><?php _e('Purchase SAT Subscriptions', 'iii-dictionary') ?></h3>
             </div>
-            <form method="post" action="<?php echo locale_home_url() ?>/?r=payments">
+            <form method="post" action="<?php echo locale_home_url() ?>">
                 <input type="hidden" name="sub-type" id="sat2-preparation-sub-type" value="8">
                 <input type="hidden" name="sat-class" id="sat2-preparation-class" value="15">
                 <input type="hidden" name="sub-id" value="0">
@@ -1228,7 +1228,7 @@
                 <span style="right: 3%;padding-top: 2%;" href="#" data-dismiss="modal" aria-hidden="true" class="close close-dialog"></span>
                 <h3><?php _e('Purchase SAT Subscriptions', 'iii-dictionary') ?></h3>
             </div>
-            <form method="post" action="<?php echo locale_home_url() ?>/?r=payments">
+            <form method="post" action="<?php echo locale_home_url() ?>">
                 <input type="hidden" name="sub-type" id="ikmath-course-sub-type" value="12">
                 <input type="hidden" name="sat-class" id="ikmath-course-sat-class" value="">
                 <input type="hidden" name="sub-id"  value="0">
@@ -1278,7 +1278,7 @@
                         </div>
                         <div class="col-sm-12 padding-top-2">
                             <div class="box-gray-dialog" style="text-align: right">
-                                <?php _e('Total amount:', 'iii-dictionary') ?> <span class="currency color708b23">$<span id="total-ikmath-course" class="color708b23">1</span></span>
+                                <?php _e('Total amount:', 'iii-dictionary') ?> <span class="currency color708b23"><span id="total-ikmath-course" class="color708b23">1</span>&nbsp;Points</span>
                             </div>
                         </div>
                     </div>				

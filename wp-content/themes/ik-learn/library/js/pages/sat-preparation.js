@@ -162,12 +162,15 @@
         function calc_ikmath_course_price() {
             var months = parseInt($("#sel-month-ikmath-course").val());
             var d = $("#select-class-ikmath-course").val();
+            console.log(d);
             switch (d) {
                 case "38":
                     p = satMIKP;
+                    
                     break;
                 case "39":
                     p = satMIKP1;
+                    
                     break;
                 case "40":
                     p = satMIKP2;
@@ -207,7 +210,79 @@
                     break;
             }
             $("#total-ikmath-course").text(months * p);
+
         }
+        $(document).ready(function(){
+            var d = $("#select-class-ikmath-course").val();
+
+
+            switch (d) {
+                
+                case "38":
+                    p = satMIKP;
+                    $('.case-38').text(p+' Points / Month');
+                    
+                case "39":
+                    p = satMIKP1;
+                    $('.case-39').text(p+' Points / Month');
+                    
+                case "40":
+                    p = satMIKP2;
+                    $('.case-40').text(p+' Points / Month');
+                   
+                case "41":
+                    p = satMIKP3;
+                    $('.case-41').text(p+' Points / Month');
+                    
+                case "42":
+                    p = satMIKP4;
+                    $('.case-42').text(p+' Points / Month');
+                    
+                case "43":
+                    p = satMIKP5;
+                    $('.case-43').text(p+' Points / Month');
+                    
+                case "44":
+                    p = satMIKP6;
+                    $('.case-44').text(p+' Points / Month');
+                    
+                case "45":
+                    p = satMIKP7;
+                    $('.case-45').text(p+' Points / Month');
+                    
+                case "46":
+                    p = satMIKP8;
+                    $('.case-46').text(p+' Points / Month');
+                    
+                case "47":
+                    p = satMIKP9;
+                    $('.case-47').text(p+' Points / Month');
+                   
+                case "48":
+                    p = satMIKP10;
+                    $('.case-48').text(p+' Points / Month');
+                    
+                case "49":
+                    p = satMIKP11;
+                    $('.case-49').text(p+' Points / Month');
+                   
+                case "50":
+                    p = satMIKP12;
+                    $('.case-50').text(p+' Points / Month');
+                    
+               
+            };
+            $('.case-10').text(satMIP+ ' Points /  Month');
+            $('.case-pre').text(sat1Pre+ ' Points /  Month');
+            $('.case-pre2').text(sat2Pre+ ' Points /  Month');
+            $('.case-20').text(satMIIP+ ' Points /  Month');
+            $('.case-gra').text(satGp+ ' Points /  Month');
+            $('.case-prac').text(satWp+ ' Points /  Month');
+            $('.case-t1').text(satStp+ ' Points /  Month');
+            
+
+        });
+
         $('#select-class-ikmath-course').change (function (){
             var class_ik = $('#select-class-ikmath-course').val();
             $('#ikmath-course-sat-class').val(class_ik);

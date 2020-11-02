@@ -110,6 +110,7 @@
 		});
 
 		$("#add-flashcard").click(function(e){
+
                     e.preventDefault();
                     var tthis = $(this);
                     var scrolldiv = tthis.parents(".modal-content").find(".scroll-list3");
@@ -127,7 +128,9 @@
                                     $("#save-flashcard-modal").modal("hide");
                                     $('#message-modal-save').modal('show');
                                     $('#message-save').text('You already have same word in the folder. Please select a different word.');
+                                    
                                 } else {
+                                	
                                     tthis.button("loading");
                                     $.post(home_url + "/?r=ajax/flashcard/addcard",{did: dictionary_slug, e: entry, fid: fid}, function(data){
                                         data = JSON.parse(data);

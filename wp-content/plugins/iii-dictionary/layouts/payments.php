@@ -151,7 +151,7 @@ if($cart_items !=""){
                                                 <td><?php echo in_array($item->typeid, array(SUB_DICTIONARY, SUB_SELF_STUDY, SUB_SELF_STUDY_MATH, SUB_GROUP)) ? $item->no_students : '1' ?></td>
                                                 <td class="hidden-xs"><?php echo empty($item->dictionary) ? 'N/A' : $item->dictionary ?></td>
                                                 <td><?php echo empty($item->no_of_points) ? 'N/A' : $item->no_of_points ?></td>
-                                                <td>$ <?php echo $item->price ?></td>
+                                                <td> <?php echo $item->price ?> Points</td>
                                                 <td><button type="submit" name="delete-cart-item" value="<?php echo $item->id ?>" class="btn-custom-2 delete-item" style="margin: 0"><?php _e('Delete', 'iii-dictionary') ?></button></td>
                                             </tr>
                                             <?php
@@ -167,7 +167,7 @@ if($cart_items !=""){
                 </div>
                 <div class="col-sm-12 margin-3" >
                     <p class="box-gray-dialog" style="text-align: right" >
-                        <?php _e('Total Amount: ','iii-dictionary') ?> <span class="currency color-green708b23">$</span> <span id="total-amount" class="color-green708b23 css-font-weight"><?php echo $cart_amount ?></span>
+                        <?php _e('Total Amount: ','iii-dictionary') ?> <span class="currency color-green708b23"></span> <span id="total-amount" class="color-green708b23 css-font-weight"><?php echo $cart_amount ?> Points</span>
                     </p>
                 </div>
             </div>
@@ -191,7 +191,7 @@ if($cart_items !=""){
                 endforeach;
             endif;
             ?>
-            <div class="row " id="exist-card" data-type="0" <?php if(isset($_SESSION['payment']['sub-type']) && $_SESSION['payment']['sub-type'] == 30 || $is_tutoring_plan) echo 'style="display: none;"'; ?>>
+            <!-- <div class="row " id="exist-card" data-type="0" <?php if(isset($_SESSION['payment']['sub-type']) && $_SESSION['payment']['sub-type'] == 30 || $is_tutoring_plan) echo 'style="display: none;"'; ?>>
                 <div class="col-xs-1 width-45" form-group new-msg-style col-xs-12>
                     <span class="arrow_down"></span>
                 </div>
@@ -339,23 +339,25 @@ if($cart_items !=""){
                 <div class="col-xs-11">
                     <label class="color4c4c4c pad-left-10" for="exist-card"><?php _e('Pay with my points balance', 'iii-dictionary') ?></label>
                 </div>
-            </div>
-                <div class="col-xs-12 hidden" id="points-balance-block">
+            </div> -->
+                <div class="col-xs-12" id="points-balance-block">
                     <div>
                         <div class="form-group">
-                            <input id="points-balance" type="radio" class="rd-points" name="payment-method-point" value="3">
-                            <label class="font-dialog"><?php _e('Your current points is', 'iii-dictionary') ?> <em class="text-info color-green708b23">(Exchange rate: <?php echo $point_ex_rate ?>pts = 1$)</em></label>
+                            
                             <div class="box-gray-dialog">
-                                <h3 ><?php echo 'TOTAL POINTS:&nbsp;' ?><span class="color-green708b23" ><?php echo number_format(ik_get_user_points(), 2) ?></span></h3>
+                                <h3 ><?php echo 'TOTAL POINTS:&nbsp;' ?><span class="color-green708b23" ><?php echo ik_get_user_points(); ?></span></h3>
                                 
                             </div>
+                            <input id="points-balance" type="checkbox" class="rd-points" name="payment-method-point" value="3">
+                            <label class="font-dialog"><?php _e('Accept Payment', 'iii-dictionary') ?></label>
+                            <div id="accept-payment" style="display: none;color: red;"><i>● Please click accept payment</i></div>
                         </div>
                     </div>
                 </div>
 
             <div class="row" style="margin-left: 25px">
                 <div class="col-xs-12 col-sm-6 top-buffer">
-                    <button type="submit" name="process" id="process-btn" class="btn-custom"></span><?php _e('Check out', 'iii-dictionary') ?></button>
+                    <button type="button" name="process" id="process-btn" class="btn-custom"></span><?php _e('Check out', 'iii-dictionary') ?></button>
                 </div>
                 <div class="col-xs-12 col-sm-6 top-buffer">
                     <a href="#" class="btn-custom-1"></span><?php _e('Continue shopping', 'iii-dictionary') ?></a>
@@ -396,6 +398,26 @@ if($cart_items !=""){
         </div>
     </div>
 </div>
+
+<div class="modal fade " id="purchase-point" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-custom-first">
+        <div class="modal-content modal-content-custom">
+            <div class="modal-header custom-header">
+                
+                <h3 style="padding-left: 1%"><?php _e('Message', 'iii-dictionary') ?></h3>
+            </div>
+            <div style=" padding: 20px 50px; font-size: 15px;font-family: semibold">You don't have enough points to pay for the courses, do you want to add more points to your account?  </div>
+            <div class="row" style="padding-bottom: 10px;">
+                <div class="col-xs-6">
+                    <button id="push-point-btn" class="border-btn btn-dark-blue" type="button" style="background: #4c4c4c ;">YES</button>
+                </div>
+                <div class="col-xs-6">
+                    <button id="cancel-push" class="border-btn btn-dark-blue" type="button" style="background: #CECECE;">CANCEL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- modal message erro payment type new card-->
 <div class="modal fade " id="modal-error-message" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-custom-first">
@@ -427,225 +449,260 @@ if($cart_items !=""){
 <script>
     var open_mt4 = <?php echo!is_null($_SESSION['open_method_point']) ? 1 : 0 ?>;
     (function ($) {
-        $(function () {
-            id_check ="";
-            $('#exist-card,#new-card, #paypal, #points-balance').click(function(){
-                data_type=$(this).attr('data-type');
-                switch(data_type){
-                    case "0" : 
-                        data_id=$("#existing-card-block");
-                        $('#type-payment').val("0");
-                        $('#new-card-info-block').addClass("hidden");
-                        $('#paypal-block').addClass("hidden");
-                        $('#points-balance-block').addClass("hidden");
-                        $(".rd-points").prop("checked", false);
+//         $(function () {
+//             id_check ="";
+//             $('#exist-card,#new-card, #paypal, #points-balance').click(function(){
+//                 data_type=$(this).attr('data-type');
+//                 switch(data_type){
+//                     case "0" : 
+//                         data_id=$("#existing-card-block");
+//                         $('#type-payment').val("0");
+//                         $('#new-card-info-block').addClass("hidden");
+//                         $('#paypal-block').addClass("hidden");
+//                         $('#points-balance-block').addClass("hidden");
+//                         $(".rd-points").prop("checked", false);
                         
-                        $('#new-card div:first-child span').removeClass("arrow_up");
-                        $('#new-card div:first-child span').addClass("arrow_down");
-                        $('#paypal div:first-child span').removeClass("arrow_up");
-                        $('#paypal div:first-child span').addClass("arrow_down");
-                        $('#points-balance div:first-child span').removeClass("arrow_up");
-                        $('#points-balance div:first-child span').addClass("arrow_down");
-                        if(id_check != 0) {
-                            $('#exist-card div:first-child span').removeClass("arrow_down");
-                            $('#exist-card div:first-child span').addClass("arrow_up");
-                            $('#existing-card-block').removeClass("hidden");
-                        }else{
-                            if($('#existing-card-block').hasClass("hidden")){
-                                $('#exist-card div:first-child span').removeClass("arrow_down");
-                                $('#exist-card div:first-child span').addClass("arrow_up");
-                                $('#existing-card-block').removeClass("hidden");
-                            }else{
-                                $('#exist-card div:first-child span').removeClass("arrow_up");
-                                $('#exist-card div:first-child span').addClass("arrow_down");
-                                $('#existing-card-block').addClass("hidden");
-                            }
-                        }
-                        id_check =0;
-                        break;
-                    case "1" : 
-                        data_id=$("#new-card-info-block");
-                        $('#type-payment').val("1");
-                        $('#existing-card-block').addClass("hidden");
-                        $('#paypal-block').addClass("hidden");
-                        $('#points-balance-block').addClass("hidden");
-                        $(".rd-points").prop("checked", false);
+//                         $('#new-card div:first-child span').removeClass("arrow_up");
+//                         $('#new-card div:first-child span').addClass("arrow_down");
+//                         $('#paypal div:first-child span').removeClass("arrow_up");
+//                         $('#paypal div:first-child span').addClass("arrow_down");
+//                         $('#points-balance div:first-child span').removeClass("arrow_up");
+//                         $('#points-balance div:first-child span').addClass("arrow_down");
+//                         if(id_check != 0) {
+//                             $('#exist-card div:first-child span').removeClass("arrow_down");
+//                             $('#exist-card div:first-child span').addClass("arrow_up");
+//                             $('#existing-card-block').removeClass("hidden");
+//                         }else{
+//                             if($('#existing-card-block').hasClass("hidden")){
+//                                 $('#exist-card div:first-child span').removeClass("arrow_down");
+//                                 $('#exist-card div:first-child span').addClass("arrow_up");
+//                                 $('#existing-card-block').removeClass("hidden");
+//                             }else{
+//                                 $('#exist-card div:first-child span').removeClass("arrow_up");
+//                                 $('#exist-card div:first-child span').addClass("arrow_down");
+//                                 $('#existing-card-block').addClass("hidden");
+//                             }
+//                         }
+//                         id_check =0;
+//                         break;
+//                     case "1" : 
+//                         data_id=$("#new-card-info-block");
+//                         $('#type-payment').val("1");
+//                         $('#existing-card-block').addClass("hidden");
+//                         $('#paypal-block').addClass("hidden");
+//                         $('#points-balance-block').addClass("hidden");
+//                         $(".rd-points").prop("checked", false);
                         
-                        $('#exist-card div:first-child span').removeClass("arrow_up");
-                        $('#exist-card div:first-child span').addClass("arrow_down");
-                        $('#paypal div:first-child span').removeClass("arrow_up");
-                        $('#paypal div:first-child span').addClass("arrow_down");
-                        $('#points-balance div:first-child span').removeClass("arrow_up");
-                        $('#points-balance div:first-child span').addClass("arrow_down");
-                        if(id_check != 1 || id_check == null) {
-                            $('#new-card div:first-child span').removeClass("arrow_down");
-                            $('#new-card div:first-child span').addClass("arrow_up")
-                            $('#new-card-info-block').removeClass("hidden");
-                        }else{
-                            if($('#new-card-block').hasClass("hidden")){
-                                $('#new-card div:first-child span').removeClass("arrow_down");
-                                $('#new-card div:first-child span').addClass("arrow_up");
-                                $('#new-card-info-block').removeClass("hidden");
-                            }else{
-                                $('#new-card div:first-child span').removeClass("arrow_up");
-                                $('#new-card div:first-child span').addClass("arrow_down");
-                                $('#new-card-info-block').addClass("hidden");
-                            }
-                        }
-                        id_check =1;
-                        break;
-                    case "2" : 
-                        data_id=$("#paypal-block");
-                        $('#type-payment').val("2");
-                        $('#existing-card-block').addClass("hidden");
-                        $('#new-card-info-block').addClass("hidden");
-                        $('#points-balance-block').addClass("hidden");
-                        $(".rd-points").prop("checked", false);
+//                         $('#exist-card div:first-child span').removeClass("arrow_up");
+//                         $('#exist-card div:first-child span').addClass("arrow_down");
+//                         $('#paypal div:first-child span').removeClass("arrow_up");
+//                         $('#paypal div:first-child span').addClass("arrow_down");
+//                         $('#points-balance div:first-child span').removeClass("arrow_up");
+//                         $('#points-balance div:first-child span').addClass("arrow_down");
+//                         if(id_check != 1 || id_check == null) {
+//                             $('#new-card div:first-child span').removeClass("arrow_down");
+//                             $('#new-card div:first-child span').addClass("arrow_up")
+//                             $('#new-card-info-block').removeClass("hidden");
+//                         }else{
+//                             if($('#new-card-block').hasClass("hidden")){
+//                                 $('#new-card div:first-child span').removeClass("arrow_down");
+//                                 $('#new-card div:first-child span').addClass("arrow_up");
+//                                 $('#new-card-info-block').removeClass("hidden");
+//                             }else{
+//                                 $('#new-card div:first-child span').removeClass("arrow_up");
+//                                 $('#new-card div:first-child span').addClass("arrow_down");
+//                                 $('#new-card-info-block').addClass("hidden");
+//                             }
+//                         }
+//                         id_check =1;
+//                         break;
+//                     case "2" : 
+//                         data_id=$("#paypal-block");
+//                         $('#type-payment').val("2");
+//                         $('#existing-card-block').addClass("hidden");
+//                         $('#new-card-info-block').addClass("hidden");
+//                         $('#points-balance-block').addClass("hidden");
+//                         $(".rd-points").prop("checked", false);
                         
-                        $('#exist-card div:first-child span').removeClass("arrow_up");
-                        $('#exist-card div:first-child span').addClass("arrow_down");
-                        $('#new-card div:first-child span').removeClass("arrow_up");
-                        $('#new-card div:first-child span').addClass("arrow_down");
-                        $('#points-balance div:first-child span').removeClass("arrow_up");
-                        $('#points-balance div:first-child span').addClass("arrow_down");
-                        if(id_check != 2 || id_check == null) {
-                            $('#paypal div:first-child span').removeClass("arrow_down");
-                            $('#paypal div:first-child span').addClass("arrow_up")
-                            $('#paypal-block').removeClass("hidden");
-                        }else{
-                            if($('#paypal-block').hasClass("hidden")){
-                                $('#paypal div:first-child span').removeClass("arrow_down");
-                                $('#paypal div:first-child span').addClass("arrow_up");
-                                $('#paypal-block').removeClass("hidden");
-                            }else{
-                                $('#paypal div:first-child span').removeClass("arrow_up");
-                                $('#paypal div:first-child span').addClass("arrow_down");
-                                $('#paypal-block').addClass("hidden");
-                            }
-                        }
-                        id_check =2;
-                        break;
-                    case "3" : 
-                        data_id=$("#points-balance-block");
-                        $('#type-payment').val("3");
-                        $('#existing-card-block').addClass("hidden");
-                        $('#new-card-info-block').addClass("hidden");
-                        $('#paypal-block').addClass("hidden");
-                        $(".rd-points").prop("checked", false);
+//                         $('#exist-card div:first-child span').removeClass("arrow_up");
+//                         $('#exist-card div:first-child span').addClass("arrow_down");
+//                         $('#new-card div:first-child span').removeClass("arrow_up");
+//                         $('#new-card div:first-child span').addClass("arrow_down");
+//                         $('#points-balance div:first-child span').removeClass("arrow_up");
+//                         $('#points-balance div:first-child span').addClass("arrow_down");
+//                         if(id_check != 2 || id_check == null) {
+//                             $('#paypal div:first-child span').removeClass("arrow_down");
+//                             $('#paypal div:first-child span').addClass("arrow_up")
+//                             $('#paypal-block').removeClass("hidden");
+//                         }else{
+//                             if($('#paypal-block').hasClass("hidden")){
+//                                 $('#paypal div:first-child span').removeClass("arrow_down");
+//                                 $('#paypal div:first-child span').addClass("arrow_up");
+//                                 $('#paypal-block').removeClass("hidden");
+//                             }else{
+//                                 $('#paypal div:first-child span').removeClass("arrow_up");
+//                                 $('#paypal div:first-child span').addClass("arrow_down");
+//                                 $('#paypal-block').addClass("hidden");
+//                             }
+//                         }
+//                         id_check =2;
+//                         break;
+//                     case "3" : 
+//                         data_id=$("#points-balance-block");
+//                         $('#type-payment').val("3");
+//                         $('#existing-card-block').addClass("hidden");
+//                         $('#new-card-info-block').addClass("hidden");
+//                         $('#paypal-block').addClass("hidden");
+//                         $(".rd-points").prop("checked", false);
                         
-                        $('#exist-card div:first-child span').removeClass("arrow_up");
-                        $('#exist-card div:first-child span').addClass("arrow_down");
-                        $('#new-card div:first-child span').removeClass("arrow_up");
-                        $('#new-card div:first-child span').addClass("arrow_down");
-                        $('#paypal div:first-child span').removeClass("arrow_up");
-                        $('#paypal div:first-child span').addClass("arrow_down");
-                        if(id_check != 3 || id_check == null) {
-                            $('#points-balance div:first-child span').removeClass("arrow_down");
-                            $('#points-balance div:first-child span').addClass("arrow_up")
-                            $('#points-balance-block').removeClass("hidden");
-                        }else{
-                            if($('#points-balance-block').hasClass("hidden")){
-                                $('#points-balance div:first-child span').removeClass("arrow_down");
-                                $('#points-balance div:first-child span').addClass("arrow_up");
-                                $('#points-balance-block').removeClass("hidden");
-                            }else{
-                                $('#points-balance div:first-child span').removeClass("arrow_up");
-                                $('#points-balance div:first-child span').addClass("arrow_down");
-                                $('#points-balance-block').addClass("hidden");
-                            }
-                        }
-                        id_check =3;
-                        break;
-                }
-//                var clicked = $(this).data('clicked');
-//                        if ( clicked ) {
-//                            $(this).find('span').removeClass('arrow_up');
-//                            $(this).find('span').addClass('arrow_down');
-//                            data_id.slideUp();
-//                        }else{
-//                            $(this).find('span').removeClass('arrow_down');
-//                            $(this).find('span').addClass('arrow_up');
-//                            data_id.slideDown();
-//                        }
-//                        $(this).data('clicked', !clicked);
-            });
+//                         $('#exist-card div:first-child span').removeClass("arrow_up");
+//                         $('#exist-card div:first-child span').addClass("arrow_down");
+//                         $('#new-card div:first-child span').removeClass("arrow_up");
+//                         $('#new-card div:first-child span').addClass("arrow_down");
+//                         $('#paypal div:first-child span').removeClass("arrow_up");
+//                         $('#paypal div:first-child span').addClass("arrow_down");
+//                         if(id_check != 3 || id_check == null) {
+//                             $('#points-balance div:first-child span').removeClass("arrow_down");
+//                             $('#points-balance div:first-child span').addClass("arrow_up")
+//                             $('#points-balance-block').removeClass("hidden");
+//                         }else{
+//                             if($('#points-balance-block').hasClass("hidden")){
+//                                 $('#points-balance div:first-child span').removeClass("arrow_down");
+//                                 $('#points-balance div:first-child span').addClass("arrow_up");
+//                                 $('#points-balance-block').removeClass("hidden");
+//                             }else{
+//                                 $('#points-balance div:first-child span').removeClass("arrow_up");
+//                                 $('#points-balance div:first-child span').addClass("arrow_down");
+//                                 $('#points-balance-block').addClass("hidden");
+//                             }
+//                         }
+//                         id_check =3;
+//                         break;
+//                 }
+// //                var clicked = $(this).data('clicked');
+// //                        if ( clicked ) {
+// //                            $(this).find('span').removeClass('arrow_up');
+// //                            $(this).find('span').addClass('arrow_down');
+// //                            data_id.slideUp();
+// //                        }else{
+// //                            $(this).find('span').removeClass('arrow_down');
+// //                            $(this).find('span').addClass('arrow_up');
+// //                            data_id.slideDown();
+// //                        }
+// //                        $(this).data('clicked', !clicked);
+//             });
             
 
-            $("#paypal-submit").click(function (e) {
-                e.preventDefault();
-                if ($("#item-count").val() != "0") {
-                    $("#paypal-btn").click();
-                }
-            });
+//             $("#paypal-submit").click(function (e) {
+//                 e.preventDefault();
+//                 if ($("#item-count").val() != "0") {
+//                     $("#paypal-btn").click();
+//                 }
+//             });
 
-            if (open_mt4) {
-                $("#points-balance").click();
-            }
-            $('.btn-custom-1').click(function (e){
-                e.preventDefault();
-                history.back(1);
-            });
-            var tt_point = <?php echo ik_get_user_points($user->ID);?>;
-            var point = $('#total-amount').html();
-            var arr_id = <?php echo json_encode($arr_id);?>;
+//             if (open_mt4) {
+//                 $("#points-balance").click();
+//             }
+//             $('.btn-custom-1').click(function (e){
+//                 e.preventDefault();
+//                 history.back(1);
+//             });
+//             var tt_point = <?php echo ik_get_user_points($user->ID);?>;
+//             var point = $('#total-amount').html();
+//             var arr_id = <?php echo json_encode($arr_id);?>;
+//         // Handing add data on table wp_dict_tutoring_plan only pay with "tutoring plan"
+//             $('#process-btn').click(function(e){
+//                 var select_card = $('#select-credit-card').val();
+//                 var card = $('#ssl_card_number').val();
+//                 var exp_month= $('#exp-month').val();
+//                 var exp_year= $('#exp-year').val();
+//                 var ccvv= $('#ssl_cvv2cvc2').val();
+//                 var address= $('#ssl_avs_address').val();
+//                 var city= $('#city').val();
+//                 var state= $('#state').val();
+//                 var zip= $('#ssl_avs_zip').val();
+//                 var string = "" ;// message 
+//                 alert(point);
+//                 if($('#type-payment').val()==1){
+//                     if(!select_card || !card || !exp_month || !exp_year || !ccvv || !address || !city || !state || !zip){
+//                         e.preventDefault();
+//                         if(!select_card){string='Please select cart type<br>';}
+//                         if(!card){string+='Card number cannot empty';}
+//                         if(!exp_month || !exp_year){string+='<br>Expiration date is not valid';}
+//                         if(!address || !city || !state){string+='<br>Address cannot empty';}
+//                         if(!zip){string+='<br>Zip code cannot empty';}
+//                         $('#message-error').html(string);
+//                         $('#modal-error-message').modal("show");
+//                     }   
+//                 }else if($('#type-payment').val()==0){
+//                     if(!select_card || !card){
+//                         e.preventDefault();
+//                         if(!select_card){string='Please select a Credit Card,<br>';}
+//                         if(!card){string+='CVV/CVC cannot empty';}
+//                         $('#message-error').html(string);
+//                         $("#process-tran-modal").modal("hide");
+//                         $('#modal-error-message').modal("show");
+//                     }
+//                 }else{
+//                     console.log(arr_id);
+//                     if(tt_point > point) {
+//                         if(arr_id.indexOf("30") != -1)
+//                         {  
+//                             $.get(home_url + "/?r=ajax/paid_wp_dict_tutoring", {}, function (data) {
+//                             });
+//                         }
+//                     }
+//                     $("#process-tran-modal").modal();
+//                 }
+//             });
+//         // Handing uncheck point plance
+//             var checked=false;
+//             $('.rd-points').click(function(){
+//                 checked=!checked;
+//                 $(this).prop("checked",checked);
+//                 if($(this).is(':checked'))
+//                 {
+//                 }
+//                 else{
+//                     $('#points-balance div:first-child span').removeClass("arrow_up");
+//                     $('#points-balance div:first-child span').addClass("arrow_down");
+//                 }
+//             });
+//         });
+            
         // Handing add data on table wp_dict_tutoring_plan only pay with "tutoring plan"
             $('#process-btn').click(function(e){
-                var select_card = $('#select-credit-card').val();
-                var card = $('#ssl_card_number').val();
-                var exp_month= $('#exp-month').val();
-                var exp_year= $('#exp-year').val();
-                var ccvv= $('#ssl_cvv2cvc2').val();
-                var address= $('#ssl_avs_address').val();
-                var city= $('#city').val();
-                var state= $('#state').val();
-                var zip= $('#ssl_avs_zip').val();
-                var string = "" ;// message 
-                if($('#type-payment').val()==1){
-                    if(!select_card || !card || !exp_month || !exp_year || !ccvv || !address || !city || !state || !zip){
-                        e.preventDefault();
-                        if(!select_card){string='Please select cart type<br>';}
-                        if(!card){string+='Card number cannot empty';}
-                        if(!exp_month || !exp_year){string+='<br>Expiration date is not valid';}
-                        if(!address || !city || !state){string+='<br>Address cannot empty';}
-                        if(!zip){string+='<br>Zip code cannot empty';}
-                        $('#message-error').html(string);
-                        $('#modal-error-message').modal("show");
-                    }   
-                }else if($('#type-payment').val()==0){
-                    if(!select_card || !card){
-                        e.preventDefault();
-                        if(!select_card){string='Please select a Credit Card,<br>';}
-                        if(!card){string+='CVV/CVC cannot empty';}
-                        $('#message-error').html(string);
-                        $("#process-tran-modal").modal("hide");
-                        $('#modal-error-message').modal("show");
-                    }
-                }else{
-                    console.log(arr_id);
+                var tt_point = <?php echo ik_get_user_points($user->ID);?>;
+                var point = '<?php echo $cart_amount ?>';
+                var arr_id = <?php echo json_encode($arr_id);?>;
+                
                     if(tt_point > point) {
-                        if(arr_id.indexOf("30") != -1)
-                        {  
-                            $.get(home_url + "/?r=ajax/paid_wp_dict_tutoring", {}, function (data) {
-                            });
-                        }
+                        $.get(home_url + "/?r=ajax/paid_wp_dict_tutoring", {}, function (data) {
+                        });
+                        $("#process-tran-modal").modal();
+                        $.get(home_url + "/?r=ajax/process_point_payment", {}, function (data) {
+
+                        });
+                        window.location.replace('<?php echo home_url_ssl() ?>/?r=my-account');
+                    }else{
+                        $('#purchase-point').modal('show');                
                     }
-                    $("#process-tran-modal").modal();
-                }
+                
+                
             });
-        // Handing uncheck point plance
-            var checked=false;
-            $('.rd-points').click(function(){
-                checked=!checked;
-                $(this).prop("checked",checked);
-                if($(this).is(':checked'))
-                {
-                }
-                else{
-                    $('#points-balance div:first-child span').removeClass("arrow_up");
-                    $('#points-balance div:first-child span').addClass("arrow_down");
-                }
+            $('#points-balance').click(function(){
+                $('#accept-payment').css('display','none');
             });
-        });
+            $('#cancel-push').click(function(){
+                $('#purchase-point').modal('hide');
+            });
+            $('#push-point-btn').click(function(){
+                $('#push-point').modal('hide');
+                $("#my-account-modal").modal('show');
+                $("#login-user").removeClass("active");
+                $("#login-user").removeClass("in");
+                $('#purchase-points').addClass('active in');
+            });
     })(jQuery);
 <?php
 //unset session to open method point  

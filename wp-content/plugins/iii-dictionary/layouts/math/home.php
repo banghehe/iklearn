@@ -5,6 +5,17 @@ $price_course_at_math = mw_get_option('price-course-at-math');
 if (!empty($_POST['data-join'])) {
     MWDB::lang_join_group($_POST);
 }
+if (isset($_POST['add-to-cart'])) {
+    
+    $_SESSION['home'] = $_POST; 
+    
+       // echo '<pre>';
+       // print_r($_POST);
+       // die;
+    ik_add_to_cart($_POST);
+    wp_redirect('https://iktutor.com/iklearn/en/?r=home&add=cart');
+    exit;
+}
 if(isset($_POST['credit-code']))
 	{
 		if($cid = MWDB::add_credit_code($_POST))

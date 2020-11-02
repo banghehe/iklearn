@@ -2823,12 +2823,14 @@ if ($task == 'flashcard') {
             'name' => $name
                 )
         );
-
-        if ($result) {
-            die(json_encode(array($wpdb->insert_id)));
-        } else {
-            die(json_encode(array(0)));
-        }
+        $current_user_id = get_current_user_id();
+        $fl_fd = MWDB::get_flashcard_folders($current_user_id, true);
+        echo json_encode($fl_fd);
+        // if ($result) {
+        //     die(json_encode(array($wpdb->insert_id)));
+        // } else {
+        //     die(json_encode(array(0)));
+        // }
     }
     if ($do == 'addfolder1') {
         $name = $_REAL_POST['n'];
@@ -2840,6 +2842,7 @@ if ($task == 'flashcard') {
             'name' => $name
                 )
         );
+
 
         if ($result) {
             die(json_encode(array($wpdb->insert_id)));
@@ -3944,6 +3947,7 @@ if ($task == "auto_cancel_schedule") {
 
 if ($task == "paid_wp_dict_tutoring") {
     MWDB::paid_wp_dic_tutoring_plan();
+    echo 1;
     exit();
 }
 
@@ -5430,6 +5434,8 @@ if($task == "search_tutor"){
     $date = $_REQUEST['date'];
     $type_search = $_REQUEST['type_search'];
     $available = $_REQUEST['available'];
+    $pricet = $_REQUEST['pricet'];
+    $tutor_type = $_REQUEST['tutor_type'];
 
     $roles = array('mw_registered_teacher','mw_qualified_teacher','mw_registered_math_teacher','mw_qualified_math_teacher');
     foreach ($roles as $role) {
@@ -5458,7 +5464,7 @@ if($task == "search_tutor"){
                 else if(isset($subject_arr[0]) && $subject_arr[0] = 'science_subject')
                     $sub_arr = array('science_middle_school','physics_high_school','chemistry_high_school','others');
                 else
-                    $sub_arr = array();
+                    $sub_arr = array('other_preference');
 
                 if(count($sub_arr) > 0){
                     foreach ($sub_arr as $sub) {
@@ -5794,19 +5800,85 @@ if($task == "search_tutor"){
             $item['up_price_group'] = $price_group;
 
 
-            if($type == 'favorite' && $favorite > 0){
-                $arr_user1[] = $item;
-            }else{
-                if($type_search[0] == 'favorite' && $favorite > 0){
-                    $arr_user2[] = $item;
-                }else if($type_search[0] == 'rating' && $total_star > 0){
-                    $arr_user2[] = $item;
-                }else if(count($type_search) == 2 && ($favorite > 0 || $total_star > 0)){
-                    $arr_user2[] = $item;
-                }else{
-                    $arr_user2[] = $arr_user[] = $item;
+            // if($type == 'favorite' && $favorite > 0){
+            //     $arr_user1[] = $item;
+            // }else{
+            //     if($type_search[0] == 'favorite' && $favorite > 0){
+            //         $arr_user2[] = $item;
+            //     }else if($type_search[0] == 'rating' && $total_star > 0){
+            //         $arr_user2[] = $item;
+            //     }else if(count($type_search) == 2 && ($favorite > 0 || $total_star > 0)){
+            //         $arr_user2[] = $item;
+            //     }else{
+            //         $arr_user2[] = $arr_user[] = $item;
+            //     }
+            // }
+            $sub_type = $value->subject_type;
+            $sub_type = explode("|", $sub_type);
+            $a = 0;
+            $sub_type2 = explode("|", $subject_type);
+            if($sub_type[0] == $sub_type2[0]){
+                if($sub_type2[1] == 'all'){
+                    $a++;
+                }elseif($sub_type[1] == $sub_type2[1]){
+                    $a++;
+                }
+            }elseif ($sub_type[0] == 'all' || $sub_type2[0] =='all') {
+                $a++;
+            }elseif($sub_type[0] == ''){
+                $a++;
+            }
+            if($a != 0){               
+            
+                if($value->enable_group_tutoring == 'timelot_group_tutoring' && $tutor_type == 'group_tutoring'){
+                    $price1 = $item['up_price_group'];            
+                    if($pricet == '0'){
+                         $arr_user2[] = $arr_user[] = $item;
+                    }else if($pricet == '50') {
+                         if($pricet < $price1){
+                            $arr_user2[] = $arr_user[] = $item;
+                         }
+                    }else{
+                        $pricer = explode("-", $pricet);
+                        if($pricer[0] < $price1 && $price1 < $pricer[1]){
+                        $arr_user2[] = $arr_user[] = $item;
+                        }
+                    }
+                }elseif($value->enable_group_tutoring != 'timelot_group_tutoring' && $tutor_type == 'one_tutoring'){
+                    $price1 = $item['up_price_one'];
+                    if($pricet == '0'){
+                         $arr_user2[] = $arr_user[] = $item;
+                    }else if($pricet == '50') {
+                         if($pricet < $price1){
+                            $arr_user2[] = $arr_user[] = $item;
+                         }
+                    }else{
+                        $pricer = explode("-", $pricet);
+                        if($pricer[0] < $price1 && $price1 < $pricer[1]){
+                        $arr_user2[] = $arr_user[] = $item;
+                        }
+                    }
+                }elseif($tutor_type == '0'){
+                    if($value->enable_group_tutoring == 'timelot_group_tutoring'){
+                        $price1 = $item['up_price_group'];
+                    }else{
+                        $price1 = $item['up_price_one'];
+                    }
+                    if($pricet == '0'){
+                         $arr_user2[] = $arr_user[] = $item;
+                    }else if($pricet == '50') {
+                         if($pricet < $price1){
+                            $arr_user2[] = $arr_user[] = $item;
+                         }
+                    }else{
+                        $pricer = explode("-", $pricet);
+                        if($pricer[0] < $price1 && $price1 < $pricer[1]){
+                        $arr_user2[] = $arr_user[] = $item;
+                        }
+                    }
                 }
             }
+            
         }
     }
     //$arr_user = unique_multidim_array('ID',$arr_user);
@@ -5960,7 +6032,13 @@ if ($task == "get_users_tutor") {
 
     if(($type == 'available' || $available == 'available') ){
         $where .= ' AND ID IN (SELECT tutor_id FROM ' . $wpdb->prefix . 'dict_tutoring_available GROUP BY tutor_id)';
-    }    
+    }
+    if( $type =='english'){
+        $where .= ' AND ID IN (SELECT tutor_id FROM ' . $wpdb->prefix . 'dict_tutoring_available GROUP BY tutor_id)';
+    }   
+    if( $type =='math'){
+        $where .= ' AND ID IN (SELECT tutor_id FROM ' . $wpdb->prefix . 'dict_tutoring_available GROUP BY tutor_id)';
+    } 
 
     if($time != ''){
         $where .= ' AND ID IN (SELECT tutor_id FROM ' . $wpdb->prefix . 'dict_tutoring_available WHERE time_start = \''.$time.'\' GROUP BY tutor_id)';
@@ -5979,7 +6057,7 @@ if ($task == "get_users_tutor") {
     $rquery .= ' GROUP BY ID ORDER BY user_registered DESC';
     //echo $query;
     $users = $wpdb->get_results($rquery);
-    $arr_user2 = $arr_user1 = $arr_user = array();
+    $arr_user2 = $arr_user1 = $arr_user = $arr_user3 = $arr_user4 = array();
     $current_user = wp_get_current_user();
     if(count($users) > 0){
         $item = array();
@@ -6248,6 +6326,42 @@ if ($task == "get_users_tutor") {
             $item['main_image'] = $main_image;
             $item['enable_one_tutoring'] = $value->enable_one_tutoring;
             $item['enable_group_tutoring'] = $value->enable_group_tutoring;
+            if ($type == 'english-conv') {
+                $b = 0;
+                foreach ($subject_type_update as $valuex) {
+                    $pos = substr($valuex,0,12);
+                    if($pos == "English: Con"){
+                        $b = 1;                        
+                    }
+                }
+                if($b == 1){
+                    $arr_user5[] = $item;
+                }
+            }
+            if ($type == 'english-wri') {
+                $b = 0;
+                foreach ($subject_type_update as $valuex) {
+                    $pos = substr($valuex,0,19);
+                    if($pos == "English: English Wr"){
+                        $b = 1;                        
+                    }
+                }
+                if($b == 1){
+                    $arr_user3[] = $item;
+                }
+            }
+            if ($type == 'math') {
+                $b = 0;
+                foreach ($subject_type_update as $valuex) {
+                    $pos = substr($valuex,0,3);
+                    if($pos == "Mat"){
+                        $b = 1;                        
+                    }
+                }
+                if($b == 1){
+                    $arr_user4[] = $item;
+                }
+            }
 
             if($type == 'favorite' && $favorite > 0){
                 $arr_user1[] = $item;
@@ -6285,6 +6399,12 @@ if ($task == "get_users_tutor") {
             $arr_user2
         );
         echo json_encode(array('users' => $arr_user2));
+    }else if($type == 'english-conv') {
+        echo json_encode(array('users' => $arr_user5));
+    }else if($type == 'math') {
+        echo json_encode(array('users' => $arr_user4));
+    }else if($type == 'english-wri'){
+        echo json_encode(array('users' => $arr_user3));
     }else{
         echo json_encode(array('users' => $arr_user));
     }
@@ -7577,3 +7697,301 @@ if ($task == "get_my_schedules"){
     echo json_encode($arr);
     exit;
 }
+if ($task == "create_code") {
+    $id = $_REQUEST['userid'];
+    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    $size = strlen( $chars );
+    for( $i = 0; $i < 15; $i++ ) {
+        $str .= $chars[ rand( 0, $size - 1 ) ];
+    }
+    $code = get_user_meta($id,'code_point',true);
+    if($code == ''){
+        $code = [];
+        $code[] = $str;
+    }else{
+        $code[] = $str;
+    }
+    update_user_meta($id,'code_point',$code);
+    echo $str;
+    
+
+
+}
+
+if($task == "process_point_payment") {
+    ik_process_point_payment();
+}
+if($task == 'get_scheduled_day_tutor'){
+    $day = $_REQUEST["day"];
+    $user_id = $_REQUEST["userid"];
+    if($day == '')
+        $date = date('Y-m-d',time());
+    else
+        $date = $day;
+    
+    
+    $price_tutoring = get_user_meta($user_id, 'price_tutoring', true);
+    $user_points = get_user_meta($user_id, 'user_points', true);
+    $user_points = empty($user_points) ? 0 : $user_points;
+    $time_zone = get_user_meta($user_id, 'user_timezone', true);
+    $time_zone = empty($time_zone) ? 0 : $time_zone;    
+    $u_time_zone_index = get_user_meta($user_id, 'time_zone_index', true);
+    $u_time_zone_index = empty($u_time_zone_index)? 0 : $u_time_zone_index;
+    $time_zone_name = get_user_meta($user_id, 'time_zone_name', true);
+    $timezone_name = empty($time_zone_name)? convert_timezone_to_name($u_time_zone_index):$time_zone_name;
+    $first_name = get_user_meta($user_id,'first_name',true);
+    $last_name = get_user_meta($user_id,'last_name',true);
+    $full_name = $first_name.' '.$last_name;
+    $up_price_one = get_user_meta($user_id, 'price_array', true);
+    $up_price_group = get_user_meta($user_id, 'group_price_array', true);
+    
+    
+   
+
+    $query2 = "SELECT tp.*, u.display_name AS student_name
+            FROM " . $wpdb->prefix . "dict_tutoring_plan AS tp
+            LEFT JOIN " . $wpdb->users . " AS u ON u.ID = tp.id_user
+            WHERE tp.canceled = 0 AND tp.accepted = 1 AND tp.tutor_id = ".$user_id."
+            ORDER BY tp.date DESC";
+    $results_cf = $wpdb->get_results($query2);
+    $confirmed = array();
+    if(count($results_cf) > 0){
+        foreach ($results_cf as $v) {
+            $date_time2 = explode('~', $v->time);
+            $start2 = substr(trim($date_time2[0]),0,-3).' '.strtoupper(substr(trim($date_time2[0]),-2));
+            $end2 = substr(trim($date_time2[1]),0,-3).' '.strtoupper(substr(trim($date_time2[1]),-2));
+            $timezone_scheduled2 = convert_timezone_to_name($v->time_zone_index);
+            
+            $original_datetime_st2 = $v->date.' '.$start2;
+            $original_timezone_st2 = new DateTimeZone($timezone_scheduled2);
+            $datetime_st2 = new DateTime($original_datetime_st2, $original_timezone_st2);
+            $target_timezone_st2 = new DateTimeZone($timezone_name);
+            $datetime_st2->setTimeZone($target_timezone_st2);
+            
+            $original_datetime_ed2 = $v->date.' '.$end2;
+            $original_timezone_ed2 = new DateTimeZone($timezone_scheduled2);
+            $datetime_ed2 = new DateTime($original_datetime_ed2, $original_timezone_ed2);
+            $target_timezone_ed2 = new DateTimeZone($timezone_name);
+            $datetime_ed2->setTimeZone($target_timezone_ed2);
+
+            $time = $datetime_st2->format('h:i A').' - '.$datetime_ed2->format('h:i A');
+            $keyprice = $date.$time;
+            $price_one = $up_price_one[$keyprice];
+            $price_group = $up_price_group[$keyprice];
+            $confirmed[] = array(
+                            'subject' => $v->subject,
+                            'private_subject' => $v->private_subject,
+                            'short_message' => $v->short_message,                        
+                            'student_name' => $v->student_name,
+                            'date' => $datetime_st2->format('F d, Y'),
+                            'date_view' => $datetime_st2->format('m/d/Y'),
+                            'stuff' => $datetime_st2->format('(D)'),
+                            'time_view' => $time,
+                            'time' => $v->time,
+                            'time_start' => $datetime_st2->format('h:i a'),
+                            'time_end' => $datetime_ed2->format('h:i a'),
+                            'stime' => strtotime($datetime_st2->format('Y-m-d H:i:s')),
+                        );
+        }
+    }
+    if(count($confirmed) > 0){
+        array_multisort(
+            array_column($confirmed, 'stime'), SORT_NUMERIC, SORT_DESC,
+            $confirmed
+        );
+    }
+
+    $query3 = "SELECT ta.*, u.display_name AS student_name
+            FROM " . $wpdb->prefix . "dict_tutoring_available AS ta
+            LEFT JOIN " . $wpdb->users . " AS u ON u.ID = ta.tutor_id
+            WHERE ta.tutor_id = ".$user_id." 
+            ORDER BY ta.date DESC"; //tp.date = '".$date."' AND 
+    $results3 = $wpdb->get_results($query3);
+    $availables = array();
+    if(count($results3) > 0){
+        foreach ($results3 as $item) {
+            $date_time3 = explode('~', $item->time);
+            $start3 = substr(trim($date_time3[0]),0,-3).' '.strtoupper(substr(trim($date_time3[0]),-2));
+            $end3 = substr(trim($date_time3[1]),0,-3).' '.strtoupper(substr(trim($date_time3[1]),-2));
+            $timezone_scheduled3 = convert_timezone_to_name($item->time_zone_index);
+            
+            $original_datetime_st3 = $item->date.' '.$start3;
+            $original_timezone_st3 = new DateTimeZone($timezone_scheduled3);
+            $datetime_st3 = new DateTime($original_datetime_st3, $original_timezone_st3);
+            $target_timezone_st3 = new DateTimeZone($timezone_name);
+            $datetime_st3->setTimeZone($target_timezone_st3);
+        
+            $original_datetime_ed3 = $item->date.' '.$end3;
+            $original_timezone_ed3 = new DateTimeZone($timezone_scheduled3);
+            $datetime_ed3 = new DateTime($original_datetime_ed3, $original_timezone_ed3);
+            $target_timezone_ed3 = new DateTimeZone($timezone_name);
+            $datetime_ed3->setTimeZone($target_timezone_ed3);
+            
+            $original_datetime_ct3 = $item->created_on;
+            $original_timezone_ct3 = new DateTimeZone($timezone_scheduled3);
+            $datetime_ct3 = new DateTime($original_datetime_ct3, $original_timezone_ct3);
+            $target_timezone_ct3 = new DateTimeZone($timezone_name);
+            $datetime_ct3->setTimeZone($target_timezone_ct3);
+
+            if($datetime_st3->format('Y-m-d') == $date){
+                
+                if($datetime_st3->format('G') == '0')
+                    $start_id3 = '12_'.$datetime_st3->format('i_a');
+                else
+                    $start_id3 = $datetime_st3->format('G_i_a');
+                    
+                if($datetime_ed3->format('G') == '0')
+                    $end_id3 = '12_'.$datetime_ed3->format('i_a');
+                else
+                    $end_id3 = $datetime_ed3->format('G_i_a');
+                
+                $query_count = "SELECT tp.*
+                        FROM " . $wpdb->prefix . "dict_tutoring_plan AS tp
+                        WHERE tp.tutor_id = ".$user_id." AND tp.date = '".$date."' AND tp.time = '".$item->time."' AND tp.status = 2";
+                $results_count = $wpdb->get_results($query_count);
+
+                $query_accept = "SELECT tp.*
+                        FROM " . $wpdb->prefix . "dict_tutoring_plan AS tp
+                        WHERE tp.tutor_id = ".$user_id." AND tp.date = '".$date."' AND tp.time = '".$item->time."' AND tp.status = 2 AND tp.accepted = 1";
+                $results_accept = $wpdb->get_results($query_accept);
+
+                if(count($results_accept) == 1)
+                    $ct_users = 1;
+                else
+                    $ct_users = count($results_count);
+                $keyprice = $date.$item->time_start;
+                $price_one = $up_price_one[$keyprice];
+                $price_group = $up_price_group[$keyprice];
+                $availables[] = array(
+                    'id' => $item->id,
+                    'tutor_id' => $item->tutor_id,
+                    'start_id' => $start_id3,
+                    'end_id' => $end_id3,
+                    'one_tutoring'=>$item->enable_one_tutoring,
+                    'group_tutoring' => $item->enable_group_tutoring,
+                    'subject_name'=>$item->subject_name,
+                    'subject_type'=>$item->subject_type,
+                    'fromtime' => $item->time_start,
+                    'totime' => $item->time_end,
+                    'price_tutoring' => $item->price_tutoring,
+                    'price_group_tutoring' => $item->price_group_tutoring,
+                    'up_price_tutoring' => $up_price_one[$keyprice],
+                    'up_price_group_tutoring' => $up_price_group[$keyprice],
+                    'time' => $item->time,
+                    'day' => $item->date,
+                    'stime' => strtotime($datetime_st3->format('Y-m-d H:i:s')),
+                    'users' => $ct_users,
+                    'accept' => count($results_accept),
+                    'fullname' => $full_name
+                );
+            }            
+        }
+    }
+
+    if(count($availables) == 0){
+        $query4 = "SELECT tp.*, u.display_name AS student_name
+            FROM " . $wpdb->prefix . "dict_tutoring_plan AS tp
+            LEFT JOIN " . $wpdb->users . " AS u ON u.ID = tp.id_user
+            WHERE tp.tutor_id = ".$user_id." 
+            ORDER BY tp.date DESC"; //tp.date = '".$date."' AND 
+        $results4 = $wpdb->get_results($query4);
+        if(count($results4) > 0){
+            foreach ($results4 as $item) {
+                $date_time3 = explode('~', $item->time);
+                $start3 = substr(trim($date_time3[0]),0,-3).' '.strtoupper(substr(trim($date_time3[0]),-2));
+                $end3 = substr(trim($date_time3[1]),0,-3).' '.strtoupper(substr(trim($date_time3[1]),-2));
+                $timezone_scheduled3 = convert_timezone_to_name($item->time_zone_index);
+                
+                $original_datetime_st3 = $item->date.' '.$start3;
+                $original_timezone_st3 = new DateTimeZone($timezone_scheduled3);
+                $datetime_st3 = new DateTime($original_datetime_st3, $original_timezone_st3);
+                $target_timezone_st3 = new DateTimeZone($timezone_name);
+                $datetime_st3->setTimeZone($target_timezone_st3);
+            
+                $original_datetime_ed3 = $item->date.' '.$end3;
+                $original_timezone_ed3 = new DateTimeZone($timezone_scheduled3);
+                $datetime_ed3 = new DateTime($original_datetime_ed3, $original_timezone_ed3);
+                $target_timezone_ed3 = new DateTimeZone($timezone_name);
+                $datetime_ed3->setTimeZone($target_timezone_ed3);
+                
+                $original_datetime_ct3 = $item->created_on;
+                $original_timezone_ct3 = new DateTimeZone($timezone_scheduled3);
+                $datetime_ct3 = new DateTime($original_datetime_ct3, $original_timezone_ct3);
+                $target_timezone_ct3 = new DateTimeZone($timezone_name);
+                $datetime_ct3->setTimeZone($target_timezone_ct3);
+
+                if($datetime_st3->format('Y-m-d') == $date){
+                    
+                    if($datetime_st3->format('G') == '0')
+                        $start_id3 = '12_'.$datetime_st3->format('i_a');
+                    else
+                        $start_id3 = $datetime_st3->format('G_i_a');
+                        
+                    if($datetime_ed3->format('G') == '0')
+                        $end_id3 = '12_'.$datetime_ed3->format('i_a');
+                    else
+                        $end_id3 = $datetime_ed3->format('G_i_a');
+                    
+                    $query_count = "SELECT tp.*
+                            FROM " . $wpdb->prefix . "dict_tutoring_plan AS tp
+                            WHERE tp.tutor_id = ".$user_id." AND tp.date = '".$date."' AND tp.time = '".$item->time."' AND tp.status = 2";
+                    $results_count = $wpdb->get_results($query_count);
+
+                    $query_accept = "SELECT tp.*
+                            FROM " . $wpdb->prefix . "dict_tutoring_plan AS tp
+                            WHERE tp.tutor_id = ".$user_id." AND tp.date = '".$date."' AND tp.time = '".$item->time."' AND tp.status = 2 AND tp.accepted = 1";
+                    $results_accept = $wpdb->get_results($query_accept);
+
+                    if(count($results_accept) == 1)
+                        $ct_users = 1;
+                    else
+                        $ct_users = count($results_count);
+                    
+                    $availables[] = array(
+                        'id' => $item->id,
+                        'tutor_id' => $item->tutor_id,
+                        'start_id' => $start_id3,
+                        'end_id' => $end_id3,
+                        'fromtime' => isset($item->time_start)?$item->time_start:$datetime_st3->format('h:ia'),
+                        'totime' => isset($item->time_end)?$item->time_end:$datetime_ed3->format('h:ia'),
+                        'time' => $item->time,
+                        'day' => $item->date,
+                        'stime' => strtotime($datetime_st3->format('Y-m-d H:i:s')),
+                        'users' => $ct_users,
+                        'accept' => count($results_accept)
+                    );
+                }            
+            }
+        }
+    }
+
+    echo json_encode(array('confirmed' => $confirmed, 'availables' => $availables, 'points' => $user_points, 'price_tutoring' => $price_tutoring));//'scheduled' => $arr, 
+    die;
+}
+if($task == "get_name_tutor") {
+    $id = $_REQUEST['id'];
+    echo get_user_meta($id,'first_name',true).' '.get_user_meta($id,'last_name',true);
+}
+if($task =="delete_item") {
+    $data = $_REQUEST['data'];
+    $current_user_id = get_current_user_id();
+    $cart = get_user_cart();
+
+    if (isset($data)) {
+        foreach ($cart->items as $key => $item) {
+            if ($item->id == $data) {
+                $cart->total_amount -= $item->price;
+                unset($cart->items[$key]);
+            }
+        }
+    }
+
+    $data = array(
+        'items' => json_encode($cart->items),
+        'total_amount' => $cart->total_amount
+    );
+
+    MWDB::update_user_shopping_cart($current_user_id, $data);
+    echo get_cart_amount();
+}
+

@@ -98,8 +98,8 @@ if (strpos($link_current, 'my-account') !== false) {
                                         <td class="content-table font-bold" style="width: 50%;padding-top: 3px;padding-left: 0px; "><span class="css-get-points"><?php _e(ik_get_user_points($user->ID)) ?></span><span><?php echo "(USD)"?></span></td>
                                     </tr>
                                 <tr>
-                                    <td class="content-table-noboder" colspan="2">
-                                        <a href="#purchase-points-dialog" class="btn-custom" target="_blank" data-toggle="modal">Purchase More Points</a>
+                                    <td  class="content-table-noboder" colspan="2">
+                                        <p id="purchase-more-points" class="btn-custom">Purchase More Points</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -2493,6 +2493,12 @@ without calculator questions and so forth.', 'iii-dictionary'); ?></p>
                 theme: "rounded-dark",
                 scrollButtons: {enable: true}
             });
+        });
+        $('#purchase-more-points').click(function(){
+            $("#my-account-modal").modal('show');
+                $("#login-user").removeClass("active");
+                $("#login-user").removeClass("in");
+                $('#purchase-points').addClass('active in');
         });
     })(jQuery);
     var ttp = <?php echo (int)$teacher_tool_price ?>;

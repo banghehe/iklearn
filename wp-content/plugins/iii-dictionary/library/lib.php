@@ -128,8 +128,8 @@ function site_admin_url()
 function home_url_ssl()
 {
 	$return_url =  is_math_panel() ? site_math_url() : site_home_url(); 
-	//return locale_home_url();
-	//return str_replace('http://', 'https://', $return_url);
+	return locale_home_url();
+	return str_replace('http://', 'https://', $return_url);
 	
 }
 

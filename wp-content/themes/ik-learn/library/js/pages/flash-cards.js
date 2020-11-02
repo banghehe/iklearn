@@ -2,7 +2,7 @@ var flashs = [];
 var change = false;
 (function ($) {
     $(function () {
-        
+        ;
 
         toggle_fc_type($("#sel-fc-type").val());
 
@@ -80,7 +80,7 @@ var change = false;
                             '<td class="fh">' + v.word + '</td>' +
                             '<td><input type="text" class="flashcard-note" data-id="' + v.word_id + '" autocomplete="off" value="' + v.notes + '"></td>' +
                             '<td><a class="toggle-memorized" data-id="' + v.word_id + '" href="#">' + m + '</a></td>' +
-                            '<td><a href="#" data-id="' + v.word_id + '" class="delete-card">delete</a></td>' +
+                            '<td><a href="#" data-id="' + v.word_id + '" class="delete-card"><u>delete</u>&nbsp;&nbsp;<img src="'+url_image+'icon_remove.png"></a></td>' +
                             '</tr>';
                 });
                 $("#fc-table tbody").html(rows);
@@ -123,15 +123,25 @@ var change = false;
             }
         }
 
-        $("#fc-table").on("click", ".fh", function (e) {
+        $(document).ready(function(){
+            $('.fh').click(function (e) {
             e.preventDefault();
             var a = $(this).parent().find("a");
+            
             $.get(home_url + "/?r=ajax/flashcard/lookup", {id: a.attr("data-id")}, function (data) {
                 $("#dictionary-block").show();
                 $("#dictionary-block").html(data);
 
             });
+            });
+            $('.back-deep').click(function () {
+                $('.back-deep').css('display','none');
+                $('#flashcard-modal,#require-modal,#fl-create-folder-modal,#create-folder-success,#message-full-memorized,#fl-delete-folder-modal,#modal-message-not-delete,#require-modal1,#modal-sub-dictionary').css('display','none');
+            });
         });
+
+        
+        
 
         var timer;
         $("#fc-table").on("keyup", ".flashcard-note", function (e) {
@@ -186,16 +196,18 @@ var change = false;
             //delete fc_folders[parseInt($("#sel-fc-folders").val())]["w" + parseInt($(this).attr("data-id"))];
             $(this).parents("tr").remove();
         });
-        $('#btn-ok-close').click(function(){
-            $('#modal-message-not-delete').modal('hide');
+        $('#btn-ok-close, #cls-mes').click(function(){
+            $('#modal-message-not-delete').css('display','none');
+            $('.back-deep').css('display','none');
         });
         $("#flash-card-mode").click(function () {
             if (flashs.length == 0) {
-                $("#require-modal").modal();
+                $("#require-modal").css('display','block');
             } else {
                 setup_flash();
-                $("#flashcard-modal").modal();
+                $("#flashcard-modal").css('display','block');
             }
+            $('.back-deep').css('display','block');
         });
 
         $("#memorized-radio").change(function (e) {
@@ -238,16 +250,21 @@ var change = false;
             if(!jQuery.isEmptyObject(flashs)){
                 shuffle(flashs);
                 $("#answer-block").text(flashs[0].word);
-                //$("#hints").text('My sentense: My gr');
+                $("#hints").text(flashs[0].notes);
                 $("#memorized-radio").prop("checked", false);
             }
             else {
-                $('#flashcard-modal').modal('hide');
-                $('#message-full-memorized').modal('show');
+                $('#flashcard-modal').css('display','none');
+                $('#message-full-memorized').css('display','block');
             }
         }
-        $('#memorized-ok').click(function(){
-            $('#message-full-memorized').modal('hide');
+        $('#memorized-ok, #cls-full').click(function(){
+            $('#message-full-memorized').css('display','none');
+            $('.back-deep').css('display','none');
+        });
+        $('#cls-flc').click(function(){
+            $('#flashcard-modal').css('display','none');
+            $('.back-deep').css('display','none');
         });
 
         $("body").tooltip({
@@ -312,55 +329,74 @@ var change = false;
                         $valid = false;
                     } else {
                         $.post(home_url + "/?r=ajax/flashcard/addfolder1",{n: fc_name.val()}, function(data){
-                        $('#fl-create-folder-modal').modal('hide'); 
-                        $("#create-folder-success").modal('show');
+                        $('#fl-create-folder-modal').css('display','none'); 
+                        $("#create-folder-success").css('display','block'); 
+                        data = JSON.parse(data);
+                        console.log(data);
+                        $('#sel-fc-folders').append(new Option(fc_name.val(), data[0]));
+                         $('#sel-fc-foldersSelectBoxItOptions li:last').removeClass('selectboxit-option-last');
+                        $('#sel-fc-foldersSelectBoxItOptions').append('<li data-id="3" data-val="'+data[0]+'" data-disabled="false" class="selectboxit-option" role="option"><a class="selectboxit-option-anchor"><span class="selectboxit-option-icon-container selectboxit-option-last"><i class="selectboxit-option-icon  selectboxit-container"></i></span>'+fc_name.val()+'</a></li>');
                         });   
                     }
                 });
             }
         });
-        $('#create-ok').click(function (){
-            //$("#create-folder-success").modal('hide');
-            location.reload(); 
+        $('#create-ok, #cls-succ').click(function (){
+            $("#create-folder-success").css('display','none');
+            $('#back-deep').css('display','none');
+            
         }); 
         $('#create-folder').click(function (){
             if(!check_sub_any_dic){
-                $("#require-modal1").modal();       
+                $("#require-modal1").css('display','block');
+                $('.back-deep').css('display','block');
             } else {
-                $('#fl-create-folder-modal').modal('show');
+                $('#fl-create-folder-modal').css('display','block');
+                $('.back-deep').css('display','block');
             }
          });
+        $('#add-cart-cancel').click(function(){
+            $("#modal-sub-dictionary").css('display','none');
+            $('.back-deep').css('display','none');
+        });
         $('.sub-dictionary-now').click(function () {
-            $("#require-modal1").modal('hide');
-            $("#modal-sub-dictionary").modal('show');
+            $("#require-modal1").css('display','none');
+            $("#modal-sub-dictionary").css('display','block');
         });
-        $('#ok-modal-req-sub').click(function () {
-            $("#require-modal1").modal('hide');
-            $("#modal-sub-dictionary").modal('show');
+        $('#ok-modal-req-sub, #cls-req1').click(function () {
+            $("#require-modal1").css('display','none');
+                $('.back-deep').css('display','none');
         });
-        $('#close-modal').click(function () {
-            ('#require-modal1').modal('hide');
-        });
-        $('#fc-folder-form').click(function () {
-            $('#fl-create-folder-modal').modal('hide');
+        
+        $('#fc-folder-form, #cls-cre-fd').click(function () {
+            $('#fl-create-folder-modal').css('display','none');
+            $('.back-deep').css('display','none');
         });
         $('#flash-card-delete-folder').click(function () {
             $name_folder = $("#sel-fc-folders option:selected").text();
             //$name_folder = $('#sel-fc-folders').val();
             if ($name_folder == 'Sample' || $name_folder == 'Teacher') {
-                $('#modal-message-not-delete').modal('show');
+                $('#modal-message-not-delete').css('display','block');
+                $('.back-deep').css('display','block');
             } else {
-                $('#fl-delete-folder-modal').modal('show');
+                $('#fl-delete-folder-modal').css('display','block');
+                $('.back-deep').css('display','block');
             }
         });
-        $('#delete-folder-cancel').click(function () {
-            $('#fl-delete-folder-modal').modal('hide');
+        $('#delete-folder-cancel, #cls-del').click(function () {
+            $('#fl-delete-folder-modal').css('display','none');
+            $('.back-deep').css('display','none');
         });
         $('#delete-folder-ok').click (function (e){
             e.preventDefault();
             $.post(home_url + "/?r=ajax/flashcard/deletefolder",{n: $name_folder}, function(data){
-                   location.reload(); 
-                });  
+                   var name_fd_re = $("#sel-fc-folders option:selected").val();
+                   $("#sel-fc-folders option[value='"+name_fd_re+"']").remove();
+                   $("#sel-fc-foldersSelectBoxItOptions li[data-val='"+name_fd_re+"']").remove();
+                   $("#sel-fc-foldersSelectBoxItText").text('');
+                });
+            $('#fl-delete-folder-modal').css('display','none');
+            $('.back-deep').css('display','none');
         });
         function price_subcrible_dictionary() {
             $("#addi-sub-type").val(2);
@@ -410,13 +446,14 @@ var change = false;
             $('#message-modal-save-changes').modal('hide');
 //            location.reload();
         });
-        $('#btn-ok-full-memory').click(function (){
-            $('#require-modal').modal('hide');
+        $('#btn-ok-full-memory, #cls-req').click(function (){
+            $('#require-modal').css('display','none');
+            $('.back-deep').css('display','none');
         });
         $(function() {
             var url = window.location.href;
             var id = url.split("&id");
-            $("#sel-fc-folders").selectBoxIt('selectOption', id[1].toString()).data("selectBox-selectBoxIt");
+                        // $("#sel-fc-folders").selectBoxIt('selectOption', id[1].toString()).data("selectBox-selectBoxIt");
             $("#sel-fc-folders").data("selectBox-selectBoxIt").refresh();
         });
     });

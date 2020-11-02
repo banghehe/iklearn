@@ -801,8 +801,7 @@ label {
 }
 
 .btn.orange {
-    background: -webkit-linear-gradient(#ffcb00, #fe9700);
-    background: linear-gradient(#ffcb00, #fe9700);
+     background: #ffa422;
     color: #312108;
 }
 a.btn.lock {
@@ -1249,23 +1248,24 @@ a.btn.grey:focus {
     height: 28px;
     display: inline-block;
     vertical-align: bottom;
-
 }
 
 .icon-yes2 {
-    background: url(../images/icon-yes2.png) no-repeat;
-    width: 17px;
-    height: 12px;
+    background: url(../images/icon_memorized.png) no-repeat;
+    width: 18px;
+    height: 18px;
     display: inline-block;
     vertical-align: bottom;
+    background-size: 18px 18px;
 }
 
 .icon-no2 {
-    background: url(../images/icon-no2.png) no-repeat;
-    width: 13px;
-    height: 13px;
+    background: url(../images/icon_not_memorized.png) no-repeat;
+    width: 18px;
+    height: 18px;
     display: inline-block;
     vertical-align: bottom;
+    background-size: 18px 18px;
 }
 
 .icon-rarrow {
@@ -1650,6 +1650,7 @@ table.ik-table-noborder > tbody > tr > td {
 
 table.ik-table2 > tbody > tr {
     background: transparent;
+    border-bottom: 1px solid #c9c9c9;
 }
 
 table.ik-table2 tr:first-child > td {
@@ -1661,20 +1662,15 @@ table.ik-table2 > thead > tr > th {
 }
 
 table.ik-table2.table-striped > tbody > tr:nth-of-type(2n+1) {
-    background: #F9F9F9;
+    background: #fff;
 }
 
 table.ik-table2.table-striped > tbody > tr:nth-of-type(2n) {
     background: transparent;
 }
 
-table.ik-table2.table-striped.ik-table-green > tbody > tr:nth-of-type(2n) {
-    background: #0c460c;
-}
 
-table.ik-table2.table-striped.ik-table-green > tbody > tr:nth-of-type(2n+1) {
-    background: transparent;
-}
+
 
 /*Vu: create css for login form*/
 
@@ -4765,6 +4761,7 @@ main.home .table-row .col-md-5.cell {
 
 .flashcard-table .flashcard-table-header {
     padding: 0 15px;
+        border-bottom: 1px solid #c9c9c9;
 }
 
 .flashcard-table .flashcard-table-header > div {
@@ -4785,7 +4782,7 @@ main.home .table-row .col-md-5.cell {
 }
 
 .flashcard-table .box {
-    padding: 10px 15px;
+    padding: 10px 0;
 }
 
 .flashcard-table .box .table {
@@ -4793,25 +4790,37 @@ main.home .table-row .col-md-5.cell {
 }
 
 .flashcard-table .box .table tr td:first-child {
-    font-weight: 600;
-    font-size: 16px;
-    color: #fff;
+    font-family: semibold;
+    font-size: 15px;
+    color: black;
     cursor: pointer;
+    width: 200px;
 }
 
 .flashcard-table .box .table tr td:nth-child(2) {
-    font-size: 15px;
-    color: #37e037;
+    font-size: 14px;
+    color: #3fa44e;
+    padding-left: 18px;
+    width: 450px;
 }
 
 .flashcard-table .box .table tr td:nth-child(3) {
     width: 35px;
     text-align: center;
+    padding-left: 15px;
 }
 
 .flashcard-table .delete-card {
-    text-decoration: underline;
-    color: #d53a3c;
+    
+    color: #9c9c9c;
+    font-size: 13px;
+}
+.flashcard-table .delete-card:hover {
+    
+  text-decoration: none;
+}
+.delete-card img {
+    width: 16px;
 }
 
 .flashcard-table-content tr.selected {
@@ -4820,11 +4829,11 @@ main.home .table-row .col-md-5.cell {
 
 .flashcard-table-content .flashcard-note {
     background: transparent;
-    color: #37E037;
+    color: #3fa44e;
     font-size: 15px;
     width: 100%;
     border: 0;
-    border-bottom: 1px dotted #126814;
+    border-bottom: 1px dotted #37d320;
 }
 
 #flash-cards .box-white {
@@ -4873,9 +4882,9 @@ main.home .table-row .col-md-5.cell {
 }
 
 #flashcard-modal #answer-block {
-    background: #EAEAEA;
-    color: #000;
-    font-size: 43px;
+    
+    color: #626262;
+    font-size: 60px;
     padding: 7px 35px;
     margin-bottom: 20px;
     text-align: center;
@@ -8106,9 +8115,8 @@ main.home #content .left-col {
         border-radius: 15px;
     }
 
-    .flashcard-table .flashcard-table-header > div:first-child,
-    .flashcard-table .box .table tr td:first-child {
-        padding-left: 20px;
+    .flashcard-table .flashcard-table-header > div:first-child {
+        padding-left: 15px;
     }
 
     .flashcard-table .box .table tr td:nth-child(3) {
@@ -15868,7 +15876,7 @@ header .user-nav > li:nth-child(2){
     color: #fff !important;
 }
 #menu-main-menu-math-english {
-    padding-top: 20px;
+    background: #b0b0b0;
 }
 #menu-dictionary-menu-english {
     padding-top: 20px;
@@ -18339,7 +18347,7 @@ header .user-nav > li:nth-child(2){
     }
     #menu-math-user-menu-english > li:first-child {
         float: left !important;
-        margin-left: 130px !important;
+        /*margin-left: 130px !important;*/
         margin-right: 0px !important;
     }
     #main-nav > nav#sub-user-nav {
@@ -19311,7 +19319,7 @@ table.table-critical-lesson > tbody > tr > td {
     border-right: 1px solid #d6d6d6;
     width: 0;
     position: absolute;
-    z-index: 4000;
+    z-index: 3999;
     margin-left: 56px;
     background-color: #fff !important;
     overflow-x: hidden;
@@ -19324,7 +19332,7 @@ table.table-critical-lesson > tbody > tr > td {
     opacity: 1;
 }
 .sidenav a {
-    padding: 0px 8px 8px 1px;
+    padding: 0px 0px 8px 1px;
     text-decoration: none;
     font-size: 25px;
     display: block;
@@ -19346,7 +19354,7 @@ table.table-critical-lesson > tbody > tr > td {
 }
 .sidenav.open {
     width: 183px;
-    margin-left: 53px;
+    /*margin-left: 53px;*/
     box-shadow: 5px 0px 0px 0px rgba(0,0,0,0.1); 
 }
 .sub-menu-left a {
@@ -19355,6 +19363,7 @@ table.table-critical-lesson > tbody > tr > td {
     color: #929292 !important;
     font-weight: normal;
     font-family: Myriad_regular;
+    display: inline-block;
 }
 .sub-menu-left > li.active > a {
     border-bottom: 1px solid #93cfe1 !important;
@@ -19363,6 +19372,7 @@ table.table-critical-lesson > tbody > tr > td {
     border-right: none !important;
     border-top: none !important;
     font-weight: normal !important;
+    width: 90%;
 }
 .selectboxit-options{
     background: white !important;
@@ -19568,11 +19578,11 @@ table.table-critical-lesson > tbody > tr > td {
 .title-div > img {
     width: 24px;
 }
-#my-account-modal .ic-close7 {
+ .ic-close7 {
     width: 18px;
     vertical-align: sub;
 }
-#my-account-modal .ic-close7.active{
+ .ic-close7.active{
     height: 22px;
     width: auto;
 }
@@ -19631,7 +19641,7 @@ table.table-critical-lesson > tbody > tr > td {
 #myForm input[type="text"], #myUpdate input[type="text"], #createAccount input[type="text"], 
 #createAccount input[type="password"], #earningFrom input[type="text"], #tutorForm input[type="text"], 
 .style-form input[type="text"], #myUpdate input[type="password"], .style-form textarea,
-.main-new-request input[type="text"],
+.main-new-request input[type="text"], #fl-create-folder-modal input[type="text"],
 .frm-available-now input[type="text"], #purchase-points input[type="text"]{
     font-size: 15px;
     color: #515151;
@@ -19773,7 +19783,9 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 #date .selectboxit-arrow-container, #myUpdate .selectboxit-arrow-container, .cb-type4 .selectboxit-arrow-container,
 .main-new-request .selectboxit-arrow-container, .user-timezone .selectboxit-arrow-container,
 #custom-timezone .selectboxit-arrow-container, .frm-available-now .selectboxit-arrow-container,
-#top-my-schedules .selectboxit-arrow-container, .chose-rate .show-list-rate{
+#top-my-schedules .selectboxit-arrow-container, .chose-rate .show-list-rate,#english-main .selectboxit-arrow-container,
+#math-main .selectboxit-arrow-container,#satmath-main .selectboxit-arrow-container,
+#satenglish-main .selectboxit-arrow-container,#vocab-builder .selectboxit-arrow-container{
     background-image: url(../images/icon_dropdown_arrow.png) !important;
     background-repeat: no-repeat;
     background-size: 10px;
@@ -19981,7 +19993,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     border-radius: 0;
 }
 #menu-left-myaccount > li.active > a {
-    border: 1px solid #fff;
+    
     background: none;
 }
 .open-myschedule .sidenav {
@@ -20324,6 +20336,8 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     border-bottom-color: #E0E0E0;
     padding-top: 8px;
     padding-bottom: 7px;
+        margin-left: -33px;
+    padding-left: 33px;
 }
 .toggle-btn{
     border-bottom: 1px solid #E0E0E0;
@@ -20339,6 +20353,10 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     width: 16px;
     margin-right: 3px;
 }
+.item-name .icon-star{
+
+       padding-bottom: 5px;
+}
 .avatar-tutor img{
     width: 83px;
     height: 83px;
@@ -20347,8 +20365,9 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 }
 .name-tutor{
     color: #000;
-    font-size: 16px;
-    font-family: Myriad_regular;  
+    font-size: 17px;
+    font-family: Myriad_regular; 
+        padding-top: 5px 
 }
 .subject-tutor{
     color: #9c9c9c;
@@ -20406,7 +20425,9 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     position: absolute;
     border-bottom: 1px solid #EBEBEB;
     width: 100%;
-    left: 10px;
+     padding-top: 4.5px;
+    padding-bottom: 4.5px;
+    
 }
 .view-tutor img{
     height: 22px;
@@ -20447,8 +20468,8 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 }
 .form-group .find-name{
     border:0px !important;
-    font-size: 14pt;
-    color: #b9b9b9;
+    font-size: 15px;
+    color: ##515151;
     padding-left: 0px !important;
     
 }
@@ -20460,6 +20481,8 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 }
 .tr-tutor{
     border-bottom: 1px solid #EBEBEB;
+    margin-left: -20px;
+
 }
 .tr-tutor td{
     padding: 13px 0 14px;
@@ -20541,6 +20564,21 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     padding-top: 8px;
     margin: 0;
 }*/
+.tr-info, .tr-tutor, .view-tutor, .tr-review {
+    padding-left: 30px;
+}
+.tr-review {
+    margin-top: -21px;
+}
+.tr-review .tr-info {
+     padding-left: 0 !important;
+}
+.tr-review .tr-info p{
+     padding-left: 21px !important;
+}
+.view-tutor span:nth-child(1){
+    padding-left: 0;
+}
 .tr-info ul{
     list-style: 0;
     margin: 0;
@@ -20933,6 +20971,9 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     margin: 3px 11px 3px 0;
     display: inline-block;
 }
+#sandbox-calender-tutor .datepicker th.dow{
+        font-family: Myriad_regular;
+}
 #sandbox-container-tutor .datepicker th.prev, #sandbox-calender-tutor .datepicker th.prev,
 #sandbox-container-tutor .datepicker th.next, #sandbox-calender-tutor .datepicker th.next{
     width: 33px!important;
@@ -21025,6 +21066,9 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     border-radius: 50%;
     color: #000!important;
 }
+#sandbox-calender-tutor .datepicker table tr td.day.activeClass{
+    color: #b4b4b4 !important;
+}
 .datepicker table tr td.day.disabled.activeClass,
 .datepicker table tr td.disabled.activeClass:active,
 .datepicker table tr td.disabled.activeClass:hover,
@@ -21047,7 +21091,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 #send_my_declined{
     margin-top: 20px;
 }
-.btn-new-request {
+.btn-new-request, .btn-new-request1 {
     color: #cacaca;
     font-size: 12px;
     font-family: Myriad_regular;
@@ -21056,7 +21100,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     padding: 0;
     outline: none;
 }
-.btn-new-request img{
+.btn-new-request img, .btn-new-request1 img{
     width: 17px;
     margin: 0 9px;
 }
@@ -21469,6 +21513,8 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     padding: 13px 0 8px;
     border-bottom: 1px solid #EBEBEB;
     display: none;
+    margin-left: -33px;
+    padding-left: 33px;
 }
 .btn-available-reset{
     background: #BCBCBC;
@@ -21663,6 +21709,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 #btn-select-tutor{
     width: 86px;
     height: 22px;
+    display: none;
 }
 .btn-my-schedule{
     background: #fff;
@@ -21708,9 +21755,9 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     border-bottom: 1px solid #E0E0E0;
 }
 .tr-detail td{
-    padding: 12px 20px 13px;
+    padding: 12px 30px 13px;
 }
-.a-left, .a-right, .close-detail{
+.a-left, .a-right{
     width: 18px;
     right: 20px;
     cursor: pointer;
@@ -21718,6 +21765,12 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 .close-detail{
     position: absolute;
     margin-top: 5px;
+        width: 28px;
+    right: 22px;
+    cursor: pointer;
+    bottom: 13px;
+    border-radius: 8px;
+   
 }
 .head-title-resum{
     padding-top: 45px;
@@ -21750,7 +21803,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 .type-detail span,
 .subject-selected-detail span{
     font-size: 14px;
-    color: #58aec8;
+    color: #9f9f9f;
     font-family: Myriad_regular;
 }
 .date-detail span, .type-detail span:first-child,
@@ -21772,7 +21825,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     color: #000;
 }
 div.tr-tutor{
-    height: 100px;
+    height: 125px;
 }
 div.tr-tutor .avatar-tutor{
     margin: 19px 10px 19px 35px;
@@ -21790,15 +21843,22 @@ div.tr-info p{
 }
 #table-detail-tutor{
     position: relative;
+    display: table;
+    margin-top: -36px;
+    
+    width: 104.1%;
+    margin-left: -33px;
 }
 .writting-review.active{
     position: absolute;
-    top: 330px;
-    width: 100%;
+    top: 317px;
+    width: 100.5%;
     background: white;
+    margin-left: -3px;
 }
 .slide-resume{
     min-height: 500px;
+    margin-left: -33px;
 }
 /* .frm-available-now .search-tutorname{
     width: 100%;
@@ -22194,7 +22254,7 @@ div.tr-info p{
     position: relative;
 }
 .mCSB_scrollTools{
-    width: 8px;
+    
     right: -1px;
 }
 .mCS-dark-thick.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
@@ -22316,9 +22376,7 @@ ul #select-available-subjectSelectBoxItOptions{
 
 
 
-#select-available-subjectSelectBoxItOptions .selectboxit-option-first{
-    display: none;
-}
+
 #btn-schedule, #btn-getting,
 #btn-tutor{
     background: none;
@@ -22827,6 +22885,9 @@ ul #select-available-subjectSelectBoxItOptions{
     }
 }
 @media(max-width: 649px) {
+    #account-show{
+            padding-left: 13px !important;
+    }
     #my-account-modal .title-div,
     #my-account-modal .modal-body-signup,
     #top-popup-message .modal-contents,
@@ -23687,12 +23748,13 @@ padding: 0 !important;
 display: inline-block;
 width: 90%;
 }
+
 #list-language li .option-input-3:checked + span{
     color: #4eacc8;
 }
-#sub-course li img{
+#mySidenav li img{
    width:  10px;
-    padding: 0 1px 0 2px;
+    padding: 0 2px 0 2px;
 }
 .getting-img {
     
@@ -23773,8 +23835,8 @@ padding-left: 20px;
 
 }
 .img-tutor img {
-    width: 70px;
-    height: 70px;
+    width: 82px;
+    height: 82px;
     border-radius: 5%;
 }
 .price-tutor {
@@ -23810,7 +23872,7 @@ padding-left: 20px;
 }
 .chose-rate {
     width: 179px;
-    border: 1px solid #9c9c9c;
+    border: 1px solid #d9d9d9;
     display: inline-block;
     border-radius: 7px;
     padding-left: 5px;
@@ -23935,4 +23997,341 @@ padding-left: 20px;
     margin-left: 20px;
     margin-top: -4px;
     position: absolute;
+}
+#paypal-submit {
+    
+    border: 3px solid #ffc433;
+    background: #ffc433;
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 8px;
+
+}
+.point-history {
+    background: #f5f7f6;
+    border-radius: 15px 15px 0 0;
+    height: 40px;
+}
+.point-history li{
+    padding: 10px 65px 0 30px;
+    font-size: 15px;
+    font-family: semibold;
+}
+.list-history li{
+     padding: 10px 0px 10px 30px;
+}
+.history-points {
+        max-height: 250px;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        overflow: auto;
+}
+#next-w, #back-w{
+        width: 28px;
+    cursor: pointer;
+    padding-left: 3px;
+}
+
+.schedule-view .current-day {
+    font-size: 20px;
+    color: #343434;
+}
+.schedule-view .stuff-day {
+    font-size: 14px;
+    color: #343434;
+}
+#sandbox-calender-tutor .datepicker td  {
+        
+        margin-top: -20px;
+    background: none !important;
+    color: #b4b4b4;
+    font-family: Myriad_regular;
+}
+.date-view-pick{
+        float: right;
+    font-size: 16px;
+    color: #343434;
+    font-family: semibold;
+    padding-top: 16.5px;
+}
+#sandbox-calender-tutor .datepicker table tr td.day.today:not(.activeClass){
+    color: black !important;
+}
+#sandbox-calender-tutor .datepicker table tr td.day.active {
+    color: #343434 !Important;
+}
+.schedule-view-deep {
+    height:20px;
+}
+#tutoring-scheduled-tutor .view-detail-schedule.slot-available{
+    background: #ffffe5;
+    margin-left: -31px;
+        width: 94.5%;
+}
+#tutoring-scheduled-tutor .view-detail-schedule.slot-available.active{
+    background: #e7feff;
+    margin-left: -31px;
+        width: 94.5%;
+}
+#tutoring-scheduled-tutor .view-detail-schedule.slot-available.active .icon-status{
+    background: url(../images/icon_schedule_TAKEN.png) 0 0 no-repeat;
+    background-size: 17px;
+    padding-left: 24px;
+}
+#tutoring-scheduled-tutor .view-detail-schedule.slot-available .icon-status {
+    background: url(../images/01_Availiable_Time_Slot.png) 0 0 no-repeat;
+    background-size: 17px;
+    padding-left: 24px;
+    width: 210px;
+}
+#tutoring-scheduled-tutor .view-detail-schedule.slot-available.active .icon-users {
+    background: url(../images/icon_schedule_WAITING-ON.png) 0 7px no-repeat;
+    background-size: 15px;
+    padding-left: 21px;
+    vertical-align: middle;
+}
+#tutoring-scheduled-tutor .view-detail-schedule.slot-available .icon-users {
+    background: url(../images/icon_schedule_WAITING-NONE.png) 0 7px no-repeat;
+    background-size: 15px;
+    padding-left: 21px;
+    vertical-align: middle;
+}
+#tutoring-scheduled-tutor .view-detail-schedule.slot-available .subject-scheduled{
+    font-size: 13px;
+    color: #000;
+    font-family: Myriad_regular;
+    font-weight: bold;
+}
+#selected-type, #selected-subject, #selected-date, #selected-tutor{
+    font-family: semibold;
+}
+#msat li a, #mmath li a, #menglish li a,#sub-tutoring li a,#sub-myacc li a,#sub-toeic li a  {
+    padding-bottom: 2px;
+    width: 90%;
+}
+#msat, #mmath, #menglish, #sub-toeic{
+    display: none;
+}
+#sub-course, #msat, #mmath, #menglish, #sub-toeic {
+    padding-top: 5px;
+}
+.click-add {
+    text-decoration-line: underline;
+    cursor: pointer;
+}
+#account-show {
+    position: absolute;
+    margin-top: -19px;
+    padding-left: 20px;
+}
+.main-back {   
+    height: 360px;
+    background-size: 570px;
+    background-repeat: no-repeat;
+    background-position: right;
+    margin-top: 23px;
+    /*box-shadow: 0px 5px 5px -4px #8f8f8f;*/
+
+}
+#main-back {
+    background-image: url(../images/IMG_ENGLISH.jpg);    
+}
+#main-math-back{
+    background-image: url(../images/IMG_MATH.jpg);    
+}
+#sat1main-back, #sat2main-back{
+    background-image: url(../images/IMG_SAT.jpg);    
+}
+
+.main-title {
+    font-size: 42px;
+    font-family: Myriad_light;
+    color: #0074ea;
+    width: 500px;
+    line-height: 1.2;
+    padding: 45px 0 30px 0;
+}
+.list-title {
+    font-size: 19px;
+    font-family: Myriad_light;
+    color: #7f7f7f;
+}
+.slick-prev, .slick-next {
+    display: none !important;
+}
+.list-title img{
+    width: 7px;
+}
+.let-title {
+    font-size: 19px;
+    padding-top: 35px;
+}
+.let-title img {
+    width: 25px;
+}
+.list-learn {
+    height: 80px;
+    border-bottom: 1px solid #d9d9d9;
+    color: #0074ea;
+    font-family: Myriad_light;
+    font-size: 20px;
+}
+.list-learn img {
+    max-height: 40px;
+}
+.list-learn img:first-child {
+    position: absolute;
+    top: 0;
+    /* right: 0; */
+    bottom: 0;
+    margin: auto;
+
+}
+.list-learn div {
+    margin-top: 22px;
+
+}
+.list-learn span {
+    max-width: 150px;
+    display: inline-block;
+    line-height: 1.1;
+    padding-left:58px;   
+
+}
+.list-learn a:hover{
+     text-decoration-line: none;
+}
+#english-selectSelectBoxItContainer, #math-selectSelectBoxItContainer, 
+#satenglish-selectSelectBoxItContainer, #satmath-selectSelectBoxItContainer{
+    float: right;
+    width: 200px;
+    padding-top: 10px;
+}
+.top-corner .select-box-it {
+    height: 43px !important;
+}
+.top-corner .selectboxit-text {
+        float: right;
+    padding-right: 20px;
+    text-decoration-line: underline;
+}
+.sat-button {
+    width: 100px; 
+    border-radius: 8px; 
+}
+#myacc img, #mtutoring img, #english-all img,
+#math-all img, #sat-all img, #mmessage img, 
+#mdownload img, #class-manager img, #etoeic img, 
+#free-courses img  {
+    float: right;
+    margin-top: 6px;    
+}
+#class-manager, #etoeic, #sat-all, #math-all,#english-all {
+    padding-bottom: 0;
+    width: 100%;
+    padding-right: 1px;
+    color: #929292 !important;
+    border-bottom: none !important;
+}
+#mySidenav ul li a .active {
+    width: 26px !important;
+    margin-right: -8px;
+    margin-top: 0;
+}
+.bor-top {
+    padding-bottom: 5px;
+    width: 26px;
+   
+    border-top: 1px solid #d9d9d9;
+    margin-left: 15px;
+}
+#myacc p {
+        width: 140px;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: normal;
+}
+.bor-down {
+        height: 10px;
+    box-shadow: 0px 4px 5px -4px #8f8f8f;
+    margin-top: -10px;
+    margin-left: -37px;
+}
+#satenglish-main .list-learn a, #satenglish-main .list-learn a:hover,
+#satmath-main .list-learn a,#satmath-main .list-learn a:hover {
+    color: #ffad42;
+}
+
+#math-main .list-learn a ,#math-main .list-learn a:hover {
+    color: #65d02a;
+}
+#english-main .list-learn a ,#english-main .list-learn a:hover {
+    color: #0074ea;
+}
+.fl-title {
+    font-size: 12px;
+    color: #9c9c9c;
+}
+#flash-card-delete-folder {
+    float: right;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 13px;
+    color: #9c9c9c;
+}
+#fl-create-folder-modal, #flashcard-modal, #require-modal,
+#create-folder-success,#message-full-memorized,
+#modal-message-not-delete,#require-modal1,#fl-delete-folder-modal,
+#modal-sub-dictionary {
+    position: absolute;
+    top: 130px;
+    display: none;
+    z-index: 5001;
+}
+.fl-header-box {
+        padding: 12px 23px;
+        border-bottom: 1px solid #9c9c9c;
+}
+.fl-header-box span {
+        font-size: 16px;
+    font-family: Semibold;
+    color: black;
+}
+.fl-cent-box {
+    
+    padding: 18px 23px;
+}
+#fc-folder-form, #btn-create,#as-memory, #next-flashcard {
+    border-radius: 0 !important;
+    height: 36px;
+    font-size: 15px;
+}
+.fl-bot-box {
+        padding: 0 3px;
+}
+.back-deep {
+
+    position: absolute;
+    z-index: 5000;
+    width: 100%;
+    height: 75%;
+    margin-left: -20%;
+    background: red;
+    opacity: 0;
+    display: none;
+}
+.heading-fl {
+    font-size: 18px;
+}
+.fl-header-box img {
+        width: 13px;
+    float: right;
+    margin-top: 5px;
+    cursor: pointer;
+}
+#tinymce p {
+        font-size: 15px;
+        font-family: Myriad_regular;
 }
