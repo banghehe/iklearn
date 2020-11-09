@@ -55,11 +55,11 @@
  
     }
     // dùng cho server
-    // $ip_user = $_SERVER['REMOTE_ADDR'];
-    // $time_zone_user = json_decode(file_get_contents_curl("https://ipinfo.io/{$ip_user}"));
+    $ip_user = $_SERVER['REMOTE_ADDR'];
+    $time_zone_user = json_decode(file_get_contents_curl("https://ipinfo.io/{$ip_user}"));
     
     //dùng cho localhost
-    $time_zone_user = json_decode(file_get_contents("https://ipinfo.io/"));
+    // $time_zone_user = json_decode(file_get_contents("https://ipinfo.io/"));
     // 
     $time_zone_user1 = $time_zone_user->city;
     $timezone_name = $time_zone_user->timezone;
@@ -2528,14 +2528,15 @@
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
-                                                            <tbody style="height: 9px; display: block; margin-top: -9px; box-shadow: 0px 3px 6px -3px #8f8f8f;">
+                                                            <tbody style="height: 9px; display: block; margin-top: -9px; box-shadow: 0px 3px 6px -3px black;">
                                                                 
                                                             </tbody>
                                                         </table>
-                                                        <table>
+                                                        <table class="table-list-tt">
                                                             <tbody id="table-list-tutor">
                                                                
                                                             </tbody>
+                                                            
                                                         </table>
                                                         <div class="slide-resume">
                                                             
@@ -2699,7 +2700,7 @@
                                                     <p class="head-title-resum">Schedule</p>
                                                     <p style="font-size: 13px;color: #656565;">This time calender shows the current tutor's available time. The current time can be  adjusted to local timezone with the timezone switch.</p>
                                                     
-                                                    <div style="height: 36px;background: #f5f6f8;">
+                                                    <div style="height: 36px;background: #f5f6f8; padding-left: 11px;">
                                                         <div class="current-stuff" style="padding: 4px;">
                                                                 <span class="current-day"></span>
                                                                 <span class="stuff-day"></span>
@@ -3126,19 +3127,17 @@
                                     <div class="row">
                                         <div class="col-sm-6 col-md-6 col-xs-6">
                                             <p class="mt-bottom-12 student-center-title">Student Information Center</p>
-                                            <div class="new-request-list">ENGLISH</div>
+                                            <div class="tutor-acc">ENGLISH</div>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-xs-6 text-right select-style top-corner">
                                             <div class="form-group">
-                                                <select id="english-select" class="select-box-it form-control">
+                                                <select id="english-select" class="select-box-it form-control" onchange="window.open(this.value)">
                                                     <option>English Main</option>
-                                                    <option>Spelling Practice</option>
-                                                    <option>Vocabulary & Grammar</option>
-                                                    <option>Reading Comprehension</option>
-                                                    <option>Writing Practice</option>
-                                                    <option>Vocabulary Builder</option>
-                                                    
-                                                    <option>Conversation Practice</option>
+                                                    <option value="https://iktutor.com/iklearn/en/?r=spelling-practice">Spelling Practice</option>
+                                                    <option value="https://iktutor.com/iklearn/en/?r=vocabulary-practice">Vocabulary & Grammar</option>
+                                                    <option value="https://iktutor.com/iklearn/en/?r=vocabulary-practice">Reading Comprehension</option>
+                                                    <option value="https://iktutor.com/iklearn/en/?r=writing-practice">Writing Practice</option> 
+                                                    <option value="https://ael.iktutor.com/ael/">Conversation Practice</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -3159,12 +3158,12 @@
                                     <div class="row list-learn">
                                         <div class="col-sm-4 col-md-4 col-xs-4">
                                             <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_ENLGISH_spelling_practice.png" style="float: left; max-width: 40px;">
-                                            <span><a data-toggle="tab" href="https://iktutor.com/iklearn/en/?r=spelling-practice" aria-expanded="true">Spelling Practice</a></span>
+                                            <span><a target="_blank" href="https://iktutor.com/iklearn/en/?r=spelling-practice" aria-expanded="true">Spelling Practice</a></span>
                                             <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_divider.png" style="float: right;">
                                         </div>
                                         <div class="col-sm-4 col-md-4 col-xs-4">
                                             <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_ENLGISH_vocab_grammar.png"style="float: left; max-width: 40px;">
-                                            <span><a href="https://iktutor.com/iklearn/en/?r=spelling-practice" target="_blank">Spelling Practice</a></span>
+                                            <span><a href="https://iktutor.com/iklearn/en/?r=spelling-practice" target="_blank">Vocabulary & Grammar</a></span>
                                             <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_divider.png"style="float: right;">
                                         </div>
                                         <div class="col-sm-4 col-md-4 col-xs-4">
@@ -3178,14 +3177,15 @@
                                             <span><a target="_blank" href="https://iktutor.com/iklearn/en/?r=writing-practice">Writing Practice</a></span>
                                             <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_divider.png"style="float: right;">
                                         </div>
-                                        <div class="col-sm-4 col-md-4 col-xs-4">
+                                        <!-- <div class="col-sm-4 col-md-4 col-xs-4">
                                             <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_ENLGISH_vocab_builder.png"style="float: left; max-width: 40px;">
                                             <span>Vocabulary & Builder</span>
                                             <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_divider.png"style="float: right;">
-                                        </div>
+                                        </div> -->
                                         <div class="col-sm-4 col-md-4 col-xs-4">
                                             <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_ENLGISH_conversation_practice.png"style="float: left; max-width: 40px;">
                                             <span><a target="_blank" href="https://ael.iktutor.com/ael/">Conversation Practice</a></span>
+                                            <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_divider.png"style="float: right;">
                                         </div>
                                     </div>
                                     
@@ -3201,15 +3201,15 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-xs-6 text-right select-style top-corner">
                                             <div class="form-group">
-                                                <select id="math-select" class="select-box-it form-control">
+                                                <select id="vocab-select" class="select-box-it form-control" onchange="window.open(this.value)">
                                                     <option>English Main</option>
-                                                    <option>Spelling Practice</option>
-                                                    <option>Vocabulary & Grammar</option>
-                                                    <option>Reading Comprehension</option>
-                                                    <option>Writing Practice</option>
-                                                    <option>Vocabulary Builder</option>
+                                                    <option value="https://iktutor.com/iklearn/en/?r=spelling-practice">Spelling Practice</option>
+                                                    <option value="https://iktutor.com/iklearn/en/?r=vocabulary-practice">Vocabulary & Grammar</option>
+                                                    <option value="https://iktutor.com/iklearn/en/?r=reading-comprehension">Reading Comprehension</option>
+                                                    <option value="https://iktutor.com/iklearn/en/?r=reading-comprehension">Writing Practice</option>
+                                                    <option >Vocabulary Builder</option>
                                                     
-                                                    <option>Conversation Practice</option>
+                                                    <option value="https://ael.iktutor.com/ael/">Conversation Practice</option>
                                                 </select>
 
                                             </div>
@@ -3274,7 +3274,7 @@
             foreach($flashcards as $flashcard)
             {
                 if($flashcard->folder_id == $folder->id) {
-                    $a[] = 'w' . $flashcard->id . ': {word_id: "' . $flashcard->id . '", word: ' . json_encode($flashcard->word) . ', memorized: ' . $flashcard->memorized . ', notes: ' . json_encode($flashcard->notes) . '}';
+                    $a[] = 'w' . $flashcard->id . ': {word_id: "' . $flashcard->id . '", word: ' . json_encode($flashcard->word) . ', memorized: ' . $flashcard->memorized . ', notes: ' . json_encode($flashcard->notes) . ', dict_id: '. $flashcard->dictionary_id .'}';
                     //array_push($array_memory, $flashcard->memorized);
                 }
             }
@@ -3385,6 +3385,9 @@
             <div class="box box-white flashcard-des scroll-list2 dictionary" style="max-height: 200px">
                 <div id="fc-meaning"></div>
             </div>
+        </div>
+        <div class="col-sm-12">
+            <span id="add-word">+add more Words</span>
         </div>
         <div class="col-sm-12 css-btn-fl-card">
             <label>&nbsp;</label>
@@ -3619,6 +3622,45 @@
         </div>
     </div>
 </div>
+<div id="add-word-box" class="" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="fl-header-box">
+                
+                <span><?php _e('ADD TO WORD', 'iii-dictionary') ?></span>
+                <img id="cls-adw" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Not_Available.png">
+            </div>
+            <div id="add-word-dics" class="fl-cent-box" style="font-size: 16px; color: black;">
+                <div class="find-general-border mt-top-18">
+                    <div class="form-group">
+                        <span class="find-label">New Word<span class="required-star"> *</span></span>
+                         <input type="text" class="form-control" id="word-add" style="height:42px" autocomplete="off" >
+                        <div class="clear-input" onclick="document.getElementById('word-add').value=null;"></div>
+                        
+                    </div>
+                </div>
+                
+                <div style="border-top: 1px solid #d9d9d9; padding-top: 15px; margin-top: 25px; ">Do you want to add new words to the dictionary? <a class="sub-dictionary-now" style="color: #ff8283;"> Subscribe Dictionary Now.</a></div>
+                    
+            </div>
+            <div class="fl-bot-box">
+                <div class="row">
+                    <div class="col-sm-6" style="padding-right: 1px !important;">
+                        <div class="form-group" style="margin-bottom: 3px;">
+                            <button style="background: #58aec7;" type="button" class="border-btn btn-dark-blue" id="word-add-btn" ><?php _e('ADD', 'iii-dictionary') ?></button>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" style="padding-left: 2px !important;">
+                        <div class="form-group" style="margin-bottom: 3px;">
+                            <button style="background: #cecece;" type="button" id="close-add" class="border-btn btn-dark-blue"><?php _e('CANCEL', 'iii-dictionary') ?></button>
+                        </div>
+                    </div>
+                                      
+                </div>
+            </div>      
+        </div>
+    </div>
+</div>
 <!--modal-subscrible-dictionary-now  -->
 <div id="modal-sub-dictionary" class="">
     <div class="modal-dialog modal-custom-first">
@@ -3722,16 +3764,16 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-xs-6 text-right select-style top-corner">
                                             <div class="form-group">
-                                                <select id="math-select" class="select-box-it form-control">
-                                                    <option>Math Main</option>
-                                                    <option>Elementary</option>
-                                                    <option>Algebra 1</option>
-                                                    <option>Algebra 2 </option>
-                                                    <option>Geometry </option>
-                                                    <option>Calculus </option>
-                                                    <option>ikMath Courses</option>
-                                                    <option>SAT Preparation </option>
-                                                    <option>SAT 2 Preparation  </option>
+                                                <select id="math-select" class="select-box-it form-control" onchange="window.open(this.value)">
+                                                    <option>English Main</option>
+                                                    <option value="https://math.iktutor.com/iklearn/en/?r=arithmetics">Spelling Practice</option>
+                                                    <option value="https://math.iktutor.com/iklearn/en/?r=algebra-i">Vocabulary & Grammar</option>
+                                                    <option value="https://math.iktutor.com/iklearn/en/?r=algebra-ii">Reading Comprehension</option>
+                                                    <option value="https://math.iktutor.com/iklearn/en/?r=geometry">Geometry </option>
+                                                    <option value="https://math.iktutor.com/iklearn/en/?r=calculus">Calculus </option>
+                                                    <option value="https://math.iktutor.com/iklearn/en/?r=sat-preparation/emathk&client=math-emathk">ikMath Courses</option>
+                                                    <option value="https://math.iktutor.com/iklearn/en/?r=sat-preparation/sat1prep&client=math-sat1">SAT Preparation </option>
+                                                    <option value="https://math.iktutor.com/iklearn/en/?r=sat-preparation/sat2prep&client=math-sat2">SAT 2 Preparation  </option>
                                                 </select>
 
                                             </div>
@@ -3807,11 +3849,11 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-xs-6 text-right select-style top-corner">
                                             <div class="form-group">
-                                                <select id="satenglish-select" class="select-box-it form-control">
+                                                <select id="sat-select" class="select-box-it form-control">
                                                     <option>English SAT Main</option>
-                                                    <option>English SAT</option>
-                                                    <option>Essay Writing</option>
-                                                    <option>SAT Tutoring</option>
+                                                    <option value="https://iktutor.com/iklearn/en/?r=sat-preparation">English SAT</option>
+                                                    <option value="https://iktutor.com/iklearn/en/?r=writing-practice">Essay Writing</option>
+                                                    <option value="https://math.iktutor.com/iklearn/en/?r=homework-status">SAT Tutoring</option>
                                                     
                                                 </select>
                                             </div>
@@ -3844,7 +3886,7 @@
                                         </div>
                                         <div class="col-sm-4 col-md-4 col-xs-4">
                                             <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_SAT_sat_tutoring.png"style="float: left; width: 40px;">
-                                            <span><a target="_blank" href="https://iktutor.com/iklearn/en/?r=writing-practice#my-account-modal">SAT Tutoring</a></span>
+                                            <span><a target="_blank" href="SAT Tutoring">SAT Tutoring</a></span>
                                         </div>
                                     </div>
                                     
@@ -3859,11 +3901,11 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-xs-6 text-right select-style top-corner">
                                             <div class="form-group">
-                                                <select id="english-select" class="select-box-it form-control">
+                                                <select id="satmath-select" class="select-box-it form-control" onchange="window.open(this.value)">
                                                     <option>Math SAT Main</option>
-                                                    <option>Math SAT 1</option>
-                                                    <option>Math SAT 2</option>
-                                                    <option>SAT Tutoring</option>
+                                                    <option value="https://math.iktutor.com/iklearn/en/?r=sat-preparation/sat1prep&client=math-sat1">Math SAT 1</option>
+                                                    <option value="https://math.iktutor.com/iklearn/en/?r=sat-preparation/sat2prep&client=math-sat2">Math SAT 2</option>
+                                                    <option value="https://math.iktutor.com/iklearn/en/?r=homework-status">SAT Tutoring</option>
                                                     
                                                 </select>
                                             </div>
@@ -4040,6 +4082,15 @@
                                     <li id="itutoring">
                                         <div class="bor-top"></div>
                                         <a data-toggle="tab" href="#"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_tutoring.png" class="" alt="setting my account" style="width: 24px;margin:15px 0px"></a>
+                                        <div id="icon-tutoring" style="display: none;">
+                                            <div style="margin-top: 0px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/Tutor-Icon_Getting_Tutoring.png" style="width: 15px"></div>
+                                            <div style="margin-top: 8px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/Tutor-Icon_Find_a_Tutor.png" style="width: 15px"></div>
+                                            <div style="margin-top: 8px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/Tutor-Icon_Schedule.png" style="width: 15px"></div>
+                                            <div style="margin-top: 8px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/Tutor-Icon_Tutoring_Screen.png" style="width: 15px"></div>
+                                            <div style="margin-top: 7px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/Tutor-Icon_English_Conversation_Tutoring.png" style="width: 15px"></div>
+                                            <div style="margin-top: 23px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/Tutor-Icon_Status.png" style="width: 15px"></div>
+                                            
+                                        </div>
                                     </li>
                                     <li class="" id="ienglish"><a data-toggle="tab" href="#"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_ONLINE_COURSE_new.png" class="" alt="setting my account" style="width: 24px;margin:15px 0px"></a>
                                         <div id="icon-free" style="display: none;">
@@ -4048,6 +4099,8 @@
                                             <div style="margin-top: 8px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MATH.png" style="width: 15px"></div>
                                             <div style="margin-top: 8px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_SAT.png" style="width: 15px"></div>
                                             <div style="margin-top: 7px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_TOEIC_TOFEL.png" style="width: 15px"></div>
+                                            <div style="margin-top: 8px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/OnlineCourse-Icon_Conversation_Practice.png" style="width: 15px"></div>
+                                            <div style="margin-top: 7px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_More_Online_Courses.png" style="width: 15px"></div>
                                         </div>
                                     </li>
                                     
@@ -4089,17 +4142,18 @@
                                     </li>
                                     <li><a class="header-menu-left padd-adjus redirect-create" id="mtutoring" data-toggle="tab" style="padding-top: 22px !important;">Tutoring<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_normal_state.png" ></a>
                                         <ul class="sub-menu-left" id="sub-tutoring">
-                                            <li id="getting-tutoring"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png" >&nbsp;&nbsp;<a id="tutor-main-home" class="redirect-create" data-toggle="tab" href="#tutoring-main">Getting Tutoring</a></li>
-                                            <li id="sub-findingtutor" ><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png" >&nbsp;&nbsp;<a class="redirect-create" data-toggle="tab" href="#tutoring-main">Find a Tutor</a></li>
+                                            <li id="getting-tutoring"><a id="tutor-main-home" class="redirect-create" data-toggle="tab" href="#tutoring-main">Getting Tutoring<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a></li>
+                                            <li id="sub-findingtutor" ><a class="redirect-create" data-toggle="tab" href="#tutoring-main">Find a Tutor<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a></li>
                                             <ul id="find-course" style="display: none; padding-left: 15px;">
                                                 <li class="onl-math" data-type="english-conv"><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a  data-toggle="tab"  >English Conversation</a> </li>
                                                 <li class="onl-math" data-type="english-wri"><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a  data-toggle="tab" >English Writing</a></li>
                                                 <li class="onl-math" data-type="math"><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a data-toggle="tab"  >Math</a></li>
                                                 
                                             </ul>
-                                            <li id="sub-schedule-li"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png" >&nbsp;&nbsp;<a class="redirect-create" data-toggle="tab" href="#tutoring-main">Schedule</a></li>
-                                            <li ><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png" >&nbsp;&nbsp;<a class="redirect-create" target="_blank" href="https://notepad.888tutor.com">Tutoring Screen</a></li>
-                                            <li id="sub-status"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png" >&nbsp;&nbsp;<a class="redirect-create" data-toggle="tab" href="#tutoring-main">Status</a></li>    
+                                            <li id="sub-schedule-li"><a class="redirect-create" data-toggle="tab" href="#tutoring-main">Schedule<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a></li>
+                                            <li id="sub-screen"><a class="redirect-create" target="_blank" href="https://notepad.iktutor.com">Tutoring Screen<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a></li>
+                                            <li id="sub-english-conv"><a class="redirect-create" data-toggle="tab" href="#tutoring-main" style="color: #00b823 !important">English Conversation Tutoring<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a></li>    
+                                            <li id="sub-status"><a class="redirect-create" data-toggle="tab" href="#tutoring-main">Status<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a></li>    
                                         </ul>
                                     </li>
                                     <li><a id="free-courses" class="header-menu-left padd-adjus redirect-create" data-toggle="tab" style="">Online Courses<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_normal_state.png"></a>
@@ -4130,7 +4184,7 @@
                                             <li><a class="" id="math-all" data-toggle="tab">Math<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a>
                                                 <ul id="mmath" >
                                                     <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png" style="width: 8px;" >&nbsp;&nbsp;<a id="math-main-home" data-toggle="tab" href="#math-main">Math Main</a></li>
-                                                    <li id="vidu"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png" style="width: 8px;" >&nbsp;&nbsp;<a data-toggle="tab" >Elementary</a></li>
+                                                    <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png" style="width: 8px;" >&nbsp;&nbsp;<a target="_blank" href="https://math.iktutor.com/iklearn/en/?r=arithmetics">Elementary</a></li>
                                                     <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png" style="width: 8px;" >&nbsp;&nbsp;<a target="_blank" href="https://math.iktutor.com/iklearn/en/?r=algebra-i">Algebra 1</a></li>
                                                     <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png" style="width: 8px;" >&nbsp;&nbsp;<a target="_blank" href="https://math.iktutor.com/iklearn/en/?r=algebra-ii">Algebra 2</a></li>
                                                     <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png" style="width: 8px;" >&nbsp;&nbsp;<a target="_blank" href="https://math.iktutor.com/iklearn/en/?r=geometry">Geometry</a></li>
@@ -4161,10 +4215,23 @@
                                                     
                                                 </ul>
                                             </li>
+                                            
                                             <li><a class="" id="etoeic" href="#" data-toggle="tab">TOEIC/TOEFL<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a>
                                                 <ul class="sub-menu-left" id="sub-toeic">
                                                     <li><img style="width: 8px" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png">&nbsp;&nbsp;<a>TOEIC</a></li>
                                                     <li><img style="width: 8px" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png">&nbsp;&nbsp;<a>TOEFL</a></li>
+                                                </ul>
+                                                
+                                            </li>
+                                            <li><a class="" id="econver" href="#" data-toggle="tab">Conversation Practice<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a>
+                                            </li>
+                                            <li><a class="" id="emore" href="#" data-toggle="tab">More Online Courses<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a>
+                                                <ul class="sub-menu-left" id="sub-more">
+                                                    <li><img style="width: 8px" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png">&nbsp;&nbsp;<a>English</a></li>
+                                                    <li><img style="width: 8px" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png">&nbsp;&nbsp;<a>Math</a></li>
+                                                    <li><img style="width: 8px" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png">&nbsp;&nbsp;<a>Physics</a></li>
+                                                    <li><img style="width: 8px" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png">&nbsp;&nbsp;<a>Chemistry</a></li>
+                                                    <li style="padding-bottom: 14px; margin-bottom: 0;"><img style="width: 8px" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png">&nbsp;&nbsp;<a>Others</a></li>
                                                 </ul>
                                                 
                                             </li>
@@ -4175,7 +4242,7 @@
                                     
 
                                     
-                                    <li><a id="mmessage" class="header-menu-left padd-adjus redirect-create" href="#"> Message<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_normal_state.png"></a></li>
+                                    <li><a id="mmessage" class="header-menu-left padd-adjus redirect-create" href="#" style="padding-top: 12px;"> Message<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_normal_state.png"></a></li>
                                     <li><a id="mdownload" class="header-menu-left padd-adjus redirect-create" href="#">Downloads<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_normal_state.png"></a></li>
                                     
                                 </ul>
@@ -4464,8 +4531,10 @@
         var fc_sets = <?php echo $fc_sets ?>;
         <?php echo $tfc_js ?>
         <?php echo $fc_js ?>
+        
             var check_sub_any_dic = <?php echo $check_user_sub_any_dic ? 'true':'false'?>;
             var folderid = <?php echo $folderid ?>;
+            
             var url_image = '<?php echo get_template_directory_uri() ?>/library/images/';
             
         </script>
@@ -5147,6 +5216,7 @@
                         $('#tutor-main-home').click();
                         $("#my-timezone").css("display","none");
                         $("#open-menu-schedule").css("display","none");
+
                         var name = $(".display-name").text();
                         var viewport = getViewport();  
                         if(viewport.width < 650){
@@ -5167,26 +5237,23 @@
                             
                             $('#free-all').css('display','none');
                             $('#free-all').removeClass("opensub");
+                            $('#icon-tutoring').css('display','block');
                             if (check) {
                                 //closeNav();
                                 $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
-                                $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "134px");
+                                $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "0");
                                 $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
                                 $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
                                 $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "0px");
-                                $('#menu-left-myaccount li:nth-child(7)').css("margin-top", "10px");
-                                $('#menu-left-myaccount li:nth-child(8)').css("margin-top", "4px");
-                                $('#menu-left-myaccount li:nth-child(9)').css("margin-top", "6px");
+                                
                             } else {
                                 openNav();
                                 $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
-                                $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "134px");
+                                $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "0");
                                 $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
                                 $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
                                 $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "0px");
-                                $('#menu-left-myaccount li:nth-child(7)').css("margin-top", "10px");
-                                $('#menu-left-myaccount li:nth-child(8)').css("margin-top", "4px");
-                                $('#menu-left-myaccount li:nth-child(9)').css("margin-top", "6px");
+                                
                             }
                         }
                     });
@@ -5220,6 +5287,8 @@
                             $("#msat").removeClass("opensub");
                             $('#sub-toeic').css('display','none');
                             $('#sub-toeic').removeClass("opensub");
+                            $('#sub-more').css('display','none');
+                            $('#sub-more').removeClass("opensub");
                             
                                 openNav();
                                 $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
@@ -5229,6 +5298,7 @@
                                 $('#icon-free div:nth-child(2)').css("margin-top", "8px");
                                 $('#icon-free div:nth-child(3)').css("margin-top", "8px");
                                 $('#icon-free div:nth-child(4)').css("margin-top", "8px");
+                                $('#icon-free div:nth-child(5)').css("margin-top", "7px");
                                 $('#icon-free div:nth-child(5)').css("margin-top", "7px");
                                 
                             
@@ -5266,12 +5336,12 @@
                                     $('#account-show').css('display','none');
                                     $("#sub-course").css("display", "none");
                                     $("#sub-course").removeClass("opensub");
-                                     $("#sub-tutoring").css("display", "block");
+                                    $("#sub-tutoring").css("display", "block");
                                     $("#sub-tutoring").addClass("opensub");
-                                    
+                                    $('#icon-tutoring').css('display','block')
                                     
                                     $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
-                                    $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "134px");
+                                    $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "6px");
                                     $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
                                     $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
                                     
@@ -5291,6 +5361,8 @@
                                     $('#msat').removeClass("opensub");
                                     $('#mmath').removeClass("opensub");
                                     $('#sub-toeic').removeClass("opensub");
+                                    $('#sub-more').css('display','none');
+                                    $('#sub-more').removeClass("opensub");
                                     $('#icon-free').css('display','block')
                                      
                                     $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
@@ -5400,6 +5472,9 @@
                         $("#msat").removeClass("opensub");
                         $('#sub-toeic').css('display','none');
                         $('#sub-toeic').removeClass("opensub");
+                        $('#sub-more').css('display','none');
+                        
+                        $('#sub-more').removeClass("opensub");
                         $('#find-course').removeClass('active');
                         change_image_list(x,y);
                         change_image_close1(xx);
@@ -5435,9 +5510,12 @@
                             openNav();
                             $("#sub-tutoring").css("display", "none");
                             $("#sub-tutoring").removeClass("opensub");
+                            $('#icon-tutoring').css('display','none');
                             change_image_close(y);
                         }else{
+
                         $('#tutor-main-home').click();
+                        $('#icon-tutoring').css('display','block');
                         $("#sub-tutoring").css("display", "block");
                         $("#sub-tutoring").addClass("opensub");
                         $("#sub-myacc").css("display", "none");
@@ -5453,6 +5531,8 @@
                         $("#msat").removeClass("opensub");
                         $('#sub-toeic').css('display','none');
                         $('#sub-toeic').removeClass("opensub");
+                        $('#sub-more').css('display','none');
+                            $('#sub-more').removeClass("opensub");
                         $('#find-course').removeClass('active');
                         $('#free-all').css('display','none');
                          $('#free-all').removeClass("opensub");
@@ -5473,16 +5553,22 @@
                             $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0px");
                         } else {
                             openNav();
+                            $('#icon-tutoring div:nth-child(2)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(3)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(4)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(5)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(6)').css("margin-top", "23px");
+                            
                             $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
-                            $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "134px");
+                            $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "0px");
                             $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
-                            $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
+                            $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "4px");
                             
                         }
                     }
                     });
                     $('#etoeic').click(function(){
-                        var xx=$("#english-all img, #class-manager img, #sat-all img, #math-all img");
+                        var xx=$("#english-all img, #class-manager img, #sat-all img, #math-all img, #emore img");
                         var yy=$("#etoeic img");
                         $('#icon-free').css("display", "block");
                         if($("#sub-toeic").hasClass("opensub")){
@@ -5507,6 +5593,8 @@
                         $("#sub-myacc").css("display", "none");
                         $("#sub-myacc").removeClass("opensub");
                         $('#account-show').css('display','none');
+                        $("#sub-more").css("display", "none");
+                        $("#sub-more").removeClass("opensub");
 
                        
                             openNav();
@@ -5514,14 +5602,57 @@
                             $('#icon-free div:nth-child(3)').css("margin-top", "8px");
                             $('#icon-free div:nth-child(4)').css("margin-top", "8px");
                             $('#icon-free div:nth-child(5)').css("margin-top", "7px");
-                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "68px");
+                            $('#icon-free div:nth-child(6)').css("margin-top", "61px");
+                            $('#icon-free div:nth-child(7)').css("margin-top", "8px");
+                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "20px");                              
+                        
+                    }
+                    });
+                    $('#emore').click(function(){
+                        var xx=$("#english-all img, #class-manager img, #sat-all img, #math-all img, #etoeic img");
+                        var yy=$("#emore img");
+                        $('#icon-free').css("display", "block");
+                        if($("#sub-more").hasClass("opensub")){
+                            openNav();
+                            $("#sub-more").css("display", "none");
+                            $("#sub-more").removeClass("opensub");
+                            change_image_close1(yy);
+                        }else{
+                            change_image_list1(xx,yy);
+                        $("#sub-more").css("display", "block");
+                        $("#sub-more").addClass("opensub");
+                        $('#sub-toeic').css('display','none');
+                        $('#sub-toeic').removeClass("opensub");
+                        $('#msat').css('display','none');
+                        $('#msat').removeClass("opensub");
+                        $('#mmath').css("display","none");
+                        $('#mmath').removeClass("opensub");
+                        $('#menglish').css('display','none');
+                        $('#menglish').removeClass("opensub");
+                        $("#sub-course").css("display","none");
+                        $("#sub-course").removeClass("opensub");
+                        $("#sub-tutoring").css("display","none");
+                        $("#sub-tutoring").removeClass("opensub");
+                        $("#sub-myacc").css("display", "none");
+                        $("#sub-myacc").removeClass("opensub");
+                        $('#account-show').css('display','none');
+
+                       
+                            openNav();
+                            $('#icon-free div:nth-child(2)').css("margin-top", "8px");
+                            $('#icon-free div:nth-child(3)').css("margin-top", "8px");
+                            $('#icon-free div:nth-child(4)').css("margin-top", "8px");
+                            $('#icon-free div:nth-child(5)').css("margin-top", "7px");
+                            $('#icon-free div:nth-child(6)').css("margin-top", "8px");
+                            $('#icon-free div:nth-child(7)').css("margin-top", "8px");
+                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "168px");
                             
                         
                     }
                     });
 
                     $('#sat-all').click(function(){
-                        var xx=$("#class-manager img,#math-all img,#english-all img, #etoeic img");
+                        var xx=$("#class-manager img,#math-all img,#english-all img, #etoeic img, #emore img");
                         var yy=$("#sat-all img");
                         
                         if($("#msat").hasClass("opensub")){
@@ -5545,6 +5676,8 @@
                         $("#sub-tutoring").removeClass("opensub"); 
                          $("#sub-toeic").css("display","none");
                         $("#sub-toeic").removeClass("opensub"); 
+                        $("#sub-more").css("display", "none");
+                            $("#sub-more").removeClass("opensub");
                                              
                         $('#sat-en img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png");
                         $('#sat-en img').css('padding','0 2px 0 2px');
@@ -5558,6 +5691,8 @@
                             $('#icon-free div:nth-child(3)').css("margin-top", "8px");
                             $('#icon-free div:nth-child(4)').css("margin-top", "8px");
                             $('#icon-free div:nth-child(5)').css("margin-top", "59px");
+                            $('#icon-free div:nth-child(6)').css("margin-top", "8px");
+                            $('#icon-free div:nth-child(7)').css("margin-top", "8px");
                             $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "20px");
                         
                         }
@@ -5565,7 +5700,7 @@
                     });
 
                     $('#math-all').click(function(){
-                        var xx=$("#english-all img, #class-manager img, #sat-all img, #etoeic img");
+                        var xx=$("#english-all img, #class-manager img, #sat-all img, #etoeic img,#emore img");
                         var yy=$("#math-all img");
                         
                         if($("#mmath").hasClass("opensub")){
@@ -5587,6 +5722,8 @@
                         $('#msat').removeClass("opensub");
                         $('#sub-toeic').css('display','none');
                         $('#sub-toeic').removeClass("opensub");
+                        $("#sub-more").css("display", "none");
+                            $("#sub-more").removeClass("opensub");
 
                         
                             openNav();
@@ -5594,6 +5731,8 @@
                             $('#icon-free div:nth-child(3)').css("margin-top", "8px");
                             $('#icon-free div:nth-child(4)').css("margin-top", "255px");
                             $('#icon-free div:nth-child(5)').css("margin-top", "8px");
+                            $('#icon-free div:nth-child(6)').css("margin-top", "8px");
+                            $('#icon-free div:nth-child(7)').css("margin-top", "8px");
                             $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "20px");
                        
                         }
@@ -5601,7 +5740,7 @@
                     });
 
                     $('#english-all').click(function(){
-                        var xx=$("#class-manager img,#math-all img,#sat-all img, #etoeic img");
+                        var xx=$("#class-manager img,#math-all img,#sat-all img, #etoeic img, #emore img");
                         var yy=$("#english-all img");
 
                         if($('#menglish').hasClass("opensub")){
@@ -5623,12 +5762,16 @@
                         $("#msat").css("display", "none");
                         $("#msat").removeClass("opensub");
                         $('#sub-toeic').css('display','none');
-                        $('#sub-toeic').removeClass("opensub");                       
+                        $('#sub-toeic').removeClass("opensub");
+                        $("#sub-more").css("display", "none");
+                            $("#sub-more").removeClass("opensub");                       
                             openNav();
                             $('#icon-free div:nth-child(2)').css("margin-top", "8px");
                             $('#icon-free div:nth-child(3)').css("margin-top", "172px");
                             $('#icon-free div:nth-child(4)').css("margin-top", "8px");
                             $('#icon-free div:nth-child(5)').css("margin-top", "7px");
+                            $('#icon-free div:nth-child(6)').css("margin-top", "8px");
+                            $('#icon-free div:nth-child(7)').css("margin-top", "8px");
                             $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "20px");
                        
                         }
@@ -5637,7 +5780,7 @@
                     });
 
                     $('#class-manager').click(function(){
-                        var xx=$("#english-all img,#math-all img,#sat-all img, #etoeic img");
+                        var xx=$("#english-all img,#math-all img,#sat-all img, #etoeic img, #emore img");
                         var yy=$("#class-manager img");
                          openNav();
                          $('#icon-free').css("display", "block");
@@ -5659,11 +5802,15 @@
                         $("#msat").removeClass("opensub");
                         $('#sub-toeic').css('display','none');
                         $('#sub-toeic').removeClass("opensub");
+                        $("#sub-more").css("display", "none");
+                            $("#sub-more").removeClass("opensub");
                         
                             $('#icon-free div:nth-child(2)').css("margin-top", "115px");
                             $('#icon-free div:nth-child(3)').css("margin-top", "8px");
                             $('#icon-free div:nth-child(4)').css("margin-top", "8px");
                             $('#icon-free div:nth-child(5)').css("margin-top", "7px");
+                            $('#icon-free div:nth-child(6)').css("margin-top", "8px");
+                            $('#icon-free div:nth-child(7)').css("margin-top", "8px");
                             $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "20px");
                             
                              
@@ -5675,17 +5822,16 @@
 
                     $('#sub-findingtutor a').click(function(){
                          openNav();
+                        $('#icon-tutoring').css('display','block');
                         if(!$('#find-course').hasClass('active')){
                         $('#find-course').css('display','block');                         
                         $('#find-course').addClass('active');
-                        $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
-                        $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "192px");
-                        $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
-                        $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
-                        $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "0px");
-                        $('#menu-left-myaccount li:nth-child(7)').css("margin-top", "10px");
-                        $('#menu-left-myaccount li:nth-child(8)').css("margin-top", "4px");
-                        $('#menu-left-myaccount li:nth-child(9)').css("margin-top", "6px");
+                            $('#icon-tutoring div:nth-child(2)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(3)').css("margin-top", "110px");
+                            $('#icon-tutoring div:nth-child(4)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(5)').css("margin-top", "7px");
+                            $('#icon-tutoring div:nth-child(6)').css("margin-top", "23px");                            
+                        $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "0px");
                         $('#sub-findingtutor img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_open_state.png");                        
                         $('#sub-findingtutor img').css('padding','0');                         
                         // 
@@ -5695,14 +5841,12 @@
                             $('#sub-findingtutor').removeClass('active');
                             $('#sub-findingtutor img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png");
                             $('#sub-findingtutor img').css('padding','0 2px 0 2px');  
-                            $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
-                            $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "134px");
-                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
-                            $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
-                            $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "0px");
-                            $('#menu-left-myaccount li:nth-child(7)').css("margin-top", "10px");
-                            $('#menu-left-myaccount li:nth-child(8)').css("margin-top", "4px");
-                            $('#menu-left-myaccount li:nth-child(9)').css("margin-top", "6px");
+                            $('#icon-tutoring div:nth-child(2)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(3)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(4)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(5)').css("margin-top", "7px");
+                            $('#icon-tutoring div:nth-child(6)').css("margin-top", "23px");                            
+                        $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "0px");
                         }
                     });
                     $('#sat-mat').click(function(){
@@ -6721,6 +6865,12 @@
                         get_tutor_user('available');
                     });
 
+                    // $('#english-select').change(function(){
+                    //     // $(this).target = "_blank";
+                    //     var href $(this).val();
+                    //     window.open($(this).prop(href));
+
+                    // });
 
                     $('#tab-tutoring').click(function(){
                         var path = '<?php echo get_template_directory_uri() ?>/library/images/';
@@ -7395,7 +7545,16 @@
                         }
 
                         get_resume(id,'resume',ptype,table,"",time_view);
+                        $('#table-detail-tutor').addClass('hidden');
+                        var trd = '<tr><td><img id="close-view-tt" src="<?php echo get_template_directory_uri(); ?>/library/images/12_Tab_Close.png"></td></tr>';
+
+                        $('#table-list-tutor').html(trd);
                     });
+
+                    $('#close-view-tt').live('click', function(e){
+                        e.preventDefault();
+                        $('#btn-available-now').click();
+                    })
 
                     $('.find-card-select-btn').live('click', function (e) {
                         e.preventDefault();
@@ -7420,6 +7579,7 @@
                         $('#selected-type').html('<img style="height:12px;margin-top:-2px;" src="<?php echo get_template_directory_uri(); ?>'+ptype+'">&nbsp;'+data_price+'&nbsp;Points');
                         $('#selected-type').addClass('active');
                         $('#selected-tutor').addClass('active');
+                        $('#table-detail-tutor').removeClass('hidden');
                         $.get(home_url + "/?r=ajax/get_name_tutor",{id: id}, function (data) {
                             $('#selected-tutor').text($.trim(data));
                         });
@@ -7595,6 +7755,7 @@
                         get_resume(id,'review',ptype,table);
                         $('.view-schedule').removeClass('active');
                         $('.slick-slide').css('height','100%');
+                        $('.schedule-view-deep').css('display','block');
                     });
 
                     $('.chose-rate').live('click', function(){
@@ -7610,6 +7771,14 @@
                         var message = $(this).attr('data-message');
                         var ptype = $(this).attr('data-ptype');
                         var table = $(this).attr('data-table');
+                        var ht =  $('.tr-review').css('height');
+                        if($('#table-detail-tutor').hasClass('hidden')){
+                            $('.writting-review').css('top','205px');
+                        }else{
+                            $('.writting-review').css('top','317px');
+                        }
+                        ht = parseInt(ht)-19;
+                        $('.writting-review').css('height',ht+'px');
 
                         $('#write-review-subject').val(subject);
                         tinymce.get('message-review').setContent(message);
@@ -11360,6 +11529,7 @@
                     $('#cancel-writing').click(function(){
                         $('.writting-review').removeClass('active');
                          $('.writting-review').css('display','none');
+                         $('.tr-review').css('display','block');
                     });
 
                     $(".modal-content-signup").click( function (e){
@@ -11917,25 +12087,25 @@
 
                     $(".slide-my-schedule").slick(getSliderSettings(true));
 
-                    $(".slide-resume").on('swipe', function(event, slick, direction){
-                        if($('.writting-review').hasClass("active")){
-                            $('.writting-review').removeClass("active");
-                            $('.writting-review').css("display","none");
-                        }  
+                    // $(".slide-resume").on('swipe', function(event, slick, direction){
+                    //     if($('.writting-review').hasClass("active")){
+                    //         $('.writting-review').removeClass("active");
+                    //         $('.writting-review').css("display","none");
+                    //     }  
 
-                        $('.tr-info').css('display','block');
-                        $('.tr-review').css('display','none');
-                        $('.view-review').attr('src','<?php echo get_template_directory_uri(); ?>/library/images/iconM_Review_OFF.png');
-                        $('.view-resume').attr('src','<?php echo get_template_directory_uri(); ?>/library/images/iconM_Resume_ON-O.png');
-                        $('.view-write-review').attr('src','<?php echo get_template_directory_uri(); ?>/library/images/iconM_Write_Review_OFF.png');
+                    //     $('.tr-info').css('display','block');
+                    //     $('.tr-review').css('display','none');
+                    //     $('.view-review').attr('src','<?php echo get_template_directory_uri(); ?>/library/images/iconM_Review_OFF.png');
+                    //     $('.view-resume').attr('src','<?php echo get_template_directory_uri(); ?>/library/images/iconM_Resume_ON-O.png');
+                    //     $('.view-write-review').attr('src','<?php echo get_template_directory_uri(); ?>/library/images/iconM_Write_Review_OFF.png');
 
-                        if($('#selected-tutor').hasClass('active')){
-                            $('#selected-tutor').removeClass('active');
-                            $('#btn-schedule-now').removeClass('active');
-                            $('#selected-tutor').text('Not selected yet');
-                            $('#btn-schedule-now').attr('data-tutor-id','');
-                        }
-                    });
+                    //     if($('#selected-tutor').hasClass('active')){
+                    //         $('#selected-tutor').removeClass('active');
+                    //         $('#btn-schedule-now').removeClass('active');
+                    //         $('#selected-tutor').text('Not selected yet');
+                    //         $('#btn-schedule-now').attr('data-tutor-id','');
+                    //     }
+                    // });
 
                     // Event custom scrollbar
                     $('.style-scrollbar').mCustomScrollbar({theme:"dark-thick"});
@@ -12671,7 +12841,11 @@
                                             //background: #' + slot_available +';
 
                                             if(top1 < 0) top1 = top1 - 8;
-                                            var style = 'style="top: ' + (top1+508) + 'px; height: ' + h1 + 'px;"';    
+                                            if($('#table-detail-tutor').hasClass('hidden')){
+                                                var style = 'style="top: ' + (top1+396) + 'px; height: ' + h1 + 'px;"';
+                                            }else{
+                                                var style = 'style="top: ' + (top1+508) + 'px; height: ' + h1 + 'px;"'; 
+                                            }   
                                             var class_type = ' slot-available';                             
                                         }else{
                                             var style = ' style="top: ' + (i+1) + 'px; height: 78px;"';
@@ -13454,7 +13628,16 @@
                         $('#icon-free div:nth-child(3)').css("margin-top", "8px");
                         $('#icon-free div:nth-child(4)').css("margin-top", "8px");
                         $('#icon-free div:nth-child(5)').css("margin-top", "7px");
+                        $('#icon-free div:nth-child(6)').css("margin-top", "8px");
 
+                        $('#icon-tutoring div:nth-child(2)').css("margin-top", "8px");
+                        $('#icon-tutoring div:nth-child(3)').css("margin-top", "8px");
+                        $('#icon-tutoring div:nth-child(4)').css("margin-top", "8px");
+                        $('#icon-tutoring div:nth-child(5)').css("margin-top", "7px");
+                        $('#icon-tutoring div:nth-child(6)').css("margin-top", "23px");
+
+
+                        $('#icon-tutoring').css('display','none');
                         $('#icon-free').css('display','none');
                         $('#account-show').css('display','none');
                         $('.bor-top').css('width','26px');
@@ -13569,6 +13752,8 @@
                             $('#icon-free div:nth-child(3)').css("margin-top", "8px");
                             $('#icon-free div:nth-child(4)').css("margin-top", "8px");
                             $('#icon-free div:nth-child(5)').css("margin-top", "7px");
+                            $('#icon-free div:nth-child(6)').css("margin-top", "8px");
+                            $('#icon-free div:nth-child(7)').css("margin-top", "8px");
                             $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "20px");
                     }
                     function change_image_list(x,y) {
@@ -13883,6 +14068,8 @@
                                 slidesToScroll: 1,
                                 dots: false,
                                 infinite: false,
+                                swipe: false,
+                                cssEase: 'linear',
                                 prevArrow:"<img class='a-left slick-prev slick-my-schedule' src='<?php echo get_template_directory_uri(); ?>/library/images/icon_Arrow_Left.png'>",
                                 nextArrow:"<img class='a-right slick-next slick-my-schedule' src='<?php echo get_template_directory_uri(); ?>/library/images/icon_Arrow_Right.png'>"
                             }
@@ -13893,6 +14080,8 @@
                                 slidesToScroll: 1,
                                 dots: false,
                                 infinite: false,
+                                swipe: false,
+                                cssEase: 'linear',
                                 prevArrow:"<img class='a-left slick-prev' src='<?php echo get_template_directory_uri(); ?>/library/images/icon_Arrow_Left.png'>",
                                 nextArrow:"<img class='a-right slick-next' src='<?php echo get_template_directory_uri(); ?>/library/images/icon_Arrow_Right.png'>"
                             } 
@@ -14775,6 +14964,11 @@
                 $("#point-input").inputFilter(function(value) {
                     return /^\d*$/.test(value); 
                 });
+                $('#add-word').click(function(){
+                    $('.back-deep').css('display','block');   
+                        $('#add-word-box').css('display','block'); 
+                });
+                
                 $('#sandbox-calender-tutor').ready(function(){
                      function getMontoText(m = 0){
                         switch(m) {
@@ -14855,9 +15049,11 @@
                     $('#sandbox-calender-tutor .table-condensed thead tr:nth-child(1)').css('display','none');
                     var sb = '#sandbox-calender-tutor .datepicker-days .table-condensed tbody tr';
                     var td = '#sandbox-calender-tutor .datepicker-days .table-condensed tbody tr td';
+                    
                     for(i=1;i < 7; i++){
+                       
                         
-                        if($(sb+'+:nth-child('+i+') .today').length){
+                        if($(sb+':nth-child('+i+') .today').length){
                             $(sb+':nth-child('+i+')').css('display','block');
                             a = i;
                             weekday();
@@ -14996,7 +15192,24 @@
             }
             
             });
-             $( document ).ready(function() {
+             $(document).ready(function() {
+                $.get(home_url + "/?r=ajax/checkname", {}, function (data) {
+                        data = JSON.parse(data);       
+                            $.each(data, function( i, v ) {
+                                if(v == 1){
+                                    $('#add-word-dics').append('<a href="https://iktutor.com/iklearn/en/?r=dictionary/elearner">E learner\'s</a></br>');
+                                }else if(v == 2){
+                                    $('#add-word-dics').append('<a href="https://iktutor.com/iklearn/en/?r=dictionary/collegiate">Collegiate</a></br>');
+                                }else if(v == 3){
+                                    $('#add-word-dics').append('<a href="https://iktutor.com/iklearn/en/?r=dictionary/medical">Medical</a></br>');
+                                }else if(v == 4){
+                                    $('#add-word-dics').append('<a href="https://iktutor.com/iklearn/en/?r=dictionary/Intermediate">Intermediate</a></br>');    
+                                }else{
+                                    $('#add-word-dics').append('<a href="https://iktutor.com/iklearn/en/?r=dictionary/Intermediate">Elementary</a>');   
+                                }
+                            });
+                        
+                    });
                if( $('#my-timezone').find('.my-timezone').hasClass('active')){
                  var city = $('#my-timezone').find('.active').attr("data-city");
                  document.getElementById('mycity-name').innerHTML= city;

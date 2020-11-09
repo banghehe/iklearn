@@ -525,6 +525,14 @@ function check_user_subscrible_any_dictionary($user_id) {
    }
     return false;
 }
+function check_user_subscrible_any_dictionary_name($user_id) {
+    $name = [];
+   for ($i=1;$i<=6;$i++) {
+       $name[]  = MWDB::check_subscription_library($user_id,$i);
+        
+   }
+    echo json_encode($name);
+}
 /*
  * check if user subscribed SAT Preparation class
  *

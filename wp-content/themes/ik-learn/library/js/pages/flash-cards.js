@@ -55,9 +55,17 @@ var change = false;
             update_header_width();
         }
 
-        function setup_my_own_cards(change) {
-
-            if (folderid != 0 && !change) {
+        function setup_my_own_cards(change, fc) {
+            if(fc == null){
+                var fld_id = fc_folders;
+                console.log(fc_folders[2]);
+            }else{
+                var fld_id = fc;
+                console.log(fc_folders[2]);
+            }
+            
+          
+            if (  folderid   != 0 && !change) {
                 var fid = folderid;
 //                        var selectBox = $("select#sel-fc-folders").selectBoxIt().data("selectBoxIt");
 //                        selectBox.selectOption(folderid);
@@ -71,13 +79,17 @@ var change = false;
             $("#flashcard-set-header").hide();
 
             if (!$.isEmptyObject(fc_folders[fid])) {
+
                 $.each(fc_folders[fid], function (i, v) {
                     if (!v.memorized) {
                         flashs.push(v);
                     }
+                    if(v.dict_id == 6)
+                        s = 'style="color: red;"';
+                    else s ='';
                     m = v.memorized == 1 ? "<span class='icon-yes2'></span>" : "<span class='icon-no2'></span>";
                     rows += '<tr>' +
-                            '<td class="fh">' + v.word + '</td>' +
+                            '<td class="fh"'+s+'>' + v.word + '</td>' +
                             '<td><input type="text" class="flashcard-note" data-id="' + v.word_id + '" autocomplete="off" value="' + v.notes + '"></td>' +
                             '<td><a class="toggle-memorized" data-id="' + v.word_id + '" href="#">' + m + '</a></td>' +
                             '<td><a href="#" data-id="' + v.word_id + '" class="delete-card"><u>delete</u>&nbsp;&nbsp;<img src="'+url_image+'icon_remove.png"></a></td>' +
@@ -103,6 +115,7 @@ var change = false;
                 var rows;
                 flashs = [];
                 if (!$.isEmptyObject(fc_sets[setid].words)) {
+                    console.log(fc_sets[setid].words);
                     $.each(fc_sets[setid].words, function (i, v) {
                         if (!v.memorized) {
                             flashs.push(v);
@@ -136,7 +149,7 @@ var change = false;
             });
             $('.back-deep').click(function () {
                 $('.back-deep').css('display','none');
-                $('#flashcard-modal,#require-modal,#fl-create-folder-modal,#create-folder-success,#message-full-memorized,#fl-delete-folder-modal,#modal-message-not-delete,#require-modal1,#modal-sub-dictionary').css('display','none');
+                $('#flashcard-modal,#require-modal,#fl-create-folder-modal,#create-folder-success,#message-full-memorized,#fl-delete-folder-modal,#modal-message-not-delete,#require-modal1,#modal-sub-dictionary,#add-word-box').css('display','none');
             });
         });
 
@@ -190,6 +203,40 @@ var change = false;
             }
         });
 
+        $('#word-add-btn').click(function(){
+                    var word = $('#word-add').val();
+                    var folder = $('#sel-fc-foldersSelectBoxItText').attr('data-val');
+                    if(word == ''){
+                       $('#word-add').popover({content: '<span class="text-danger">' +'You have not entered a word.'+ '</span>', html: true, trigger: "hover", placement: "bottom"}).popover("show");
+                        setTimeout(function () {
+                            $('#word-add').popover("destroy");
+                        },2000);
+                    }else{
+                        $.get(home_url + "/?r=ajax/addcard2", {word: word, folder:folder}, function (data) {
+                            
+                            data = JSON.parse(data);
+                                        
+                            if(data.status == 1){
+                                var rows ='';
+                                rows += '<tr>' +
+                            '<td class="fh" style="color:red;">' + word + '</td>' +
+                            '<td><input type="text" class="flashcard-note" data-id="' + data.id + '" autocomplete="off" value=""></td>' +
+                            '<td><a class="toggle-memorized" data-id="' + data.id + '" href="#"><span class="icon-no2"></span></a></td>' +
+                            '<td><a href="#" data-id="' + data.id + '" class="delete-card"><u>delete</u>&nbsp;&nbsp;<img src="'+url_image+'icon_remove.png"></a></td>' +
+                            '</tr>';        
+                            $("#fc-table tbody").append(rows);  
+                            $('#close-add').click();
+                            }else if(data.status == 3){
+                                $('#word-add').popover({content: '<span class="text-danger">' +'Word already exists.'+ '</span>', html: true, trigger: "hover", placement: "bottom"}).popover("show");
+                                setTimeout(function () {
+                                    $('#word-add').popover("destroy");
+                                },2000);
+                            }
+                        });
+                    }
+                });
+
+
         $("#fc-table").on("click", ".delete-card", function (e) {
             e.preventDefault();
             $.post(home_url + "/?r=ajax/flashcard/delete", {id: $(this).attr("data-id")});
@@ -200,14 +247,14 @@ var change = false;
             $('#modal-message-not-delete').css('display','none');
             $('.back-deep').css('display','none');
         });
-        $("#flash-card-mode").click(function () {
+        $("#flash-card-mode").click(function () {    
             if (flashs.length == 0) {
                 $("#require-modal").css('display','block');
             } else {
                 setup_flash();
                 $("#flashcard-modal").css('display','block');
             }
-            $('.back-deep').css('display','block');
+            $('.back-deep').css('display','block'); 
         });
 
         $("#memorized-radio").change(function (e) {
@@ -341,9 +388,13 @@ var change = false;
                 });
             }
         });
+        $('#close-add, #cls-adw').click(function(){
+            $("#add-word-box").css('display','none');
+            $('.back-deep').css('display','none');
+        });
         $('#create-ok, #cls-succ').click(function (){
             $("#create-folder-success").css('display','none');
-            $('#back-deep').css('display','none');
+            $('.back-deep').css('display','none');
             
         }); 
         $('#create-folder').click(function (){

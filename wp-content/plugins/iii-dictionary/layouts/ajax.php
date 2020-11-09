@@ -2864,6 +2864,36 @@ if ($task == 'flashcard') {
             die(json_encode(array(0)));
         }
     }
+    if ($do == 'addcard2') {
+        $current_user_id = get_current_user_id();
+        $entry = $_REAL_POST['word'];
+        $folder_id = $_REAL_POST['folder'];
+
+        $result = $wpdb->insert(
+            $wpdb->prefix . 'dict_flashcards', array(
+                'created_by' => $current_user_id,
+                'folder_id' => $folder_id,
+                'group_id' => 0,
+                'dictionary_id' => 6,
+                'word' => $entry
+            )
+        );
+        $result2 = $wpdb->insert(
+                $wpdb->prefix . 'dict_flashcard_userdata', array(
+            'flashcard_id' => $wpdb->insert_id,
+            'user_id' => $current_user_id
+                )
+        );
+        if ($result) {
+            echo json_encode(array('status' => 1));
+        } else {
+            echo json_encode(array('status' => 0));
+        }
+
+        die;
+
+
+    }
 
     if ($do == 'addcard') {
         $current_user_id = get_current_user_id();
@@ -7995,3 +8025,108 @@ if($task =="delete_item") {
     echo get_cart_amount();
 }
 
+if($task =="checkname") {
+    $current_user_id = get_current_user_id();
+    $name = [];
+    $name2 = [];
+    for ($i=1;$i<=6;$i++) {
+       $name[]  = MWDB::check_subscription_library($current_user_id,$i);
+        
+   }
+   foreach ($name as $key => $value){
+        if($value)
+            $name2[] = $key+1;
+    }
+    echo json_encode($name2);
+}
+if ($task == 'addcard2') {
+        $current_user_id = get_current_user_id();
+        $entry = $_REQUEST['word'];
+        $folder_id = $_REQUEST['folder'];
+        $arr = $wpdb->get_col('SELECT word FROM ' . $wpdb->prefix . 'dict_flashcards WHERE created_by = ' . $current_user_id . ' AND dictionary_id = ' . 6);
+        foreach ($arr as  $value) {
+            if($value == $entry){
+                echo json_encode(array('status' => 3));
+                die;
+            }
+        }
+        $result = $wpdb->insert(
+            $wpdb->prefix . 'dict_flashcards', array(
+                'created_by' => $current_user_id,
+                'folder_id' => $folder_id,
+                'group_id' => 0,
+                'dictionary_id' => 6,
+                'word' => $entry
+            )
+        );
+        $result2 = $wpdb->insert(
+                $wpdb->prefix . 'dict_flashcard_userdata', array(
+            'flashcard_id' => $wpdb->insert_id,
+            'user_id' => $current_user_id
+                )
+        );
+        if ($result) {
+           
+
+        $x = $wpdb->get_col('SELECT id FROM ' . $wpdb->prefix . 'dict_flashcards WHERE created_by = ' . $current_user_id . ' AND word = ' . '"'.$entry.'"');  
+         echo json_encode(array('status' => 1, 'id' => $x[0]));
+        } else {
+            echo json_encode(array('status' => 0));
+        }
+
+        die;
+
+
+}
+if($task =="helo") {
+     $current_user_id = get_current_user_id();
+        $check_user_sub_any_dic = check_user_subscrible_any_dictionary($current_user_id);
+    $flashcard_folders = MWDB::get_flashcard_folders($current_user_id, true);
+        $dictionary_price = mw_get_option('dictionary-price');
+    $flashcards = MWDB::get_flashcards($current_user_id);
+    $teacher_sets = MWDB::get_flashcard_teacher_sets($current_user_id);
+    $teacher_flashcards = MWDB::get_teacher_flashcards($current_user_id);
+        $folderid = isset($_REQUEST['id'])?(int)$_REQUEST['id']:0;
+    $fc_sets =array();
+        $arr_memory=array();
+    foreach($teacher_sets as $set)
+    {
+            $a = array();
+            foreach($teacher_flashcards as $flashcard) {
+                    if($flashcard->teacher_set_id == $set->id) {
+                        $memorized = is_null($flashcard->memorized) ? 0 : $flashcard->memorized;
+                        if(empty($flashcard->notes)) {
+                            if(!is_null($flashcard->teacher_sentence)) {
+                                $notes = $flashcard->teacher_sentence;
+                            }
+                            else {
+                                $notes = '';
+                            }
+                        }
+                        else {
+                            $notes = $flashcard->notes;
+                        }
+
+                        $a[] = 'w' . $flashcard->id . ': {' .
+                                                'word_id: "' . $flashcard->id . '",' .
+                                                'word: ' . json_encode($flashcard->word) . ',' .
+                                                'memorized: ' . $memorized . ',' .
+                                                'notes: ' . json_encode($notes) .
+                                        '}';
+                    }
+            }
+
+            $fc_sets .= 'fc_sets[' . $set->id . '] = {header: ' . json_encode($set->header_name) . ', comment: ' . json_encode($set->comments) . ', teacher: ' . json_encode($set->display_name) . ', group: ' . json_encode($set->group_name) . ', date: ' . json_encode($set->created_on) . ', words: {' . implode(',', $a) . '}};';
+    }
+
+    $ta = array();
+    foreach($teacher_flashcards as $flashcard)
+    {
+            $memorized = is_null($flashcard->memorized) ? 0 : $flashcard->memorized;
+            $notes = is_null($flashcard->notes) ? '' : $flashcard->notes;
+            $ta[] = '{word_id: "' . $flashcard->id . '", word: ' . json_encode($flashcard->word) . ', memorized: ' . $memorized . ', notes: ' . json_encode($notes) . '}';
+    }
+    $tfc_js = 'var tfc_folders = [' . implode(',', $ta) . '];';
+
+    
+}

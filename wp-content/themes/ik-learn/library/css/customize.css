@@ -19366,7 +19366,7 @@ table.table-critical-lesson > tbody > tr > td {
     display: inline-block;
 }
 .sub-menu-left > li.active > a {
-    border-bottom: 1px solid #93cfe1 !important;
+    /*border-bottom: 1px solid #93cfe1 !important;*/
     color: #009dcb !important;
     border-left: none !important;
     border-right: none !important;
@@ -21751,7 +21751,7 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
     font-family: Myriad_regular;
 }*/
 .tr-detail{
-    background: #f5f6f8;
+    background: #d9d9d9;
     border-bottom: 1px solid #E0E0E0;
 }
 .tr-detail td{
@@ -23863,6 +23863,7 @@ padding-left: 20px;
 .img-rate img{
     width: 21px;
     padding-bottom: 5px;
+    margin-left: 4px; 
 }
 .select-rating {
         float: right;
@@ -23898,7 +23899,7 @@ padding-left: 20px;
 
 }
 .list-rating {
-    border: 1px solid #9c9cc9;
+    border: 1px solid #d9d9d9;
     border-top: 0;
     width: 160px;
     padding-left: 10p;
@@ -24105,14 +24106,14 @@ padding-left: 20px;
 #selected-type, #selected-subject, #selected-date, #selected-tutor{
     font-family: semibold;
 }
-#msat li a, #mmath li a, #menglish li a,#sub-tutoring li a,#sub-myacc li a,#sub-toeic li a  {
+#msat li a, #mmath li a, #menglish li a,#sub-myacc li a,#sub-toeic li a, #sub-more li a  {
     padding-bottom: 2px;
     width: 90%;
 }
-#msat, #mmath, #menglish, #sub-toeic{
+#msat, #mmath, #menglish, #sub-toeic, #sub-more{
     display: none;
 }
-#sub-course, #msat, #mmath, #menglish, #sub-toeic {
+#sub-course, #msat, #mmath, #menglish, #sub-toeic, #sub-more {
     padding-top: 5px;
 }
 .click-add {
@@ -24222,11 +24223,18 @@ padding-left: 20px;
 #myacc img, #mtutoring img, #english-all img,
 #math-all img, #sat-all img, #mmessage img, 
 #mdownload img, #class-manager img, #etoeic img, 
-#free-courses img  {
+#free-courses img, #emore img, #econver img, #tutor-main-home img,
+#sub-findingtutor a img, #sub-schedule-li img, 
+#sub-screen img, #sub-english-conv img, #sub-status img{
     float: right;
     margin-top: 6px;    
 }
-#class-manager, #etoeic, #sat-all, #math-all,#english-all {
+#sub-english-conv img {
+    margin-top: -13px;
+}
+#class-manager, #etoeic, #sat-all, #math-all,#english-all, #emore, #econver,
+#tutor-main-home, #sub-findingtutor a, #sub-schedule-li,#sub-schedule-li a, #sub-screen a, 
+#sub-english-conv a, #sub-status a {
     padding-bottom: 0;
     width: 100%;
     padding-right: 1px;
@@ -24284,7 +24292,7 @@ padding-left: 20px;
 #fl-create-folder-modal, #flashcard-modal, #require-modal,
 #create-folder-success,#message-full-memorized,
 #modal-message-not-delete,#require-modal1,#fl-delete-folder-modal,
-#modal-sub-dictionary {
+#modal-sub-dictionary, #add-word-box {
     position: absolute;
     top: 130px;
     display: none;
@@ -24334,4 +24342,21 @@ padding-left: 20px;
 #tinymce p {
         font-size: 15px;
         font-family: Myriad_regular;
+}
+#add-word{
+    color: #009dcb;
+    text-decoration: underline;
+    text-align: right;
+    padding-top: 10px;
+    width: 100px;
+   cursor: pointer;
+
+}
+#close-view-tt {
+    height: 15px;   
+    position: absolute;
+    right: 18px;
+    margin-top: 20px;
+    cursor: pointer;
+    z-index: 10;
 }
