@@ -1,6 +1,6 @@
 <?php
     $route = get_route();
-    if(isset($route[1])) {
+    if(isset($route[1])) { 
         switch($route[1]) {
             case 'elearner': $active_menu = 68;
                 break;
@@ -55,11 +55,11 @@
  
     }
     // dùng cho server
-    $ip_user = $_SERVER['REMOTE_ADDR'];
-    $time_zone_user = json_decode(file_get_contents_curl("https://ipinfo.io/{$ip_user}"));
+    // $ip_user = $_SERVER['REMOTE_ADDR'];
+    // $time_zone_user = json_decode(file_get_contents_curl("https://ipinfo.io/{$ip_user}"));
     
     //dùng cho localhost
-    // $time_zone_user = json_decode(file_get_contents("https://ipinfo.io/"));
+    $time_zone_user = json_decode(file_get_contents("https://ipinfo.io/"));
     // 
     $time_zone_user1 = $time_zone_user->city;
     $timezone_name = $time_zone_user->timezone;
@@ -2133,7 +2133,8 @@
                                             <p class="mt-bottom-12 student-center-title">Student Information Center</p>
                                             <div class="new-request-list">SCHEDULE</div>
                                         </div>
-                                        <div class="col-sm-6 col-md-6 col-xs-6 text-right">
+                                        <div class="col-sm-6 col-md-6 col-xs-6 text-right  select-style top-corner">
+                                            <div style="display: none;">
                                             <button type="button" id="btn-getting">
                                                 Getting Tutoring
                                             </button>
@@ -2144,6 +2145,20 @@
                                             <button type="button" id="btn-schedule">
                                                 Schedule
                                             </button>
+                                            <button type="button" id="btn-note">
+                                                Schedule
+                                            </button>
+                                            </div>
+                                            <select id="tutoring-select" class="select-box-it form-control text-right" onchange=" $('#'+this.value).click();">
+                                                    <option value="btn-getting">Getting Tutoring</option>
+                                                    
+                                                    <option value="">English Conversation with Native Speaker</option>
+                                                    <option value="btn-tutor">Find a Tutor</option>
+                                                    <option value="btn-schedule">Schedule</option> 
+                                                    <option value="btn-note">Tutoring Screen</option>
+                                                    <option value="">English Conversation Tutoring</option>
+                                                    <option value="sub-status">Status</option>
+                                                </select>
                                         </div>
                                     </div>
                                 </div>
@@ -3131,11 +3146,11 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-xs-6 text-right select-style top-corner">
                                             <div class="form-group">
-                                                <select id="english-select" class="select-box-it form-control" onchange="window.open(this.value)">
-                                                    <option>English Main</option>
-                                                    <option value="https://iktutor.com/iklearn/en/?r=spelling-practice">Spelling Practice</option>
+                                                <select id="english-select" class="select-box-it form-control" onchange="if(this.value != ''){window.open(this.value)}">
+                                                    <option value="">English Main</option>
+                                                    
                                                     <option value="https://iktutor.com/iklearn/en/?r=vocabulary-practice">Vocabulary & Grammar</option>
-                                                    <option value="https://iktutor.com/iklearn/en/?r=vocabulary-practice">Reading Comprehension</option>
+                                                    <option value="https://iktutor.com/iklearn/en/?r=reading-comprehension">Reading Comprehension</option>
                                                     <option value="https://iktutor.com/iklearn/en/?r=writing-practice">Writing Practice</option> 
                                                     <option value="https://ael.iktutor.com/ael/">Conversation Practice</option>
                                                 </select>
@@ -3156,11 +3171,11 @@
                                 <div >
                                     <img src="<?php echo get_template_directory_uri(); ?>/library/images/13_Step_BelowArrow.png" style=" width: 54px; margin-left: -6px;">
                                     <div class="row list-learn">
-                                        <div class="col-sm-4 col-md-4 col-xs-4">
+                                        <!-- <div class="col-sm-4 col-md-4 col-xs-4">
                                             <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_ENLGISH_spelling_practice.png" style="float: left; max-width: 40px;">
                                             <span><a target="_blank" href="https://iktutor.com/iklearn/en/?r=spelling-practice" aria-expanded="true">Spelling Practice</a></span>
                                             <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_divider.png" style="float: right;">
-                                        </div>
+                                        </div> -->
                                         <div class="col-sm-4 col-md-4 col-xs-4">
                                             <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_ENLGISH_vocab_grammar.png"style="float: left; max-width: 40px;">
                                             <span><a href="https://iktutor.com/iklearn/en/?r=spelling-practice" target="_blank">Vocabulary & Grammar</a></span>
@@ -3169,14 +3184,16 @@
                                         <div class="col-sm-4 col-md-4 col-xs-4">
                                             <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_ENLGISH_reading_comprehension.png"style="float: left; max-width: 40px;">
                                             <span><a target="_blank" href="https://iktutor.com/iklearn/en/?r=reading-comprehension">Reading Comprehension</a></span>
+                                            <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_divider.png"style="float: right;">
                                         </div>
-                                    </div>
-                                    <div class="row list-learn" style="border: none;">
                                         <div class="col-sm-4 col-md-4 col-xs-4">
                                             <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_ENLGISH_writing_practice.png"style="float: left; max-width: 40px;">
                                             <span><a target="_blank" href="https://iktutor.com/iklearn/en/?r=writing-practice">Writing Practice</a></span>
-                                            <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_divider.png"style="float: right;">
+                                            
                                         </div>
+                                    </div>
+                                    <div class="row list-learn" style="border: none;">
+                                        
                                         <!-- <div class="col-sm-4 col-md-4 col-xs-4">
                                             <img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_ENLGISH_vocab_builder.png"style="float: left; max-width: 40px;">
                                             <span>Vocabulary & Builder</span>
@@ -3764,11 +3781,11 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-xs-6 text-right select-style top-corner">
                                             <div class="form-group">
-                                                <select id="math-select" class="select-box-it form-control" onchange="window.open(this.value)">
-                                                    <option>English Main</option>
-                                                    <option value="https://math.iktutor.com/iklearn/en/?r=arithmetics">Spelling Practice</option>
-                                                    <option value="https://math.iktutor.com/iklearn/en/?r=algebra-i">Vocabulary & Grammar</option>
-                                                    <option value="https://math.iktutor.com/iklearn/en/?r=algebra-ii">Reading Comprehension</option>
+                                                <select id="math-select" class="select-box-it form-control" onchange="if(this.value != ''){window.open(this.value)}">
+                                                    <option value="">Math Main</option>
+                                                    <option value="https://math.iktutor.com/iklearn/en/?r=arithmetics">Elementary</option>
+                                                    <option value="https://math.iktutor.com/iklearn/en/?r=algebra-i">Algebra 1</option>
+                                                    <option value="https://math.iktutor.com/iklearn/en/?r=algebra-ii">Algebra 2</option>
                                                     <option value="https://math.iktutor.com/iklearn/en/?r=geometry">Geometry </option>
                                                     <option value="https://math.iktutor.com/iklearn/en/?r=calculus">Calculus </option>
                                                     <option value="https://math.iktutor.com/iklearn/en/?r=sat-preparation/emathk&client=math-emathk">ikMath Courses</option>
@@ -3849,8 +3866,8 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-xs-6 text-right select-style top-corner">
                                             <div class="form-group">
-                                                <select id="sat-select" class="select-box-it form-control">
-                                                    <option>English SAT Main</option>
+                                                <select id="sat-select" class="select-box-it form-control" onchange="if(this.value != ''){window.open(this.value)}">
+                                                    <option value="">English SAT Main</option>
                                                     <option value="https://iktutor.com/iklearn/en/?r=sat-preparation">English SAT</option>
                                                     <option value="https://iktutor.com/iklearn/en/?r=writing-practice">Essay Writing</option>
                                                     <option value="https://math.iktutor.com/iklearn/en/?r=homework-status">SAT Tutoring</option>
@@ -3901,8 +3918,8 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-xs-6 text-right select-style top-corner">
                                             <div class="form-group">
-                                                <select id="satmath-select" class="select-box-it form-control" onchange="window.open(this.value)">
-                                                    <option>Math SAT Main</option>
+                                                <select id="satmath-select" class="select-box-it form-control" onchange="if(this.value != ''){window.open(this.value)}">
+                                                    <option value="0">Math SAT Main</option>
                                                     <option value="https://math.iktutor.com/iklearn/en/?r=sat-preparation/sat1prep&client=math-sat1">Math SAT 1</option>
                                                     <option value="https://math.iktutor.com/iklearn/en/?r=sat-preparation/sat2prep&client=math-sat2">Math SAT 2</option>
                                                     <option value="https://math.iktutor.com/iklearn/en/?r=homework-status">SAT Tutoring</option>
@@ -4084,7 +4101,8 @@
                                         <a data-toggle="tab" href="#"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_tutoring.png" class="" alt="setting my account" style="width: 24px;margin:15px 0px"></a>
                                         <div id="icon-tutoring" style="display: none;">
                                             <div style="margin-top: 0px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/Tutor-Icon_Getting_Tutoring.png" style="width: 15px"></div>
-                                            <div style="margin-top: 8px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/Tutor-Icon_Find_a_Tutor.png" style="width: 15px"></div>
+                                            <div style="margin-top: 8px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_English_Native_Speaker.png" style="width: 15px"></div>
+                                            <div style="margin-top: 24px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/Tutor-Icon_Find_a_Tutor.png" style="width: 15px"></div>
                                             <div style="margin-top: 8px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/Tutor-Icon_Schedule.png" style="width: 15px"></div>
                                             <div style="margin-top: 8px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/Tutor-Icon_Tutoring_Screen.png" style="width: 15px"></div>
                                             <div style="margin-top: 7px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/Tutor-Icon_English_Conversation_Tutoring.png" style="width: 15px"></div>
@@ -4103,7 +4121,13 @@
                                             <div style="margin-top: 7px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_More_Online_Courses.png" style="width: 15px"></div>
                                         </div>
                                     </li>
-                                    
+                                    <li id="imarket"><a data-toggle="tab" href="#"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Online_Market_Place.png" class="" alt="setting my account" style="width: 24px;margin:15px 0px"></a>
+                                        <div id="icon-market" style="display: none;">
+                                            <div style="margin-top: 0px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Course-List.png" style="width: 15px"></div>
+                                            <div style="margin-top: 7px;"><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Tutor-List.png" style="width: 15px"></div>
+                                            
+                                        </div>
+                                    </li>
                                     
                                     
                                    
@@ -4143,6 +4167,7 @@
                                     <li><a class="header-menu-left padd-adjus redirect-create" id="mtutoring" data-toggle="tab" style="padding-top: 22px !important;">Tutoring<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_normal_state.png" ></a>
                                         <ul class="sub-menu-left" id="sub-tutoring">
                                             <li id="getting-tutoring"><a id="tutor-main-home" class="redirect-create" data-toggle="tab" href="#tutoring-main">Getting Tutoring<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a></li>
+                                            <li id="native-speaker"><a id="" class="redirect-create" data-toggle="tab" href="#tutoring-main">English Conversation<br>with Native Speaker<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a></li>
                                             <li id="sub-findingtutor" ><a class="redirect-create" data-toggle="tab" href="#tutoring-main">Find a Tutor<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a></li>
                                             <ul id="find-course" style="display: none; padding-left: 15px;">
                                                 <li class="onl-math" data-type="english-conv"><img src="<?php echo get_template_directory_uri(); ?>/library/images/03_Icon_Sub-menu.png" style="width: 8px !important">&nbsp;&nbsp;<a  data-toggle="tab"  >English Conversation</a> </li>
@@ -4157,7 +4182,7 @@
                                         </ul>
                                     </li>
                                     <li><a id="free-courses" class="header-menu-left padd-adjus redirect-create" data-toggle="tab" style="">Online Courses<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_normal_state.png"></a>
-                                        <ul id="free-all"  class="sub-menu-left" style="display: none; padding-bottom: 8px;">
+                                        <ul id="free-all"  class="sub-menu-left" style="display: none; ">
                                             <li><a style="color: #00b823 !important;" id="class-manager">Free Courses<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a>
                                                 <ul class="sub-menu-left" id="sub-course">
                                                     <li id=""><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png" style="width: 8px;">&nbsp;&nbsp;<a href="https://iktutor.com/iklearn/en/?r=spelling-practice" target="_bank">Spelling Practice </a></li>
@@ -4171,7 +4196,7 @@
                                             <li><a  id="english-all" data-toggle="tab">English<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a>
                                                 <ul id="menglish" style="display: none;">
                                                     <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png" style="width: 8px;" >&nbsp;&nbsp;<a data-toggle="tab" href="#english-main" id="english-main-home">English Main</a></li>
-                                                    <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png" style="width: 8px;" >&nbsp;&nbsp;<a href="https://iktutor.com/iklearn/en/?r=spelling-practice" target="_blank">Spelling Practice</a></li>
+                                                    <!-- <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png" style="width: 8px;" >&nbsp;&nbsp;<a href="https://iktutor.com/iklearn/en/?r=spelling-practice" target="_blank">Spelling Practice</a></li> -->
                                                     <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png" style="width: 8px;" >&nbsp;&nbsp;<a target="_blank" href="https://iktutor.com/iklearn/en/?r=vocabulary-practice">Vocabulary & Grammar</a></li>
                                                     <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png" style="width: 8px;" >&nbsp;&nbsp;<a target="_blank" href="https://iktutor.com/iklearn/en/?r=reading-comprehension">Reading Comprehension</a></li>
                                                     <li><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png" style="width: 8px;" >&nbsp;&nbsp;<a target="_blank" href="https://iktutor.com/iklearn/en/?r=writing-practice">Writing Practice</a></li>
@@ -4231,14 +4256,21 @@
                                                     <li><img style="width: 8px" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png">&nbsp;&nbsp;<a>Math</a></li>
                                                     <li><img style="width: 8px" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png">&nbsp;&nbsp;<a>Physics</a></li>
                                                     <li><img style="width: 8px" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png">&nbsp;&nbsp;<a>Chemistry</a></li>
-                                                    <li style="padding-bottom: 14px; margin-bottom: 0;"><img style="width: 8px" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png">&nbsp;&nbsp;<a>Others</a></li>
+                                                    <li><img style="width: 8px" src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Point.png">&nbsp;&nbsp;<a>Others</a></li>
                                                 </ul>
                                                 
                                             </li>
                                         </ul>
                                     </li>
                                     
-                                    
+                                    <li><a id="onl-market" class="header-menu-left padd-adjus redirect-create"  style="padding-top: 12px;">Online Market Place<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN_normal_state.png"></a>
+                                        <ul class="sub-menu-left" id="sub-market">
+                                            <li><a href="#" data-toggle="tab">Course List<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a></li>
+                                            <li style="padding-bottom: 18px;"><a href="#" data-toggle="tab">Tutor List<img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png"></a></li>
+                                                    
+                                                    
+                                        </ul>
+                                    </li>
                                     
 
                                     
@@ -5158,7 +5190,7 @@
                     });
 
                     $("#account").click(function () {
-                        var x=$("#mtutoring img, #free-courses img");
+                        var x=$("#mtutoring img, #free-courses img, #onl-market img");
                         var y=$("#myacc img");
                         change_image_list(x,y);
                         $("#my-timezone").css("display","none");
@@ -5183,34 +5215,36 @@
                             $("#sub-tutoring").removeClass("opensub");
                             $('#free-all').css('display','none');
                             $('#free-all').removeClass("opensub");
+                            $('#sub-market').css('display','none');
+                            $('#sub-market').removeClass("opensub");
+                             $('#icon-market').css('display','none');
+                            $('#icon-tutoring').css('display','none');
+                            $('#icon-free').css('display','none');
+                            
 
                             if (check) {
                                 //closeNav();
                                 $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "89px");
                                 $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "2px");
-                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
+                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "1px");
                                 $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
-                                $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "0px");
-                                $('#menu-left-myaccount li:nth-child(7)').css("margin-top", "10px");
-                                $('#menu-left-myaccount li:nth-child(8)').css("margin-top", "4px");
-                                $('#menu-left-myaccount li:nth-child(9)').css("margin-top", "6px");
+                                $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
+                                
                             } else {
                                 openNav();
                                 $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "89px");
                                 $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "2px");
-                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
+                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "1px");
                                 $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
-                                $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "0px");
-                                $('#menu-left-myaccount li:nth-child(7)').css("margin-top", "10px");
-                                $('#menu-left-myaccount li:nth-child(8)').css("margin-top", "4px");
-                                $('#menu-left-myaccount li:nth-child(9)').css("margin-top", "6px");
+                                $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
+                                
                             }
                         }
                     });
 
 
                     $("#itutoring").click(function () {
-                        var x=$("#myacc img, #free-courses img");
+                        var x=$("#myacc img, #free-courses img, #onl-market img");
                         var y=$("#mtutoring img");
                         change_image_list(x,y); 
                         $('#tutor-main-home').click();
@@ -5237,22 +5271,28 @@
                             
                             $('#free-all').css('display','none');
                             $('#free-all').removeClass("opensub");
+                            $('#sub-market').css('display','none');
+                            $('#sub-market').removeClass("opensub");
                             $('#icon-tutoring').css('display','block');
+                             $('#icon-market').css('display','none');
+                            
+                            $('#icon-free').css('display','none');
+                            $('#account-show').css('display','none');
                             if (check) {
                                 //closeNav();
                                 $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
-                                $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "0");
-                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
+                                $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "4px");
+                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "1px");
                                 $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
-                                $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "0px");
+                                $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
                                 
                             } else {
                                 openNav();
                                 $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
-                                $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "0");
-                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
+                                $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "4px");
+                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "1px");
                                 $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
-                                $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "0px");
+                                $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
                                 
                             }
                         }
@@ -5260,7 +5300,7 @@
 
                     
                     $("#ienglish").click(function () {
-                        var x=$("#myacc img, mtutoring img");
+                        var x=$("#myacc img, mtutoring img, #onl-market img");
                         var y=$("#free-courses img");
                         change_image_list(x,y); 
                         
@@ -5277,6 +5317,66 @@
                             $('#free-all').css('display','block');
                             $('#free-all').addClass("opensub");
                             $('#icon-free').css('display','block');
+                             $('#icon-market').css('display','none');
+                            $('#icon-tutoring').css('display','none');
+                            
+                            $('#account-show').css('display','none');
+                            $("#sub-course").css("display", "none");
+                            $("#sub-course").removeClass("opensub");
+                            $('#menglish').css('display','none');
+                            $('#menglish').removeClass("opensub");
+                            $('#mmath').css("display", "none");
+                            $('#mmath').removeClass("opensub");
+                            $("#msat").css("display", "none");
+                            $("#msat").removeClass("opensub");
+                            $('#sub-toeic').css('display','none');
+                            $('#sub-toeic').removeClass("opensub");
+                            $('#sub-more').css('display','none');
+                            $('#sub-more').removeClass("opensub");
+                            $('#sub-market').css('display','none');
+                            $('#sub-market').removeClass("opensub");
+                            
+                                openNav();
+                                $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
+                                $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "3px");
+                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "2px");
+                                $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
+                                $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
+                                $('#icon-free div:nth-child(2)').css("margin-top", "8px");
+                                $('#icon-free div:nth-child(3)').css("margin-top", "8px");
+                                $('#icon-free div:nth-child(4)').css("margin-top", "8px");
+                                $('#icon-free div:nth-child(5)').css("margin-top", "7px");
+                                $('#icon-free div:nth-child(5)').css("margin-top", "7px");
+                                
+                            
+                        }
+                    });
+                   
+                    
+                    $("#imarket").click(function () {
+                        var x=$("#myacc img, mtutoring img, #free-courses img");
+                        var y=$("#onl-market img");
+                        change_image_list(x,y); 
+                        
+                        $("#my-timezone").css("display","none");
+                        $("#open-menu-schedule").css("display","none");
+                        var name = $(".display-name").text();
+                        
+                        if (name !== '') {
+                            $("#sub-tutoring").css("display", "none");
+                            $("#sub-tutoring").removeClass("opensub");
+                            $("#sub-myacc").css("display", "none");
+                            $("#sub-myacc").removeClass("opensub");
+                            $('#account-show').css('display','none');                            
+                            $('#sub-market').css('display','block');
+                            $('#sub-market').addClass("opensub");
+                            $('#icon-market').css('display','block');
+                            $('#icon-tutoring').css('display','none');
+                            $('#icon-free').css('display','none');
+                            $('#account-show').css('display','none');
+                            
+                            $("#free-all").css("display", "none");
+                            $("#free-all").removeClass("opensub");
                             $("#sub-course").css("display", "none");
                             $("#sub-course").removeClass("opensub");
                             $('#menglish').css('display','none');
@@ -5293,20 +5393,14 @@
                                 openNav();
                                 $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
                                 $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "3px");
-                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "20px");
-                                $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "6px");
-                                $('#icon-free div:nth-child(2)').css("margin-top", "8px");
-                                $('#icon-free div:nth-child(3)').css("margin-top", "8px");
-                                $('#icon-free div:nth-child(4)').css("margin-top", "8px");
-                                $('#icon-free div:nth-child(5)').css("margin-top", "7px");
-                                $('#icon-free div:nth-child(5)').css("margin-top", "7px");
+                                $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "1px");
+                                $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "20px");
+                                $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
+                                
                                 
                             
                         }
                     });
-                   
-                    
-                    
 
                     
 
@@ -5342,9 +5436,9 @@
                                     
                                     $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
                                     $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "6px");
-                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
+                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "1px");
                                     $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
-                                    
+                                    $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
                                 }else if($('#free-all').hasClass("opensub")){                                    
                                      $("#sub-tutoring").css("display", "none");
                                     $("#sub-tutoring").removeClass("opensub");
@@ -5363,12 +5457,13 @@
                                     $('#sub-toeic').removeClass("opensub");
                                     $('#sub-more').css('display','none');
                                     $('#sub-more').removeClass("opensub");
-                                    $('#icon-free').css('display','block')
+                                    $('#icon-free').css('display','block');
                                      
                                     $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
                                     $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "3px");
-                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "20px");
-                                    $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "6px");
+                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "1px");
+                                    $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
+                                    $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
                                      var xx=$("#english-all img, #class-manager img, #sat-all img, #math-all img, #etoeic img");
                                      change_image_close1(xx);
                                     
@@ -5384,8 +5479,9 @@
                                     change_image_list(x,y);
                                     $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "89px");
                                     $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "2px");
-                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
+                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "1px");
                                     $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
+                                    $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
                                     
                                 }else if($("#sub-course").hasClass("opensub")){
                                     $("#sub-tutoring").css("display", "none");
@@ -5395,8 +5491,9 @@
                                     $('#account-show').css('display','none');
                                     $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
                                     $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "4px");
-                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "0");
-                                    $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "4px");
+                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "1px");
+                                    $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
+                                    $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
                                     
 
                                 }else if($("#sub-toeic").hasClass("opensub")){
@@ -5408,12 +5505,38 @@
                                                                    
                                     $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
                                     $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "4px");
-                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "0");
-                                    $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "4px");
+                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "1px");
+                                    $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
+                                    $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
                                     
 
+                                }else if($("#sub-market").hasClass("opensub")){
+                                    $("#sub-tutoring").css("display", "none");
+                                    $("#sub-tutoring").removeClass("opensub");
+                                    $("#sub-myacc").css("display", "none");
+                                    $("#sub-myacc").removeClass("opensub");
+                                    $('#account-show').css('display','none');
+                                    $("#sub-course").css("display", "none");
+                                    $("#sub-course").removeClass("opensub"); 
+                                    $('#menglish').css("display", "none");
+                                    $('#msat').css("display", "none");
+                                    $('#mmath').css("display", "none");
+                                    $('#sub-toeic').css("display", "none");
+                                    $('#menglish').removeClass("opensub");
+                                    $('#msat').removeClass("opensub");
+                                    $('#mmath').removeClass("opensub");
+                                    $('#sub-toeic').removeClass("opensub");
+                                    $('#sub-more').css('display','none');
+                                    $('#sub-more').removeClass("opensub");
+                                    $('#icon-market').css('display','block')
+                                                                   
+                                    $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
+                                    $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "4px");
+                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "1px");
+                                    $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "20px");
+                                    $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
                                 }else{
-                                    var x=$("#mtutoring img, #free-courses img");
+                                    var x=$("#mtutoring img, #free-courses img, #onl-market img");
                                     var y=$("#myacc img");
                                     change_image_list(x,y);
                                     $("#sub-myacc").css("display", "block");
@@ -5425,8 +5548,9 @@
                                     $("#sub-course").removeClass("opensub");
                                     $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "89px");
                                     $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "2px");
-                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
+                                    $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "1px");
                                     $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
+                                    $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
                                     
 
                                 }
@@ -5439,10 +5563,10 @@
                         $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0px");
                     });
                     $("#free-courses").click(function () {
-                        var x=$("#myacc img, #mtutoring img");
+                        var x=$("#myacc img, #mtutoring img, #onl-market img");
                         var y=$("#free-courses img");
                         var xx=$("#english-all img, #class-manager img, #sat-all img, #math-all img, #etoeic img");
-                       
+                        
                         if($("#free-all").hasClass("opensub")){
                             openNav();
                             $("#free-all").css("display", "none");
@@ -5461,6 +5585,8 @@
                         $("#free-all").addClass("opensub");
                         $("#sub-myacc").css("display", "none");
                         $("#sub-myacc").removeClass("opensub");
+                        $("#sub-market").css("display", "none");
+                        $("#sub-market").removeClass("opensub");
                         $('#account-show').css('display','none');
                         $("#sub-course").css("display", "none");
                         $("#sub-course").removeClass("opensub");
@@ -5496,15 +5622,81 @@
                             openNav();
                             $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
                             $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "3px");
-                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "20px");
-                            $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "6px");
+                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "2px");
+                            $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
+                            $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");                            
+                        }
+                    }
+                    });
+
+                    $('#onl-market').click(function(){
+                        var x=$("#myacc img, #free-courses img, #mtutoring img");
+                        var y=$("#onl-market img");
+                        if($("#sub-market").hasClass("opensub")){
+                            openNav();
+                            $("#sub-market").css("display", "none");
+                            $("#sub-market").removeClass("opensub");
+                            $('#icon-market').css('display','none');
+                            change_image_close(y);
+                        }else{
+                             
+                        $('#icon-market').css('display','block');
+                        $("#sub-market").css("display", "block");
+                        $("#sub-market").addClass("opensub");
+                        $('#icon-tutoring').css('display','none');
+                        $("#sub-tutoring").css("display", "none");
+                        $("#sub-tutoring").removeClass("opensub");
+                        $("#sub-myacc").css("display", "none");
+                        $("#sub-myacc").removeClass("opensub");
+                        $('#account-show').css('display','none');
+                        $("#sub-course").css("display", "none");
+                        $("#sub-course").removeClass("opensub");
+                        $('#menglish').css('display','none');
+                        $('#menglish').removeClass("opensub");
+                        $('#mmath').css("display", "none");
+                        $('#mmath').removeClass("opensub");
+                        $("#msat").css("display", "none");
+                        $("#msat").removeClass("opensub");
+                        $('#sub-toeic').css('display','none');
+                        $('#sub-toeic').removeClass("opensub");
+                        $('#sub-more').css('display','none');
+                        $('#sub-more').removeClass("opensub");
+                        $('#find-course').removeClass('active');
+                        $('#free-all').css('display','none');
+                         $('#free-all').removeClass("opensub");
+                        change_image_list(x,y);
+                        var viewport = getViewport();  
+                        if(viewport.width < 650){
+                            var check = $("#menu-account-nav").hasClass("open");
+                        }else{
+                            if($('body').hasClass('open-myschedule')){
+                                var check = $("#menu-account-nav").hasClass("open");
+                            }else{
+                                var check = $("#mySidenav").hasClass("open");
+                            }
+                        }
+
+                        if (check) {
+                            closeNav();
+                            $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0px");
+                        } else {
+                            openNav();
+                            // $('#icon-market div:nth-child(2)').css("margin-top", "7px");
+                            // $('#icon-market div:nth-child(3)').css("margin-top", "7px");
+                            
+                            
+                            $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
+                            $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "4px");
+                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "1px");
+                            $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "20px");
+                            $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
                             
                         }
                     }
                     });
 
                     $("#mtutoring").click(function () {
-                        var x=$("#myacc img, #free-courses img");
+                        var x=$("#myacc img, #free-courses img,#onl-market img");
                         var y=$("#mtutoring img");
                         if($("#sub-tutoring").hasClass("opensub")){
                             openNav();
@@ -5520,6 +5712,8 @@
                         $("#sub-tutoring").addClass("opensub");
                         $("#sub-myacc").css("display", "none");
                         $("#sub-myacc").removeClass("opensub");
+                        $("#sub-market").css("display", "none");
+                        $("#sub-market").removeClass("opensub");
                         $('#account-show').css('display','none');
                         $("#sub-course").css("display", "none");
                         $("#sub-course").removeClass("opensub");
@@ -5554,15 +5748,17 @@
                         } else {
                             openNav();
                             $('#icon-tutoring div:nth-child(2)').css("margin-top", "8px");
-                            $('#icon-tutoring div:nth-child(3)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(3)').css("margin-top", "24px");
                             $('#icon-tutoring div:nth-child(4)').css("margin-top", "8px");
                             $('#icon-tutoring div:nth-child(5)').css("margin-top", "8px");
-                            $('#icon-tutoring div:nth-child(6)').css("margin-top", "23px");
+                            $('#icon-tutoring div:nth-child(6)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(7)').css("margin-top", "23px");
                             
                             $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
-                            $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "0px");
-                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
-                            $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "4px");
+                            $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "4px");
+                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "1px");
+                            $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
+                            $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
                             
                         }
                     }
@@ -5645,7 +5841,7 @@
                             $('#icon-free div:nth-child(5)').css("margin-top", "7px");
                             $('#icon-free div:nth-child(6)').css("margin-top", "8px");
                             $('#icon-free div:nth-child(7)').css("margin-top", "8px");
-                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "168px");
+                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "138px");
                             
                         
                     }
@@ -5767,7 +5963,7 @@
                             $("#sub-more").removeClass("opensub");                       
                             openNav();
                             $('#icon-free div:nth-child(2)').css("margin-top", "8px");
-                            $('#icon-free div:nth-child(3)').css("margin-top", "172px");
+                            $('#icon-free div:nth-child(3)').css("margin-top", "144px");
                             $('#icon-free div:nth-child(4)').css("margin-top", "8px");
                             $('#icon-free div:nth-child(5)').css("margin-top", "7px");
                             $('#icon-free div:nth-child(6)').css("margin-top", "8px");
@@ -5820,17 +6016,18 @@
 
                     // 
 
-                    $('#sub-findingtutor a').click(function(){
+                    $('#sub-findingtutor').click(function(){
                          openNav();
                         $('#icon-tutoring').css('display','block');
                         if(!$('#find-course').hasClass('active')){
                         $('#find-course').css('display','block');                         
                         $('#find-course').addClass('active');
                             $('#icon-tutoring div:nth-child(2)').css("margin-top", "8px");
-                            $('#icon-tutoring div:nth-child(3)').css("margin-top", "110px");
-                            $('#icon-tutoring div:nth-child(4)').css("margin-top", "8px");
-                            $('#icon-tutoring div:nth-child(5)').css("margin-top", "7px");
-                            $('#icon-tutoring div:nth-child(6)').css("margin-top", "23px");                            
+                            $('#icon-tutoring div:nth-child(3)').css("margin-top", "24px");
+                            $('#icon-tutoring div:nth-child(4)').css("margin-top", "91px");
+                            $('#icon-tutoring div:nth-child(5)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(6)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(7)').css("margin-top", "23px");                            
                         $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "0px");
                         $('#sub-findingtutor img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_open_state.png");                        
                         $('#sub-findingtutor img').css('padding','0');                         
@@ -5842,10 +6039,11 @@
                             $('#sub-findingtutor img').attr("src","<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png");
                             $('#sub-findingtutor img').css('padding','0 2px 0 2px');  
                             $('#icon-tutoring div:nth-child(2)').css("margin-top", "8px");
-                            $('#icon-tutoring div:nth-child(3)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(3)').css("margin-top", "24px");
                             $('#icon-tutoring div:nth-child(4)').css("margin-top", "8px");
-                            $('#icon-tutoring div:nth-child(5)').css("margin-top", "7px");
-                            $('#icon-tutoring div:nth-child(6)').css("margin-top", "23px");                            
+                            $('#icon-tutoring div:nth-child(5)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(6)').css("margin-top", "8px");
+                            $('#icon-tutoring div:nth-child(7)').css("margin-top", "23px");                            
                         $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "0px");
                         }
                     });
@@ -5913,7 +6111,7 @@
                     
 
                     $("#myacc").click(function () {
-                        var x=$("#mtutoring img,#free-courses img");
+                        var x=$("#mtutoring img,#free-courses img, #onl-market img");
                         var y=$("#myacc img");
                         if($("#sub-myacc").hasClass("opensub")){
                             $("#sub-myacc").removeClass("opensub");
@@ -5931,6 +6129,8 @@
                         
                         $('#free-all').css('display','none');
                         $('#free-all').removeClass("opensub");
+                        $('#sub-market').css('display','none');
+                        $('#sub-market').removeClass("opensub");
 
 
                         var viewport = getViewport();  
@@ -5951,12 +6151,10 @@
                             openNav();
                             $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "89px");
                             $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "2px");
-                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "4px");
+                            $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "1px");
                             $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
-                            $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "0px");
-                            $('#menu-left-myaccount li:nth-child(7)').css("margin-top", "10px");
-                            $('#menu-left-myaccount li:nth-child(8)').css("margin-top", "4px");
-                            $('#menu-left-myaccount li:nth-child(9)').css("margin-top", "6px");
+                            $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "4px");
+                            
 
                         }
                     }
@@ -7959,7 +8157,9 @@
                         $("#getting-tutoring").addClass('active');
                         $('.new-request-list').text('GETTING TUTORING');    
                     });
-
+                    $("#btn-note").click(function(){
+                        window.open('https://notepad.iktutor.com');
+                    });
                     $("#btn-schedule").click(function(){   
                         var day = $('#today-tutor').val();
                         closeNav();
@@ -13622,7 +13822,8 @@
                         $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
                         $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "3px");
                         $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "8px");
-                        $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "6px");
+                        $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "5px");
+                        $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
 
                         $('#icon-free div:nth-child(2)').css("margin-top", "8px");
                         $('#icon-free div:nth-child(3)').css("margin-top", "8px");
@@ -13631,12 +13832,13 @@
                         $('#icon-free div:nth-child(6)').css("margin-top", "8px");
 
                         $('#icon-tutoring div:nth-child(2)').css("margin-top", "8px");
-                        $('#icon-tutoring div:nth-child(3)').css("margin-top", "8px");
+                        $('#icon-tutoring div:nth-child(3)').css("margin-top", "24px");
                         $('#icon-tutoring div:nth-child(4)').css("margin-top", "8px");
                         $('#icon-tutoring div:nth-child(5)').css("margin-top", "7px");
-                        $('#icon-tutoring div:nth-child(6)').css("margin-top", "23px");
+                        $('#icon-tutoring div:nth-child(6)').css("margin-top", "7px");
+                        $('#icon-tutoring div:nth-child(7)').css("margin-top", "23px");
 
-
+                        $('#icon-market').css('display','none');
                         $('#icon-tutoring').css('display','none');
                         $('#icon-free').css('display','none');
                         $('#account-show').css('display','none');
@@ -13739,11 +13941,9 @@
                         $('#menu-left-myaccount li:nth-child(2)').css("margin-top", "0");
                         $('#menu-left-myaccount li:nth-child(3)').css("margin-top", "4px");
                         $('#menu-left-myaccount li:nth-child(4)').css("margin-top", "0px");
-                        $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "2px");
-                        $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "0px");
-                        $('#menu-left-myaccount li:nth-child(7)').css("margin-top", "10px");
-                        $('#menu-left-myaccount li:nth-child(8)').css("margin-top", "6px");
-                        $('#menu-left-myaccount li:nth-child(9)').css("margin-top", "6px");
+                        $('#menu-left-myaccount li:nth-child(5)').css("margin-top", "0px");
+                        $('#menu-left-myaccount li:nth-child(6)').css("margin-top", "6px");
+                        
                        }
                     function change_image_close1(y){
                         y.attr('src','<?php echo get_template_directory_uri(); ?>/library/images/icon_MAIN-SUB_normal_state.png');
@@ -14069,7 +14269,7 @@
                                 dots: false,
                                 infinite: false,
                                 swipe: false,
-                                cssEase: 'linear',
+                                speed: 0,
                                 prevArrow:"<img class='a-left slick-prev slick-my-schedule' src='<?php echo get_template_directory_uri(); ?>/library/images/icon_Arrow_Left.png'>",
                                 nextArrow:"<img class='a-right slick-next slick-my-schedule' src='<?php echo get_template_directory_uri(); ?>/library/images/icon_Arrow_Right.png'>"
                             }
@@ -14080,8 +14280,8 @@
                                 slidesToScroll: 1,
                                 dots: false,
                                 infinite: false,
-                                swipe: false,
-                                cssEase: 'linear',
+                                swipe: false,      
+                                speed: 0,
                                 prevArrow:"<img class='a-left slick-prev' src='<?php echo get_template_directory_uri(); ?>/library/images/icon_Arrow_Left.png'>",
                                 nextArrow:"<img class='a-right slick-next' src='<?php echo get_template_directory_uri(); ?>/library/images/icon_Arrow_Right.png'>"
                             } 
@@ -14232,7 +14432,7 @@
                                     var div = '<div class="item">';
                                             div += '<div class="tr-tutor resume clearfix" id="tr-tutor' + v.ID + '">';
                                                 div +='<div class="img-tutor"><img src="' + v.user_avatar + '" alt="' + v.display_name + '"/></div>'; 
-                                                div +='<div class="item-name"><p class="name-tutor">' + v.display_name + '</p><p class="icon-star">' + img_star + '<span>('+v.cnt+')<span></p><p><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_1on1.png" style="height:12px"><span class="price-tutor"><b>&nbsp;$'+v.price_tutoring+'</b>&nbsp;/ 30m</span></p><p><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Group.png" style="height:12px"><span class="price-tutor"><b>&nbsp;$'+v.price_group_tutoring+'</b>&nbsp;/ 30m</span></p></div>';
+                                                div +='<div class="item-name"><p class="name-tutor">' + v.display_name + '</p><p class="icon-star">' + img_star + '<span>('+v.cnt+')<span></p><p><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_1on1.png" style="height:12px"><span class="price-tutor"><b>&nbsp;'+v.price_tutoring+' Points</b>&nbsp;/ 30m</span></p><p><img src="<?php echo get_template_directory_uri(); ?>/library/images/icon_Group.png" style="height:12px"><span class="price-tutor"><b>&nbsp;'+v.price_group_tutoring+' Points</b>&nbsp;/ 30m</span></p></div>';
                                             div +='</div>';
                                             div +='<div><div class="view-tutor">' + view + '</div>'
                                             div += '</div>'

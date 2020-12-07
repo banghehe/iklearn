@@ -1,5 +1,5 @@
-body {
-    /*background: #131313;*/
+body { 
+    /*background: #131313;*/ 
     color: #000000;
     font-family: Myriad_regular, "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 300;
@@ -19593,6 +19593,7 @@ table.table-critical-lesson > tbody > tr > td {
 .line-modal {
     margin-bottom: 0;
     border-bottom: 1px solid #d6d6d6;
+    border-top: 0;
 }
 #my-account-modal .modal-body-signup, .modal-yesno-body {
     width: 925px;
@@ -19785,7 +19786,8 @@ span.select-box-it.form-control, span.select-box-it.form-control > span {
 #custom-timezone .selectboxit-arrow-container, .frm-available-now .selectboxit-arrow-container,
 #top-my-schedules .selectboxit-arrow-container, .chose-rate .show-list-rate,#english-main .selectboxit-arrow-container,
 #math-main .selectboxit-arrow-container,#satmath-main .selectboxit-arrow-container,
-#satenglish-main .selectboxit-arrow-container,#vocab-builder .selectboxit-arrow-container{
+#satenglish-main .selectboxit-arrow-container,#vocab-builder .selectboxit-arrow-container,
+#tutoring-main .selectboxit-arrow-container{
     background-image: url(../images/icon_dropdown_arrow.png) !important;
     background-repeat: no-repeat;
     background-size: 10px;
@@ -24106,11 +24108,12 @@ padding-left: 20px;
 #selected-type, #selected-subject, #selected-date, #selected-tutor{
     font-family: semibold;
 }
-#msat li a, #mmath li a, #menglish li a,#sub-myacc li a,#sub-toeic li a, #sub-more li a  {
+#msat li a, #mmath li a, #menglish li a,#sub-myacc li a,
+#sub-toeic li a, #sub-more li a, #find-course li a{
     padding-bottom: 2px;
     width: 90%;
 }
-#msat, #mmath, #menglish, #sub-toeic, #sub-more{
+#msat, #mmath, #menglish, #sub-toeic, #sub-more, #sub-market{
     display: none;
 }
 #sub-course, #msat, #mmath, #menglish, #sub-toeic, #sub-more {
@@ -24203,10 +24206,14 @@ padding-left: 20px;
      text-decoration-line: none;
 }
 #english-selectSelectBoxItContainer, #math-selectSelectBoxItContainer, 
-#satenglish-selectSelectBoxItContainer, #satmath-selectSelectBoxItContainer{
+#sat-selectSelectBoxItContainer, #satmath-selectSelectBoxItContainer,
+#tutoring-selectSelectBoxItContainer{
     float: right;
     width: 200px;
     padding-top: 10px;
+}
+#tutoring-selectSelectBoxItContainer{
+    width: 260px !important;
 }
 .top-corner .select-box-it {
     height: 43px !important;
@@ -24225,16 +24232,18 @@ padding-left: 20px;
 #mdownload img, #class-manager img, #etoeic img, 
 #free-courses img, #emore img, #econver img, #tutor-main-home img,
 #sub-findingtutor a img, #sub-schedule-li img, 
-#sub-screen img, #sub-english-conv img, #sub-status img{
+#sub-screen img, #sub-english-conv img, #sub-status img,
+#native-speaker img, #onl-market img, #sub-market img{
     float: right;
     margin-top: 6px;    
 }
-#sub-english-conv img {
+#sub-english-conv img, #native-speaker img {
     margin-top: -13px;
+
 }
 #class-manager, #etoeic, #sat-all, #math-all,#english-all, #emore, #econver,
 #tutor-main-home, #sub-findingtutor a, #sub-schedule-li,#sub-schedule-li a, #sub-screen a, 
-#sub-english-conv a, #sub-status a {
+#sub-english-conv a, #sub-status a,  #native-speaker a, #sub-market a{
     padding-bottom: 0;
     width: 100%;
     padding-right: 1px;

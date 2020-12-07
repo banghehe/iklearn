@@ -2894,7 +2894,7 @@ if ($task == 'flashcard') {
 
 
     }
-
+ 
     if ($do == 'addcard') {
         $current_user_id = get_current_user_id();
 
@@ -8043,7 +8043,8 @@ if ($task == 'addcard2') {
         $current_user_id = get_current_user_id();
         $entry = $_REQUEST['word'];
         $folder_id = $_REQUEST['folder'];
-        $arr = $wpdb->get_col('SELECT word FROM ' . $wpdb->prefix . 'dict_flashcards WHERE created_by = ' . $current_user_id . ' AND dictionary_id = ' . 6);
+        $arr = $wpdb->get_col('SELECT word FROM ' . $wpdb->prefix . 'dict_flashcards WHERE created_by = ' . $current_user_id);
+        $arr2 = $wpdb->get_col('SELECT entry FROM ' . $wpdb->prefix . 'dict_elearner');
         foreach ($arr as  $value) {
             if($value == $entry){
                 echo json_encode(array('status' => 3));
@@ -8055,7 +8056,7 @@ if ($task == 'addcard2') {
                 'created_by' => $current_user_id,
                 'folder_id' => $folder_id,
                 'group_id' => 0,
-                'dictionary_id' => 6,
+                'dictionary_id' => 1,
                 'word' => $entry
             )
         );
